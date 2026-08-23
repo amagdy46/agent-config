@@ -1,0 +1,20 @@
+schema-version: 1
+name: start-here
+description: The first owned skills selected from stated preferences and observed work.
+skills:
+  - prototype
+  - research
+  - wayfinder
+  - systematic-debugging
+  - verification-before-completion
+  - code-review
+  - architecture-design
+  - refactor-safely
+  - blast-radius
+  - handoff
+  - multi-agent-development
+  - grilling
+  - unslop
+  - wait-what
+  - explain-codebase
+  - teach

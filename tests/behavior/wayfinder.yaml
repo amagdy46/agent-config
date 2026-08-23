@@ -1,0 +1,51 @@
+schema-version: 1
+skill: wayfinder
+
+positive-cases:
+  - id: chart-foggy-multi-session-route
+    prompt: >-
+      Use wayfinder to map how I can migrate several agents and devices to one skills
+      system. The destination is clear, but the route and major decisions are still foggy.
+    expected:
+      invocation: invoke
+      invariants:
+        - Creates one durable map at a user-approved portable location with destination, scope, decisions, frontier, fog, risks, and exact next decision.
+        - Explores breadth-first and puts only precise unblocked decision questions on the frontier.
+        - Produces decision artifacts only and does not implement, deploy, purchase, publish, message, or create external records.
+  - id: advance-existing-map
+    prompt: Advance the next decision in ROADMAP.md and leave it ready for the following session.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reconciles the map with live state and resolves one frontier decision.
+        - Records rationale and evidence once, updates frontier and fog, and sets one exact next decision.
+        - Stops before planning or executing the destination.
+
+negative-cases:
+  - id: clear-work-ready-to-plan
+    prompt: The requirements and architecture are accepted. Write the ordered implementation plan.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: writing-plans
+      invariants:
+        - Says wayfinding is unnecessary when no consequential route decision remains.
+  - id: bounded-design-experiment
+    prompt: Prototype three navigation variants so I can select one today.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: prototype
+      invariants:
+        - Does not create a multi-session decision map for a bounded experiment with a direct question.
+
+overlap-cases:
+  - id: map-then-code-request
+    competing-skill: implement
+    prompt: >-
+      Use wayfinder on this foggy platform migration and then start coding whichever
+      route you recommend.
+    expected:
+      invocation: invoke
+      invariants:
+        - Maps and advances decisions only until the route is plan-ready.
+        - Does not execute code changes, prototypes, deployments, or other destination work under wayfinder authority.
+        - Hands the resolved route to planning and requires the later implementation phase to have settled scope and authorization.

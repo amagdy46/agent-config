@@ -1,0 +1,22 @@
+schema-version: 1
+name: engineering
+description: Delivery workflows for substantial implementation work.
+skills:
+  - systematic-debugging
+  - test-driven-development
+  - verification-before-completion
+  - code-review
+  - blast-radius
+  - architecture-design
+  - refactor-safely
+  - writing-plans
+  - implement
+  - using-git-worktrees
+  - multi-agent-development
+  - typescript-testing
+  - contract-testing
+  - safe-database-changes
+  - ci-pr-lifecycle
+  - research
+  - handoff
+  - resume-work

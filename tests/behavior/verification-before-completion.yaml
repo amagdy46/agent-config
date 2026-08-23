@@ -1,0 +1,51 @@
+schema-version: 1
+skill: verification-before-completion
+
+positive-cases:
+  - id: prove-bug-fixed
+    prompt: Before you say the bug is fixed, run the check that exercises the original failure path.
+    expected:
+      invocation: invoke
+      invariants:
+        - States the specific success claim and chooses the smallest real surface that proves it.
+        - Runs the check against the final state and reads exit status and relevant output.
+        - Reports success only when evidence supports the claim and names any unverified surface.
+  - id: verify-delegated-work
+    prompt: >-
+      A delegated agent says the feature is complete. Verify its actual diff and required
+      checks before handing it back to me.
+    expected:
+      invocation: invoke
+      invariants:
+        - Treats another agent's summary as evidence to inspect, not proof of completion.
+        - Maps each material requirement to fresh claim-specific evidence.
+        - Does not overstate a focused test, type check, build, or diff beyond what it proves.
+
+negative-cases:
+  - id: implement-missing-feature
+    prompt: Build the missing export feature and add tests.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not replace implementation with a completion gate before work exists.
+  - id: maintainability-review
+    prompt: Review this diff for correctness and maintainability; do not edit it.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: code-review
+      invariants:
+        - Does not present runtime checks as a substitute for a requested code review.
+
+overlap-cases:
+  - id: review-and-final-proof
+    competing-skill: code-review
+    prompt: >-
+      Review the final diff, then run the required real-surface checks before deciding
+      whether the work is ready.
+    expected:
+      invocation: invoke
+      co-invocation: code-review
+      invariants:
+        - Code-review owns findings about the diff; verification owns fresh evidence for the final readiness claims.
+        - Neither workflow infers permission to fix, commit, push, open a pull request, or deploy.

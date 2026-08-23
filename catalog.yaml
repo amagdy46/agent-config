@@ -1,0 +1,161 @@
+schema-version: 1
+
+skills:
+  - id: prototype
+    path: skills/prototype
+    summary: Build throwaway variants to answer one named design question.
+    status: active
+    invocation: explicit
+    portability: portable
+  - id: grilling
+    path: skills/grilling
+    summary: Stress-test a design through dependency-aware decision questions.
+    status: active
+    invocation: explicit
+    portability: portable
+  - id: architecture-design
+    path: skills/architecture-design
+    summary: Design consequential module, interface, seam, and boundary changes.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: refactor-safely
+    path: skills/refactor-safely
+    summary: Restructure code while preserving externally observable behavior.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: blast-radius
+    path: skills/blast-radius
+    summary: Trace consumers and prove the load-bearing fact behind risky changes.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: unslop
+    path: skills/unslop
+    summary: Make substantial human-facing prose concrete, direct, and natural.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: wait-what
+    path: skills/wait-what
+    summary: Re-explain the immediately preceding point in plain language.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: explain-codebase
+    path: skills/explain-codebase
+    summary: Explain how existing code works and why it was designed that way.
+    status: active
+    invocation: automatic
+    portability: degraded
+  - id: teach
+    path: skills/teach
+    summary: Create or continue a persistent multi-session course workspace.
+    status: active
+    invocation: explicit
+    portability: portable
+  - id: research
+    path: skills/research
+    summary: Produce a scoped, current, primary-source research artifact.
+    status: active
+    invocation: automatic
+    portability: degraded
+  - id: wayfinder
+    path: skills/wayfinder
+    summary: Navigate large efforts whose destination is known but route is unclear.
+    status: active
+    invocation: explicit
+    portability: degraded
+  - id: handoff
+    path: skills/handoff
+    summary: Transfer verified work state across agents, sessions, repos, or devices.
+    status: active
+    invocation: explicit
+    portability: portable
+  - id: resume-work
+    path: skills/resume-work
+    summary: Continue from a named handoff, branch, task, or prior work trail.
+    status: active
+    invocation: automatic
+    portability: degraded
+  - id: systematic-debugging
+    path: skills/systematic-debugging
+    summary: Reproduce, isolate, explain, and verify the root cause of failures.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: test-driven-development
+    path: skills/test-driven-development
+    summary: Implement behavior through an affordable public seam using red-green-refactor.
+    status: active
+    invocation: explicit
+    portability: portable
+  - id: verification-before-completion
+    path: skills/verification-before-completion
+    summary: Require fresh claim-specific evidence before declaring success.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: code-review
+    path: skills/code-review
+    summary: Review a change against requirements and maintainability without editing it.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: writing-plans
+    path: skills/writing-plans
+    summary: Produce a dependency-aware implementation plan in verifiable units.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: implement
+    path: skills/implement
+    summary: Execute an approved specification or plan with evidence and review gates.
+    status: active
+    invocation: explicit
+    portability: portable
+  - id: using-git-worktrees
+    path: skills/using-git-worktrees
+    summary: Establish safe Git isolation for substantial or parallel work.
+    status: active
+    invocation: explicit
+    portability: degraded
+  - id: multi-agent-development
+    path: skills/multi-agent-development
+    summary: Coordinate bounded delegated implementation with independent review gates.
+    status: active
+    invocation: explicit
+    portability: degraded
+  - id: typescript-testing
+    path: skills/typescript-testing
+    summary: Choose the smallest honest TypeScript test layer and behavior seam.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: contract-testing
+    path: skills/contract-testing
+    summary: Prove provider-consumer compatibility at real transport boundaries.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: safe-database-changes
+    path: skills/safe-database-changes
+    summary: Design and verify migrations safely on disposable databases.
+    status: active
+    invocation: automatic
+    portability: degraded
+  - id: ci-pr-lifecycle
+    path: skills/ci-pr-lifecycle
+    summary: Inspect or drive PR and CI state with explicit mutation boundaries.
+    status: active
+    invocation: automatic
+    portability: degraded
+
+next-candidates:
+  - incident-investigation
+  - technical-writing
+  - author-agent-instructions
+  - visual-parity
+  - arena
+  - interrogate

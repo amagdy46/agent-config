@@ -1,0 +1,11 @@
+schema-version: 1
+name: prototyping
+description: Product discovery, experimental design, and safe structural exploration.
+skills:
+  - prototype
+  - grilling
+  - architecture-design
+  - refactor-safely
+  - blast-radius
+  - research
+  - verification-before-completion

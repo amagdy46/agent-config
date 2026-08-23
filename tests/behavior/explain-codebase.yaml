@@ -1,0 +1,47 @@
+schema-version: 1
+skill: explain-codebase
+
+positive-cases:
+  - id: explain-runtime-flow
+    prompt: Explain how a request moves through this repository from route to database write.
+    expected:
+      invocation: invoke
+      invariants:
+        - Traces actual code, types, configuration, tests, and boundaries proportionally to the question.
+        - Uses a concrete request or data example and cites useful path, line, or symbol locations.
+        - Remains read-only and returns the explanation rather than an investigation log.
+  - id: explain-historical-rationale
+    prompt: Why is retry ownership in this module instead of the queue consumer? Check the history.
+    expected:
+      invocation: invoke
+      invariants:
+        - Separates current mechanics, direct historical evidence, inference, competing explanations, and unknowns.
+        - Does not claim that current code alone proves original intent.
+        - Does not edit code, documentation, tickets, or external systems.
+
+negative-cases:
+  - id: persistent-learning-course
+    prompt: Build me a six-week course workspace so I can learn distributed systems across sessions.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: teach
+      invariants:
+        - Does not collapse a persistent course into a one-off codebase walkthrough.
+  - id: repair-last-explanation
+    prompt: Wait, what? Your last explanation did not make sense.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: wait-what
+      invariants:
+        - Does not start a new codebase investigation when the request is to re-pitch the immediately preceding answer.
+
+overlap-cases:
+  - id: teach-me-this-subsystem
+    competing-skill: teach
+    prompt: Teach me how this repository's reconciliation subsystem works and why it ended up this way.
+    expected:
+      invocation: invoke
+      invariants:
+        - Treats the request as a bounded mechanics-and-rationale explanation of an existing codebase.
+        - Does not initialize a persistent learning workspace or course.
+        - Performs no edits or external writes.

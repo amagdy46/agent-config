@@ -1,0 +1,46 @@
+schema-version: 1
+skill: multi-agent-development
+
+positive-cases:
+  - id: explicit-parallel-implementation
+    prompt: Use multiple agents to implement these four independent modules and review each one.
+    expected:
+      invocation: invoke
+      invariants:
+        - Maps dependencies and writable ownership before delegation.
+        - Gives each writer an isolated or disjoint surface and a complete brief.
+        - Runs specification and quality review gates before parent integration verification.
+  - id: requested-delegated-program
+    prompt: Coordinate subagents for this substantial plan, including correction loops and a final integrated check.
+    expected:
+      invocation: invoke
+      invariants:
+        - Keeps architecture, integration, and final acceptance with the coordinator.
+        - Accounts for every delegated task and relays accepted upstream results to dependents.
+        - Does not infer permission to commit, push, open a pull request, merge, or deploy.
+
+negative-cases:
+  - id: tiny-local-change
+    prompt: Fix this typo in one error message.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Avoids delegation overhead for a small coherent edit.
+  - id: parallelize-shared-file
+    prompt: Have five agents simultaneously edit the same configuration file to finish faster.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Rejects overlapping concurrent writes and keeps the shared-file work serial.
+
+overlap-cases:
+  - id: implementation-needs-coordination
+    competing-skill: implement
+    prompt: Implement this accepted plan with several independent workstreams using multiple agents.
+    expected:
+      invocation: invoke
+      co-invocation: implement
+      invariants:
+        - Owns dependency-aware delegation while implementation discipline applies inside each task.
+        - Preserves parent verification of the actual combined diff.

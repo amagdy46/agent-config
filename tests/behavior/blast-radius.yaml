@@ -1,0 +1,54 @@
+schema-version: 1
+skill: blast-radius
+
+positive-cases:
+  - id: event-contract-change
+    prompt: >-
+      What could break if we rename this emitted event field? Trace every kind of
+      consumer, including delayed and cross-repository consumers.
+    expected:
+      invocation: invoke
+      invariants:
+        - Maps the semantic contract change rather than relying only on symbol search.
+        - Separates confirmed risks, cleared risks, and unknowns with evidence levels.
+        - Identifies deployment ordering, compatibility, detection, and rollback constraints where relevant.
+        - Remains read-only unless a fix or persisted test is separately requested.
+  - id: schema-migration-risk
+    prompt: >-
+      Assess the blast radius of making this database column non-null before the next
+      release and tell me the load-bearing safety assumptions.
+    expected:
+      invocation: invoke
+      invariants:
+        - Traces readers, writers, stored values, migrations, rollback, and mixed-version operation.
+        - Prefers a safe executable proof for the most consequential assumption when practical.
+        - Labels facts that remain unproven.
+
+negative-cases:
+  - id: ordinary-diff-review
+    prompt: Review this small UI diff for correctness and maintainability.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: code-review
+      invariants:
+        - Does not expand a routine review into speculative system-wide risk analysis.
+  - id: repair-known-local-bug
+    prompt: Fix the off-by-one error in this pure pagination helper.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not run a downstream-consumer audit when the contract and affected surface are local and established.
+
+overlap-cases:
+  - id: risky-change-review
+    competing-skill: code-review
+    prompt: >-
+      Review this API-removal diff specifically for downstream breakage and deployment
+      ordering across clients.
+    expected:
+      invocation: invoke
+      co-invocation: code-review
+      invariants:
+        - Blast-radius owns the cross-boundary consumer and rollout analysis.
+        - Code-review may assess the diff, but neither workflow edits or auto-fixes it.

@@ -1,0 +1,51 @@
+schema-version: 1
+skill: wait-what
+
+positive-cases:
+  - id: explicit-failed-explanation
+    prompt: Wait, what? That last explanation did not land. Explain the same point normally.
+    context: The immediately preceding assistant message attempted to explain a technical concept.
+    expected:
+      invocation: invoke
+      invariants:
+        - Re-pitches the smallest necessary part of the immediately preceding explanation.
+        - Restores missing premises and uses plain language plus one concrete example when useful.
+        - Preserves exact names, commands, identifiers, evidence, numbers, and uncertainty.
+        - Does not defend the old wording, research anew, create a course, or start a broad tutorial.
+  - id: bro-after-confusing-answer
+    prompt: Bro, what does that mean?
+    context: The immediately preceding assistant answer introduced an unexplained deployment concept.
+    expected:
+      invocation: invoke
+      invariants:
+        - Interprets bro as clarification only because it responds to a failed immediate explanation.
+        - Answers the point again rather than merely shortening the same jargon.
+
+negative-cases:
+  - id: bro-as-address
+    prompt: Bro, build the settings page from the accepted design.
+    context: This begins a new task and does not respond to a failed explanation.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not treat casual address as evidence that an explanation failed.
+  - id: standalone-codebase-question
+    prompt: Explain the authentication flow simply, starting from the incoming request.
+    context: There is no immediately preceding failed explanation.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: explain-codebase
+      invariants:
+        - Does not use the repair workflow for a new codebase investigation.
+
+overlap-cases:
+  - id: immediate-repair-not-course
+    competing-skill: teach
+    prompt: Bro, I did not understand your last answer. Re-explain just that point with an example.
+    context: The previous assistant response failed to explain a concept the user asked about.
+    expected:
+      invocation: invoke
+      invariants:
+        - Performs a one-turn repair and does not initialize or resume a persistent course workspace.
+        - Does not broaden into explain-codebase research unless the missing fact makes an accurate re-pitch impossible.

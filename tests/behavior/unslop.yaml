@@ -1,0 +1,48 @@
+schema-version: 1
+skill: unslop
+
+positive-cases:
+  - id: edit-substantial-report
+    prompt: >-
+      Unslop this incident report. Remove generic AI phrasing and repetition while
+      preserving every fact, citation, command, and uncertainty marker.
+    expected:
+      invocation: invoke
+      invariants:
+        - Preserves facts, literals, attribution, calibrated uncertainty, audience, and operationally significant wording.
+        - Leads with concrete points and removes filler, puffery, forced symmetry, and decorative structure.
+        - Does not invent evidence, strengthen claims, silently alter terms, or rewrite quoted passages.
+  - id: final-prose-pass
+    prompt: Give this long proposal a deliberate human-sounding prose pass without changing its position.
+    expected:
+      invocation: invoke
+      invariants:
+        - Matches the document's audience, purpose, and implied voice instead of flattening it into generic terse prose.
+        - Compares the revision with the source for factual and confidence drift.
+        - Returns the revised prose and raises only ambiguities that require the author.
+
+negative-cases:
+  - id: short-transactional-reply
+    prompt: Reply with the command I should run next.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not load a substantial prose-editing workflow for a short transactional answer.
+  - id: edit-source-code
+    prompt: Refactor this TypeScript function to reduce duplication.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: refactor-safely
+      invariants:
+        - Does not treat code as human-facing prose.
+
+overlap-cases:
+  - id: failed-immediate-explanation
+    competing-skill: wait-what
+    prompt: Bro, that last explanation was slop. Explain the same point normally.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: wait-what
+      invariants:
+        - Routes the failed immediate explanation to one-turn clarification rather than a document editing pass.
+        - Preserves exact technical terms and evidence while re-pitching the point.

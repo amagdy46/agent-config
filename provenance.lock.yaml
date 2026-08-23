@@ -1,0 +1,46 @@
+schema-version: 1
+
+sources:
+  superpowers:
+    url: https://github.com/obra/superpowers
+    commit: b36e0829c6d0140e93cfef2ca599b1b07d4a7797
+    license: MIT
+    copyright: Copyright (c) 2025 Jesse Vincent
+  matt-skills:
+    url: https://github.com/mattpocock/skills
+    commit: 5b15a47f2d7150f545fbcacbfe381787fc0230dc
+    license: MIT
+    copyright: Copyright (c) 2026 Matt Pocock
+  pstack:
+    url: https://github.com/cursor/plugins
+    commit: 46125561306434d8a1d7745d540d8932ab0cd2a2
+    subpath: pstack
+    license: MIT
+    copyright: Copyright (c) 2026 Lauren Tan
+
+derived-skills:
+  prototype: [superpowers, matt-skills, pstack]
+  grilling: [matt-skills]
+  architecture-design: [superpowers, matt-skills, pstack]
+  refactor-safely: [matt-skills, pstack]
+  blast-radius: [pstack]
+  unslop: [matt-skills, pstack]
+  wait-what: [matt-skills, pstack]
+  explain-codebase: [matt-skills, pstack]
+  teach: [matt-skills, pstack]
+  research: [superpowers, matt-skills, pstack]
+  wayfinder: [superpowers, matt-skills, pstack]
+  handoff: [superpowers, matt-skills, pstack]
+  resume-work: [superpowers, matt-skills, pstack]
+  systematic-debugging: [superpowers, matt-skills, pstack]
+  test-driven-development: [superpowers, matt-skills, pstack]
+  verification-before-completion: [superpowers, pstack]
+  code-review: [superpowers, matt-skills, pstack]
+  writing-plans: [superpowers, matt-skills, pstack]
+  implement: [superpowers, matt-skills, pstack]
+  using-git-worktrees: [superpowers, matt-skills, pstack]
+  multi-agent-development: [superpowers, pstack]
+  typescript-testing: [superpowers, matt-skills, pstack]
+  contract-testing: [pstack]
+  safe-database-changes: [pstack]
+  ci-pr-lifecycle: [superpowers, pstack]

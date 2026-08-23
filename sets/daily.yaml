@@ -1,0 +1,13 @@
+schema-version: 1
+name: daily
+description: Low-friction skills for ordinary engineering and communication.
+skills:
+  - research
+  - systematic-debugging
+  - verification-before-completion
+  - code-review
+  - handoff
+  - resume-work
+  - unslop
+  - wait-what
+  - explain-codebase

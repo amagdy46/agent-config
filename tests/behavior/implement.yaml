@@ -1,0 +1,48 @@
+schema-version: 1
+skill: implement
+
+positive-cases:
+  - id: build-accepted-feature
+    prompt: Implement the accepted notification-preferences specification and run the relevant checks.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reads repository instructions, requirements, and existing design before editing.
+        - Works in small verifiable units without opportunistic refactors or dependency upgrades.
+        - Uses appropriate planning, testing, debugging, review, and final-verification disciplines where they fit.
+        - Reports changed behavior, files, fresh evidence, and remaining risks.
+  - id: fix-authorized-bug
+    prompt: Fix the reproduced duplicate-charge bug, add the regression check, and verify the original path.
+    expected:
+      invocation: invoke
+      invariants:
+        - Diagnoses or confirms the root cause before applying a focused repair.
+        - Preserves unrelated changes and established contracts.
+        - Exercises the original symptom or a faithful regression check before claiming success.
+
+negative-cases:
+  - id: plan-only-request
+    prompt: Write a detailed implementation plan for this feature. Do not edit code.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: writing-plans
+      invariants:
+        - Does not treat planning as authorization to execute.
+  - id: review-only-request
+    prompt: Review this branch and report findings without changing it.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: code-review
+      invariants:
+        - Does not infer permission to fix findings.
+
+overlap-cases:
+  - id: execute-accepted-plan
+    competing-skill: writing-plans
+    prompt: Implement the accepted plan in plans/session-expiry.md, but do not commit, push, or open a PR.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses the accepted plan as execution input rather than rewriting it without cause.
+        - Does not infer permission to commit, push, create or update a pull request, deploy, merge, publish, or modify tickets.
+        - Stops for material unresolved choices or scope expansion rather than inventing authority.

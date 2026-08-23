@@ -1,0 +1,54 @@
+schema-version: 1
+skill: writing-plans
+
+positive-cases:
+  - id: plan-accepted-feature
+    prompt: >-
+      Turn these accepted requirements into an implementation plan with exact files,
+      interfaces, dependencies, and checks. Do not edit implementation files.
+    expected:
+      invocation: invoke
+      invariants:
+        - Grounds the plan in requirements, exclusions, repository structure, current behavior, and success evidence.
+        - Breaks work into ordered coherent units with exact file responsibilities and compatible interfaces.
+        - Gives each unit an independent observable check and names risk or rollback only where relevant.
+        - Remains read-only and does not modify source, tests, branches, tickets, dependencies, or external systems.
+  - id: plan-behavior-preserving-migration
+    prompt: Plan the staged migration from this legacy contract while preserving mixed-version compatibility.
+    expected:
+      invocation: invoke
+      invariants:
+        - Orders characterization, contract, consumer migration, compatibility, and legacy removal coherently.
+        - Maps every material requirement to a unit and reports unresolved coverage gaps.
+        - Avoids vague tasks such as add tests or handle edge cases without named seams and cases.
+
+negative-cases:
+  - id: foggy-route
+    prompt: >-
+      I know the long-term destination, but the major strategy choices are still unclear
+      and this will take many sessions. Help me find the route.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: wayfinder
+      invariants:
+        - Does not fabricate a detailed task plan inside unresolved strategic fog.
+  - id: execute-existing-plan
+    prompt: Implement the accepted plan now and run its checks.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not reinterpret execution authorization as another plan-only task.
+
+overlap-cases:
+  - id: plan-then-implement
+    competing-skill: implement
+    prompt: >-
+      First write a plan for this multi-unit change, let me review it, and only then
+      implement it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Produces the complete plan as a distinct read-only phase and stops for the requested review gate.
+        - Does not edit implementation files or infer acceptance before the user reviews the plan.
+        - Leaves execution to implement after explicit acceptance.

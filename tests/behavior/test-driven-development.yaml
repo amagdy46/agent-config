@@ -1,0 +1,50 @@
+schema-version: 1
+skill: test-driven-development
+
+positive-cases:
+  - id: explicit-test-first-feature
+    prompt: Implement this parser behavior test-first with strict red-green-refactor cycles.
+    expected:
+      invocation: invoke
+      invariants:
+        - Identifies the expected behavior, source of truth, stable public seam, smallest faithful test level, and controlled boundaries.
+        - Observes each narrow test fail for the intended missing behavior before writing the minimum production change.
+        - Works in vertical red-green-refactor slices and reports exact commands and outcomes.
+        - Does not weaken assertions or retain production code not demanded by a requirement and test.
+  - id: regression-first-bug-fix
+    prompt: >-
+      Fix this serializer bug using TDD. Start with a regression at the public encode/decode
+      boundary where users observe it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Keeps the regression at the real observed seam and confirms useful failing-before evidence.
+        - Does not delete existing work to manufacture test-first history.
+        - Runs proportionate nearby checks after the focused test passes.
+
+negative-cases:
+  - id: throwaway-spike
+    prompt: Make a disposable probe to see whether this SDK call is technically feasible.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: prototype
+      invariants:
+        - Does not impose a production test suite on an exploratory spike.
+  - id: documentation-only-edit
+    prompt: Correct the wording and examples in this README without changing code.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not invent an executable behavior seam for prose-only work.
+
+overlap-cases:
+  - id: implement-plan-test-first
+    competing-skill: implement
+    prompt: Implement the accepted rate-limit behavior using TDD at the public request boundary.
+    expected:
+      invocation: invoke
+      co-invocation: implement
+      invariants:
+        - Implement owns the authorized delivery scope while TDD owns the suitable behavior seams and red-green cycles.
+        - Refuses false-confidence tests when no affordable honest seam exists and proposes a design seam instead.
+        - Does not treat focused TDD evidence as proof that the entire feature or system is complete.

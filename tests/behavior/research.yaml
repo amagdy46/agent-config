@@ -1,0 +1,54 @@
+schema-version: 1
+skill: research
+
+positive-cases:
+  - id: compare-current-platform-options
+    prompt: >-
+      Research the current official support and migration trade-offs for these three
+      workflow engines as of today. Give me a cited recommendation.
+    expected:
+      invocation: invoke
+      invariants:
+        - Frames a question, scope, as-of boundary, and stopping condition.
+        - Prioritizes current primary sources and keeps claims close to citations.
+        - Separates mechanics, documented intent, inference, contradictions, and unavailable evidence.
+        - Produces a verifiable artifact or response without publishing or implementing anything.
+  - id: investigate-technical-standard
+    prompt: >-
+      Find out from the specification and official implementation sources whether this
+      protocol permits duplicate delivery, bounded to version 2.1.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses the requested version boundary and sources that own the fact.
+        - Stops when the defined evidence threshold is met or additional searches repeat evidence.
+        - Labels confidence and material gaps rather than forcing a single story.
+
+negative-cases:
+  - id: local-code-mechanics
+    prompt: Explain how this function transforms the request into a database record.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: explain-codebase
+      invariants:
+        - Does not start external research for a bounded local mechanics question.
+  - id: implementation-request
+    prompt: Add support for the selected provider and verify the integration.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not turn an execution request into an unsolicited market or technology survey.
+
+overlap-cases:
+  - id: local-historical-rationale
+    competing-skill: explain-codebase
+    prompt: >-
+      Why was this repository's retry mechanism designed this way? Inspect its code,
+      commits, and linked decisions, and explain what is evidence versus inference.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: explain-codebase
+      invariants:
+        - Uses the codebase rationale workflow for a bounded local history question.
+        - Does not broaden the scope into general external research unless the user requests it or local evidence requires it.

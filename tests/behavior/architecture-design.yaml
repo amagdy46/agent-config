@@ -1,0 +1,53 @@
+schema-version: 1
+skill: architecture-design
+
+positive-cases:
+  - id: design-new-integration-boundary
+    prompt: >-
+      Design the boundary between our order domain and a new payment provider before
+      we implement it. Compare viable shapes and show how callers would use it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Grounds the design in existing callers, contracts, state, and side effects.
+        - Compares meaningfully different shapes on locality, reader load, failure containment, and migration cost.
+        - Delivers a caller-first interface sketch, invariants, module ownership, verification strategy, and migration notes.
+        - Does not edit production files unless implementation is separately requested and all material choices are settled.
+  - id: reshape-consequential-module
+    prompt: >-
+      The eligibility rules are scattered across handlers and invalid states keep
+      appearing. Propose a better module and type model, but do not implement it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Identifies the domain knowledge and invalid states the new boundary should own.
+        - Rejects abstractions that add indirection without a present variation or useful seam.
+        - Remains design-only.
+
+negative-cases:
+  - id: routine-local-edit
+    prompt: Rename this private helper and update its three callers.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: refactor-safely
+      invariants:
+        - Does not introduce an architecture exercise for an established local shape.
+  - id: diagnose-observed-failure
+    prompt: Diagnose why this endpoint returns 500 after the latest deploy. Do not fix it.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: systematic-debugging
+      invariants:
+        - Does not substitute speculative redesign for reproducing and locating the failure.
+
+overlap-cases:
+  - id: refactor-crosses-contract-boundary
+    competing-skill: refactor-safely
+    prompt: >-
+      We want to refactor the event publisher, but the target shape changes the public
+      interface used by several services. Design the target boundary first.
+    expected:
+      invocation: invoke
+      invariants:
+        - Resolves the consequential interface and migration strategy before structural edits begin.
+        - Leaves behavior-preserving migration and equivalence proof to refactor-safely after the design is accepted.

@@ -1,0 +1,52 @@
+schema-version: 1
+skill: prototype
+
+positive-cases:
+  - id: compare-ui-directions
+    prompt: >-
+      Prototype three meaningfully different dashboard navigation approaches so I can
+      choose one before we build the production version.
+    expected:
+      invocation: invoke
+      invariants:
+        - States the uncertain question, decision, and observation that distinguishes the options.
+        - Produces two to four structurally distinct variants on a cheap faithful surface.
+        - Uses realistic inert context without production mutations or customer data.
+        - Marks artifacts as disposable and reports evidence, trade-offs, and a recommendation.
+  - id: technical-feasibility-spike
+    prompt: Build the smallest local spike to find out whether this SDK preserves event ordering.
+    expected:
+      invocation: invoke
+      invariants:
+        - Builds a minimal runnable probe for the disputed behavior.
+        - Captures the relevant observation instead of adding production abstractions or exhaustive tests.
+        - Does not publish, deploy, or widen the experiment without separate authorization.
+
+negative-cases:
+  - id: settled-production-feature
+    prompt: Implement the approved profile form design in production with tests.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not substitute throwaway code when behavior and design are already settled.
+  - id: behavior-preserving-cleanup
+    prompt: Extract this duplicated validation into one module without changing behavior.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: refactor-safely
+      invariants:
+        - Does not treat structural cleanup as a design experiment.
+
+overlap-cases:
+  - id: prototype-inside-real-shell
+    competing-skill: refactor-safely
+    prompt: >-
+      Try two new checkout layouts using the real app shell, but this is only to choose
+      a direction; do not turn either into production behavior yet.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses a clearly labeled, isolated, production-guarded prototype route or switch if the real shell is required.
+        - Does not present visual parity, refactoring, or production polish as the experiment's goal.
+        - Does not promote the chosen variant directly into production without a separate implementation workflow.

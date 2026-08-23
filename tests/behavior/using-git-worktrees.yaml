@@ -1,0 +1,54 @@
+schema-version: 1
+skill: using-git-worktrees
+
+positive-cases:
+  - id: explicit-worktree-request
+    prompt: >-
+      Create an isolated Git worktree for this implementation on a new feature branch.
+      Preserve my current uncommitted changes.
+    expected:
+      invocation: invoke
+      invariants:
+        - Inspects repository root, branch state, status, common Git directory, existing worktrees, and repository instructions first.
+        - Requires or recognizes authorization before creating a worktree or branch.
+        - Prefers a host-native isolated workspace and avoids nesting isolation unnecessarily.
+        - Never resets, cleans, stashes, relocates, or overwrites user changes.
+  - id: concurrent-work-needs-isolation
+    prompt: >-
+      Set up separate worktrees for these authorized non-overlapping tasks so the agents
+      cannot collide, and report each baseline.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses exact safe destinations and confirms branches are not checked out elsewhere.
+        - Establishes and reports path, base revision, branch state, cleanliness, and a credible baseline check.
+        - Does not infer commit, push, install, or cleanup authority from isolation authority.
+
+negative-cases:
+  - id: routine-read-only-review
+    prompt: Review the current working-tree diff without editing it.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: code-review
+      invariants:
+        - Does not create isolation for a read-only task that can safely inspect the current tree.
+  - id: cleanup-not-requested
+    prompt: The implementation is complete. Summarize what changed.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not remove a worktree or branch merely because work appears finished.
+
+overlap-cases:
+  - id: isolated-implementation
+    competing-skill: implement
+    prompt: >-
+      Implement the accepted plan in a new worktree, but do not commit, push, or delete
+      the worktree afterward.
+    expected:
+      invocation: invoke
+      co-invocation: implement
+      invariants:
+        - Establishes authorized isolation before implementation and preserves current-tree changes.
+        - Keeps branch creation, implementation, commit, push, and cleanup as distinct authorization boundaries.
+        - Leaves the worktree registered and intact because cleanup was expressly excluded.

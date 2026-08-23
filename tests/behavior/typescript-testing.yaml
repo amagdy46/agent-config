@@ -1,0 +1,56 @@
+schema-version: 1
+skill: typescript-testing
+
+positive-cases:
+  - id: choose-backend-test-layer
+    prompt: >-
+      Where should this TypeScript regression test live: a pure unit test, a Nest-style
+      module test, or end to end? Design the smallest honest seam for it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Inspects nearby tests, configuration, package metadata, and public interfaces before choosing a layer.
+        - Selects the lowest-cost layer that can fail for the intended observable behavior without replacing that behavior with mocks.
+        - Names the independent oracle, controlled boundaries, and what the chosen layer does not prove.
+        - Uses repository or framework-specific guidance for runner syntax rather than inventing commands or duplicating it here.
+  - id: distinguish-type-and-runtime-evidence
+    prompt: >-
+      Design tests for this TypeScript decoder and its exported types. Tell me what needs
+      compile-time assertions and what needs runtime execution.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses compile-time assertions for public type relationships and runtime tests for parsing, validation, and execution.
+        - Exercises public seams and meaningful outcomes rather than private methods or internal call choreography.
+        - Keeps fixtures typed and focused without weakening production types.
+
+negative-cases:
+  - id: runner-configuration-only
+    prompt: Configure Vitest coverage thresholds, reporters, and workspace projects in this repository.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Defers runner-specific configuration and syntax to repository documentation or an installed Vitest-focused skill.
+  - id: provider-consumer-compatibility
+    prompt: >-
+      Prove that this independently deployed consumer still accepts every response variant
+      emitted by the provider.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: contract-testing
+      invariants:
+        - Does not reduce cross-ownership compatibility evidence to an ordinary TypeScript integration test.
+
+overlap-cases:
+  - id: typescript-test-first-implementation
+    competing-skill: test-driven-development
+    prompt: >-
+      Implement this TypeScript validation behavior test-first, and first choose whether
+      its honest seam is a pure unit or module integration test.
+    expected:
+      invocation: invoke
+      co-invocation: test-driven-development
+      invariants:
+        - TypeScript-testing owns layer selection, public seam quality, typed fixtures, and control of runtime boundaries.
+        - Test-driven-development owns the deliberate red-green-refactor sequence.
+        - Neither workflow substitutes runner-specific mechanics for repository-established commands and conventions.

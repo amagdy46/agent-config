@@ -1,0 +1,50 @@
+schema-version: 1
+skill: resume-work
+
+positive-cases:
+  - id: resume-from-handoff
+    prompt: Resume from docs/HANDOFF.md, reconcile it with the live branch, and continue the authorized work.
+    expected:
+      invocation: invoke
+      invariants:
+        - Extracts goal, scope, authority, decisions, completed work, claims, blockers, artifacts, and the stated resume point.
+        - Classifies inherited state as matches, drift, unknown, or done using targeted live checks.
+        - Gives a takeover capsule and continues from the recomputed true resume point.
+        - Does not repeat work already confirmed complete or expand inherited authorization.
+  - id: take-over-branch-trail
+    prompt: >-
+      Take over this branch from the linked task trail. Work out where it really stopped
+      and finish the remaining in-scope test change.
+    expected:
+      invocation: invoke
+      invariants:
+        - Treats live state as authoritative for current files, revisions, and status while preserving recorded intent and rationale.
+        - Reads only the trail and referenced detail needed to close consequential gaps.
+        - Requests direction if the original goal or authority cannot be safely recovered.
+
+negative-cases:
+  - id: same-session-continue
+    prompt: Continue with the next step we just discussed.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not create takeover ceremony for an unbroken same-session continuation.
+  - id: create-new-handoff
+    prompt: Write a handoff for another agent and stop; do not continue the work.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: handoff
+      invariants:
+        - Does not execute work when the request is to package continuation context.
+
+overlap-cases:
+  - id: supplied-handoff-takeover
+    competing-skill: handoff
+    prompt: >-
+      Here is the previous agent's handoff. Reconcile it with the working tree and resume
+      at the first unfinished action.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses the handoff as input and does not regenerate it as the primary outcome.
+        - Avoids replaying already verified investigations unless a targeted freshness check is needed.

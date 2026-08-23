@@ -1,0 +1,48 @@
+schema-version: 1
+skill: systematic-debugging
+
+positive-cases:
+  - id: diagnose-only-production-symptom
+    prompt: Diagnose why this worker stalls after restart. Report the root cause; do not change anything.
+    expected:
+      invocation: invoke
+      invariants:
+        - Establishes the reported symptom, expected behavior, conditions, and narrowest faithful reproduction or signal.
+        - Ranks falsifiable hypotheses and tests one variable at a time with minimally invasive evidence.
+        - Stops at diagnosis with evidence, confidence, remaining hypotheses, and a proposed remedy labeled as unimplemented.
+        - Does not edit source, configuration, infrastructure, or external systems.
+  - id: authorized-bug-fix
+    prompt: Find and fix why this request intermittently loses its correlation ID, then prove it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Diagnoses before changing behavior and confirms the reproduction represents the user's symptom.
+        - Converts the reproduction into an honest regression check when a suitable seam exists.
+        - Applies one focused root-cause fix, reruns the original reproduction, and removes temporary instrumentation.
+
+negative-cases:
+  - id: ordinary-feature-work
+    prompt: Add a new export format according to this accepted specification.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not invent a failure investigation for planned feature work.
+  - id: behavior-preserving-structure
+    prompt: Move these helpers into the owning module without changing behavior.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: refactor-safely
+      invariants:
+        - Does not treat structural cleanup as a bug signal.
+
+overlap-cases:
+  - id: diagnosis-is-not-fix-authorization
+    competing-skill: implement
+    prompt: This test started failing after the upgrade. Diagnose the cause only and tell me the smallest remedy.
+    expected:
+      invocation: invoke
+      invariants:
+        - Preserves the explicit diagnosis-only boundary even if a likely code fix becomes obvious.
+        - Does not patch, refactor, clean up, commit, push, or mutate configuration.
+        - Distinguishes a supported root cause from ranked remaining hypotheses.

@@ -1,0 +1,52 @@
+schema-version: 1
+skill: code-review
+
+positive-cases:
+  - id: review-branch-against-requirements
+    prompt: >-
+      Review my branch against the attached acceptance criteria. Report correctness and
+      maintainability findings, but do not change anything.
+    expected:
+      invocation: invoke
+      invariants:
+        - Establishes an explicit comparison point and complete relevant diff.
+        - Keeps specification correctness separate from maintainability and repository fit.
+        - Reports deduplicated, evidence-backed findings with severity and exact locations.
+        - Does not edit, fix, commit, push, submit comments, or mutate external state.
+  - id: readiness-review-named-files
+    prompt: Are these named files ready to merge? Review them and list any blocking findings.
+    expected:
+      invocation: invoke
+      invariants:
+        - States the review scope and any requirement or runtime evidence gaps.
+        - Does not treat style preferences or tool-enforced lint as defects.
+        - Says plainly when no findings are found without presenting that as runtime proof.
+
+negative-cases:
+  - id: apply-review-fixes
+    prompt: Fix the three review findings in this branch and verify them.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Treats fixing as a separate implementation task, not a read-only review.
+  - id: prove-running-feature
+    prompt: Run the final checks and prove the checkout fix works before saying it is done.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: verification-before-completion
+      invariants:
+        - Does not substitute diff inspection for fresh execution evidence.
+
+overlap-cases:
+  - id: review-contract-removal
+    competing-skill: blast-radius
+    prompt: >-
+      Review this branch for requirements and maintainability, including whether removing
+      this serialized field breaks downstream consumers.
+    expected:
+      invocation: invoke
+      co-invocation: blast-radius
+      invariants:
+        - Code-review owns the frozen diff and requirements verdict.
+        - Blast-radius may supply cross-boundary risk evidence, but the combined work remains read-only.

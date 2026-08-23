@@ -1,0 +1,52 @@
+schema-version: 1
+skill: refactor-safely
+
+positive-cases:
+  - id: extract-policy-module
+    prompt: >-
+      Refactor the duplicated eligibility branches into one domain module while preserving
+      every externally observable result.
+    expected:
+      invocation: invoke
+      invariants:
+        - States the behavior contract and establishes a meaningful executable pin before structural edits.
+        - Names the reader-load or ownership problem the target shape removes.
+        - Migrates in small reviewable steps and runs the pin after meaningful slices.
+        - Proves equivalence on the strongest relevant surface and reports residual uncertainty.
+  - id: move-internal-api
+    prompt: Move this internal API and all callers into the owning module without changing behavior.
+    expected:
+      invocation: invoke
+      invariants:
+        - Inventories and migrates every coordinated caller, including non-symbol references.
+        - Deletes the legacy path in the same change when all internal callers can move together.
+        - Avoids speculative abstractions and unrelated cleanup.
+
+negative-cases:
+  - id: fix-known-defect
+    prompt: Fix the bug where expired vouchers are still accepted.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: systematic-debugging
+      invariants:
+        - Does not mislabel a behavior change as refactoring.
+  - id: explore-new-visual-direction
+    prompt: Prototype several new layouts so we can decide how this page should look.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: prototype
+      invariants:
+        - Does not impose behavior-equivalence constraints on a disposable design experiment.
+
+overlap-cases:
+  - id: visual-parity-is-not-refactor
+    competing-skill: prototype
+    prompt: >-
+      Change the current page until its rendered layout and interactions match this new
+      reference design exactly; visible behavior is expected to change.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Routes visual parity or deliberate interaction changes to implementation rather than behavior-preserving refactoring.
+        - Does not claim equivalence when the requested observable output changes.

@@ -1,0 +1,49 @@
+schema-version: 1
+skill: handoff
+
+positive-cases:
+  - id: transfer-to-another-agent
+    prompt: Create a handoff so a fresh agent can continue this branch tomorrow.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reconciles claims with available live state before recording them as current.
+        - Separates verified, unverified, completed, blocked, and risky state.
+        - Gives one executable resume point with a target and observable success condition.
+        - Uses portable paths and identifiers and excludes secrets, transcripts, machine paths, and host databases.
+  - id: transfer-between-machines
+    prompt: >-
+      Make a portable continuation brief for moving this unfinished work from Linux to
+      my Mac. Return it here; do not commit or push it.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses repository-relative paths, stable URLs, branches, and revisions.
+        - Does not silently write to a temporary or host-specific location.
+        - Does not commit, push, publish, launch an agent, or perform the resumed work.
+
+negative-cases:
+  - id: final-project-summary
+    prompt: Summarize the completed project and its outcomes for stakeholders.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not force a continuation contract onto a final report.
+  - id: take-over-existing-handoff
+    prompt: Resume the work from HANDOFF.md and continue at its true current point.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: resume-work
+      invariants:
+        - Does not create another handoff when the request is to reconcile and continue one.
+
+overlap-cases:
+  - id: supplied-trail-is-input
+    competing-skill: resume-work
+    prompt: Read this handoff, reconcile it with the branch, and continue the implementation.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: resume-work
+      invariants:
+        - Treats the handoff as takeover input rather than regenerating it.
+        - Preserves the inherited authorization boundary while live state determines current reality.

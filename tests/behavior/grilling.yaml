@@ -1,0 +1,46 @@
+schema-version: 1
+skill: grilling
+
+positive-cases:
+  - id: explicit-architecture-grill
+    prompt: Grill me on this proposed service split. Push hard on assumptions and failure modes.
+    expected:
+      invocation: invoke
+      invariants:
+        - Inspects available evidence before asking discoverable factual questions.
+        - Asks dependency-aware frontier rounds with a recommendation and trade-off for each question.
+        - Challenges contradictions, vague success criteria, failure modes, and irreversible choices.
+        - Finishes with settled decisions, unresolved owners, risks, and a confirmation request.
+  - id: interrogate-product-decision
+    prompt: Interrogate my plan to launch this feature to every tenant at once.
+    expected:
+      invocation: invoke
+      invariants:
+        - Starts from the decision and current success criteria.
+        - Recomputes the question frontier as answers settle prerequisites.
+        - Does not implement, contact people, or change external systems.
+
+negative-cases:
+  - id: ordinary-clarification
+    prompt: Ask me any missing questions you need before changing this copy.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Uses proportionate clarification without turning it into an adversarial interview.
+  - id: write-implementation-plan
+    prompt: Write an implementation plan for these accepted requirements.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: writing-plans
+      invariants:
+        - Does not reopen settled requirements merely to manufacture questions.
+
+overlap-cases:
+  - id: grill-existing-plan
+    competing-skill: writing-plans
+    prompt: Grill this rollout plan before we accept it; do not rewrite or implement it yet.
+    expected:
+      invocation: invoke
+      invariants:
+        - Stress-tests the plan's assumptions and decision branches instead of producing a replacement implementation plan.
+        - Interview authorization does not become authorization to edit plan or implementation artifacts.

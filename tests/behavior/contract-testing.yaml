@@ -1,0 +1,55 @@
+schema-version: 1
+skill: contract-testing
+
+positive-cases:
+  - id: http-provider-consumer-contract
+    prompt: >-
+      Add contract evidence that the billing client expectations match the independently
+      released HTTP provider, including its handled error variants.
+    expected:
+      invocation: invoke
+      invariants:
+        - Identifies provider, consumers, boundary owner, transported representation, and compatibility policy.
+        - Exercises the production consumer decoder or client and the provider router or serializer without mocking the contracted boundary.
+        - Creates local contract evidence within the requested implementation scope and records exact revisions.
+        - Publishes, triggers remote verification, or mutates an external registry only with separate explicit authorization.
+        - Treats missing, stale, pending, or revision-mismatched provider evidence as non-terminal.
+  - id: event-contract-evolution
+    prompt: >-
+      Verify that changing this event schema remains compatible with old and new consumers
+      that may coexist during rollout.
+    expected:
+      invocation: invoke
+      invariants:
+        - Records only observable interoperability obligations and meaningful variants.
+        - Uses semantic matching for optional fields, identifiers, timestamps, and extensible values where appropriate.
+        - Makes additive evolution, removals, stricter validation, version overlap, and ownership explicit.
+
+negative-cases:
+  - id: ordinary-module-integration
+    prompt: Test that this controller, service, and repository work together inside one application module.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: typescript-testing
+      invariants:
+        - Does not call an ordinary same-ownership integration test a provider-consumer contract.
+  - id: browser-business-journey
+    prompt: Test the complete sign-in and checkout journey in a real browser.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not use boundary compatibility tests as a substitute for end-to-end business-flow coverage.
+
+overlap-cases:
+  - id: typescript-client-contract
+    competing-skill: typescript-testing
+    prompt: >-
+      In this TypeScript repository, prove that the production API client and the separately
+      deployed provider agree on the wire response and error variants.
+    expected:
+      invocation: invoke
+      co-invocation: typescript-testing
+      invariants:
+        - Contract-testing owns cross-revision provider-consumer obligations and two-direction verification.
+        - TypeScript-testing may shape the local test layer and typed fixtures but cannot replace provider replay evidence.
+        - Shared DTO assignability or framework metadata alone is not accepted as wire compatibility proof.

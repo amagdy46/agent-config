@@ -1,0 +1,52 @@
+schema-version: 1
+skill: teach
+
+positive-cases:
+  - id: start-persistent-course
+    prompt: >-
+      I want to genuinely learn distributed systems over the next two months. Set up a
+      persistent course with lessons, practice, progress records, and an end condition.
+    expected:
+      invocation: invoke
+      invariants:
+        - Resolves an explicit dedicated learning-workspace path before writing.
+        - Establishes prior knowledge, observable success criteria, milestones, and an end condition before creating the mission.
+        - Vets high-trust resources and creates one short sourced HTML lesson or practice unit at a time.
+        - Records demonstrated learning rather than equating coverage with mastery.
+  - id: resume-existing-course
+    prompt: Resume my existing Rust course workspace and choose the next lesson from my demonstrated progress.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reads mission, resources, notes, relevant records, and recent lessons from the chosen workspace.
+        - Selects instruction, retrieval, correction, practice, consolidation, outside feedback, or completion based on evidence.
+        - Keeps the workspace private and does not push, publish, or share it without explicit permission.
+
+negative-cases:
+  - id: one-turn-clarification
+    prompt: Wait, what did your previous paragraph mean? Explain it normally.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: wait-what
+      invariants:
+        - Does not initialize a learning workspace for an immediate clarification.
+  - id: bounded-codebase-explanation
+    prompt: Teach me how the authentication flow in this repository works.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: explain-codebase
+      invariants:
+        - Does not turn a one-off walkthrough of existing code into a multi-session course.
+
+overlap-cases:
+  - id: course-about-a-codebase
+    competing-skill: explain-codebase
+    prompt: >-
+      Create a persistent multi-session course workspace that teaches me this compiler
+      codebase through lessons, exercises, retrieval practice, and measurable milestones.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses explain-codebase-style evidence only as course material, while teach owns continuity and learning design.
+        - Requires a chosen course workspace and preserves mission and progress across sessions.
+        - Does not reduce the request to a single mechanics-and-rationale explanation.
