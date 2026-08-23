@@ -7,6 +7,36 @@ skills:
     status: active
     invocation: explicit
     portability: portable
+  - id: product-discovery
+    path: skills/product-discovery
+    summary: Frame product problems and choose the cheapest evidence that changes a decision.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: product-specification
+    path: skills/product-specification
+    summary: Write evidence-backed product briefs with scope, states, and acceptance evidence.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: user-stories
+    path: skills/user-stories
+    summary: Create small negotiable stories with observable acceptance examples.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: ux-design
+    path: skills/ux-design
+    summary: Design task flows, information architecture, states, and structural UX variants.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: frontend-design
+    path: skills/frontend-design
+    summary: Implement product-specific, accessible, and visually verified web interfaces.
+    status: active
+    invocation: automatic
+    portability: degraded
   - id: grilling
     path: skills/grilling
     summary: Stress-test a design through dependency-aware decision questions.
@@ -34,6 +64,18 @@ skills:
   - id: unslop
     path: skills/unslop
     summary: Make substantial human-facing prose concrete, direct, and natural.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: technical-documentation
+    path: skills/technical-documentation
+    summary: Create source-grounded technical docs matched to reader and document mode.
+    status: active
+    invocation: automatic
+    portability: portable
+  - id: operator-guide
+    path: skills/operator-guide
+    summary: Write verified task guidance for non-technical product operators and support staff.
     status: active
     invocation: automatic
     portability: portable

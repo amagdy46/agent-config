@@ -1,0 +1,50 @@
+schema-version: 1
+skill: technical-documentation
+
+positive-cases:
+  - id: write-api-reference
+    prompt: >-
+      Document this API for service developers. Ground every endpoint, field, default, error, and example in the current schema and implementation.
+    expected:
+      invocation: invoke
+      invariants:
+        - Chooses reference mode and organizes the document around the interface being described.
+        - Verifies contract details against current authoritative sources and labels any unverified surface.
+        - Uses exact names and preserves a single source of truth instead of paraphrasing unstable implementation trivia.
+  - id: write-architecture-explanation
+    prompt: Write an architecture explanation for new engineers that covers why this boundary exists, its trade-offs, and the current constraints.
+    expected:
+      invocation: invoke
+      invariants:
+        - Chooses explanation mode, grounds mechanics separately from rationale, and labels inference.
+        - Leads with the bounded conclusion and gives context, alternatives, costs, and consequences.
+        - Checks existing documentation ownership before creating a competing document.
+
+negative-cases:
+  - id: conversational-code-explanation
+    prompt: Explain this function to me here in chat. I do not want a documentation artifact.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: explain-codebase
+      invariants:
+        - Does not turn a one-off explanation into repository documentation.
+  - id: nontechnical-product-guide
+    prompt: Write a step-by-step guide for support agents who use this internal web tool and do not need implementation details.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: operator-guide
+      invariants:
+        - Routes non-technical product operation to the audience-specific workflow.
+
+overlap-cases:
+  - id: revise-technical-doc-prose
+    competing-skill: unslop
+    prompt: >-
+      Verify and restructure this developer guide, then remove the generic AI wording without changing facts, commands, or uncertainty.
+    expected:
+      invocation: invoke
+      co-invocation: unslop
+      invariants:
+        - Technical documentation owns mode, source grounding, structure, exact technical terms, and verification.
+        - Unslop owns the substantial prose pass while preserving protected literals and evidence confidence.
+        - Neither invents behavior or changes approved policy to improve the writing.

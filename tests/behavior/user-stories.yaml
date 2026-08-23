@@ -1,0 +1,49 @@
+schema-version: 1
+skill: user-stories
+
+positive-cases:
+  - id: write-story-from-approved-need
+    prompt: >-
+      Write a user story and acceptance examples for an approved ability that lets an operations agent correct a rejected record and retry it safely.
+    expected:
+      invocation: invoke
+      invariants:
+        - States a specific role, action or motivation, and an outcome that adds information.
+        - Keeps conversation context concise and traces the story to the approved need.
+        - Covers observable success plus applicable permission, validation, failure, retry, and recovery behavior without inventing policy.
+  - id: split-large-story
+    prompt: Split this oversized story into coherent vertical slices without producing frontend, backend, and database task silos.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses INVEST as a diagnostic and explains the actual reason the original story is too large.
+        - Splits by useful workflow, rule, operation, role, or boundary rather than implementation layer.
+        - Preserves meaningful value or evidence in every resulting story.
+
+negative-cases:
+  - id: unresolved-problem
+    prompt: We have a vague idea for an AI dashboard. Write the backlog even though we do not know the user problem yet.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: product-discovery
+      invariants:
+        - Does not manufacture personas, value, scope, or acceptance criteria before discovery.
+  - id: pure-engineering-task
+    prompt: Write a user story for renaming private database helpers without changing behavior.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Identifies work with no direct user outcome as an engineering task rather than disguising it as a user story.
+
+overlap-cases:
+  - id: stories-from-product-spec
+    competing-skill: product-specification
+    prompt: >-
+      Review this draft product spec, resolve its product-level gaps, and then derive the smallest useful backlog stories.
+    expected:
+      invocation: invoke
+      co-invocation: product-specification
+      invariants:
+        - Product specification resolves users, outcomes, scope, states, and product-level acceptance first.
+        - User stories produce negotiable vertical slices without changing the approved product contract.
+        - Open policy or permission decisions remain visible rather than being invented in story criteria.

@@ -1,0 +1,50 @@
+schema-version: 1
+skill: frontend-design
+
+positive-cases:
+  - id: build-distinctive-page
+    prompt: >-
+      Implement this approved landing page in the existing React app. Give it a product-specific visual direction, complete responsive states, and inspect the rendered result.
+    expected:
+      invocation: invoke
+      invariants:
+        - Grounds the visual thesis in the approved brief, audience, content, design system, and repository conventions.
+        - Implements functional responsive behavior and applicable loading, error, focus, contrast, and reduced-motion states.
+        - Inspects the rendered interface and reports evidence rather than claiming quality from source code alone.
+  - id: restyle-existing-dashboard
+    prompt: >-
+      Restyle this working dashboard so its hierarchy and visual identity fit the product without changing its approved workflow.
+    expected:
+      invocation: invoke
+      invariants:
+        - Preserves approved information architecture, behavior, permissions, and domain vocabulary.
+        - Uses typography, layout, and a coherent token system before adding decoration.
+        - Concentrates distinctiveness in an explainable signature and checks representative content density and states.
+
+negative-cases:
+  - id: unresolved-workflow
+    prompt: We do not know what task this screen serves or how the flow works. Pick a beautiful UI and build it anyway.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: ux-design
+      invariants:
+        - Does not use visual implementation to conceal missing product and interaction decisions.
+  - id: react-performance-only
+    prompt: Profile and fix unnecessary React rerenders without changing the interface design.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not turn a performance-only engineering task into a visual redesign.
+
+overlap-cases:
+  - id: ux-then-frontend
+    competing-skill: ux-design
+    prompt: >-
+      Resolve the information architecture and recovery states for this new workflow, then implement the approved direction as a polished responsive interface.
+    expected:
+      invocation: invoke
+      co-invocation: ux-design
+      invariants:
+        - UX design owns the task flow, information order, state model, and structural decision.
+        - Frontend design owns the visual thesis, production implementation, complete rendered states, and visual verification.
+        - Visual preferences do not silently change the approved product or UX contract.

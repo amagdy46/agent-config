@@ -35,6 +35,18 @@ provider-consumer contracts, safe migration practice, and terminal CI/PR
 evidence. It remains generic; repository-local instructions supply the real
 commands, services, and policies.
 
+Use `sets/product.yaml` for evidence-led discovery, concise product
+specifications, user stories, interaction design, and prototypes. Use
+`sets/documentation.yaml` for source-grounded developer documentation and
+task-focused guides for non-technical operators. The latter is intentionally
+separate because an API reference and an internal-tool procedure serve different
+readers and require different evidence.
+
+Within product work, `ux-design` decides task flow, information architecture,
+and behavior; `frontend-design` implements the approved direction with visual
+craft and rendered verification. Keeping them separate prevents polish from
+masking an unresolved workflow.
+
 The communication skills have deliberately different jobs:
 
 - `wait-what` rephrases the immediately preceding explanation. Saying “bro” is

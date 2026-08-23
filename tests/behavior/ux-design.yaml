@@ -1,0 +1,49 @@
+schema-version: 1
+skill: ux-design
+
+positive-cases:
+  - id: design-operator-flow
+    prompt: >-
+      Design the UX for an internal exception queue: task flow, information priority, permissions, failure states, recovery, keyboard use, and responsive behavior.
+    expected:
+      invocation: invoke
+      invariants:
+        - Grounds the flow in user task, domain terms, approved scope, permissions, and supplied evidence.
+        - Defines information and action hierarchy plus applicable non-ideal, accessibility, and recovery states.
+        - Does not invent research, analytics, policy, or a preferred component before its responsibility is clear.
+  - id: compare-information-architecture
+    prompt: Compare queue-first, overview-first, and guided-sequence structures for this workflow using low-fidelity wireframes.
+    expected:
+      invocation: invoke
+      invariants:
+        - Makes variants structurally different and comparable at similar fidelity.
+        - States attention order, path, state handling, responsive behavior, assumptions, advantages, and risks for each viable option.
+        - Records a reasoned selection or the product decision that prevents selection.
+
+negative-cases:
+  - id: visual-code-implementation
+    prompt: Implement this already approved Figma screen in React and match its colors, typography, and spacing.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not replace visual frontend implementation with a new UX-design phase when structure and behavior are already approved.
+  - id: product-problem-not-understood
+    prompt: Pick a screen layout for this feature even though we have not established the user, problem, or desired outcome.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: product-discovery
+      invariants:
+        - Does not use layout exploration to conceal missing product decisions.
+
+overlap-cases:
+  - id: ux-prototype
+    competing-skill: prototype
+    prompt: >-
+      Define the interaction and state model for this uncertain flow, then prototype two variants so we can compare them.
+    expected:
+      invocation: invoke
+      co-invocation: prototype
+      invariants:
+        - UX design owns the task model, information architecture, state coverage, and comparison criteria.
+        - Prototype owns the disposable artifact, variant switcher, and real interaction evidence.
+        - The result does not silently become production code or approved product policy.

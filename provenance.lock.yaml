@@ -17,14 +17,50 @@ sources:
     subpath: pstack
     license: MIT
     copyright: Copyright (c) 2026 Lauren Tan
+  productskills:
+    url: https://github.com/assimovt/productskills
+    commit: 66f9cee5868d6daf9cf106b4a74090428d6fa83e
+    license: MIT
+    copyright: Copyright (c) 2026 Tair Asim
+  pm-skills:
+    url: https://github.com/phuryn/pm-skills
+    commit: 18468a95b427e70e258b51389796367c6f684e7d
+    license: MIT
+    copyright: Copyright (c) 2026 Pawel Huryn
+  vibe-design-skills:
+    url: https://github.com/nick3/vibe-design-skills
+    commit: 79000e161fdfeb3a35674045a7bcb8d33bf555e1
+    license: MIT
+    copyright: Copyright (c) 2026 nick3
+  awesome-copilot:
+    url: https://github.com/github/awesome-copilot
+    commit: 83561bd7d8a46fcda0581aedabdf8eac7cb196b6
+    license: MIT
+    copyright: Copyright GitHub, Inc.
+  technical-writer:
+    url: https://github.com/riekelt/technical-writer
+    commit: 69a7f3518ee004a1689a7a480f4fbba89206b934
+    license: MIT
+    copyright: Copyright (c) 2026 riekelt
+  anthropic-skills:
+    url: https://github.com/anthropics/skills
+    commit: 3b3fad96af16a10759d930941b4520ba0c40edae
+    license: Apache-2.0
 
 derived-skills:
   prototype: [superpowers, matt-skills, pstack]
+  product-discovery: [productskills, superpowers, pstack]
+  product-specification: [productskills, vibe-design-skills, matt-skills]
+  user-stories: [pm-skills]
+  ux-design: [vibe-design-skills, matt-skills, pstack]
+  frontend-design: [anthropic-skills, vibe-design-skills, pstack]
   grilling: [matt-skills]
   architecture-design: [superpowers, matt-skills, pstack]
   refactor-safely: [matt-skills, pstack]
   blast-radius: [pstack]
   unslop: [matt-skills, pstack]
+  technical-documentation: [pstack, awesome-copilot, technical-writer]
+  operator-guide: [technical-writer, pstack, awesome-copilot]
   wait-what: [matt-skills, pstack]
   explain-codebase: [matt-skills, pstack]
   teach: [matt-skills, pstack]

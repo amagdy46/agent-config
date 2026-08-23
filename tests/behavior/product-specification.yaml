@@ -1,0 +1,50 @@
+schema-version: 1
+skill: product-specification
+
+positive-cases:
+  - id: write-feature-prd
+    prompt: >-
+      Turn this approved product direction and research summary into a concise PRD with outcomes, non-goals, permissions, failure states, and acceptance evidence.
+    expected:
+      invocation: invoke
+      invariants:
+        - Separates facts, evidence-backed observations, proposals, and open decisions.
+        - Defines users, outcomes, scope, non-goals, applicable experience states, and acceptance evidence.
+        - Does not invent metrics, policy, permissions, research, or technical capability.
+  - id: review-product-spec
+    prompt: Review this product spec for hidden scope, missing states, unverifiable success criteria, and decisions that still need an owner.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reviews the product contract rather than rewriting it as an implementation plan.
+        - Identifies missing critical states, unsupported priorities, and unowned decisions with their consequence.
+        - Preserves approved product intent and calls out proposed changes explicitly.
+
+negative-cases:
+  - id: engineering-plan-only
+    prompt: The product spec is approved. Write the file-by-file implementation sequence and exact verification commands.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: writing-plans
+      invariants:
+        - Does not duplicate implementation planning inside the product specification workflow.
+  - id: backlog-story-only
+    prompt: Convert requirement P0-3 from this approved spec into one small backlog story with acceptance examples.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: user-stories
+      invariants:
+        - Does not regenerate the full product specification for a story-authoring request.
+
+overlap-cases:
+  - id: specification-and-ux-structure
+    competing-skill: ux-design
+    prompt: >-
+      Specify this new internal workflow and propose how its information and actions should be organized across the screen.
+    expected:
+      invocation: invoke
+      co-invocation: ux-design
+      invariants:
+        - Product specification owns users, outcomes, scope, product states, and acceptance contract.
+        - UX design owns task flow, information hierarchy, structural variants, and interaction behavior.
+        - Visual or structural preferences do not silently become product requirements.

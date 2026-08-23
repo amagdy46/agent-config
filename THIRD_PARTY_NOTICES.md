@@ -30,6 +30,61 @@ Pinned revision: `46125561306434d8a1d7745d540d8932ab0cd2a2`
 Copyright (c) 2026 Lauren Tan
 License: MIT
 
+## Productskills
+
+Source: https://github.com/assimovt/productskills
+
+Pinned revision: `66f9cee5868d6daf9cf106b4a74090428d6fa83e`
+
+Copyright (c) 2026 Tair Asim
+License: MIT
+
+## PM Skills
+
+Source: https://github.com/phuryn/pm-skills
+
+Pinned revision: `18468a95b427e70e258b51389796367c6f684e7d`
+
+Copyright (c) 2026 Pawel Huryn
+License: MIT
+
+## Vibe Design Skills
+
+Source: https://github.com/nick3/vibe-design-skills
+
+Pinned revision: `79000e161fdfeb3a35674045a7bcb8d33bf555e1`
+
+Copyright (c) 2026 nick3
+License: MIT
+
+## Awesome Copilot
+
+Source: https://github.com/github/awesome-copilot
+
+Pinned revision: `83561bd7d8a46fcda0581aedabdf8eac7cb196b6`
+
+Copyright GitHub, Inc.
+License: MIT
+
+## Technical Writer
+
+Source: https://github.com/riekelt/technical-writer
+
+Pinned revision: `69a7f3518ee004a1689a7a480f4fbba89206b934`
+
+Copyright (c) 2026 riekelt
+License: MIT
+
+## Anthropic Skills
+
+Source: https://github.com/anthropics/skills
+
+Pinned revision: `3b3fad96af16a10759d930941b4520ba0c40edae`
+
+The frontend-design source was consulted for conceptual inspiration; no source
+text or code was copied. License: Apache-2.0. Full terms:
+https://github.com/anthropics/skills/blob/3b3fad96af16a10759d930941b4520ba0c40edae/skills/frontend-design/LICENSE.txt
+
 ## MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

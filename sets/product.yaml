@@ -1,7 +1,8 @@
 schema-version: 1
-name: prototyping
-description: Product discovery, experimental design, and safe structural exploration.
+name: product
+description: Product discovery, specification, interaction design, and decision-ready backlog work.
 skills:
+  - research
   - product-discovery
   - product-specification
   - user-stories
@@ -9,8 +10,5 @@ skills:
   - frontend-design
   - prototype
   - grilling
-  - architecture-design
-  - refactor-safely
-  - blast-radius
-  - research
   - verification-before-completion
+  - unslop

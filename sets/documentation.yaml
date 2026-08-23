@@ -1,0 +1,9 @@
+schema-version: 1
+name: documentation
+description: Technical and non-technical documentation with source grounding and plain prose.
+skills:
+  - technical-documentation
+  - operator-guide
+  - explain-codebase
+  - research
+  - unslop

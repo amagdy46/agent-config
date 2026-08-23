@@ -1,0 +1,51 @@
+schema-version: 1
+skill: product-discovery
+
+positive-cases:
+  - id: validate-product-problem
+    prompt: >-
+      We keep hearing that store operators lose time correcting orders. Should we build a bulk correction feature, and what evidence should we gather first?
+    expected:
+      invocation: invoke
+      invariants:
+        - Separates the proposed bulk feature from the underlying operator problem and desired outcome.
+        - Classifies supplied evidence, assumptions, contradictions, and decision-changing unknowns without inventing research.
+        - Recommends the cheapest safe disconfirming test and states what result would change the recommendation.
+  - id: map-opportunities
+    prompt: >-
+      Map the opportunities behind these onboarding support cases and analytics notes before we pick a solution.
+    expected:
+      invocation: invoke
+      invariants:
+        - Grounds opportunities in the supplied evidence and keeps customer needs distinct from features.
+        - Connects the desired outcome to opportunities, candidate approaches, assumptions, and evidence tests.
+        - Surfaces weak or conflicting evidence instead of forcing a confident product verdict.
+
+negative-cases:
+  - id: approved-direction-needs-prd
+    prompt: Write the PRD for this already approved feature direction, including scope and release acceptance.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: product-specification
+      invariants:
+        - Does not reopen discovery when the request is to specify an approved direction.
+  - id: ordinary-code-investigation
+    prompt: Explain where this request is validated in the existing code and why the branch is failing.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: systematic-debugging
+      invariants:
+        - Does not turn a code diagnosis request into product discovery.
+
+overlap-cases:
+  - id: prototype-as-discovery-test
+    competing-skill: prototype
+    prompt: >-
+      We are unsure whether operators understand this exception workflow. Frame the assumption and build a disposable prototype to test it.
+    expected:
+      invocation: invoke
+      co-invocation: prototype
+      invariants:
+        - Product discovery owns the decision, hypothesis, evidence standard, and stopping condition.
+        - Prototype owns the disposable artifact and comparable interaction evidence.
+        - Neither treats positive stakeholder preference as validated user behavior.

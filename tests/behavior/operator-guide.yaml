@@ -1,0 +1,50 @@
+schema-version: 1
+skill: operator-guide
+
+positive-cases:
+  - id: internal-tool-guide
+    prompt: >-
+      Write a guide for non-technical operations staff to review a rejected item, correct permitted fields, retry it, verify success, and know when to escalate.
+    expected:
+      invocation: invoke
+      invariants:
+        - Defines the operator role, permissions, prerequisites, task, success, recovery, and escalation boundary.
+        - Uses exact visible interface labels verified against the real surface or marks the guide as a draft where labels are unconfirmed.
+        - Avoids implementation detail, invented policy, and sensitive example data.
+  - id: operator-troubleshooting
+    prompt: Turn these support cases into symptom-first troubleshooting entries for staff using the admin portal.
+    expected:
+      invocation: invoke
+      invariants:
+        - Organizes entries by what the operator sees, followed by safe checks, fixes, evidence to collect, and escalation.
+        - Orders checks by cost and risk and states consequences before dangerous or irreversible actions.
+        - Distinguishes exercised behavior from an unverified branch.
+
+negative-cases:
+  - id: developer-api-documentation
+    prompt: Produce a complete reference for these webhook payloads, schemas, error codes, and versioning rules.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: technical-documentation
+      invariants:
+        - Does not replace a technical contract reference with an operator procedure.
+  - id: production-deployment-runbook
+    prompt: Write the engineering runbook with shell commands for deploying, rolling back, and inspecting production services.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: technical-documentation
+      invariants:
+        - Does not expose production commands in a non-technical product-operator guide.
+
+overlap-cases:
+  - id: mixed-audience-documentation
+    competing-skill: technical-documentation
+    prompt: >-
+      Document this internal tool for operations staff, and add a separate developer appendix explaining its API and failure contract.
+    expected:
+      invocation: invoke
+      co-invocation: technical-documentation
+      invariants:
+        - Operator guide owns task procedures, interface language, safe recovery, and escalation for non-technical staff.
+        - Technical documentation owns the separate developer-facing API and failure reference.
+        - The two audiences are linked but not mixed into one confusing procedure.

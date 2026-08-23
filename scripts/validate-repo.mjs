@@ -9,6 +9,17 @@ const errors = [];
 const allowedStatuses = new Set(["active", "pilot", "catalog", "retired"]);
 const allowedInvocations = new Set(["automatic", "explicit"]);
 const allowedPortability = new Set(["portable", "degraded", "host-specific"]);
+const provenanceSources = [
+  { id: "superpowers", marker: "obra/superpowers" },
+  { id: "matt-skills", marker: "mattpocock/skills" },
+  { id: "pstack", marker: "cursor/plugins" },
+  { id: "productskills", marker: "assimovt/productskills" },
+  { id: "pm-skills", marker: "phuryn/pm-skills" },
+  { id: "vibe-design-skills", marker: "nick3/vibe-design-skills" },
+  { id: "awesome-copilot", marker: "github/awesome-copilot" },
+  { id: "technical-writer", marker: "riekelt/technical-writer" },
+  { id: "anthropic-skills", marker: "anthropics/skills" },
+];
 
 async function text(path) {
   return readFile(path, "utf8");
@@ -255,10 +266,10 @@ for (const entry of await readdir(setDir, { withFileTypes: true })) {
 
 const provenance = await text(join(root, "provenance.lock.yaml"));
 const sourceCommits = new Map();
-for (const source of ["superpowers", "matt-skills", "pstack"]) {
+for (const { id: source } of provenanceSources) {
   const block = provenance.match(new RegExp(`^  ${source}:\\n([\\s\\S]*?)(?=^  [a-z][a-z-]*:|^derived-skills:|(?![\\s\\S]))`, "m"))?.[1];
   const commit = block?.match(/^    commit:\s*([0-9a-f]{40})$/m)?.[1];
-  if (!commit || !/^    license:\s*MIT$/m.test(block)) {
+  if (!commit || !/^    license:\s*(?:MIT|Apache-2\.0)$/m.test(block)) {
     errors.push(`invalid pinned provenance source: ${source}`);
   } else {
     sourceCommits.set(source, commit);
@@ -275,10 +286,9 @@ for (const name of skillNames) {
     continue;
   }
   const notice = await text(join(skillsDir, name, "NOTICE.md"));
-  const cited = [];
-  if (notice.includes("obra/superpowers")) cited.push("superpowers");
-  if (notice.includes("mattpocock/skills")) cited.push("matt-skills");
-  if (notice.includes("cursor/plugins")) cited.push("pstack");
+  const cited = provenanceSources
+    .filter(({ marker }) => notice.includes(marker))
+    .map(({ id }) => id);
   if (declared.join(",") !== cited.sort().join(",")) {
     errors.push(`NOTICE/provenance source mismatch: ${name}`);
   }
