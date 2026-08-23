@@ -7,12 +7,7 @@ description: Design or verify provider-consumer contracts at HTTP, message, or t
 
 A contract test proves that a consumer's concrete expectations match a provider's production boundary behavior. First identify the provider, each consumer, the boundary owner, the transported representation, and the compatibility policy.
 
-Match actions to the request. A design, review, or compatibility assessment is
-read-only. Create or update local contract code and artifacts only when the user
-asked for implementation. Publishing to a broker, registry, CI service, or other
-external system; changing provider state outside a disposable test environment;
-and triggering remote verification are separate mutations that require explicit
-authorization. Local implementation permission does not imply any of them.
+Match actions to the request. A design, review, or compatibility assessment is read-only. Create or update local contract code and artifacts only when the user asked for implementation. Publishing to a broker, registry, CI service, or other external system; changing provider state outside a disposable test environment; and triggering remote verification are separate mutations that require explicit authorization. Local implementation permission does not imply any of them.
 
 ## Anchor the contract to production shapes
 
