@@ -37,6 +37,12 @@ skills:
     status: active
     invocation: automatic
     portability: degraded
+  - id: taste
+    path: skills/taste
+    summary: Enforce anti-slop visual craft, consistency locks, and honest pre-flight checks on web UI.
+    status: active
+    invocation: automatic
+    portability: portable
   - id: grilling
     path: skills/grilling
     summary: Stress-test a design through dependency-aware decision questions.

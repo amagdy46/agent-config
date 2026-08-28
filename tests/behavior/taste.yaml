@@ -1,0 +1,80 @@
+schema-version: 1
+skill: taste
+
+positive-cases:
+  - id: landing-page-no-slop
+    prompt: >-
+      Build the marketing landing page for this developer tool. It must not look like a generic AI-generated template.
+    expected:
+      invocation: invoke
+      co-invocation: frontend-design
+      invariants:
+        - States a one-line design read and reasoned dial values before producing markup.
+        - Avoids habitual defaults such as purple-blue glow gradients, a centered hero over a mesh, three equal feature cards, and Inter on slate.
+        - Applies the color, shape, and theme locks across the whole page and limits eyebrows, marquees, and repeated layout families.
+        - Runs the pre-flight checklist on the rendered result and reports unverified items instead of claiming completion.
+  - id: internal-portal-visual-refactor
+    prompt: >-
+      Refactor the visuals of our internal operations portal: too many cards, everything is exposed at once, no hierarchy, and it looks generated. Keep the workflow the same.
+    expected:
+      invocation: invoke
+      co-invocation: frontend-design
+      invariants:
+        - Treats the request as a preserve-mode redesign and audits brand tokens, structure, and patterns before changing anything.
+        - Applies product-UI rules such as progressive disclosure, grouped lists, fewer card wrappers, no decorative status dots, and no hairlines on every row.
+        - Skips landing-page-only rules about hero composition, logo walls, and marquees.
+        - Does not change routes, navigation labels, form fields, or approved workflow without explicit approval.
+  - id: dark-mode-parity-pass
+    prompt: >-
+      Add a dark theme to this existing pricing page and make sure it looks intentional in both modes.
+    expected:
+      invocation: invoke
+      invariants:
+        - Uses one token strategy, keeps hierarchy and brand accent recognisable in both modes, and avoids pure black and pure white.
+        - Inspects the rendered page in both modes rather than reporting parity from source alone.
+
+negative-cases:
+  - id: unresolved-flow
+    prompt: We do not know what the onboarding flow should be. Make the screens look premium and non-generic anyway.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: ux-design
+      invariants:
+        - Does not use visual craft rules to conceal an unresolved task flow or state model.
+  - id: performance-only-frontend-work
+    prompt: Reduce the JavaScript bundle size and fix hydration warnings on the dashboard without changing how it looks.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not turn an engineering-only frontend task into a visual redesign.
+  - id: prose-editing
+    prompt: Remove the generic AI phrasing from this product announcement blog post.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: unslop
+      invariants:
+        - Does not apply interface craft rules to a prose-editing request.
+
+overlap-cases:
+  - id: with-frontend-design
+    competing-skill: frontend-design
+    prompt: >-
+      Implement the approved landing page design in the existing React app with complete states, and make sure the result does not look templated.
+    expected:
+      invocation: invoke
+      co-invocation: frontend-design
+      invariants:
+        - Frontend design owns the product-specific visual direction, functional implementation, complete states, and rendered verification.
+        - Taste owns the design read, anti-default discipline, consistency locks, banned patterns, motion and dark-mode discipline, and the pre-flight checklist.
+        - Taste rules do not override the repository's stack, approved design system, or existing icon and font choices without a policy check.
+  - id: with-ux-design
+    competing-skill: ux-design
+    prompt: >-
+      Rework the information architecture and hierarchy of our admin console, then restyle it so it stops looking like a generated template.
+    expected:
+      invocation: invoke
+      co-invocation: ux-design
+      invariants:
+        - UX design owns the task flow, information architecture, action order, and state model.
+        - Taste applies hierarchy, restraint, progressive disclosure, and consistency rules on top of the approved structure without altering it.
+        - Structural decisions are not made by the visual layer, and visual preferences do not silently change the UX contract.

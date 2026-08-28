@@ -46,6 +46,11 @@ sources:
     url: https://github.com/anthropics/skills
     commit: 3b3fad96af16a10759d930941b4520ba0c40edae
     license: Apache-2.0
+  taste-skill:
+    url: https://github.com/Leonxlnx/taste-skill
+    commit: ccbc15639c97057cbfcf32ecebc38ef716e4bb37
+    license: MIT
+    copyright: Copyright (c) 2026 Leonxlnx
 
 derived-skills:
   prototype: [superpowers, matt-skills, pstack]
@@ -54,6 +59,7 @@ derived-skills:
   user-stories: [pm-skills]
   ux-design: [vibe-design-skills, matt-skills, pstack]
   frontend-design: [anthropic-skills, vibe-design-skills, pstack]
+  taste: [taste-skill]
   grilling: [matt-skills]
   architecture-design: [superpowers, matt-skills, pstack]
   refactor-safely: [matt-skills, pstack]

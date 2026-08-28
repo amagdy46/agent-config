@@ -85,6 +85,15 @@ The frontend-design source was consulted for conceptual inspiration; no source
 text or code was copied. License: Apache-2.0. Full terms:
 https://github.com/anthropics/skills/blob/3b3fad96af16a10759d930941b4520ba0c40edae/skills/frontend-design/LICENSE.txt
 
+## Taste Skill
+
+Source: https://github.com/Leonxlnx/taste-skill
+
+Pinned revision: `ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
+
+Copyright (c) 2026 Leonxlnx
+License: MIT
+
 ## MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

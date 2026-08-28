@@ -45,7 +45,9 @@ readers and require different evidence.
 Within product work, `ux-design` decides task flow, information architecture,
 and behavior; `frontend-design` implements the approved direction with visual
 craft and rendered verification. Keeping them separate prevents polish from
-masking an unresolved workflow.
+masking an unresolved workflow. `taste` is the anti-slop rules layer applied
+alongside `frontend-design` (and on top of a `ux-design` structure) whenever a
+page, redesign, or product UI must not look templated.
 
 The communication skills have deliberately different jobs:
 
