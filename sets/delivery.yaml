@@ -1,0 +1,13 @@
+schema-version: 1
+name: delivery
+description: Execute approved work with isolation, review gates, CI evidence, and a durable handoff.
+skills:
+  - writing-plans
+  - implement
+  - using-git-worktrees
+  - multi-agent-development
+  - code-review
+  - ci-pr-lifecycle
+  - verification-before-completion
+  - handoff
+  - resume-work

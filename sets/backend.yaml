@@ -1,0 +1,13 @@
+schema-version: 1
+name: backend
+description: Backend design and delivery across architecture, contracts, persistence, and tests.
+skills:
+  - architecture-design
+  - blast-radius
+  - systematic-debugging
+  - test-driven-development
+  - typescript-testing
+  - contract-testing
+  - safe-database-changes
+  - refactor-safely
+  - verification-before-completion

@@ -1,0 +1,12 @@
+schema-version: 1
+name: frontend
+description: Product interface design and implementation from task flow through visual verification.
+skills:
+  - product-discovery
+  - ux-design
+  - frontend-design
+  - taste
+  - prototype
+  - typescript-testing
+  - verification-before-completion
+  - research

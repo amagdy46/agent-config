@@ -1,0 +1,13 @@
+schema-version: 1
+name: lean-core
+description: Small baseline of differentiated workflows for careful everyday software work.
+skills:
+  - systematic-debugging
+  - verification-before-completion
+  - architecture-design
+  - refactor-safely
+  - blast-radius
+  - prototype
+  - handoff
+  - explain-codebase
+  - unslop

@@ -1,0 +1,10 @@
+schema-version: 1
+name: review
+description: Review changes for correctness, impact, maintainability, and evidence without editing them.
+skills:
+  - code-review
+  - blast-radius
+  - architecture-design
+  - refactor-safely
+  - contract-testing
+  - verification-before-completion
