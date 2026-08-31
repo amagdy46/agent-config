@@ -20,6 +20,7 @@ const provenanceSources = [
   { id: "technical-writer", marker: "riekelt/technical-writer" },
   { id: "anthropic-skills", marker: "anthropics/skills" },
   { id: "taste-skill", marker: "Leonxlnx/taste-skill" },
+  { id: "archify", marker: "tt-a1i/archify" },
 ];
 
 async function text(path) {

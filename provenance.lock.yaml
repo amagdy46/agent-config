@@ -52,6 +52,12 @@ sources:
     license: MIT
     copyright: Copyright (c) 2026 Leonxlnx
 
+  archify:
+    url: https://github.com/tt-a1i/archify
+    commit: 2bfb47132c057195d8dddb3e25ae966dd7c7a72e
+    subpath: archify
+    license: MIT
+    copyright: Copyright (c) 2026 tt-a1i (Archify); Copyright (c) 2025 Cocoon AI
 derived-skills:
   prototype: [superpowers, matt-skills, pstack]
   product-discovery: [productskills, superpowers, pstack]
@@ -86,3 +92,4 @@ derived-skills:
   contract-testing: [pstack]
   safe-database-changes: [pstack]
   ci-pr-lifecycle: [superpowers, pstack]
+  archify: [archify]

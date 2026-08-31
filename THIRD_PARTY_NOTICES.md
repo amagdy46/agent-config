@@ -113,3 +113,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Archify
+
+Source: https://github.com/tt-a1i/archify
+
+Pinned revision: `2bfb47132c057195d8dddb3e25ae966dd7c7a72e`
+
+Copyright (c) 2026 tt-a1i (Archify)
+Copyright (c) 2025 Cocoon AI (original "architecture-diagram-generator")
+License: MIT
+
+Vendored verbatim (executable skill package), not adapted; see
+`skills/archify/NOTICE.md`.
+

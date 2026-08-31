@@ -1,0 +1,52 @@
+schema-version: 1
+skill: archify
+
+positive-cases:
+  - id: visualize-system-architecture
+    prompt: >-
+      Create an interactive diagram of our system architecture — services, queues,
+      databases, and how requests flow between them — that I can open in a browser
+      and share with the team.
+    expected:
+      invocation: invoke
+      invariants:
+        - Authors typed Archify JSON grounded in stated or repository-verified topology; never invents components or relationships.
+        - Writes the candidate artifact before inspecting renderer internals and validates after every edit.
+        - Runs deliver as the final acceptance command and never describes a non-zero exit as success.
+        - Reports validation, artifact receipt, and browser-evidence status separately from perceptual review.
+  - id: beautify-mermaid-sequence
+    prompt: >-
+      Here is a Mermaid sequenceDiagram of our checkout API calls. Convert it into a
+      polished standalone HTML sequence diagram.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reads Mermaid for topology and meaning, then authors fresh Archify JSON rather than mechanically translating styling.
+        - Preserves exact product names, API paths, and message semantics from the source.
+
+negative-cases:
+  - id: data-chart-not-diagram
+    prompt: Plot our monthly revenue and active users as a chart.
+    expected:
+      invocation: do-not-invoke
+      invariants:
+        - Does not use an architecture/sequence diagram tool for quantitative data visualization.
+  - id: production-ui-not-artifact
+    prompt: Build the settings page UI for our web app.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: frontend-design
+      invariants:
+        - Does not substitute a diagram artifact for production interface implementation.
+
+overlap-cases:
+  - id: design-then-diagram
+    competing-skill: architecture-design
+    prompt: >-
+      We already decided the service boundaries in yesterday's design doc; now produce
+      a presentable interactive map of that architecture for the review meeting.
+    expected:
+      invocation: invoke
+      invariants:
+        - Treats the settled design as source facts to render, not a design question to reopen.
+        - Escalates to architecture-design only if the requested diagram exposes unresolved structural decisions.

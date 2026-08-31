@@ -200,6 +200,13 @@ skills:
     invocation: automatic
     portability: degraded
 
+  - id: archify
+    path: skills/archify
+    summary: Render validated interactive architecture, sequence, workflow, dataflow, and lifecycle diagrams as standalone HTML.
+    status: pilot
+    invocation: automatic
+    portability: degraded
+
 next-candidates:
   - incident-investigation
   - technical-writing
