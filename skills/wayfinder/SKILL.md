@@ -1,6 +1,8 @@
 ---
 name: wayfinder
 description: Build and advance a durable decision map for a large, foggy effort that cannot be responsibly planned in one session. Invoke explicitly for multi-session route-finding; this skill does not implement the destination or publish anything externally.
+license: MIT
+compatibility: Needs a writable workspace for the decision map; subagents and a pull-request CLI help but are optional.
 ---
 
 # Wayfinder

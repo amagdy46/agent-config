@@ -1,0 +1,53 @@
+schema-version: 1
+skill: author-agent-instructions
+
+positive-cases:
+  - id: improve-existing-instructions
+    prompt: >-
+      Our CLAUDE.md is 400 lines and the agent keeps ignoring the testing rules.
+      Improve it so the important parts actually get followed.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reads the repository and tooling configuration before rewriting rules.
+        - Leaves project identity, stack, and project map bare and wraps domain guidance in narrow conditional blocks.
+        - Keeps every command from the original file.
+        - Removes rules that a linter, formatter, or hook already enforces and says so.
+  - id: create-from-scratch
+    prompt: >-
+      Write an AGENTS.md for this repository. There is nothing there yet.
+    expected:
+      invocation: invoke
+      invariants:
+        - Derives conventions from repository evidence rather than generic best practices.
+        - Marks unconfirmed conventions as open questions instead of rules.
+        - Does not add employer, credential, or incident details.
+
+negative-cases:
+  - id: human-readme
+    prompt: Write a README with installation and usage instructions for contributors.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: technical-documentation
+      invariants:
+        - Treats the deliverable as documentation for people, not agent instructions.
+  - id: explain-rule
+    prompt: What does this rule in our CLAUDE.md about worktrees actually mean?
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: wait-what
+      invariants:
+        - Explains without rewriting the instruction file.
+
+overlap-cases:
+  - id: docs-and-instructions
+    competing-skill: technical-documentation
+    prompt: >-
+      Document the release process for developers and make sure the coding agent
+      follows it too.
+    expected:
+      invocation: invoke
+      co-invocation: technical-documentation
+      invariants:
+        - Author-agent-instructions owns the agent-facing instruction file and its conditional triggers.
+        - Technical-documentation owns the human-facing process document; neither duplicates the other's body text.

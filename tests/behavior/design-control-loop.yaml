@@ -1,0 +1,54 @@
+schema-version: 1
+skill: design-control-loop
+
+positive-cases:
+  - id: scheduled-lint-burndown
+    prompt: >-
+      I want a scheduled agent that chips away at our lint violations a few at a
+      time and opens a PR each day. Design it with me.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reads the repository's tooling and CI before proposing a sensor, controller, or actuator.
+        - Produces a written design naming set point, sensor, controller, actuator, disturbances, and flow control.
+        - Makes each component runnable locally before wiring CI.
+        - Bounds open pull requests per loop and stores standing feedback in a memory file.
+  - id: gradual-migration-loop
+    prompt: >-
+      Set up an agentic control loop that migrates modules off the deprecated
+      HTTP client one module per run.
+    expected:
+      invocation: invoke
+      invariants:
+        - Treats the migration as a set point with a repeatable measurement of remaining modules.
+        - Captures the golden migration pattern in a repository-local actuator skill.
+        - Does not push, enable secrets, or open the first pull request without separate authorization.
+
+negative-cases:
+  - id: one-off-migration
+    prompt: Migrate every module off the deprecated HTTP client now, in this session.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not build scheduling, memory, or CI machinery for a single change.
+  - id: plain-ci-setup
+    prompt: Add a GitHub Actions workflow that runs our tests on every pull request.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: ci-pr-lifecycle
+      invariants:
+        - Does not frame ordinary CI as a control loop.
+
+overlap-cases:
+  - id: delegated-loop-build
+    competing-skill: multi-agent-development
+    prompt: >-
+      Design a recurring agent loop for dead-code removal and use parallel agents
+      to build the sensor script and the workflow at the same time.
+    expected:
+      invocation: invoke
+      co-invocation: multi-agent-development
+      invariants:
+        - Design-control-loop owns the loop design, component boundaries, and local-first verification.
+        - Multi-agent-development only coordinates the delegated build of already-designed components.

@@ -1,6 +1,7 @@
 ---
 name: unslop
 description: Edit substantial human-facing prose to remove generic AI patterns while preserving meaning, evidence, uncertainty, and the author's intended voice. Use for reports, documentation, proposals, posts, and other writing that merits a deliberate prose pass; do not invoke for every short chat reply.
+license: MIT
 ---
 
 # Unslop

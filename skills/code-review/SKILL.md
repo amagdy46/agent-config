@@ -1,6 +1,7 @@
 ---
 name: code-review
 description: Perform a read-only review of a diff, branch, pull request, commit range, or named files for requirement correctness and maintainability. Use when the user asks for review, critique, findings, or readiness assessment; report findings without editing or auto-fixing the work.
+license: MIT
 ---
 
 # Code Review

@@ -1,6 +1,7 @@
 ---
 name: writing-plans
 description: Turn accepted requirements into an implementation plan made of ordered, independently verifiable units with explicit files, interfaces, dependencies, and checks. Use when the user asks for a plan or when complex work needs planning before implementation; this skill plans only and does not edit implementation files.
+license: MIT
 ---
 
 # Writing Plans

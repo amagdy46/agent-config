@@ -1,6 +1,7 @@
 ---
 name: systematic-debugging
 description: Diagnose bugs, failures, regressions, and unexpected behavior by building a reproducible signal and testing evidence-backed hypotheses. Use for diagnosis requests and before attempting a bug fix; preserve a diagnosis-only boundary when the user has not asked for a fix.
+license: MIT
 ---
 
 # Systematic Debugging

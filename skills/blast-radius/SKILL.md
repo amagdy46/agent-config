@@ -1,6 +1,7 @@
 ---
 name: blast-radius
 description: Determine what a proposed or completed change could break beyond its immediate diff and prove the key safety assumptions. Use explicitly for blast-radius or "what could this break?" analysis, and narrowly for contract, schema, event, serialization, or migration changes with non-obvious downstream consumers.
+license: MIT
 ---
 
 # Blast Radius

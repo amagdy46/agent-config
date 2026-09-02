@@ -1,6 +1,8 @@
 ---
 name: multi-agent-development
 description: Coordinate substantial development through bounded, dependency-aware delegation. Use when the user requests multi-agent, parallel, swarm, or delegated implementation and the work contains separable tasks; do not use for a small change or tightly coupled work that one agent should own.
+license: MIT
+compatibility: Requires a host that can run subagents or parallel sessions; otherwise degrades to sequential single-agent execution.
 ---
 
 # Multi-Agent Development

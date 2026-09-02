@@ -207,10 +207,22 @@ skills:
     invocation: automatic
     portability: degraded
 
+  - id: author-agent-instructions
+    path: skills/author-agent-instructions
+    summary: Write or improve agent instruction files with bare foundations and narrowly triggered rules.
+    status: pilot
+    invocation: automatic
+    portability: portable
+  - id: design-control-loop
+    path: skills/design-control-loop
+    summary: Design and build a scheduled coding-agent loop that drives one codebase property toward a target.
+    status: pilot
+    invocation: explicit
+    portability: degraded
+
 next-candidates:
   - incident-investigation
   - technical-writing
-  - author-agent-instructions
   - visual-parity
   - arena
   - interrogate

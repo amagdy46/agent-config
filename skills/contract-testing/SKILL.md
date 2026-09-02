@@ -1,6 +1,7 @@
 ---
 name: contract-testing
 description: Design or verify provider-consumer contracts at HTTP, message, or typed service boundaries. Use when compatibility between independently changing components is the question; do not use as a substitute for ordinary unit, integration, or end-to-end testing.
+license: MIT
 ---
 
 # Contract Testing

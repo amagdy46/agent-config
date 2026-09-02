@@ -1,6 +1,8 @@
 ---
 name: frontend-design
 description: Implement or substantially restyle a web interface when visual design judgment matters. Use for production components, pages, dashboards, and interactive artifacts that need a product-specific visual direction; do not use to resolve an unknown user flow or product requirement.
+license: MIT
+compatibility: Best with a browser or screenshot tool for rendered verification; without one, visual checks become manual.
 ---
 
 # Frontend Design

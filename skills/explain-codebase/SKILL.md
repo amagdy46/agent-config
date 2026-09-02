@@ -1,6 +1,8 @@
 ---
 name: explain-codebase
 description: Explain how an existing codebase, subsystem, flow, or change works and, when asked, why it became that way. Use for codebase teaching, runtime walkthroughs, ownership or placement questions, and historical rationale; keep the investigation read-only and separate evidence from inference.
+license: MIT
+compatibility: Rationale mode uses git history and a pull-request CLI when available; mechanics mode needs only file and search access.
 ---
 
 # Explain codebase
@@ -28,7 +30,7 @@ If the target is slightly ambiguous, state the interpretation and proceed so the
 
 Start with the smallest complete explanation: what the thing is and what job it performs here. Then add the path through the system, boundaries, reasons, and sharp edges the user's question actually needs.
 
-Prefer a concrete request, event, or data example over a catalog of functions. Introduce one stable name per concept. For three or more moving parts, build the picture in stages rather than opening with one crowded diagram. Use diagrams only when they clarify a relationship that prose does not.
+Prefer a concrete request, event, or data example over a catalog of functions. Introduce one stable name per concept. For three or more moving parts, build the picture in stages rather than opening with one crowded diagram. Use diagrams only when they clarify a relationship that prose does not. When a visual would help, pick the smallest form from [references/visual-forms.md](references/visual-forms.md).
 
 For combined mode, preserve this order unless the question calls for another:
 

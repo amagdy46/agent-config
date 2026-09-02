@@ -1,6 +1,7 @@
 ---
 name: grilling
 description: Stress-test a plan, decision, or idea through a structured, challenging interview. Use only when the user explicitly asks to be grilled, interrogated, or pushed on their assumptions; do not activate for ordinary clarification or requirements gathering.
+license: MIT
 ---
 
 # Grilling

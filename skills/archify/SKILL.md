@@ -6,6 +6,7 @@ metadata:
   version: "2.16"
   author: tt-a1i
   based_on: Cocoon-AI/architecture-diagram-generator (MIT, v1.0)
+compatibility: Bundled renderers need shell access; a manual template path exists without it.
 ---
 
 # Archify

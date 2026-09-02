@@ -1,6 +1,7 @@
 ---
 name: architecture-design
 description: Design or reshape a non-trivial module, interface, subsystem, or integration boundary before implementation. Use when ownership, seams, contracts, data flow, or testability are consequential; do not activate for routine local edits with an established shape.
+license: MIT
 ---
 
 # Architecture Design

@@ -1,6 +1,8 @@
 ---
 name: safe-database-changes
 description: Plan, create, review, and verify application database migrations without touching production. Use for schema changes, migration generation, backfills, or deploy compatibility; route ORM-specific mechanics through the matching reference or repository discovery.
+license: MIT
+compatibility: Needs a disposable local database, usually through a container runtime, plus the repository's migration tooling.
 ---
 
 # Safe Database Changes

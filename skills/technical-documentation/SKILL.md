@@ -1,6 +1,7 @@
 ---
 name: technical-documentation
 description: Create or revise source-grounded documentation for developers and technical operators, including tutorials, how-to guides, references, explanations, READMEs, and design documents. Use when technical prose must be accurate, navigable, and verifiable against the current system.
+license: MIT
 ---
 
 # Technical Documentation

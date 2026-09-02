@@ -1,6 +1,7 @@
 ---
 name: ux-design
 description: Design or review a product flow, screen structure, information architecture, or interaction before visual implementation. Use when deciding how people complete a task, what they need to see, which states must exist, or how structural UX variants should be compared.
+license: MIT
 ---
 
 # UX Design

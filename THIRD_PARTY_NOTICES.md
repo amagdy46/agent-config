@@ -127,3 +127,15 @@ License: MIT
 Vendored verbatim (executable skill package), not adapted; see
 `skills/archify/NOTICE.md`.
 
+
+## HumanLayer skills
+
+Source: https://github.com/humanlayer/skills
+
+Pinned revision: `3c2629142c5d437428269b1b722b08c0b87f574d`
+
+Copyright (c) 2026 HumanLayer
+License: MIT
+
+Consulted for `author-agent-instructions`, `design-control-loop`, and the
+visual-forms reference in `explain-codebase`; adapted, not copied.

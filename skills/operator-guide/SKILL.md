@@ -1,6 +1,7 @@
 ---
 name: operator-guide
 description: Create or revise task-focused documentation for non-technical product operators, support staff, administrators, or internal-tool users. Use for user guides, standard operating procedures, onboarding, troubleshooting, and handoffs that must match the real interface without exposing implementation detail.
+license: MIT
 ---
 
 # Operator Guide

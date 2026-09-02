@@ -1,6 +1,7 @@
 ---
 name: handoff
 description: Create a compact, portable continuation brief with verified and unverified state separated and one exact resume point. Invoke explicitly when transferring work to another agent, session, or machine; do not use for a final project report.
+license: MIT
 ---
 
 # Handoff

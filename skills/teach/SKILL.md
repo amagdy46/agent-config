@@ -1,6 +1,7 @@
 ---
 name: teach
 description: Run a persistent, multi-session course in a dedicated learning workspace, with a mission, vetted resources, short HTML lessons, learning records, retrieval practice, and an explicit end condition. Use when learning is the project; do not use for a one-turn clarification or codebase explanation.
+license: MIT
 ---
 
 # Teach

@@ -1,6 +1,8 @@
 ---
 name: ci-pr-lifecycle
 description: Inspect or drive a branch, pull request, and continuous-integration lifecycle with explicit mutation boundaries. Use for PR readiness, CI status, authorized retries, pushes, or PR creation and updates; never merge.
+license: MIT
+compatibility: Requires git and a pull-request CLI with access to CI status.
 ---
 
 # CI and PR Lifecycle

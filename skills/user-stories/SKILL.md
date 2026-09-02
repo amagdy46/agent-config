@@ -1,6 +1,7 @@
 ---
 name: user-stories
 description: Turn an understood product need into small, negotiable backlog stories with observable acceptance examples. Use when writing, reviewing, or splitting user stories and acceptance criteria; do not use when the underlying problem or feature scope is still unknown.
+license: MIT
 ---
 
 # User Stories

@@ -1,6 +1,7 @@
 ---
 name: product-specification
 description: Write or review an evidence-backed product brief, PRD, or feature specification. Use when a product direction needs clear users, outcomes, scope, states, requirements, success measures, and unresolved decisions before design or engineering planning.
+license: MIT
 ---
 
 # Product Specification

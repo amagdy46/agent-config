@@ -1,6 +1,7 @@
 ---
 name: refactor-safely
 description: Restructure, rename, extract, inline, deduplicate, or move existing code while preserving observable behavior. Use for focused refactors and structural cleanup; do not use when the intended outcome changes product behavior or fixes a known defect.
+license: MIT
 ---
 
 # Refactor Safely

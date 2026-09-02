@@ -1,6 +1,8 @@
 ---
 name: research
 description: Investigate a defined question using primary sources and produce a cited, time-bounded research artifact. Use for source-backed technical or product research; do not use for ordinary codebase explanation that needs no external or historical evidence.
+license: MIT
+compatibility: Needs web or other external source access for current primary sources; subagent delegation is optional.
 ---
 
 # Research

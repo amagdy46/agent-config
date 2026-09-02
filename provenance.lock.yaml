@@ -58,6 +58,11 @@ sources:
     subpath: archify
     license: MIT
     copyright: Copyright (c) 2026 tt-a1i (Archify); Copyright (c) 2025 Cocoon AI
+  humanlayer-skills:
+    url: https://github.com/humanlayer/skills
+    commit: 3c2629142c5d437428269b1b722b08c0b87f574d
+    license: MIT
+    copyright: Copyright (c) 2026 HumanLayer
 derived-skills:
   prototype: [superpowers, matt-skills, pstack]
   product-discovery: [productskills, superpowers, pstack]
@@ -74,7 +79,7 @@ derived-skills:
   technical-documentation: [pstack, awesome-copilot, technical-writer]
   operator-guide: [technical-writer, pstack, awesome-copilot]
   wait-what: [matt-skills, pstack]
-  explain-codebase: [matt-skills, pstack]
+  explain-codebase: [matt-skills, pstack, humanlayer-skills]
   teach: [matt-skills, pstack]
   research: [superpowers, matt-skills, pstack]
   wayfinder: [superpowers, matt-skills, pstack]
@@ -93,3 +98,5 @@ derived-skills:
   safe-database-changes: [pstack]
   ci-pr-lifecycle: [superpowers, pstack]
   archify: [archify]
+  author-agent-instructions: [humanlayer-skills]
+  design-control-loop: [humanlayer-skills]

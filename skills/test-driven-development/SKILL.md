@@ -1,6 +1,7 @@
 ---
 name: test-driven-development
 description: Develop behavior through deliberate red-green cycles at stable seams. Use when the user asks for TDD or test-first work, or when an implementation workflow explicitly composes this skill for behavior that has a suitable test seam; do not activate merely because any code is being edited.
+license: MIT
 ---
 
 # Test-Driven Development

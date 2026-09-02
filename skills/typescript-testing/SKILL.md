@@ -1,6 +1,7 @@
 ---
 name: typescript-testing
 description: Choose and design the smallest honest test layer for TypeScript backend, frontend, or shared-library behavior. Use when deciding where a TypeScript test belongs or shaping its seam; defer runner-specific syntax and configuration to the repository or an installed framework-testing skill.
+license: MIT
 ---
 
 # TypeScript Testing

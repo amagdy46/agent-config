@@ -1,6 +1,7 @@
 ---
 name: wait-what
 description: Re-pitch the immediately preceding explanation when the user says "wait, what", uses "bro" to reject that explanation, asks to "explain that normally", or otherwise says the last answer did not land. This is a one-turn clarification, not research, codebase investigation, or a course.
+license: MIT
 ---
 
 # Wait, what?

@@ -1,6 +1,7 @@
 ---
 name: taste
 description: Apply anti-slop visual craft when a web interface is built, restyled, or redesigned and it must not look templated or AI-generated. Use alongside frontend-design for landing pages, portfolios, redesigns, and product UI such as dashboards and internal tools that need hierarchy, restraint, consistent color and shape, honest motion, and dark-mode parity; do not use to decide the user flow, information architecture, or state model, and do not use for engineering-only frontend work with no visual change.
+license: MIT
 ---
 
 # Taste

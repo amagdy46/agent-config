@@ -11,6 +11,15 @@ This skill is an original, agent-neutral rewrite informed by the following MIT-l
 - Copyright: Copyright (c) 2026 Lauren Tan
 - Use: adapted the distinction between mechanics and rationale, read-only code exploration, evidence-calibrated historical investigation, and progressive teaching. Host-specific tools, model routing, and fixed subagent orchestration were not copied.
 
+## HumanLayer skills
+
+- Repository: <https://github.com/humanlayer/skills>
+- Pinned commit: `3c2629142c5d437428269b1b722b08c0b87f574d`
+- Consulted paths: `plugins/show-me/skills/show-me/SKILL.md`
+- License: MIT
+- Copyright: Copyright (c) 2026 HumanLayer
+- Use: adapted the catalog of minimal visual forms (pseudocode, call tree, component tree, shallow file tree, diff-shaped sketches) into `references/visual-forms.md`. The standalone HTML artifact behavior was not adopted.
+
 ## Matt Pocock's skills
 
 - Repository: <https://github.com/mattpocock/skills>

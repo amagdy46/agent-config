@@ -1,6 +1,8 @@
 ---
 name: resume-work
 description: Take over work from a supplied handoff, trail, branch, or prior-session artifact by reconciling it with live state and continuing at the true resume point. Use on a clear takeover request; do not use for general history recall or a same-session “continue.”
+license: MIT
+compatibility: Needs git and file access; transcript or session-export access is optional.
 ---
 
 # Resume Work

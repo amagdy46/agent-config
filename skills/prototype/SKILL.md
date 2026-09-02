@@ -1,6 +1,7 @@
 ---
 name: prototype
 description: Build a disposable artifact to answer one uncertain design, interaction, state-model, or feasibility question before production implementation. Use for explicit prototype, mockup, spike, or "try a few versions" requests; do not use for ordinary implementation where the desired behavior is already settled.
+license: MIT
 ---
 
 # Prototype

@@ -1,6 +1,8 @@
 ---
 name: using-git-worktrees
 description: Create or recognize an isolated Git workspace for implementation while preserving existing changes and authorization boundaries. Use when the user requests a worktree, an accepted workflow requires isolation, or concurrent work would otherwise collide.
+license: MIT
+compatibility: Requires git with worktree support.
 ---
 
 # Using Git Worktrees

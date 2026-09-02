@@ -1,6 +1,7 @@
 ---
 name: product-discovery
 description: Frame and investigate a product problem before committing to a solution. Use when deciding what problem is worth solving, mapping opportunities, evaluating an idea, or choosing the cheapest evidence that would change a product decision.
+license: MIT
 ---
 
 # Product Discovery

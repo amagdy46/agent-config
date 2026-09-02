@@ -1,6 +1,7 @@
 ---
 name: verification-before-completion
 description: Gate claims that work is complete, fixed, passing, or ready on fresh evidence from the surface that actually proves each claim. Use immediately before making a success claim or handing completed work back.
+license: MIT
 ---
 
 # Verification Before Completion

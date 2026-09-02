@@ -1,6 +1,7 @@
 ---
 name: implement
 description: Route an authorized implementation request through the appropriate planning, isolation, test, debugging, review, and verification disciplines. Use when the user asks to build, change, or fix code from requirements, a plan, or tickets.
+license: MIT
 ---
 
 # Implement
