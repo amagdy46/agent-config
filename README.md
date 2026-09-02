@@ -10,16 +10,30 @@ deployment targets, never canonical storage.
 
 ## Install
 
-Install one skill, a named set, or everything with the open skills installer:
+Clone the repository, then link the sets you want into the agent directories on
+the machine:
 
 ```sh
-npx skills add git@github.com:amagdy46/agent-config.git --skill systematic-debugging
+node scripts/link-set.mjs start-here engineering
 ```
 
-Add `--all` for the full catalog, or install the skill IDs listed in a set
-file under `sets/`. Start with `sets/start-here.yaml` and remove what you do not
-use. Each skill installs on its own and references only files inside its own
-directory.
+The script symlinks each selected skill from `$HOME/.agents/skills` and every
+agent-specific skills directory that already exists (Claude Code, Codex,
+Cursor, OpenCode, Pi) straight into the clone. From then on a fast-forward pull
+of the clone updates every agent at once. Rerun the script after changing a
+set; add `--prune` to drop links for skills no longer selected, `--dry-run` to
+preview, or `--all` for the whole catalog.
+
+Any client that reads the open format can also install a single skill straight
+from the remote without the clone:
+
+```sh
+npx skills add amagdy46/agent-config --skill systematic-debugging
+```
+
+Copies made that way do not follow the clone; update them with the installer.
+Start with `sets/start-here.yaml` and remove what you do not use. Each skill
+installs on its own and references only files inside its own directory.
 
 ## Why these skills exist
 
@@ -117,7 +131,7 @@ catalog.yaml            lifecycle, invocation, and portability metadata
 provenance.lock.yaml    pinned upstream revisions and the derivation map
 THIRD_PARTY_NOTICES.md  upstream notices
 docs/                   architecture notes and experiment records
-scripts/                repository validator
+scripts/                repository validator and the set linker
 ```
 
 `catalog.yaml` labels each skill `portable` or `degraded`. Portable skills
