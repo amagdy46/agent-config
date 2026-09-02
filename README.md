@@ -1,12 +1,12 @@
 # Agent Config
 
-A personal, portable library of [Agent Skills](https://agentskills.io) for
-Codex, Claude Code, Cursor, Pi, OpenCode, and any other client that reads the
-open skill format. It is an opinionated baseline, not a team standard: use it as
-a reference or fork it, then keep the skills and sets that improve your work.
+My personal library of [Agent Skills](https://agentskills.io) for Codex,
+Claude Code, Cursor, Pi, OpenCode, and any other client that reads the open
+skill format. It is a baseline, not a team standard. Fork it, keep the skills
+and sets that improve your work, and drop the rest.
 
-The repository is the source of truth. Agent-native folders and skill managers
-are deployment targets, never canonical storage.
+This repository is the source of truth. Agent folders and skill managers are
+deployment targets, never canonical storage.
 
 ## Install
 
@@ -16,23 +16,22 @@ Install one skill, a named set, or everything with the open skills installer:
 npx skills add git@github.com:amagdy46/agent-config.git --skill systematic-debugging
 ```
 
-Add `--all` to install the full catalog, or pick the skill IDs from a set file
-under `sets/`. Start with `sets/start-here.yaml`, then remove what does not
-earn its place. Every skill is independently installable and references only
-files inside its own directory.
+Add `--all` for the full catalog, or install the skill IDs listed in a set
+file under `sets/`. Start with `sets/start-here.yaml` and remove what you do not
+use. Each skill installs on its own and references only files inside its own
+directory.
 
 ## Why these skills exist
 
-Agents do their best work when the recurring judgment calls are written down:
-what counts as evidence, when to stop and ask, what must never be mutated, and
-which workflow owns which decision. Each skill here captures one such procedure,
-borrowed from the sources credited in `THIRD_PARTY_NOTICES.md` and rewritten
-to be agent-neutral, portable, and free of employer facts.
+Most of my corrections to an agent repeat: what counts as evidence, when to
+stop and ask, what must never be mutated, which workflow owns a decision. Each
+skill writes one of those corrections down once. The ideas come from the
+sources credited in `THIRD_PARTY_NOTICES.md`; the text is rewritten so it works
+in any agent and contains no employer facts.
 
-Skills are either **automatic**, meaning the agent selects them from the
-description when a task matches, or **explicit**, meaning you invoke them by
-name because they are expensive, stateful, or change what the agent is allowed
-to do.
+A skill is **automatic** when the agent picks it from the description because
+a task matches, or **explicit** when you invoke it by name because it is
+expensive, keeps state across sessions, or changes what the agent may do.
 
 ## Skills
 
@@ -84,15 +83,16 @@ to do.
 - **[handoff](skills/handoff/SKILL.md)** (explicit): transfer verified work state across agents, sessions, or machines.
 - **[resume-work](skills/resume-work/SKILL.md)**: continue from a handoff, branch, or prior work trail at the true resume point.
 
-The communication skills have deliberately different jobs: `wait-what` rephrases
-one explanation, `explain-codebase` investigates code without changing it, and
-`teach` builds a course across sessions. Within product work, `ux-design`
-decides the flow and `frontend-design` plus `taste` implement it, so polish
-never masks an unresolved workflow.
+Three of these overlap by name but not by job. `wait-what` rephrases one
+explanation, `explain-codebase` investigates code without changing it, and
+`teach` runs a course across sessions. In product work, `ux-design` settles
+the flow before `frontend-design` and `taste` make it look right, so polish
+cannot hide an unresolved workflow.
 
 ## Sets
 
-A set is a named list of skill IDs under `sets/`, like a playlist:
+A set is a named list of skill IDs under `sets/`. Install a set by passing its
+IDs to the installer.
 
 | Set | Use it for |
 | --- | --- |
@@ -120,20 +120,21 @@ docs/                   architecture notes and experiment records
 scripts/                repository validator
 ```
 
-Portability labels in the catalog mean: `portable` needs only file, search, and
-shell access; `degraded` stays useful everywhere but loses automation when a
-host lacks subagents, a browser, external sources, or native worktrees. Skills
-marked degraded declare the capability in their `compatibility` field.
+`catalog.yaml` labels each skill `portable` or `degraded`. Portable skills
+need only file, search, and shell access. Degraded skills still work everywhere
+but lose automation on a host without subagents, a browser, external sources,
+or native worktrees; each one names the capability in its `compatibility`
+field.
 
 ## Principles
 
 - Broad catalog, narrow enabled sets.
-- Precise discovery descriptions and lazy bodies, following the specification's
-  progressive-disclosure model.
+- Precise descriptions, bodies loaded only on activation.
 - Manual invocation for expensive or stateful workflows.
 - Portable procedures here; project and employer facts stay project-local.
 - No automatic upstream updates. Review, adapt, test, then change the pin.
-- Never copy an upstream skill wholesale; every skill records its provenance.
+- Adapt upstream skills instead of copying them; every skill records where it
+  came from.
 
 ## Validate
 
@@ -144,10 +145,10 @@ node scripts/validate-repo.mjs
 for d in skills/*/; do DO_NOT_TRACK=1 uvx --from skills-ref agentskills validate "$d"; done
 ```
 
-The first command checks structure, links, provenance alignment, fixture schemas,
-and repository safety rules. The second checks each skill against the Agent
-Skills specification. See `CONTRIBUTING.md` for the full checklist and
-`docs/architecture.md` for vocabulary.
+The first command checks structure, links, provenance, fixture schemas, and
+repository safety rules. The second checks each skill against the Agent Skills
+specification. `CONTRIBUTING.md` has the full checklist and
+`docs/architecture.md` defines the vocabulary.
 
 ## License
 
