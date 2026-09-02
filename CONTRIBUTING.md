@@ -12,7 +12,7 @@
 Fix what you observed going wrong. Do not add rules for failures that have not
 happened.
 
-Run the repository validator with Node.js 20 or newer:
+Run the repository validator with Node.js 24 or newer:
 
 ```sh
 node scripts/validate-repo.mjs

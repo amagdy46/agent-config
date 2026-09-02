@@ -138,7 +138,7 @@ field.
 
 ## Validate
 
-Requires Node.js 20 or newer and, for the specification check, `uv`:
+Requires Node.js 24 or newer and, for the specification check, `uv`:
 
 ```sh
 node scripts/validate-repo.mjs
