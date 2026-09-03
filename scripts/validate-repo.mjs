@@ -22,6 +22,7 @@ const provenanceSources = [
   { id: "taste-skill", marker: "Leonxlnx/taste-skill" },
   { id: "archify", marker: "tt-a1i/archify" },
   { id: "humanlayer-skills", marker: "humanlayer/skills" },
+  { id: "ponytail", marker: "DietrichGebert/ponytail" },
 ];
 
 async function text(path) {

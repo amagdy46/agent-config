@@ -71,6 +71,7 @@ expensive, keeps state across sessions, or changes what the agent may do.
 - **[safe-database-changes](skills/safe-database-changes/SKILL.md)**: design and verify migrations on disposable databases, never production.
 - **[writing-plans](skills/writing-plans/SKILL.md)**: produce a dependency-aware plan in independently verifiable units.
 - **[implement](skills/implement/SKILL.md)** (explicit): execute an approved plan with evidence and review gates.
+- **[ponytail](skills/ponytail/SKILL.md)** (explicit, pilot): apply a YAGNI ladder to choose the minimum sufficient coding solution without dropping safety or evidence.
 - **[code-review](skills/code-review/SKILL.md)**: review a change for requirement correctness and maintainability without editing it.
 - **[verification-before-completion](skills/verification-before-completion/SKILL.md)**: require fresh, claim-specific evidence before declaring success.
 - **[using-git-worktrees](skills/using-git-worktrees/SKILL.md)** (explicit): establish safe Git isolation for substantial or parallel work.

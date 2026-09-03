@@ -63,6 +63,11 @@ sources:
     commit: 3c2629142c5d437428269b1b722b08c0b87f574d
     license: MIT
     copyright: Copyright (c) 2026 HumanLayer
+  ponytail:
+    url: https://github.com/DietrichGebert/ponytail
+    commit: 2ed6c52c9d7e5e56942508591085fd45dea277d3
+    license: MIT
+    copyright: Copyright (c) 2026 DietrichGebert
 derived-skills:
   prototype: [superpowers, matt-skills, pstack]
   product-discovery: [productskills, superpowers, pstack]
@@ -91,6 +96,7 @@ derived-skills:
   code-review: [superpowers, matt-skills, pstack]
   writing-plans: [superpowers, matt-skills, pstack]
   implement: [superpowers, matt-skills, pstack]
+  ponytail: [ponytail]
   using-git-worktrees: [superpowers, matt-skills, pstack]
   multi-agent-development: [superpowers, pstack]
   typescript-testing: [superpowers, matt-skills, pstack]

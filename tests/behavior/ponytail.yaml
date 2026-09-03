@@ -1,0 +1,55 @@
+schema-version: 1
+skill: ponytail
+
+positive-cases:
+  - id: native-date-input
+    prompt: >-
+      Use Ponytail: add a date field to this ordinary browser form using the
+      simplest solution that meets the existing validation requirements.
+    expected:
+      invocation: invoke
+      invariants:
+        - Reads the form flow and repository conventions before choosing a solution.
+        - Prefers a native date input when it satisfies the observable requirement.
+        - Does not introduce a picker dependency, wrapper abstraction, or future-facing configuration without a concrete need.
+        - Preserves the existing validation and accessibility contract.
+  - id: reuse-existing-helper
+    prompt: >-
+      Be lazy and use the least code: add the same normalization behavior to a
+      second endpoint when a shared normalizer already exists in the service.
+    expected:
+      invocation: invoke
+      invariants:
+        - Searches for and reuses the existing owning implementation before writing another helper.
+        - Makes the smallest coherent change at the shared seam rather than patching duplicated symptoms.
+        - Leaves a focused regression check for non-trivial changed behavior.
+
+negative-cases:
+  - id: ordinary-implementation
+    prompt: Implement the accepted account-notification plan and run its checks.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: implement
+      invariants:
+        - Does not activate a broad simplicity persona for every coding request.
+  - id: diagnose-before-simplifying
+    prompt: Investigate why some invoice retries are charged twice and report the root cause without changing code.
+    expected:
+      invocation: do-not-invoke
+      preferred-skill: systematic-debugging
+      invariants:
+        - Does not choose a minimal fix before the failure has been reproduced and diagnosed.
+
+overlap-cases:
+  - id: ponytail-implementation
+    competing-skill: implement
+    prompt: >-
+      Implement the accepted CSV export plan in Ponytail mode: use the simplest
+      solution that works, but keep the specified authorization and regression checks.
+    expected:
+      invocation: invoke
+      co-invocation: implement
+      invariants:
+        - Implement owns repository setup, authorization boundaries, execution, and final verification.
+        - Ponytail selects the earliest viable simplicity rung and rejects unsupported abstractions or dependencies.
+        - Neither skill removes requested authorization, validation, compatibility, or regression evidence.

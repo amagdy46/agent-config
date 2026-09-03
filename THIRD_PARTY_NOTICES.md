@@ -139,3 +139,16 @@ License: MIT
 
 Consulted for `author-agent-instructions`, `design-control-loop`, and the
 visual-forms reference in `explain-codebase`; adapted, not copied.
+
+## Ponytail
+
+Source: https://github.com/DietrichGebert/ponytail
+
+Pinned revision: `2ed6c52c9d7e5e56942508591085fd45dea277d3`
+
+Copyright (c) 2026 DietrichGebert
+License: MIT
+
+Consulted for the explicit `ponytail` minimum-sufficient-change lens; adapted,
+not copied. The complete license text is preserved in
+`skills/ponytail/NOTICE.md`.

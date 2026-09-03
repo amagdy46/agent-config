@@ -163,6 +163,12 @@ skills:
     status: active
     invocation: explicit
     portability: portable
+  - id: ponytail
+    path: skills/ponytail
+    summary: Apply an explicit YAGNI ladder to choose the minimum sufficient coding solution.
+    status: pilot
+    invocation: explicit
+    portability: portable
   - id: using-git-worktrees
     path: skills/using-git-worktrees
     summary: Establish safe Git isolation for substantial or parallel work.
