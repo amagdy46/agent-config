@@ -28,10 +28,10 @@ Take the expected value from the requirement or a worked literal, never by recom
 One behavior at a time, a tracer bullet through the seam. Never write a batch of tests, then a batch of code.
 
 1. **Red:** write the smallest test for the next behavior. Run it. Confirm it fails because the behavior is missing; a syntax, fixture, or setup error is not red.
-2. **Green:** write the least code that passes. Rerun it, then the project's whole suite; name any failure in your report, even one you did not cause.
+2. **Green:** write the least code that passes. Rerun it and the focused tests around it. Run the whole suite at task boundaries; name any failure in your report, even one you did not cause.
 3. **Refactor** on green only: names, duplication, structure. New behavior needs a new red.
 
-Pass-on-first-run means the test covers existing behavior; fix the test. When a test fails, fix the code, not the assertion. A hard-to-write test signals a coupled design; simplify the interface.
+A new-behavior test that passes on its first run tests something that already exists; investigate before trusting it. A characterization test, which pins existing behavior before a refactor, should pass first time; prove it can fail by briefly breaking the behavior it guards. When a test fails, fix the code, not the assertion. A hard-to-write test signals a coupled design; simplify the interface.
 
 ## Bug fixes
 

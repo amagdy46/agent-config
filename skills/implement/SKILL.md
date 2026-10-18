@@ -22,6 +22,10 @@ one-sentence reason:
   checks it before its dependents start. Best for many tasks, or independent
   tasks that can run in parallel.
 
+Without subagent tools, run Native and do the final review as a separate
+pass yourself, re-reading the diff against the plan; report that no
+independent reviewer was available.
+
 ## Work the frontier
 
 The tasks are a graph, not a list. The **frontier** is every task whose
@@ -29,16 +33,19 @@ blockers are done. For each task on it:
 
 1. Build it test-first with the test-driven-development skill, at the seams
    the plan names.
-2. Run the type checker and the task's tests often, and the full suite at the
-   end of the task.
+2. Run the type checker and the focused tests during each cycle, and the
+   full suite once at the end of the task.
 3. Commit with a message naming the task.
 4. Mark it done in the plan checkbox, the issue file's `status`, or the
    tracker.
 
 When delegating, give each implementer pointers instead of pasted context:
 the design, the plan or ticket, the files and prior commits. Independent
-frontier tasks may run in parallel, each in its own worktree; merge each one
-back before starting the tasks it unblocks. Delegate one level deep.
+frontier tasks may run in parallel, each in its own worktree branched from
+the working branch; fold each back into the working branch locally before
+starting the tasks it unblocks. That local integration is part of the task.
+Merging into the default or a shared branch, or merging a pull request, still
+needs an explicit ask. Delegate one level deep.
 
 ## Keep going
 

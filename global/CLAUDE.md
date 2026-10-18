@@ -26,8 +26,8 @@ do X?".
 - Facts are your job: look them up in the code, docs, tools or the web.
 - If running something or a quick prototype would settle a question, run it.
 - Ask only for product direction no experiment can settle, and before
-  irreversible or outward-facing actions (force-push, merging, deleting data,
-  publishing, messaging people).
+  irreversible or outward-facing actions (force-push, merging into a shared
+  branch, deleting data, publishing, messaging people).
 - Exception: when I start a new project or say "brainstorm", use the
   brainstorm skill and interview me before building.
 - When I correct the same mistake twice, suggest the reflect skill.

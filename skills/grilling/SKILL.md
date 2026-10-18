@@ -36,8 +36,8 @@ choices, failure modes, operating cost, and what would prove the plan wrong.
 ## Facts versus decisions
 
 Facts are your job. When a question needs a fact from the code, the files or
-the web, dispatch a subagent to find it and keep going; only the questions
-downstream of that lookup wait. Decisions, trade-offs and risk tolerance are
+the web, dispatch a subagent to find it and keep going (without subagents, look it up
+yourself between rounds); only the questions downstream of that lookup wait. Decisions, trade-offs and risk tolerance are
 the user's: put each one to them.
 
 ## Done

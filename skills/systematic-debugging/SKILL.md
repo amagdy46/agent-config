@@ -17,7 +17,7 @@ Try, in order: a failing test at the seam that reaches the bug; a curl/CLI run a
 - Read complete errors, traces, and recent changes first.
 - Flaky bug: raise the reproduction rate (loop 100x, add stress, pin seeds and time) until it is debuggable.
 - Performance: baseline with a profiler or query plan, then bisect.
-- No loop possible: stop, list what you tried, and ask for access, a redacted artifact, or permission for temporary instrumentation. Do not theorise without a loop.
+- No loop possible: keep going with the evidence that exists (logs, traces, core dumps, metrics, history, `git log`), keeping confirmed causes separate from hypotheses. Ask only for the one missing artifact, access or instrumentation that would settle the next check, and list what you tried.
 
 ## 2. Confirm and minimise
 

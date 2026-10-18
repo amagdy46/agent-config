@@ -10,7 +10,7 @@ Review is read-only: report findings; edit only when asked.
 
 ## Pin the package
 
-Take the fixed point from the user (commit, branch, tag, merge-base); otherwise use the working-tree diff and say so. Confirm the ref resolves and the diff is non-empty (`git diff <ref>...HEAD`, `git log <ref>..HEAD --oneline`). State whether staged, unstaged, and untracked files are included.
+For files or a whole repository, review the requested paths at the requested revision (default: the working tree); no diff is needed. For a change, name the base and head explicitly: what the user gave, else the branch's merge-base with the default branch, else the working-tree diff. Confirm both refs resolve and the diff is non-empty (`git diff <base>...<head>`, `git log <base>..<head> --oneline`). State whether staged, unstaged, and untracked files are included.
 
 Gather the **spec** (issue refs in commits, a path the user gave, a spec file matching the branch) and the **standards** (AGENTS.md, CONTRIBUTING, ADRs). With no spec, say requirement coverage cannot be assessed; never invent one.
 
@@ -21,7 +21,7 @@ Clean code must not mask wrong behavior, nor correct behavior mask costly struct
 - **Spec:** requirements missing or partial, behavior nobody asked for, requirements that look met but are wrong. Quote the spec line. Trace input to output instead of judging hunks.
 - **Standards:** breaches of documented rules (cite file and rule), then judgement-call smells (Mysterious Name, Duplicated Code, Feature Envy, Shotgun Surgery, Speculative Generality). The repo overrides the smell list. Skip what lint already enforces.
 
-For a large diff, give each axis a fresh subagent with the diff command, its sources, and nothing from your session history; reconcile their claims against the code.
+For a large diff, give each axis a fresh subagent with the diff command, its sources, and nothing from your session history; reconcile their claims against the code. Without subagent tools, review the axes in two separate passes and say the review was not independent.
 
 ## Trace consumers beyond the diff
 

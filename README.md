@@ -56,12 +56,16 @@ folder of each agent you have installed. After that, `git pull` or a local
 edit updates every agent at once.
 
 The script also links the files in `global/` over `~/.claude/CLAUDE.md`,
-`~/.codex/AGENTS.md` and `~/AGENTS.md`. It moves any existing file aside to
-`.bak` first. Those files hold my personal rules, so edit `global/` before
-you run it.
+`~/.codex/AGENTS.md` and `~/AGENTS.md`. Those files hold my personal rules,
+so edit `global/` before you run it.
+
+The script never deletes anything it didn't create. A file, folder or
+someone else's link that is in the way is moved into a timestamped folder
+under `~/.agents/agent-config/backups/` first. It records every link it makes
+in `~/.agents/agent-config/links.json`, and a later run removes only recorded
+links that are no longer needed, such as the links for a deleted skill.
 
 Rerun the script after you add, remove or rename a skill, or move the clone.
-It also removes links left behind by deleted skills.
 
 ## Quick start
 

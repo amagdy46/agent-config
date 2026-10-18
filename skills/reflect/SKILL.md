@@ -12,15 +12,22 @@ and say so.
 
 ## 1. Find the transcript
 
-Use this session's own transcript, never other projects' chats:
+Use this session's own transcript, never another session's. Identify it, in
+order:
 
-- Claude Code: the newest `*.jsonl` in `~/.claude/projects/<cwd with / as ->/`.
-- Codex: the newest `rollout-*.jsonl` under `~/.codex/sessions/<yyyy>/<mm>/<dd>/`.
-- Other agents: the transcript folder the system prompt names.
+1. A transcript path or session ID the user or the system prompt gives.
+2. Claude Code: `<config>/projects/<cwd with / as ->/<session-id>.jsonl`,
+   where `<config>` is `$CLAUDE_CONFIG_DIR` or `~/.claude`. Entries carry
+   `sessionId`, and most carry `cwd`.
+3. Codex: `$CODEX_HOME/sessions/` (default `~/.codex/sessions/`), searched
+   across dates, since a resumed session keeps its first day's file. The
+   first `session_meta` line holds the session `id` and `cwd`.
 
-Confirm the match by checking that the file's first user message is this
-session's opening prompt. If nothing matches, write a tight digest of the
-session instead: corrections received, mistakes, decisions, skills used.
+Without a known ID, list candidates whose `cwd` matches this one and pick the
+one containing messages you sent in this session, quoted verbatim; recency
+alone is not proof, since another session can be running in the same
+folder. If none matches with certainty, write a tight digest of the session
+instead: corrections received, mistakes, decisions, skills used.
 
 ## 2. Review through three lenses
 
@@ -56,12 +63,12 @@ Route each kept finding to the cheapest home that makes it stick:
 Skill files are symlinks into the user's skills repository; resolve the real
 path and edit there. Apply the bar in that repository's `CONTRIBUTING.md`.
 
-## 4. Present, then apply
+## 4. Apply, then present
 
-Show one table, `Problem | Proposal | Home`, plus the rejected findings with a
-one-word reason and the backlog. These edits shape every future session, so
-wait for the user to pick which rows to apply; that is the only stop.
+Apply each kept finding as the smallest edit, run the skills repository's
+validator, and commit there with a message naming the lessons, one commit
+per lesson so any of them can be reverted alone. Push only when asked. Ask
+first only when a finding turns on a preference the user has not stated.
 
-Apply the chosen rows, run the skills repository's validator, and commit there
-with a message naming the lessons. Push only when asked. Finish with one line
-per edit, one line per backlog item, and one line per dropped finding.
+Then show one table, `Problem | Edit | Home | Commit`, plus the rejected
+findings with a one-word reason and the backlog, and offer to revert any row.

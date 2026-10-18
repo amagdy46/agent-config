@@ -27,7 +27,8 @@ change easy, then make the easy change.
   each batch its own ticket blocked by the expand.
 
 If a `plan.md` exists, its tasks are the raw material; merge tasks that only
-make sense together into one slice.
+make sense together into one slice, and record which task numbers each
+ticket covers.
 
 ## 3. Check the breakdown
 
@@ -57,9 +58,11 @@ Each ticket body:
 <links to blocking tickets, or "None, can start now">
 
 Design: <link to design.md or parent issue>
+Plan: <link to plan.md>, tasks <numbers>   (when a plan exists)
 ```
 
-Leave out file paths and code: they go stale. The exception is a
+Leave out file paths and code: they go stale, and the plan tasks the ticket
+links hold the exact files and interfaces. The exception is a
 decision-rich snippet from a prototype (schema, state machine, type shape).
 
 Finish with the list of created tickets and the **frontier**: tickets with no
