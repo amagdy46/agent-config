@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Think an idea through with the user before anything is built. Interview them for intent, research in the background, converge on a direction, and write it down. Use for "let's brainstorm", "I'm thinking about...", "help me figure out", a new feature, project or product idea, or any foggy request.
+description: Think a new project through with the user before anything is built. Interview them for intent, research in the background, converge on a direction, and write the design. Use for "brainstorm", "let's brainstorm", "new project", or starting a product from scratch.
 license: MIT
 ---
 
@@ -11,7 +11,8 @@ than it feels. This skill finds out what they actually want, and why, before
 anything gets built. When you understand the why, you make the hundred
 unmentioned decisions the way they would.
 
-If everything that matters is already in the request, say so and do it.
+This is the deliberate exception to proceed-then-present: it runs when the
+user starts something new or asks to brainstorm. Ordinary tasks skip it.
 
 ## 1. Explore: get them describing
 

@@ -22,7 +22,15 @@ Third-party skills I use unchanged are installed with the
 (`npx skills add <repo> --skill <name>`, `npx skills update`), never copied
 here.
 
-## The flow: from idea to shipped
+## How the agent works
+
+Proceed, then present: for reversible work the agent makes the call, does it
+and explains, and asks only for product direction or before irreversible and
+outward-facing actions. Starting a new project is the exception: `brainstorm`
+interviews first. The working-style section of the global `CLAUDE.md` /
+`AGENTS.md` sets this; the skills follow it.
+
+## The flow for a new project
 
 ```text
 brainstorm ──► writing-plans ──► to-issues ──► implement
@@ -71,6 +79,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 | Explain | [explain-codebase](skills/explain-codebase/SKILL.md) | explain how and why code works |
 | | [wait-what](skills/wait-what/SKILL.md) | re-explain the last answer plainly |
 | | [handoff](skills/handoff/SKILL.md) | write or resume from a handoff between sessions |
+| Improve | [reflect](skills/reflect/SKILL.md) | turn a session's lessons into skill, AGENTS.md or enforcement edits |
 | Write | [technical-documentation](skills/technical-documentation/SKILL.md) | write docs for developers or operators |
 | | [unslop](skills/unslop/SKILL.md) | strip AI tells from prose |
 

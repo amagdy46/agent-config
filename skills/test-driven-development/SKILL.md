@@ -12,7 +12,7 @@ Skip TDD for throwaway prototypes, generated output, docs, and declarative confi
 
 ## Seams
 
-A **seam** is the public boundary where a caller observes behavior. Before the first test, write down the seams under test, each with one line on what it catches and misses, and confirm them with the user (an accepted plan's interfaces count as confirmed). Write no test at an unconfirmed seam. With no adequate seam, say so; that is a design finding.
+A **seam** is the public boundary where a caller observes behavior. Before the first test, write down the seams under test, each with one line on what it catches and misses, and state them in your update before writing tests (an accepted plan's interfaces already name them). With no adequate seam, say so; that is a design finding.
 
 ## Tests that earn their place
 

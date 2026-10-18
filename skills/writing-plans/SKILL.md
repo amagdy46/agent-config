@@ -80,6 +80,6 @@ opposite failure.
 4. **Proportion:** if code blocks dominate, replace bodies with signatures and
    assertions.
 
-Fix gaps inline, then link the plan and ask the user to review it. Offer next
-steps: break it into tracked issues with the to-issues skill, or execute it
-with the implement skill.
+Fix gaps inline and link the plan. If the user asked for the work itself,
+continue into the implement skill; otherwise present the plan with the next
+steps: tracked issues via the to-issues skill, or execution via implement.

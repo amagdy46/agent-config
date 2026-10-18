@@ -12,7 +12,8 @@ ask.
 
 ## Pick an execution mode
 
-Recommend one, with a one-sentence reason, unless the user already chose:
+Choose one yourself, unless the user already did, and state it with a
+one-sentence reason:
 
 - **Native:** you implement every task in this session, then one fresh
   reviewer checks the whole branch. Best for a short chain of tightly coupled

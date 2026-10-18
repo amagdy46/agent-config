@@ -29,18 +29,19 @@ change easy, then make the easy change.
 If a `plan.md` exists, its tasks are the raw material; merge tasks that only
 make sense together into one slice.
 
-## 3. Agree the breakdown
+## 3. Check the breakdown
 
-Show a numbered list: title, blocked by, and what each delivers end to end.
-Ask whether the granularity is right, whether each blocking edge truly gates,
-and what to merge or split. Iterate until the user approves. Publishing is the
-one external write here, so approval comes first.
+Review your own list before publishing: each blocking edge truly gates, no
+ticket is a horizontal layer, none is too big for one context. The user asking
+for issues is the go-ahead; tickets are cheap to merge, split or close
+afterwards, so publish and let them adjust. Show the breakdown and wait first
+only when the user asked to review it.
 
 ## 4. Publish
 
-Use the tracker named by `Issue tracker:` in the project's `AGENTS.md`. If
-there is none, ask once (GitHub, Linear, or Markdown) and offer to add that
-line. Publish in dependency order, blockers first, so edges can reference
+Use the tracker named by `Issue tracker:` in the project's `AGENTS.md`, or
+the one the user named. With neither, write Markdown files in the planning
+folder and mention the `Issue tracker:` line for next time. Publish in dependency order, blockers first, so edges can reference
 real identifiers. Details per tracker: [trackers.md](trackers.md).
 
 Each ticket body:

@@ -6,7 +6,7 @@ license: MIT
 
 # Architecture Design
 
-Build **deep modules**: much behavior behind a small interface, placed at a clean seam, change local. Designing does not authorize implementing; ask before building anything with an unresolved choice.
+Build **deep modules**: much behavior behind a small interface, placed at a clean seam, change local. Settle design choices yourself, state each one with its reason, and proceed; bring the user only choices that change what the product does.
 
 ## Ground
 

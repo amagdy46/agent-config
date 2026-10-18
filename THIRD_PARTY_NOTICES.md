@@ -21,6 +21,7 @@ see `CONTRIBUTING.md` for how updates are merged.
 | handoff, wait-what | Pocock `handoff`, `wait-what`; pstack `bro` |
 | ci-pr-lifecycle | Pocock `pr`; Superpowers `finishing-a-development-branch` |
 | frontend-design | Taste Skill; Anthropic `frontend-design`; Vibe Design Skills |
+| reflect | pstack `reflect`, `principle-encode-lessons-in-structure` |
 | technical-documentation, unslop | pstack `technical-writing`, `unslop`; Technical Writer; Awesome Copilot |
 
 ## Superpowers
