@@ -1,54 +1,50 @@
 ---
 name: unslop
-description: Edit substantial human-facing prose to remove generic AI patterns while preserving meaning, evidence, uncertainty, and the author's intended voice. Use for reports, documentation, proposals, posts, and other writing that merits a deliberate prose pass; do not invoke for every short chat reply.
+description: Remove AI tells from prose while keeping facts and voice. Use as the final pass on reports, docs, READMEs, proposals, PR descriptions, and posts, or when asked to humanize, tighten, or de-slop text. Skip code, logs, quotes, and short chat replies.
 license: MIT
 ---
 
 # Unslop
 
-Revise writing so it sounds like a particular person communicating a particular point, not a model filling a familiar shape.
+Revise prose so it sounds like one person making one point, not a model filling a familiar shape. This is a cleanup pass: scan for the patterns below, rewrite, compare with the source.
 
-## Scope
+## Keep intact
 
-Apply this skill to substantial prose meant for people. It can edit an existing draft or serve as the final prose pass on a new document.
+Facts, numbers, citations, quotations, calibrated hedges, technical names, commands, identifiers, error text, the author's position, requested format, and legally significant wording. Quoted awkwardness stays; fix the prose around it. Cleaner prose never comes from inventing evidence, deleting a caveat, or strengthening a claim.
 
-Do not turn it into an always-on conversation rule. Skip it for short transactional replies, code, generated data, logs, quoted source material, and exact technical literals unless the user explicitly asks for an edit.
+## Patterns
 
-## Preserve before rewriting
+**Content and language**
+- Lead with the concrete point. Cut preambles, previews, and conclusions that repeat the introduction ("The future looks bright").
+- Name the source or delete vague attributions ("experts believe").
+- Cut trailing -ing phrases ("highlighting...", "ensuring...", "fostering...").
+- Replace AI vocabulary with plain words: additionally, crucial, delve, enhance, intricate, landscape, pivotal, showcase, tapestry, testament, underscore, vibrant. "Serves as", "boasts", and "features" become "is" or "has". "Utilize" and "leverage" become "use".
+- State the point directly instead of "not just X, but Y", forced groups of three, false ranges ("from X to Y"), and false contrasts.
+- Pick one name per concept and repeat it. Synonym cycling reads as several concepts.
+- Replace abstract metaphor nouns with the concrete word: substrate, vector, nexus, primitive, bedrock, scaffolding, paradigm, north star, flywheel, "API surface".
+- Say what it does, not how it feels. "SQL you can read" becomes "`.toSQL()` returns the exact string sent to the database." If a sentence could appear unchanged in another project's docs, make it specific or cut it.
+- Turn mannered prose (aphorisms, personified code, "rides along") into the literal statement.
+- Swap an adverb for a stronger verb or the measured number ("significantly improves" becomes the delta).
+- Say "may" for stacked hedges; keep real uncertainty once, where it applies.
 
-Identify the claims and constraints that must survive:
+**Structure and style**
+- Prefer active voice when the actor matters; keep passive when the actor is unknown.
+- Split sentences that make the reader backtrack. Vary rhythm naturally.
+- Rewrite over-compressed text (dropped articles, arrows, verbless fragments) as whole sentences.
+- Use periods or commas instead of em dashes. Use a colon only before a list or example.
+- Bold, bullets, and headings only for real structure. Convert "**Performance:** Performance improved" labels to prose; a bold lead-in followed by new detail is fine.
+- Sentence-case headings, straight quotes, no decorative emoji.
+- Delete chatbot phrases ("I hope this helps", "Certainly!") and flattery.
+- Keep first person, humor, and opinion the author already has. Add none.
 
-- facts, measurements, citations, quotations, and attribution;
-- confidence and uncertainty, including deliberate hedges;
-- technical names, commands, identifiers, API fields, error text, and other literals;
-- the author's position, intended audience, and requested format;
-- legally or operationally significant wording.
+## Agent-facing docs
 
-Never make prose sound cleaner by inventing evidence, deleting a caveat, strengthening a claim, or silently changing a technical term. If a quoted passage contains awkward wording, leave the quote intact and improve the surrounding prose.
-
-## Edit
-
-Read for meaning first, then revise at the paragraph and sentence level.
-
-- Lead with the concrete point. Cut throat-clearing, generic previews, and conclusions that only repeat the introduction.
-- Replace puffery, promotional adjectives, vague attribution, and stock AI vocabulary with specific facts or plain words.
-- Remove filler, forced symmetry, artificial groups of three, false contrasts, and formulaic "not only X, but Y" constructions.
-- Prefer one stable name for each concept. Do not cycle through synonyms for variety.
-- Prefer active voice when the actor matters. Keep passive voice when the actor is unknown or irrelevant.
-- Split sentences that make the reader backtrack. Vary rhythm naturally; do not force every sentence to the same length.
-- Use headings, bullets, bold text, colons, parentheses, and dashes only when they clarify real structure. Do not decorate prose to simulate structure.
-- Keep first person, humor, informality, or opinion when they fit the author's voice. Do not add personality the author did not imply.
-- Replace abstract claims with the mechanism, example, source, or number that makes them useful. If none exists, cut the claim or mark the gap.
-
-Do not flatten all writing into terse technical prose. A narrative, tutorial, memo, and incident report need different rhythms. Match the audience and purpose.
+For skills, AGENTS.md, and prompts, also apply the writing-for-agents rules: state the target behavior instead of the ban, use one leading word in place of a restated phrase, and delete any sentence the model would obey without being told.
 
 ## Final pass
 
-Compare the revision with the source:
+1. Did every fact, literal, citation, and hedge survive?
+2. Did any sentence turn more certain, dramatic, or promotional than the evidence?
+3. Does it read aloud without template transitions or a repeated cadence?
 
-1. Did every material fact, literal, citation, and calibrated hedge survive?
-2. Did any sentence become more certain, more dramatic, or more promotional than the evidence permits?
-3. Could a sentence appear unchanged in an unrelated document? Make it specific or remove it.
-4. Does the piece sound coherent when read aloud, without obvious template transitions or repetitive cadence?
-
-Return the revised prose. Mention a material ambiguity only when resolving it requires the author rather than an editing judgment.
+Return the revised prose. Ask the author only when an ambiguity needs their call.

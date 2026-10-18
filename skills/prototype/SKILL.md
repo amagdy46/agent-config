@@ -1,39 +1,29 @@
 ---
 name: prototype
-description: Build a disposable artifact to answer one uncertain design, interaction, state-model, or feasibility question before production implementation. Use for explicit prototype, mockup, spike, or "try a few versions" requests; do not use for ordinary implementation where the desired behavior is already settled.
+description: Build a throwaway artifact to settle one uncertain design question. Use for "prototype", "spike", "mockup", "try a few versions", "does this state model feel right", or "what should this look like". Skip when the behavior is already settled.
 license: MIT
 ---
 
 # Prototype
 
-A prototype is an instrument for making one decision, not an early production implementation.
+A prototype is throwaway code that answers one question. The question picks the shape; no decision to make means no prototype, so build normally.
 
-## Frame the experiment
+## Pick the branch
 
-State the question, the decision it will inform, and what observable result would distinguish the options. If there is no decision to make, clarify the uncertainty or use the normal implementation workflow.
+- **Look or interaction** ("what should this look like?"): 2-4 structurally different variants (hierarchy, layout, interaction, not just color) behind one labeled switcher, such as a URL param or key press. Keep realistic density and data. If the design space is open, check prior art and let the user choose directions before building.
+- **State or logic** ("does this model feel right?"): a small interactive model with domain-language actions, the full state shown after every action, and guided scenarios for the happy path, edge cases, and invalid actions. A single HTML file a non-developer can drive is ideal. Keep the model apart from the demo shell.
+- **Feasibility** (timing, compatibility, an integration fact): the smallest runnable probe that observes the disputed behavior.
 
-Choose the cheapest faithful surface:
+If the branch is unclear and nobody is around, follow the surrounding code (backend module: logic; page or component: look) and state the assumption on the prototype itself.
 
-- **Visual or interaction question:** show 2–4 structurally different variants behind one labeled switcher. Preserve realistic surrounding density and data when that context affects the judgment.
-- **State or domain-logic question:** build a small interactive model with domain-language actions, visible state after every action, and guided happy-path, edge-case, and invalid-action scenarios. Keep the model separate from the demo shell.
-- **Technical feasibility or behavior question:** write the smallest runnable probe that observes the disputed behavior, timing, compatibility, or integration fact.
+## Rules
 
-When the design space is open, inspect relevant existing screens and a small amount of prior art before building. Skip research when the direction and comparison are already clear.
+1. Name and place it so nobody mistakes it for production: a scratch dir, or a clearly labeled route near the code it informs, using the project's routing convention.
+2. One command or double-click to run.
+3. State lives in memory. If persistence is the question, use a scratch database or file named for wiping.
+4. Skip tests, error handling beyond runnable, and abstractions. Use fixtures, never real customer data or external side effects.
+5. Run it and look: screenshot variants, drive the hard transitions, keep the probe's output or timing. The observation is the test.
 
-## Build for learning
+## Close out
 
-- Default to an isolated, clearly named disposable location. If the question depends on the real application's shell, put an unmistakably labeled prototype route or switch inside the project and guard it from production.
-- Reuse enough real context to make the observation honest, but avoid production mutations, real customer data, or external side effects. Use inert fixtures, local stand-ins, or a scratch environment unless the user authorizes otherwise.
-- Optimize for speed and contrast. Do not add production abstractions, exhaustive error handling, migrations, or a full test suite.
-- Make every variant or scenario easy to run and name. For visual variants, differ in hierarchy, layout, or interaction—not merely color and copy.
-- Do not quietly widen the experiment. New production behavior, publication, or deployment requires its own authorization.
-
-## Observe and decide
-
-Exercise the prototype on the surface that answers the question:
-
-- interact with and capture visual variants;
-- drive the difficult state transitions and inspect the resulting state;
-- run the probe and retain the relevant output or timing.
-
-Report the question, alternatives tried, evidence, trade-offs, recommendation, and artifact location. Mark the artifact as throwaway. Record the decision and why it won, then remove or isolate the prototype when asked; production code must be implemented and verified under production constraints rather than promoted blindly.
+Report the question, variants tried, evidence, trade-offs, a recommendation, and the artifact path, marked throwaway. Record the verdict and why it won in the issue or commit; keep the prototype on a throwaway branch or delete it, never promote it into production. Real code follows its normal workflow. Building beyond the question needs a new go-ahead.

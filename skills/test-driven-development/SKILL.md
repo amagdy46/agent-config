@@ -1,43 +1,40 @@
 ---
 name: test-driven-development
-description: Develop behavior through deliberate red-green cycles at stable seams. Use when the user asks for TDD or test-first work, or when an implementation workflow explicitly composes this skill for behavior that has a suitable test seam; do not activate merely because any code is being edited.
+description: Build features and fix bugs test-first with red-green-refactor at agreed seams. Use for TDD, "write a failing test first", regression tests, or any behavior change with a testable seam.
 license: MIT
 ---
 
 # Test-Driven Development
 
-Use TDD deliberately, not as a blanket ceremony. It fits behavior changes with a stable, executable seam and quick feedback. It may not fit throwaway prototypes, generated output, documentation-only work, declarative configuration, exploratory spikes, or changes whose only available test would be brittle or disproportionate.
+If you did not watch the test fail, you do not know it tests the right thing. Production code follows a red test.
 
-## Choose the seam
+Skip TDD for throwaway prototypes, generated output, docs, and declarative config. Prefer no test to a test that only checks mocks, current internals, timing, or costly infrastructure for a small fix; run the closest executable check instead and say so.
 
-A seam is the public boundary through which a caller observes behavior. Before writing a test, identify:
+## Seams
 
-- the behavior and source of truth for its expected result;
-- the public boundary under test;
-- the smallest test level that faithfully reaches that behavior;
-- external boundaries that must be controlled.
+A **seam** is the public boundary where a caller observes behavior. Before the first test, write down the seams under test, each with one line on what it catches and misses, and confirm them with the user (an accepted plan's interfaces count as confirmed). Write no test at an unconfirmed seam. With no adequate seam, say so; that is a design finding.
 
-Use a seam already established by the design and repository. If the correct boundary is materially ambiguous, agree it with the user or resolve the design first. When this skill was composed from an accepted plan, treat the plan's defined seams and interfaces as that agreement.
+## Tests that earn their place
 
-Prefer behavior assertions through public interfaces. Avoid private-method tests, assertions about internal call order, snapshots without a meaningful oracle, and expected values recomputed with the same algorithm as the implementation. Mock only genuine system boundaries such as remote services, time, randomness, or costly infrastructure; prefer realistic fakes or test instances when practical.
+A test is a specification of behavior seen through the public interface. Judge each against two edits:
 
-If no adequate seam exists, say so. Use the closest honest executable check or propose a design seam rather than creating a test that produces false confidence.
+- **Break the behavior** (wrong value, skipped effect). The test must go red.
+- **Change the internals**, observable results unchanged. The test must stay green.
 
-## Work in vertical cycles
+Take the expected value from the requirement or a worked literal, never by recomputing it the way the code does. Mock only system boundaries (network, time, randomness); prefer real code and fakes. A payload a mocked external service receives is behavior; a call to an internal helper is not. Assert the error type callers branch on, not its wording.
 
-For one behavior at a time:
+## Vertical cycles
 
-1. **Red:** write the smallest test that specifies the next observable behavior.
-2. Run the narrow test and confirm it fails because the behavior is absent or wrong. A syntax, fixture, or setup failure is not useful red evidence.
-3. **Green:** write only enough production code to satisfy that behavior.
-4. Run the narrow test, then proportionate nearby checks.
-5. **Refactor:** improve names or structure while behavior stays green; do not add behavior without a new red cycle.
-6. Continue with the next vertical slice, letting each cycle inform the next.
+One behavior at a time, a tracer bullet through the seam. Never write a batch of tests, then a batch of code.
 
-Do not write a horizontal batch of imagined tests followed by a batch of implementation. Do not weaken assertions, rewrite the expected behavior to match a wrong implementation, or retain speculative production code not demanded by a test or requirement.
+1. **Red:** write the smallest test for the next behavior. Run it. Confirm it fails because the behavior is missing; a syntax, fixture, or setup error is not red.
+2. **Green:** write the least code that passes. Rerun it, then the project's whole suite; name any failure in your report, even one you did not cause.
+3. **Refactor** on green only: names, duplication, structure. New behavior needs a new red.
 
-## Existing implementation
+Pass-on-first-run means the test covers existing behavior; fix the test. When a test fails, fix the code, not the assertion. A hard-to-write test signals a coupled design; simplify the interface.
 
-If implementation already exists before this workflow begins, do not delete user work merely to manufacture test-first history. Establish the intended behavior, add a test that would fail against the known defect or missing behavior, and record honestly whether failing-before evidence was observed. For a bug fix, keep the regression at the seam where the bug actually appeared.
+## Bug fixes
 
-Report the exact red and green commands and outcomes. TDD evidence proves the behavior under those checks; it does not by itself prove the entire feature or system is complete.
+Turn the minimal reproduction into a failing test at the seam where the bug appeared, watch it fail, then fix. Delete code written before its test and restart from the test. If implementation already exists and deleting loses the user's work, add a test that fails against the defect and record honestly whether you saw red.
+
+Report the red and green commands with their outcomes.

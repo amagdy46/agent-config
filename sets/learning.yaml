@@ -1,9 +1,0 @@
-schema-version: 1
-name: learning
-description: Immediate clarification, codebase understanding, and persistent study.
-skills:
-  - wait-what
-  - explain-codebase
-  - teach
-  - research
-  - unslop

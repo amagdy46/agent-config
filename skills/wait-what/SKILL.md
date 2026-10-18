@@ -1,17 +1,17 @@
 ---
 name: wait-what
-description: Re-pitch the immediately preceding explanation when the user says "wait, what", uses "bro" to reject that explanation, asks to "explain that normally", or otherwise says the last answer did not land. This is a one-turn clarification, not research, codebase investigation, or a course.
+description: Re-pitch your last message when it did not land. Use on "wait, what", "bro", "explain that normally", "I don't get it", or "in plain English". One turn; no research.
 license: MIT
 ---
 
 # Wait, what?
 
-Stop and re-pitch the explanation that just failed.
+Say the last message again so it lands.
 
-- Restore the missing premise or context before simplifying the conclusion.
-- Use plain spoken language and the project's established terms when they are available.
-- Keep exact names, commands, identifiers, errors, numbers, evidence, and uncertainty intact.
-- Prefer one small concrete example when it makes the idea click.
-- Make the answer shorter only when that also makes it clearer. Do not collapse it into jargon-free but unhelpful fragments.
+- Open with the missing context, then the point.
+- Plain, short sentences, like one person to another; use the project's own terms (`GLOSSARY.md` if present).
+- Keep exact names, commands, numbers, errors, and uncertainty intact.
+- Add one concrete example if it makes the idea click.
+- If the user pointed at one part, re-pitch only that part.
 
-Answer the point again. Do not defend the previous wording, start new research, survey the codebase, create a lesson, quiz the user, or turn this into a general tutorial. If the user's phrase refers to a specific part of the previous answer, re-pitch that part; otherwise re-pitch the smallest context needed to understand the whole point.
+Re-explain from what you already know. Do not defend the old wording, investigate, or start a lesson.

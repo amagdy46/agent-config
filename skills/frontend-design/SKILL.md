@@ -1,52 +1,52 @@
 ---
 name: frontend-design
-description: Implement or substantially restyle a web interface when visual design judgment matters. Use for production components, pages, dashboards, and interactive artifacts that need a product-specific visual direction; do not use to resolve an unknown user flow or product requirement.
+description: Design and build web UI that avoids template and AI-generated looks. Use when building or restyling pages, components, dashboards, or landing pages, when asked to "make it look good", and when UX flows, information architecture, or screen states need deciding first.
 license: MIT
-compatibility: Best with a browser or screenshot tool for rendered verification; without one, visual checks become manual.
+compatibility: Best with a browser or screenshot tool for rendered verification.
 ---
 
 # Frontend Design
 
-Build a working interface with a deliberate visual point of view grounded in the product, audience, content, and existing design system. Distinctiveness is useful only when it improves recognition, hierarchy, or experience.
+Ship an interface a senior designer would sign off on: structure settled first, a direction drawn from the product, craft free of generic tells, verified in the browser.
 
-## Ground the direction
+## 1. Structure first
 
-Inspect the approved product or UX specification, current interface, design tokens, components, brand assets, content, accessibility requirements, and implementation conventions. Preserve an approved information architecture and interaction contract. If the user problem, flow, permissions, or critical states are unknown, resolve those before styling or implementation.
+Skip this step for a pure restyle that keeps the approved flow.
 
-When the brief leaves visual direction open, derive a compact thesis from the subject itself:
+- Name the user, the triggering situation, the task, and the domain vocabulary. Treat the existing UI as evidence, not as the standard.
+- Write the journey: entry, primary action order, decision points, feedback, completion, cancellation, resumption.
+- List the states the screen needs: first-use, empty, loading, partial, validation, error, offline, permission, stale, destructive, recovery. A happy-path wireframe is not a design.
+- Put the main task and the main risk ahead of secondary metrics.
+- When the information architecture is open, compare 2-3 variants with different organizing theses (guided sequence vs open workspace, queue-first vs overview-first) at equal fidelity. Prototype a risky one before building it.
 
-- the audience and page's primary job;
-- the desired character and level of expression;
-- one memorable but appropriate signature;
-- color, typography, spacing, density, imagery, and motion roles;
-- category conventions worth keeping and generic defaults worth challenging.
+Keep approved scope, permissions, and vocabulary. Raise a change as a question.
 
-Do not invent a brand, product claims, metrics, or user research. State any proposed direction that needs approval.
+## 2. Pick the direction
 
-## Design the system, not decoration
+Inspect the repository first: design tokens, component library, brand assets, icon set, fonts. Existing systems win. When the brief names an established design system, use its official package.
 
-Use a small coherent token set and reuse existing components where their semantics fit. Let typography and layout establish hierarchy before adding borders, shadows, gradients, badges, or motion. Structural devices must communicate real grouping, order, status, or action.
+State a one-line read before styling: "Reading this as: <page kind> for <audience>, <vibe> language, leaning toward <system or aesthetic>." Ask one question only if two readings lead to materially different work.
 
-Avoid both template sameness and novelty for its own sake. A familiar pattern is correct when it makes the task easier. A visual risk should be concentrated, explainable, and reversible rather than scattered across the page.
+Set three dials (variance, motion, density) from the read, using [references/direction.md](references/direction.md), which also maps briefs to design systems and covers redesigns of an existing interface.
 
-Write interface copy from the user's side of the screen. Controls name the action that occurs; confirmations repeat that vocabulary; errors say what happened and what the user can do next. Use real or clearly marked representative content so layout decisions are tested against plausible density and length.
+## 3. Craft locks
 
-## Implement the complete surface
+- **Color.** Neutral base, one accent used identically everywhere, one palette temperature, off-black and off-white.
+- **Shape.** One radius scale.
+- **Theme.** One theme per page; design light and dark together when the product supports both ([references/motion-and-dark-mode.md](references/motion-and-dark-mode.md)).
+- **Type.** Hierarchy from weight, size contrast, and spacing, not shouting headlines. Sans by default; a serif needs a brand or editorial reason. Body near 65 characters.
+- **Structure.** Group with whitespace and hairlines before cards. Use CSS grid and declare the narrow-viewport collapse in the same component.
+- **Copy.** Write from the user's side of the screen: controls name the action, errors say what happened and what to do next. One register, one label per intent, real or labelled sample content, no fake-precise numbers or placeholder names, no em-dash separators.
+- **Motion.** Every animation communicates something in one sentence, or it goes. Read the motion reference before adding any.
 
-Follow the repository's framework, component, styling, and asset conventions. Deliver functional behavior rather than a static mock unless the task is explicitly a prototype. Include the applicable loading, empty, validation, error, permission, success, long-content, responsive, keyboard, focus, contrast, reduced-motion, and assistive-technology states.
+Read [references/anti-slop.md](references/anti-slop.md) before building a landing page, portfolio, or any marketing surface, and whenever the result looks templated.
 
-Use motion to explain state, continuity, or causality. Respect reduced-motion preferences. Do not introduce a heavy dependency, remote font, image, icon set, or generated asset without checking repository policy, licensing, performance, and fallback behavior.
+## 4. Build
 
-## Inspect the rendered result
+Follow repository conventions and deliver working behavior with the states from step 1, plus focus, keyboard, contrast, responsive, and reduced-motion handling. Verify a dependency exists before importing it. Add fonts, icon sets, or libraries only within repository policy.
 
-Run the project's relevant checks and inspect the real interface at representative viewports and states. Use screenshots or browser evidence when available. Review hierarchy, overflow, alignment, contrast, focus order, interaction feedback, content truth, and console or runtime failures. Fix concrete problems and re-inspect the final state.
+## 5. Verify visually
 
-Report the direction, important implementation choices, states exercised, evidence collected, and any surface not verified.
+Run the project's checks, then inspect the rendered result with a screenshot or browser tool at mobile and desktop widths, in each theme, and in the key states. Check hierarchy, overflow, alignment, contrast, focus order, console errors, and every visible string. Fix, then re-inspect the final state.
 
-## Boundaries
-
-- Do not change approved product behavior merely to support a preferred visual concept.
-- Do not hide missing states behind a polished happy path.
-- Do not make every element expressive; hierarchy requires restraint.
-- Do not copy another product's distinctive identity or unlicensed assets.
-- Do not claim visual parity, accessibility, responsiveness, or runtime quality without inspecting evidence that proves it.
+Report the direction, the states exercised, the evidence, and any surface left unverified. Claim contrast, responsiveness, or dark-mode quality only from rendered evidence.

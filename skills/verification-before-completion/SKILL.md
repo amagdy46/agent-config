@@ -1,30 +1,36 @@
 ---
 name: verification-before-completion
-description: Gate claims that work is complete, fixed, passing, or ready on fresh evidence from the surface that actually proves each claim. Use immediately before making a success claim or handing completed work back.
+description: Gate any claim that work is done, fixed, passing, or ready on fresh evidence. Use right before saying "done", "fixed", or "passing", handing work back, committing, or opening a PR.
 license: MIT
 ---
 
 # Verification Before Completion
 
-Before a success claim:
+No success claim without fresh evidence from this turn. A claim is a status, a satisfied tone ("Done!"), or any wording that implies success; each needs the evidence.
 
-1. State the specific claim.
-2. Choose the smallest real check that proves that claim.
-3. Run it now; read its exit status and relevant output.
-4. Compare the evidence with the claim.
-5. Report the claim only if the evidence supports it. Otherwise report the observed state and remaining gap.
+## Gate
 
-Match evidence to the surface:
+1. **Name** the claim.
+2. **Pick** the command that proves exactly that claim.
+3. **Run** it in full, now, on the final state.
+4. **Read** all output, the exit code, and the failure count.
+5. **Claim** only what the output shows; otherwise report the observed state and the gap.
 
-- A focused test can prove its behavior, not the whole suite.
-- A type check does not prove runtime behavior.
-- A build does not prove the feature path works.
-- A diff proves files changed, not that delegated work is correct.
-- A bug is fixed only when the original symptom or faithful regression check is exercised.
-- Requirements are met only when each material requirement is checked, not merely when tests pass.
+"Should work", "probably", and "I'm confident" mean step 3 has not happened.
 
-Prefer the real artifact and end-to-end path when the claim reaches that far. Evidence must be fresh enough to include the final state; do not rely on an earlier run, cached output, expectation, or another agent's summary.
+## Proof matches the claim
 
-Keep the gate proportional. Do not create unrelated tests or expand scope solely to make verification look comprehensive. State any unverified surface and why it remains unverified.
+| Claim | Proof | Not proof |
+|---|---|---|
+| Tests pass | full suite output, 0 failures | an earlier run, one file |
+| Build succeeds | build exit 0 | linter or type check |
+| Bug fixed | original symptom re-run and gone | code changed |
+| Regression test works | passes, fails with the fix reverted, passes restored | passed once |
+| Requirements met | each requirement checked line by line | tests green |
+| Delegated work done | read the diff and run the check yourself | the agent's "success" |
 
-Verification does not authorize a commit, push, pull request, deployment, fix, or other mutation. Perform those only when separately requested or already within the user's authorized workflow.
+Check the real artifact, not a proxy. Run the feature, read the actual value. When a check fails, suspect your observation method before the system. Prefer a script that re-runs the same comparison to a one-time eyeball, and keep its output.
+
+Report failures from the full run by name, including ones you did not cause. List surfaces left unverified and why.
+
+Run the gate before committing, pushing, opening a PR, or starting the next task.

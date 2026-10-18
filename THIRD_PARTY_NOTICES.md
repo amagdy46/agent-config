@@ -1,13 +1,33 @@
 # Third-party notices
 
 This repository contains original adaptations inspired by the projects below.
-Per-skill `NOTICE.md` files identify the exact consulted paths and reuse type.
+Text was rewritten, not copied. The pinned revision is the one last reviewed;
+see `CONTRIBUTING.md` for how updates are merged.
+
+| Skill | Main sources |
+|---|---|
+| brainstorm | Superpowers `brainstorming`; Pocock `grilling`, `wayfinder` |
+| grilling | Pocock `grilling` |
+| writing-plans | Superpowers `writing-plans` |
+| to-issues | Pocock `to-tickets` |
+| implement | Pocock `implement`, `implement-spec`; Superpowers `executing-plans`, `subagent-driven-development` |
+| code-review | Pocock `code-review`; Superpowers `receiving-code-review`; pstack `blast-radius` |
+| verification-before-completion | Superpowers; pstack `principle-prove-it-works` |
+| test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
+| systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
+| architecture-design | Pocock `codebase-design`, `domain-modeling`; pstack `architect`, `arena` |
+| research, explain-codebase | Pocock `research`; pstack `how`, `why` |
+| prototype | Pocock `prototype`; pstack prototype playbook |
+| handoff, wait-what | Pocock `handoff`, `wait-what`; pstack `bro` |
+| ci-pr-lifecycle | Pocock `pr`; Superpowers `finishing-a-development-branch` |
+| frontend-design | Taste Skill; Anthropic `frontend-design`; Vibe Design Skills |
+| technical-documentation, unslop | pstack `technical-writing`, `unslop`; Technical Writer; Awesome Copilot |
 
 ## Superpowers
 
 Source: https://github.com/obra/superpowers
 
-Pinned revision: `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`
+Pinned revision: `bb92a77741419a4ab5f06e711a283343f1ada0c3`
 
 Copyright (c) 2025 Jesse Vincent
 License: MIT
@@ -16,16 +36,16 @@ License: MIT
 
 Source: https://github.com/mattpocock/skills
 
-Pinned revision: `5b15a47f2d7150f545fbcacbfe381787fc0230dc`
+Pinned revision: `49dd158d1076134a641b33efb035946536778336`
 
 Copyright (c) 2026 Matt Pocock
 License: MIT
 
 ## Cursor pstack
 
-Source: https://github.com/cursor/plugins/tree/46125561306434d8a1d7745d540d8932ab0cd2a2/pstack
+Source: https://github.com/cursor/plugins/tree/0b8e952052d482ee6de06deebf14d590d77b1b34/pstack
 
-Pinned revision: `46125561306434d8a1d7745d540d8932ab0cd2a2`
+Pinned revision: `0b8e952052d482ee6de06deebf14d590d77b1b34`
 
 Copyright (c) 2026 Lauren Tan
 License: MIT
@@ -113,42 +133,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Archify
-
-Source: https://github.com/tt-a1i/archify
-
-Pinned revision: `2bfb47132c057195d8dddb3e25ae966dd7c7a72e`
-
-Copyright (c) 2026 tt-a1i (Archify)
-Copyright (c) 2025 Cocoon AI (original "architecture-diagram-generator")
-License: MIT
-
-Vendored verbatim (executable skill package), not adapted; see
-`skills/archify/NOTICE.md`.
-
-
-## HumanLayer skills
-
-Source: https://github.com/humanlayer/skills
-
-Pinned revision: `3c2629142c5d437428269b1b722b08c0b87f574d`
-
-Copyright (c) 2026 HumanLayer
-License: MIT
-
-Consulted for `author-agent-instructions`, `design-control-loop`, and the
-visual-forms reference in `explain-codebase`; adapted, not copied.
-
-## Ponytail
-
-Source: https://github.com/DietrichGebert/ponytail
-
-Pinned revision: `2ed6c52c9d7e5e56942508591085fd45dea277d3`
-
-Copyright (c) 2026 DietrichGebert
-License: MIT
-
-Consulted for the explicit `ponytail` minimum-sufficient-change lens; adapted,
-not copied. The complete license text is preserved in
-`skills/ponytail/NOTICE.md`.

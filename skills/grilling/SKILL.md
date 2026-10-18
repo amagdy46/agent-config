@@ -1,31 +1,48 @@
 ---
 name: grilling
-description: Stress-test a plan, decision, or idea through a structured, challenging interview. Use only when the user explicitly asks to be grilled, interrogated, or pushed on their assumptions; do not activate for ordinary clarification or requirements gathering.
+description: Stress-test a plan, decision or idea through rounds of pointed questions, each with a recommended answer. Use for "grill me", "poke holes in this", "challenge my plan", or when a design must converge on decisions.
 license: MIT
 ---
 
 # Grilling
 
-Turn the topic into a decision tree: foundational choices first, then the decisions that depend on them. The current **frontier** is every important question whose prerequisites are already settled.
+Interview the user relentlessly until you share one understanding. Map the
+topic as a **design tree**: each decision branches into the decisions that
+depend on it.
 
-## Run the interview
+## Rounds
 
-1. Restate the decision being tested and the success criteria you currently understand.
-2. Inspect available files, code, documentation, history, or other in-scope evidence before asking factual questions. Facts you can discover are your work; preferences, trade-offs, risk tolerance, and authority remain the user's decisions.
-3. Ask one frontier round at a time. Include all independent questions that can be answered now, but defer questions whose premise depends on another unanswered choice.
-4. For every question, explain why it matters and give a recommended answer with its main trade-off. Challenge contradictions, vague language, hidden assumptions, irreversible choices, failure modes, operating burden, and what would falsify the plan.
-5. Incorporate the answers, recompute the frontier, and continue until no material branch remains silently assumed.
+The **frontier** is every decision whose prerequisites are settled. Ask the
+whole frontier in one round, then wait.
 
-Keep rounds digestible. Prefer numbered questions with clearly separated recommendations. Do not manufacture ceremony around trivial decisions, repeat settled questions, or ask the user to retrieve facts available to you.
+```
+❓ **Q1 - <title>**: <the question, with options when they help>
 
-## Finish
+➡️ <your recommended answer and its main trade-off>
 
-Summarize:
+---
 
-- settled decisions and reasons;
-- assumptions and evidence;
-- unresolved choices and who owns them;
-- rejected alternatives;
-- risks, validation steps, and stop conditions.
+❓ **Q2 - <title>**: ...
+```
 
-Ask the user to confirm that the summary represents the shared understanding. Grilling authorizes the interview and its synthesis only. Do not implement the plan, edit unrelated artifacts, contact people, or mutate external systems unless that action was separately requested or explicitly approved.
+Word each question so "yes" accepts your recommendation. A question that
+depends on another open question in the same round belongs to a later round.
+After each round, fold in the answers, recompute the frontier and ask the
+next round.
+
+Press on contradictions, vague words, hidden assumptions, irreversible
+choices, failure modes, operating cost, and what would prove the plan wrong.
+
+## Facts versus decisions
+
+Facts are your job. When a question needs a fact from the code, the files or
+the web, dispatch a subagent to find it and keep going; only the questions
+downstream of that lookup wait. Decisions, trade-offs and risk tolerance are
+the user's: put each one to them.
+
+## Done
+
+The session is done when the frontier is empty: every branch visited, nothing
+silently assumed. Summarise the settled decisions with reasons, the rejected
+alternatives, the remaining risks and who owns any open choice. Ask the user
+to confirm that this is the shared understanding before acting on it.

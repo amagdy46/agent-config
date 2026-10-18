@@ -1,63 +1,58 @@
 ---
 name: technical-documentation
-description: Create or revise source-grounded documentation for developers and technical operators, including tutorials, how-to guides, references, explanations, READMEs, and design documents. Use when technical prose must be accurate, navigable, and verifiable against the current system.
+description: Write or revise source-grounded docs: READMEs, tutorials, how-to guides, references, explanations, design docs, and user guides or SOPs for non-technical operators. Use when documentation must be accurate, scannable, and verified against the current system.
 license: MIT
 ---
 
 # Technical Documentation
 
-Write the document a technical reader needs, grounded in the source that owns each claim. Prefer a short truthful document over a complete-looking document filled with guesses.
+Write so a tired reader understands on the first read, and ground every claim in the source that owns it. A short true document beats a complete-looking one full of guesses.
 
-## Establish the document contract
+## 1. Fix the contract
 
-Before drafting, determine:
+- Reader mode: **developer** (works from code, terminal, config) or **operator** (non-technical, works through the product UI; see below).
+- Document mode: pick one. Action for learning is a **tutorial**; action for work is a **how-to**; understanding for work is a **reference**; understanding for learning is an **explanation**. A **design doc** states the proposal first, separates fact from proposal, and names alternatives and costs.
+- Task or understanding the reader needs, scope, non-goals, and the authoritative sources with their revision.
 
-- document kind and target reader;
-- the task or understanding the reader needs;
-- scope and explicit non-goals;
-- authoritative sources and their revision or date;
-- existing documentation conventions and the current owner of the topic.
+Extend the living owner of the topic instead of writing a rival document. Split and link when one file would teach, instruct, enumerate, and argue at once.
 
-Inspect comparable documents and extend the existing source of truth when possible. Do not create a rival document beside a living owner.
+## 2. Mode rules
 
-## Choose one primary mode
+- **Tutorial:** open with what the reader will build. Every step produces a visible result, and you say what to expect (output, prompt change, log line). One clause of explanation plus a link.
+- **How-to:** one task for a competent reader. Conditions before actions, forks as "If you want x, do y", background linked. Title it by the task.
+- **Reference:** dry, complete, no opinion. Mirror the structure of the thing described, and generate from code or schemas where possible.
+- **Explanation:** one bounded why. Give context, constraints, alternatives, consequences. Opinion belongs here and nowhere else. Label inference.
 
-- **Tutorial:** teach through a safe, concrete path with early visible success. Keep explanation brief and tell the learner what to observe.
-- **How-to:** help a competent reader complete one task. Put conditions before actions, keep steps direct, and link background separately.
-- **Reference:** support lookup with complete, stable facts arranged like the interface being described. Prefer generation from code or schemas where available.
-- **Explanation:** answer a bounded “why” with context, constraints, alternatives, consequences, and clearly labeled inference.
-- **Design document:** state the proposal early, distinguish facts from proposals, name alternatives and costs, and make open decisions addressable.
+## 3. Ground every claim
 
-Split and link when one file tries to teach, instruct, enumerate, and argue at the same time.
+Verify against current code, tests, schemas, config, runtime output, or approved decisions. A name, comment, old doc, or memory is a lead, not proof. Write the real symbol, path, flag, UI label, default, and error text. Mark estimates, unexercised branches, and unknowns as such. Keep out details a refactor would falsify without changing behavior.
 
-## Ground every claim
+## 4. Write the sentences
 
-Use current code, tests, schemas, configuration, runtime evidence, and approved decisions according to the claim. A name, comment, old document, or memory is a lead to verify, not proof. Mark estimates, unknowns, unexercised branches, and historical behavior honestly.
+- Cut every word that does no work; use the short word ("use", not "utilize").
+- Lead each section and paragraph with the conclusion or action. Headings carry the point, in sentence case.
+- Talk to "you" in the present tense, in the active voice, with commands for instructions. Name the actor.
+- Put the condition, warning, or prerequisite before the step it guards. Put the common case before exceptions.
+- One instruction per sentence; split at about 20 words (instructions) or 25 (other). Keep "the" and "a".
+- One name per thing, everywhere. Define unfamiliar terms at first use.
+- Keep "only" and "not" beside the word they change. Make every "it", "this", and "they" point at one noun.
+- Number sequences; bullet the rest, in parallel form, introduced by a full sentence. Describe links by destination.
+- Mix sentence lengths and be specific ("a column rename fails the build"). When a rule makes a sentence worse, rewrite it another way.
+- Give procedures checkpoints, expected results, recovery, and troubleshooting.
 
-Write exact symbols, paths, UI labels, commands, fields, defaults, limits, and error text when those details are part of the contract. Keep implementation trivia out of prose when a refactor would make the documentation false without changing behavior.
+## 5. Operator mode
 
-## Make the text executable by the reader
+For support staff, administrators, and internal-tool users, document the work through the product surface in their vocabulary. Skip architecture, services, and production commands.
 
-- Lead sections and paragraphs with the conclusion or action.
-- Use one term for one concept and define unfamiliar terms at first use.
-- Prefer active voice, direct commands, and short everyday words.
-- Put warnings and prerequisites before the step they guard.
-- Give procedures observable checkpoints, expected results, recovery, and troubleshooting.
-- Use descriptive link text, meaningful headings, numbered sequences, and parallel lists.
-- Preserve commands, code, identifiers, citations, numbers, and uncertainty during editing.
+- Define the role, permitted actions, the task and why it matters, access, inputs, version or environment, and the escalation owner.
+- Verify labels and flow in the real interface or a safe environment. Source code alone does not prove a UI procedure. If you cannot, mark the guide a draft and list the labels to confirm.
+- Sections as needed: purpose and audience, before you start, numbered steps (one action each, exact visible labels, checkpoint after meaningful transitions), decision branches placed where they occur ("If you see X, do Y"), how to verify success, undo or recovery (or a plain statement that it cannot be undone), troubleshooting by symptom as the reader sees it (cause, safe fix, evidence to collect, where to escalate).
+- State consequences before destructive, irreversible, customer-visible, paid, or permission-changing actions.
+- Name the visible object, not its service, table, or API. Explain unavoidable terms at once.
+- Use screenshots only to remove ambiguity: crop sensitive data and keep the text usable when the image goes stale.
 
-Match the repository's tone unless it weakens truth or clarity. Do not force mechanical style rules when they make the text less natural.
+## 6. Verify
 
-## Verify before delivery
+Check links, files, commands, examples, counts, and behavior at the relevant revision; run safe examples. Label anything not exercised. Make every count or tree claim true at the commit that lands it. Replace credentials, personal data, and internal URLs with sanitized or fictional values.
 
-Check links, referenced files, commands, code examples, schemas, counts, and claimed behavior at the relevant revision. Run safe examples when the request authorizes it. Label anything not exercised, and state what evidence would promote a draft to trusted documentation.
-
-Review for missing prerequisites, ambiguous pronouns, inconsistent terms, buried conclusions, unsupported claims, and accidental mixing of document modes. Keep factual corrections separate from optional prose improvements.
-
-## Boundaries
-
-- Do not invent behavior to fill a template.
-- Do not silently rewrite an approved policy or historical decision.
-- Do not expose credentials, customer data, private URLs, or internal facts in portable documentation.
-- Do not publish or send documentation externally without authorization.
-- Use `operator-guide`-style reasoning instead when the primary reader is a non-technical product operator completing tasks through a user interface.
+Review for missing prerequisites, ambiguous pronouns, inconsistent terms, buried conclusions, mixed modes, and unsupported claims. Finish with the unslop pass. Report corrections to facts separately from optional prose edits.

@@ -1,60 +1,38 @@
 ---
 name: handoff
-description: Create a compact, portable continuation brief with verified and unverified state separated and one exact resume point. Invoke explicitly when transferring work to another agent, session, or machine; do not use for a final project report.
+description: Write a handoff brief for another agent, session, or machine, or resume work from one. Use for "hand off", "write a handoff", "pick up where we left off", "take over from this brief or branch".
 license: MIT
 ---
 
 # Handoff
 
-Leave enough durable context for a cold-start agent to continue without replaying the conversation.
+Two modes. Writing: leave a cold-start agent enough to continue. Resuming: reconcile a brief with live state and continue at the true resume point. Live state decides what exists now; the brief carries goals, rationale, and rejected options.
 
-Inspect the live workspace with read-only checks before writing the brief when it is available. Do not claim an item is current merely because it appeared earlier in the conversation. If the current state cannot be checked, put the claim under **Unverified**.
+## Write
 
-Keep the brief portable:
-
-- Use repository-relative paths, stable URLs, issue or PR identifiers, branch names, and commit hashes.
-- Avoid absolute machine paths, transcript locations, session identifiers, local tool databases, or assumptions about one agent host.
-- Point to existing specs, plans, diffs, and decision records instead of copying them.
-- Never include secrets, credentials, private tokens, or unnecessary personal data.
-
-Write to the user-requested location. If none was requested, return the brief directly or ask for a repository-relative destination when durability is required. Do not silently put it in a host temporary directory.
-
-## Brief contract
+Check the live workspace first (branch, status, recent commits, referenced files); anything you cannot check goes under Unverified, not recalled from the conversation. Link existing specs, plans, issues, and diffs instead of copying them. Use repo-relative paths, URLs, PR numbers, and commit hashes; no host paths, session IDs, or secrets. Save where the user asks. Otherwise return it in the reply, or ask for a repo path if it must last.
 
 ```markdown
 # Handoff: <work item>
-
-## Goal and boundaries
-<desired outcome, in-scope work, exclusions, and authorization limits>
-
-## Current live state
-<workspace/repository, branch or revision, relevant working-tree state, and what exists now>
-
-## Completed
-<durable outcomes and artifact pointers; no transcript recap>
-
-## Verified
-- <claim> — <fresh command/check and result, with time if freshness matters>
-
-## Unverified
-- <inherited claim, assumption, stale result, or unknown that still needs checking>
-
-## Decisions and constraints
-- <decision or constraint> — <rationale/evidence pointer>
-
+## Goal and limits    (outcome, scope, what needs permission)
+## Live state         (repo, branch/revision, working-tree state)
+## Done               (outcomes and artifact pointers, no transcript)
+## Verified           (claim - fresh check and result)
+## Unverified         (inherited claims, assumptions, stale results)
+## Decisions          (decision - why)
 ## Blockers and risks
-- <only active blockers or material risks>
-
-## Exact resume point
-<the first action, its target, and the observable result that means it is complete>
-
-## Next after that
-1. <up to three ordered follow-on actions>
-
-## Relevant artifacts
-- <repository-relative path, URL, issue, PR, or commit>
+## Resume point       (first action, its target, the observable sign it is done)
+## Next               (up to three, ordered)
+## Suggested skills   (what the next agent should load)
 ```
 
-Make **Exact resume point** executable without guessing. “Continue implementation” is not exact; name the file, decision, test, investigation, or review to perform and its success condition.
+The resume point must be executable without guessing. "Continue implementation" is not; name the file, test, or decision and the success condition.
 
-This skill only creates the brief. It does not commit, push, publish, launch another agent, or perform the resumed work unless the user separately requests that action.
+## Resume
+
+1. Read the brief; extract goal, limits, decisions, done work, claims, resume point. Follow references only as needed.
+2. Check the live state those claims touch, then sort them: **matches**, **drift** (live state changed or contradicts), **unknown**, **done**. Keep the brief's point unless live evidence shows the work moved; flag conflicts with documented decisions instead of overriding them.
+3. Do not replay finished investigations or rewrites. Run a targeted check only to validate the resume point, guard a consequential unverified claim, or satisfy the next step's normal verification.
+4. Open with a short capsule: where work stopped, what live state confirms or contradicts, the resume point, your next action. Then continue the authorized work. If the goal or authority cannot be recovered, ask.
+
+Resuming does not widen scope or authorize pushing, deploying, or destructive actions.

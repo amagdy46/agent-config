@@ -1,58 +1,46 @@
 ---
 name: systematic-debugging
-description: Diagnose bugs, failures, regressions, and unexpected behavior by building a reproducible signal and testing evidence-backed hypotheses. Use for diagnosis requests and before attempting a bug fix; preserve a diagnosis-only boundary when the user has not asked for a fix.
+description: Find the root cause of bugs, test failures, regressions, flaky or slow behavior before fixing. Use for "debug this", "diagnose", "why does X fail", anything broken, throwing, or slow, and before proposing any fix.
 license: MIT
 ---
 
 # Systematic Debugging
 
-Find the cause before changing the behavior. Match the work to the user's requested mode:
+No fix before the root cause. Diagnosis-only requests end with a report; edit only when the user asks for the fix. Redact credentials, tokens, and personal data from every command and quoted output.
 
-- **Diagnose:** investigate and report the most strongly supported cause. Do not implement a fix.
-- **Fix:** investigate first, then make the smallest justified change and prove the original symptom is gone.
+## 1. Build a tight red loop
 
-Do not treat a request to explain a failure as permission to edit source, configuration, infrastructure, or external systems.
+This is the skill; every later step consumes it. Build one command that goes **red** on the user's exact symptom, run it at least once, and show its output. **Tight** means fast, deterministic, and runnable unattended.
 
-## Establish the signal
+Try, in order: a failing test at the seam that reaches the bug; a curl/CLI run against a fixture; a headless browser script; a replayed captured trace; a throwaway harness; a fuzz loop; a bisection harness (`git bisect run`); old-versus-new diff. A human-driven script is the last resort.
 
-Write down the reported symptom, expected behavior, affected surface, and known conditions. Read complete errors and traces; inspect relevant recent changes, configuration, state, and working examples.
+- Read complete errors, traces, and recent changes first.
+- Flaky bug: raise the reproduction rate (loop 100x, add stress, pin seeds and time) until it is debuggable.
+- Performance: baseline with a profiler or query plan, then bisect.
+- No loop possible: stop, list what you tried, and ask for access, a redacted artifact, or permission for temporary instrumentation. Do not theorise without a loop.
 
-Build the narrowest repeatable check that exercises the real failure path. Prefer, in order of fit rather than dogma:
+## 2. Confirm and minimise
 
-- an existing focused test or command;
-- a request, CLI, or browser reproduction;
-- a replayable fixture, trace, or minimal harness;
-- a measured profiler or query-plan comparison for performance issues.
+Check the loop shows the user's failure, not a neighbour. Cut inputs, config, and steps one at a time, rerunning after each, until every remaining element is load-bearing.
 
-Run it and confirm it fails for the user's symptom, not a nearby problem. For intermittent failures, increase the reproduction rate and record it. If no runnable reproduction is possible, state what evidence is missing and request a redacted artifact, access, or narrowly scoped instrumentation instead of guessing.
+## 3. Hypothesise
 
-Never expose secrets while collecting evidence. Redact credentials, tokens, cookies, personal data, and sensitive payload fields from commands and quoted output.
+Write 3-5 ranked hypotheses, each falsifiable: "if X is the cause, changing Y makes the bug vanish". A hypothesis with no prediction is a vibe; sharpen or discard it. Show the list to the user before testing, and proceed on your ranking if they are away. Compare against a nearby working path and list every difference.
 
-## Locate the cause
+## 4. Instrument
 
-Minimize the reproduction when useful, removing one condition at a time. Trace incorrect values or state backward through callers and across process, API, queue, database, or filesystem boundaries. At each boundary, compare what entered with what left and verify the configuration actually in effect.
+Each probe answers one prediction; change one variable at a time. Prefer a debugger over logs. At each boundary (process, API, queue, database), log what enters and what leaves, and check the config in effect. Trace bad values backward to where they first went wrong. Tag temporary logs with a unique prefix such as `[DEBUG-a4f2]`. A failure that appears only after restart points to persisted state, caches, locks, or serialization.
 
-Form a small ranked set of falsifiable hypotheses. For each, state the evidence for it and the observation that would disprove it. Test one variable at a time with the least invasive probe. Prefer debuggers and existing telemetry; tag any temporary instrumentation so it can be found and removed.
+## 5. Fix at the root
 
-Do not add a guard merely because it silences a symptom. Check whether restart-only failures point to persisted state, caches, locks, or serialization. Compare against a nearby working path before inventing a new pattern.
+Fix the first place the system went wrong. Ask whether the state that triggered the symptom is legitimate: if so, handle it there; if it should never exist, find what produced it. A guard, retry, swallowed error, or clamp that silences the symptom hides the bug. Search for the same fault elsewhere and fix every instance.
 
-## Stop at the authorized boundary
+1. Turn the minimal repro into a regression test at a seam that matches the real failure; with none, report that gap as a finding.
+2. Watch it fail, apply one focused fix, watch it pass.
+3. Rerun the original loop on the un-minimised scenario.
 
-For diagnosis-only work, stop after reporting:
+Three failed fixes mean a wrong model or architecture: stop stacking changes, reassess the loop and assumptions, and report before widening scope.
 
-1. the reproduction or best available signal;
-2. the supported root cause, or ranked remaining hypotheses;
-3. evidence and confidence;
-4. the smallest plausible remedy and how it would be verified, clearly labeled as a proposal.
+## 6. Clean up
 
-Do not patch, refactor, or clean up the code in this mode.
-
-For an authorized fix:
-
-1. Convert the reproduction into a regression check at a seam that represents the real failure, when such a seam exists.
-2. Observe it fail for the intended reason.
-3. Apply one focused root-cause fix without unrelated cleanup.
-4. Observe the regression check pass and rerun the original reproduction.
-5. Remove temporary instrumentation and artifacts; run proportionate nearby checks.
-
-A poor test at an artificial seam is worse than documenting that no adequate seam exists. If several well-formed hypotheses or fix attempts fail, stop stacking changes. Reassess the reproduction, environmental assumptions, and architecture, then report the impasse before widening scope.
+Remove tagged instrumentation (grep the prefix) and throwaway harnesses. State the confirmed hypothesis in the commit or report so the next debugger learns. Use the verification-before-completion skill before claiming it fixed.

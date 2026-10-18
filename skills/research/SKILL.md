@@ -1,60 +1,43 @@
 ---
 name: research
-description: Investigate a defined question using primary sources and produce a cited, time-bounded research artifact. Use for source-backed technical or product research; do not use for ordinary codebase explanation that needs no external or historical evidence.
+description: Investigate a defined question against primary sources and return a cited, dated answer. Use for "research X", "find out", docs or API facts, comparing options, or as a background lane for another skill; not for plain codebase explanation (explain-codebase).
 license: MIT
-compatibility: Needs web or other external source access for current primary sources; subagent delegation is optional.
 ---
 
 # Research
 
-Produce an answer another person can verify without repeating the investigation.
+Produce an answer someone can verify without redoing the work. Runs fine as a background subagent: everything it needs is in the brief.
 
-## Frame the investigation
+## Frame
 
-Before searching, record:
+State before searching, inferring from context where safe:
 
-- **Question:** the decision or factual question the research must answer.
-- **Scope:** included topics, excluded topics, and permitted sources or systems.
-- **As of:** the date, time zone when relevant, and any version or revision boundary.
-- **Stopping condition:** what evidence is enough and any time, source, or cost limit.
+- **Question:** the decision or fact to settle.
+- **Scope:** what is in and out; never widen into other accounts, private data, or date ranges.
+- **As of:** today's date plus any version boundary.
+- **Stop when:** the evidence that suffices, plus any time or cost limit.
 
-Infer these from the request and nearby context when safe. Ask only when a missing boundary would materially change the work. Never silently widen a workspace, account, date range, or private-data scope.
+Ask only if a missing boundary would change the work. With no human around, state the assumption in the output instead.
 
 ## Investigate
 
-1. Start with the sources that own the facts: official documentation, specifications, source code, release notes, first-party APIs, and original papers or records. Use secondary sources only to find or contextualize primary evidence, and label them.
-2. Keep mechanics, documented intent, and inference separate. A code path proves behavior; it rarely proves why that behavior was chosen.
-3. Cite claims close to the text they support. Prefer stable URLs, document identifiers, commit hashes, and repository-relative `path:line` references. Record access or publication dates when freshness matters.
-4. Surface contradictory evidence, unavailable sources, and searches that returned no relevant result. Calibrate confidence instead of forcing a single story.
+1. Go to the owner of each fact: official docs, specs, source, release notes, first-party APIs, original papers. Follow every claim back to its source; use secondary write-ups only to find primary ones, and label them.
+2. Keep three things apart: documented fact, observed behavior, inference. Code proves what happens, rarely why.
+3. Cite each claim beside the text it supports: stable URL, `path:line`, commit, issue or PR number, with access date when freshness matters.
+4. Report contradictions, dead ends, and searches that found nothing. State confidence per claim.
+5. Stop at the stopping condition or when new searches only repeat evidence.
 
-When independent source lanes would save time and delegation is available, delegate at most one level deep: one focused lane per source or subquestion. Give each worker the question, scope, as-of boundary, stopping condition, and required return format. Workers must not delegate again. Keep synthesis and citation checking in the parent session, and independently inspect the evidence behind consequential claims.
+When lanes are independent, delegate one subagent per source or subquestion, one level deep, each given the full frame and the return format. Verify the evidence behind consequential claims yourself.
 
-Stop when the framed stopping condition is met, additional searches repeat existing evidence, or a declared limit is reached. Do not continue merely to make the source list longer.
+## Return
 
-## Write the artifact
-
-Save where the user requested or where the current project already keeps research. If neither is known, propose a repository-relative location or return the artifact in the response rather than inventing a global convention.
-
-Use this compact structure, adapting it when the question benefits from another shape:
+Match the caller. A user asking for a document gets a file at the repo's existing notes location (or a stated sensible one). A parent agent or lane brief gets a compact reply in the body, no file unless asked, under about 300 words:
 
 ```markdown
-# <Research question>
-
-**Scope:** <included and excluded>
-**As of:** <date/version boundary>
-**Stopping condition:** <condition or limit>
-
-## Answer
-<direct answer and recommendation, with citations>
-
-## Evidence
-<claim-by-claim evidence, contradictions, and confidence>
-
-## Gaps
-<unknowns, unavailable sources, and material null results>
-
-## Sources consulted
-<primary sources first; note what each contributed>
+**Question / as of:** ...
+**Answer:** direct answer, with citations
+**Evidence:** claim - source - confidence; contradictions
+**Gaps:** unknowns, null results
 ```
 
-Do not publish externally, modify source systems, or turn a research request into implementation. Those actions need their own authorization.
+Research does not implement, publish, or modify source systems.

@@ -1,37 +1,39 @@
 ---
 name: ci-pr-lifecycle
-description: Inspect or drive a branch, pull request, and continuous-integration lifecycle with explicit mutation boundaries. Use for PR readiness, CI status, authorized retries, pushes, or PR creation and updates; never merge.
+description: Check or drive a branch, PR, and CI through to a finished state. Use for "is this ready", "CI status", "open a PR", "push and watch CI", "retry the failed job", or finishing a branch. Never merges without an explicit ask.
 license: MIT
-compatibility: Requires git and a pull-request CLI with access to CI status.
 ---
 
 # CI and PR Lifecycle
 
-Choose one mode from the user's request. Do not turn inspection into mutation.
+Pick the mode from the request. Checking never mutates; driving writes only what was asked.
 
-## Check mode
+## Check (read-only)
 
-Check mode is read-only. Inspect the current revision, working-tree changes, branch and base relationship, existing pull request, review state, and remote checks. Identify whether the evidence corresponds to the current head revision.
+Read the head revision, working tree, base, existing PR, reviews, and remote checks. Confirm the checks ran on the current head; stale checks and local test runs do not count as CI. Classify each required check as pending, passing, failing, cancelled, skipped, or unavailable. Report PR, head, base, diff scope, review state, check summary, and blockers. Pending is non-terminal: wait only if asked.
 
-Classify each required check as pending, successful, failing, cancelled, skipped, or unavailable. A local test run is useful context but is not remote CI evidence. A stale check from an earlier revision does not establish readiness.
+## Drive
 
-Return the pull request identity, head revision, base, material diff scope, review state, terminal check summary, and concrete blockers. If checks are still running, say the state is non-terminal; wait or monitor only when the user requested that behavior.
+Pushes, PR creation or edits, comments, labels, reviewers, and check retries each need a go-ahead from the request. One approval covers only that action.
 
-## Drive mode
+Before pushing or opening a PR:
 
-Drive mode includes any external write: pushing, creating or editing a pull request, retrying or cancelling a check, posting comments, changing labels or reviewers, or marking readiness. Each action requires authorization from the current request or a subsequent explicit instruction. Authorization for one mutation does not authorize the others.
+1. Confirm branch, base, and head; keep unrelated user changes out.
+2. Run the repo's required checks and the tests; if they fail, stop and report.
+3. Review the full diff. Write the PR body from it and from fresh evidence:
+   - **Summary:** the smallest view that makes the point (pseudocode, call tree, file tree, or diff sketch).
+   - **Evidence:** before and after output, screenshot, or test run.
+   - **Merge danger:** one-way or two-way door, and blast radius.
+   Match the repo's PR template if it has one, and its domain terms.
 
-Before a push or pull-request change:
+After each remote write, read the state back. Follow the required checks on the new head to a terminal result and report that, not that a run was started.
 
-- confirm the intended branch, base, and current revision;
-- preserve unrelated user work and inspect the complete diff;
-- run the repository's required local verification and report failures honestly;
-- derive title, description, and verification claims from the actual diff and fresh evidence.
+## Failures
 
-After every remote mutation, read back the remote state. For a new revision, follow required checks to terminal results when the request is to drive the lifecycle. Report the final remote revision and the terminal result, not merely that a request to start work was accepted.
+Read the failing job's logs before retrying. Retry only when authorized and the failure looks transient or something changed; at most once per job per revision, then report the persistent failure and the next step. Stop on missing access, an ambiguous target, divergence that changes the update, or checks that never finish.
 
-## Retry discipline
+## Finishing a branch
 
-Inspect the failing job and its logs before retrying. Retry only when authorized and when the failure is plausibly transient or the revision/environment has changed. Do not repeatedly rerun an unchanged deterministic failure. Unless the user sets a different bound, perform at most one retry for the same failing job on the same revision, then report the persistent failure and needed next action.
+When work is done and tests are green, offer: push and open a PR, keep the branch, or (only if asked) merge locally or discard. Discarding needs the branch, commits, and worktree named and an explicit confirmation. Clean up a worktree only after its work is integrated, with the repo's worktree tool, never forced.
 
-Stop on missing access, ambiguous target, branch divergence that changes the intended update, or a required check that cannot reach a terminal state. Never merge, enable automatic merge, or bypass required checks, even when the rest of the lifecycle is green.
+Never merge, enable auto-merge, or bypass required checks unless the user explicitly asks, even when everything is green; propose it and wait.
