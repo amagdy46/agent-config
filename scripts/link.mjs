@@ -11,8 +11,11 @@
 // deleted or by an earlier clone location of this repository. A real
 // directory named like a repository skill, such as a stale installer copy, is
 // replaced by a link; anything else is left alone.
+//
+// The global instruction files in global/ are linked the same way. An
+// existing real file is moved aside to <name>.bak first.
 
-import { lstat, mkdir, readdir, readlink, realpath, rm, stat, symlink } from "node:fs/promises";
+import { lstat, mkdir, rename, readdir, readlink, realpath, rm, stat, symlink } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,6 +30,12 @@ const agentDirs = [
   join(home, ".cursor", "skills"),
   join(home, ".config", "opencode", "skills"),
   join(home, ".pi", "agent", "skills"),
+];
+
+const globalFiles = [
+  [join(root, "global", "CLAUDE.md"), join(home, ".claude", "CLAUDE.md")],
+  [join(root, "global", "AGENTS.md"), join(home, ".codex", "AGENTS.md")],
+  [join(root, "global", "AGENTS.md"), join(home, "AGENTS.md")],
 ];
 
 async function exists(path) {
@@ -86,6 +95,15 @@ for (const dir of targetDirs) {
   }
 }
 
+for (const [target, link] of globalFiles) {
+  if (!(await exists(dirname(link)))) continue;
+  if (!(await exists(link))) actions.push({ kind: "link", link, target });
+  else if ((await lstat(link)).isSymbolicLink()) {
+    const current = await realpath(link).catch(() => null);
+    if (current !== target) actions.push({ kind: "relink", link, target, was: await readlink(link) });
+  } else actions.push({ kind: "backup", link, target });
+}
+
 for (const action of actions) {
   const line = {
     mkdir: () => `mkdir    ${action.path}`,
@@ -93,12 +111,17 @@ for (const action of actions) {
     relink: () => `relink   ${action.link} (was ${action.was})`,
     replace: () => `replace  ${action.link} (directory)`,
     unlink: () => `unlink   ${action.link} (dead: ${action.was})`,
+    backup: () => `backup   ${action.link} -> ${action.link}.bak`,
     skip: () => `skip     ${action.link}: not a link or directory`,
   }[action.kind]();
   console.log(`${dryRun ? "[dry-run] " : ""}${line}`);
   if (dryRun || action.kind === "skip") continue;
   if (action.kind === "mkdir") await mkdir(action.path, { recursive: true });
   else if (action.kind === "unlink") await rm(action.link);
+  else if (action.kind === "backup") {
+    await rename(action.link, `${action.link}.bak`);
+    await symlink(action.target, action.link);
+  }
   else {
     if (action.kind !== "link") await rm(action.link, { recursive: true, force: true });
     await symlink(action.target, action.link);

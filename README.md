@@ -13,7 +13,9 @@ node agent-config/scripts/link.mjs
 
 This links every skill into `~/.agents/skills` and each agent's skills folder
 that exists, and removes dead links left by deleted skills or an old clone
-location. After that, `git pull` updates every agent. Rerun the script after
+location. It also links the global instructions in `global/` to
+`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` and `~/AGENTS.md`, moving any
+existing file aside to `.bak`. After that, `git pull` updates every agent. Rerun the script after
 adding or removing a skill, or after moving the clone. Use `--dry-run` to
 preview.
 
