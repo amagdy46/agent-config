@@ -96,6 +96,8 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
   else if (description.length > 1024) errors.push(`${name}: description over 1024 characters`);
   else if (description.length > 400) warnings.push(`${name}: description is ${description.length} characters`);
 
+  const bytes = Buffer.byteLength(text);
+  if (bytes >= 20000) errors.push(`${name}: SKILL.md is ${bytes} bytes; Claude Code truncates skills at 20,000 after compaction`);
   const lines = text.split("\n").length;
   if (lines > 500) errors.push(`${name}: SKILL.md is ${lines} lines`);
   else if (lines > 100) warnings.push(`${name}: SKILL.md is ${lines} lines`);
