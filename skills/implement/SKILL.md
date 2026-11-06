@@ -31,16 +31,23 @@ independent reviewer was available.
 The tasks are a graph, not a list. The **frontier** is every task whose
 blockers are done. For each task on it:
 
-1. Build it test-first with the test-driven-development skill, at the seams
-   the plan names.
-2. Run the type checker and the focused tests during each cycle, and the
-   full suite once at the end of the task.
+1. Build it test-first with the test-driven-development skill at the seams
+   the plan names, unless the project's `AGENTS.md` sets a different testing
+   rule; then follow that rule.
+2. Run the project's fast checks during each cycle and its gate once at the
+   end of the task, proving the change in the running app with the project's
+   `verify-*` skill when it has one.
 3. Commit with a message naming the task.
 4. Mark it done in the plan checkbox, the issue file's `status`, or the
    tracker.
 
-When delegating, give each implementer pointers instead of pasted context:
-the design, the plan or ticket, the files and prior commits. Independent
+When delegating, give each implementer a fresh context (never a fork of this
+session), an explicit model, and a brief file with pointers instead of pasted
+context: the design, the plan or ticket, the files and prior commits. It
+writes a report file and returns a short status. Keep progress in a
+git-ignored ledger and trust it and `git log` over memory after compaction.
+Cap each task's review-and-fix loop at three rounds, then rule on what is
+open. For a long session with many tickets, use the orchestrate skill. Independent
 frontier tasks may run in parallel, each in its own worktree branched from
 the working branch; fold each back into the working branch locally before
 starting the tasks it unblocks. That local integration is part of the task.

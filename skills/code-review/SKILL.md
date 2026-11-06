@@ -35,7 +35,11 @@ Prefer one small executable probe over a persuasive paragraph. Probe locally; ne
 
 ## Findings
 
-Order by severity. Each carries: title, `file:line`, the violated requirement or reachable failure with its trigger, and the smallest direction to resolve it. Drop style preferences and hypotheticals without a reachable path. Finish with open questions and what stayed unverified; with no findings, say so and name the scope.
+Order by severity: **blocker** (wrong behavior, data loss, security, a broken documented rule), **should** (real cost, safe to merge without), **nit**. Each carries: title, `file:line`, the violated requirement or reachable failure with its trigger, the evidence (a command and its output, or the cited rule), and the smallest direction to resolve it. A finding with no evidence is a question, not a blocker. Drop style preferences and hypotheticals without a reachable path. Report every blocker you can find in this pass; do not save some for the next round. Finish with open questions and what stayed unverified; with no findings, say so and name the scope.
+
+## Re-review
+
+A re-review covers only the fix diff plus anything it touches, and answers ADDRESSED or NOT ADDRESSED for each earlier finding before adding new ones. New findings in code the first pass already read need a reason the first pass missed them. After three rounds, stop and hand the open findings to whoever ordered the review with a recommendation for each.
 
 ## Receiving feedback
 

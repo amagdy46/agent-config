@@ -47,7 +47,15 @@ only if it is:
 - **not already covered:** if the skill already says it clearly, the failure
   was execution, so reject it; if it says it weakly, reword or move the
   existing line instead of adding one;
-- **convergent or strong:** echoed by two lenses, or clearly important alone.
+- **convergent or strong:** echoed by two lenses, or clearly important alone;
+- **counterfactual:** if this edit did not exist, a future agent reading the
+  final code would still repeat the mistake. If the code itself now prevents
+  it, write nothing.
+
+Date each lesson you write and cite the commit it was true at, so a stale one
+can be found and pruned. For lessons across many sessions rather than this
+one, a transcript miner such as backpass proposes evidence-backed edits to
+`AGENTS.md` and skills; review its proposals with this same bar.
 
 Route each kept finding to the cheapest home that makes it stick:
 

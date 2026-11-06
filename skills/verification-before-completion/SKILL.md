@@ -29,7 +29,7 @@ No success claim without fresh evidence from this turn. A claim is a status, a s
 | Requirements met | each requirement checked line by line | tests green |
 | Delegated work done | read the diff and run the check yourself | the agent's "success" |
 
-Check the real artifact, not a proxy. Run the feature, read the actual value. When a check fails, suspect your observation method before the system. Prefer a script that re-runs the same comparison to a one-time eyeball, and keep its output.
+Check the real artifact, not a proxy. Run the feature, read the actual value. If the project has a `verify-*` skill, use it to launch, drive and capture evidence; if it has none and agents keep guessing, suggest the create-verification-skill skill. When a check fails, suspect your observation method before the system. Prefer a script that re-runs the same comparison to a one-time eyeball, and keep its output.
 
 Report failures from the full run by name, including ones you did not cause. List surfaces left unverified and why.
 
