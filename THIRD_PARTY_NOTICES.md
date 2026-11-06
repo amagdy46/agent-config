@@ -11,7 +11,9 @@ see `CONTRIBUTING.md` for how updates are merged.
 | writing-plans | Superpowers `writing-plans` |
 | to-issues | Pocock `to-tickets` |
 | implement | Pocock `implement`, `implement-spec`; Superpowers `executing-plans`, `subagent-driven-development` |
-| code-review | Pocock `code-review`; Superpowers `receiving-code-review`; pstack `blast-radius` |
+| orchestrate | Superpowers `subagent-driven-development`; pstack `orchestrate`; tstack `sol-loop` |
+| create-verification-skill | pstack `create-verification-skill` |
+| code-review | Pocock `code-review`; Superpowers `receiving-code-review`; pstack `blast-radius`, `interrogate`; tstack `sol-loop` |
 | verification-before-completion | Superpowers; pstack `principle-prove-it-works` |
 | test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
 | systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
@@ -21,14 +23,14 @@ see `CONTRIBUTING.md` for how updates are merged.
 | handoff, wait-what | Pocock `handoff`, `wait-what`; pstack `bro` |
 | ci-pr-lifecycle | Pocock `pr`; Superpowers `finishing-a-development-branch` |
 | frontend-design | Taste Skill; Anthropic `frontend-design`; Vibe Design Skills |
-| reflect | pstack `reflect`, `principle-encode-lessons-in-structure` |
+| reflect | pstack `reflect`, `principle-encode-lessons-in-structure`; Pocock `chief-of-staff`; compound-engineering `ce-compound` |
 | technical-documentation, unslop | pstack `technical-writing`, `unslop`; Technical Writer; Awesome Copilot |
 
 ## Superpowers
 
 Source: https://github.com/obra/superpowers
 
-Pinned revision: `bb92a77741419a4ab5f06e711a283343f1ada0c3`
+Pinned revision: `22f0b463e7a5e579904dd6211a520321035526f7`
 
 Copyright (c) 2025 Jesse Vincent
 License: MIT
@@ -37,16 +39,16 @@ License: MIT
 
 Source: https://github.com/mattpocock/skills
 
-Pinned revision: `49dd158d1076134a641b33efb035946536778336`
+Pinned revision: `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`
 
 Copyright (c) 2026 Matt Pocock
 License: MIT
 
 ## Cursor pstack
 
-Source: https://github.com/cursor/plugins/tree/0b8e952052d482ee6de06deebf14d590d77b1b34/pstack
+Source: https://github.com/cursor/plugins/tree/2776ddd2355d6d6c8747d3964600f28daf62f049/pstack
 
-Pinned revision: `0b8e952052d482ee6de06deebf14d590d77b1b34`
+Pinned revision: `2776ddd2355d6d6c8747d3964600f28daf62f049`
 
 Copyright (c) 2026 Lauren Tan
 License: MIT
@@ -134,3 +136,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## tstack
+
+Source: https://github.com/t3dotgg/tstack
+
+Pinned revision: `1085050f3baed1ac724caa4a8166145fb2ac88af`
+
+Copyright (c) 2026 Theo Browne
+License: MIT
+
+## Compound Engineering
+
+Source: https://github.com/EveryInc/compound-engineering-plugin
+
+Pinned revision: `173bd337fa639aac19ce7363d288836a074231a5`
+
+Copyright (c) 2025 Every
+License: MIT

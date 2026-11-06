@@ -9,7 +9,7 @@ The skills started from three collections I like:
 [Matt Pocock's skills](https://github.com/mattpocock/skills) and
 [pstack](https://github.com/cursor/plugins/tree/main/pstack). I kept the parts
 that fixed problems I actually hit, merged overlapping skills into one, and
-cut the rest. The result is 20 short skills.
+cut the rest. The result is 22 short skills.
 
 Two ideas shape everything here:
 
@@ -155,10 +155,12 @@ Issue tracker: github            # or: linear (team: X), markdown
 | | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown |
 | | [architecture-design](skills/architecture-design/SKILL.md) | design module boundaries and refactor safely |
 | Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets, yourself or with subagents |
+| | [orchestrate](skills/orchestrate/SKILL.md) | coordinate many implementers and reviewers under your standing orders |
 | | [test-driven-development](skills/test-driven-development/SKILL.md) | red, green, refactor at a public seam |
 | | [systematic-debugging](skills/systematic-debugging/SKILL.md) | reproduce, isolate and fix the root cause |
 | | [frontend-design](skills/frontend-design/SKILL.md) | design and check UI that doesn't look like a template |
 | Check | [verification-before-completion](skills/verification-before-completion/SKILL.md) | prove a claim before saying "done" |
+| | [create-verification-skill](skills/create-verification-skill/SKILL.md) | write a project's verify skill so agents can prove changes in the real app |
 | | [code-review](skills/code-review/SKILL.md) | review a change and trace what it could break |
 | | [ci-pr-lifecycle](skills/ci-pr-lifecycle/SKILL.md) | drive a PR through CI; never merges unasked |
 | Explain | [explain-codebase](skills/explain-codebase/SKILL.md) | explain how and why code works |
