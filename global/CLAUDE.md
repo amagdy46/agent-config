@@ -4,6 +4,10 @@
 
 Do NOT publish Artifacts (claude.ai-hosted pages). When a visual or HTML deliverable is useful, create a standalone local HTML file instead: a complete self-contained document (inline CSS/JS, no CDN or network dependencies, diagrams in pure HTML/CSS) that works offline when opened directly in a browser. Save it in the relevant project directory (untracked — never commit it unless I ask) or wherever I specify.
 
+## Web Scraping
+
+Use the Scrapling MCP (`mcp__scrapling__*`) for scraping, not curl, urllib or ad hoc scripts. Start with `make_request`, then escalate to `fetch` for JS pages and `stealthy_fetch` for protected ones. No logins unless I ask.
+
 ## Git Commits
 
 Never set or override the commit author/committer identity. Do NOT pass `-c user.name=` / `-c user.email=`, `--author`, or set `GIT_AUTHOR_*` / `GIT_COMMITTER_*`. Never use a name or email taken from session or environment context. Just run a plain `git commit` and let git use whatever identity is already configured in the repo/global git config.
