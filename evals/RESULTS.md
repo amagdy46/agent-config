@@ -8,7 +8,8 @@ Each cell is the mean grader score, then the runs in which every scored
 grader passed. "Without" is the built-in baseline: no plugin at all.
 "With" is a throwaway plugin holding only the skill under test. "Full set"
 is all 23 skills as one plugin, the way an install loads them (with-arm
-only; its baseline is the same as the skill's).
+only, run without a baseline arm: read "The full set" below before
+comparing it with the other columns).
 
 ## Per case
 
@@ -183,15 +184,15 @@ With 3 runs per arm, one run moves a case by 0.33 and a two-case skill by
 ## The full set
 
 With all 23 skills loaded, Opus passed everything the skill-alone arm
-passed, with one exception that turned out to be the harness, not the
-skills:
+passed, with one exception that the skills did not cause; it follows the
+eval mode, for reasons not yet found:
 
 - `skip-bad-users`: the full set fixed the signup typo in 1 of 3 runs
   (0 of 3 in the first run), against 3 of 3 for the baseline and the skill
   alone. A follow-up on 2026-11-18 kept the transcripts and removed skills
   one at a time. The full-set arm runs in a different mode of
   `claude plugin eval` (`--ablation none`, with no baseline arm). In that
-  mode Opus fixed the typo in 0 of 29 runs whatever the plugin held,
+  mode Opus fixed the typo in 1 of 32 runs whatever the plugin held,
   including `systematic-debugging` alone, the same skill that passed in
   the with-and-without mode. Run with a baseline arm, the full set fixed
   it in 1 of 3 runs against 0 of 3 for no plugin in the same invocation.
@@ -201,9 +202,10 @@ skills:
   with-and-without mode.
 - The same follow-up found the no-plugin baseline on this case drifting
   through the day (3 of 3, 3 of 5, 2 of 3, 0 of 3): Opus is near a coin
-  flip here, and three runs cannot separate the arms. No run on any model
-  loaded `systematic-debugging` on this case, so it tests the model's own
-  judgement of scope, not the skill.
+  flip here, and three runs cannot separate the arms.
+  `systematic-debugging` almost never loaded on this case (one Opus run
+  in the skill-alone arm), so it tests the model's own judgement of scope
+  more than the skill.
 
 Also:
 
