@@ -56,11 +56,9 @@ End each playback by asking what is wrong or missing.
 
 ## 4. Converge
 
-When exploring stops producing surprises, switch to grilling rounds: map the
-open decisions as a tree, ask the whole **frontier** (every decision whose
-prerequisites are settled) as numbered questions, each with your recommended
-answer, worded so "yes" accepts it. Recompute after each round. You are done
-when the frontier is empty and nothing material is silently assumed.
+When exploring stops producing surprises, run the grilling skill on the open
+decisions. Without it, ask them three at a time, each with your recommended
+answer.
 
 ## 5. Size it and write it down
 
