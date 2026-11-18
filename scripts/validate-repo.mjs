@@ -9,10 +9,10 @@ import { readdir, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
-// Limits. CONTRIBUTING.md quotes the house-style numbers; change them here first.
-const DESCRIPTION_WARN_CHARS = 300; // house style; the longest description today is 294
+// Limits. CONTRIBUTING.md and AGENTS.md quote these numbers; a test fails if they differ.
+const DESCRIPTION_WARN_CHARS = 300; // house style
 const DESCRIPTION_MAX_CHARS = 1024; // Agent Skills specification
-const SKILL_WARN_LINES = 100; // house style; the longest SKILL.md today is 88
+const SKILL_WARN_LINES = 100; // house style
 const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation
 const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills after compaction
 const NAME_MAX_CHARS = 64; // Agent Skills specification
@@ -46,7 +46,7 @@ function parseFrontmatter(text) {
     } else if (value === "" && block.length) {
       value = Object.fromEntries(block.filter(Boolean).map((entry) => entry.split(/:\s*/, 2)));
     } else if (block.some(Boolean)) {
-      throw new Error(`"${key}" continues onto an indented line. Write "${key}: >-" and put the whole value on the indented lines below it`);
+      throw new Error(`the line after "${key}" is indented. If it starts a new key, move it to column 0; if it continues "${key}", write "${key}: >-" and put the whole value on the indented lines below it`);
     } else if (/^"/.test(value)) {
       if (!/^"(?:[^"\\]|\\.)*"$/.test(value)) throw new Error(`"${key}" opens a double quote it never closes. End the value with " and escape inner quotes as \\"`);
       value = JSON.parse(value);
@@ -96,7 +96,7 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
     continue;
   }
   const text = await readFile(file, "utf8");
-  const front = text.match(/^---\n([\s\S]*?)\n---\n/);
+  const front = text.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
   if (!front) {
     errors.push(`${at}: no frontmatter. Start the file with a "---" line, the name and description fields, and a closing "---" line (LF line endings)`);
     continue;
@@ -124,7 +124,7 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
   }
 
   const bytes = Buffer.byteLength(text);
-  const lines = text.split("\n").length;
+  const lines = text.split("\n").length - (text.endsWith("\n") ? 1 : 0);
   if (bytes >= SKILL_MAX_BYTES) {
     errors.push(`${at}: ${bytes} bytes (must stay under ${SKILL_MAX_BYTES}; Claude Code drops the tail of larger skills after compaction). Move detail only some runs need into a sibling file and link to it`);
   }

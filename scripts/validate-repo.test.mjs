@@ -4,7 +4,7 @@
 
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { after, test } from "node:test";
@@ -36,6 +36,7 @@ function validate(root) {
 }
 
 const skill = (front, body = "Do the thing.\n") => `---\n${front}\n---\n\n${body}`;
+const countLines = (text) => text.split("\n").length - (text.endsWith("\n") ? 1 : 0);
 const good = (name = "demo", extra = "") => skill(`name: ${name}\ndescription: Do the thing. Use for "do it".${extra}`);
 
 // Every message is one line: "<level>: <file>: <problem>. <fix>."
@@ -73,7 +74,7 @@ const errors = [
   ["CRLF frontmatter", { "demo/SKILL.md": good().replaceAll("\n", "\r\n") }, /no frontmatter\..*LF line endings/],
   ["line that is not key: value", { "demo/SKILL.md": skill("name: demo\n- description") }, /line 2 is not a top-level "key: value" pair\. Start it at column 0/],
   ["duplicate key", { "demo/SKILL.md": skill("name: demo\nname: demo\ndescription: x") }, /key "name" appears twice\. Keep one/],
-  ["plain value continued on an indented line", { "demo/SKILL.md": skill("name: demo\ndescription: Do\n  more") }, /"description" continues onto an indented line\. Write "description: >-"/],
+  ["plain value continued on an indented line", { "demo/SKILL.md": skill("name: demo\ndescription: Do\n  more") }, /the line after "description" is indented\. If it starts a new key, move it to column 0; if it continues "description", write "description: >-"/],
   ["unterminated double quote", { "demo/SKILL.md": skill('name: demo\ndescription: "Do') }, /"description" opens a double quote it never closes\. End the value with "/],
   ["unterminated single quote", { "demo/SKILL.md": skill("name: demo\ndescription: 'Do") }, /"description" opens a single quote it never closes\. End the value with '/],
   ["plain value with YAML syntax", { "demo/SKILL.md": skill("name: demo\ndescription: Do: this") }, /"description" is unquoted but contains YAML syntax.*\. Write "description: >-"/],
@@ -113,13 +114,36 @@ test("warn: description over 300 characters", () => {
 
 test("warn: SKILL.md over 100 lines", () => {
   const text = good();
-  const lines = text.split("\n").length;
-  expectOne(run({ "demo/SKILL.md": text + "x\n".repeat(101 - lines) }), "warn", /SKILL\.md: 101 lines \(aim for 100 or fewer\)\. Cut lines/);
+  expectOne(run({ "demo/SKILL.md": text + "x\n".repeat(101 - countLines(text)) }), "warn", /SKILL\.md: 101 lines \(aim for 100 or fewer\)\. Cut lines/);
 });
 
 test("limits are inclusive: 300 characters and 100 lines pass clean", () => {
   const text = skill(`name: demo\ndescription: ${"x".repeat(300)}`);
-  const result = run({ "demo/SKILL.md": text + "x\n".repeat(100 - text.split("\n").length) });
+  const result = run({ "demo/SKILL.md": text + "x\n".repeat(100 - countLines(text)) });
   assert.equal(result.stderr, "");
   assert.equal(result.status, 0);
+});
+
+test("frontmatter with no newline after the closing --- still parses", () => {
+  const result = run({ "demo/SKILL.md": "---\nname: demo\ndescription: Do the thing.\n---" });
+  assert.equal(result.stderr, "");
+  assert.equal(result.status, 0);
+});
+
+test("error: an indented key is reported as such", () => {
+  expectOne(run({ "demo/SKILL.md": skill("name: demo\n  description: Do the thing.") }), "error", /the line after "name" is indented\. If it starts a new key, move it to column 0/);
+});
+
+test("the limits quoted in CONTRIBUTING.md and AGENTS.md match the script", () => {
+  const repo = join(dirname(script), "..");
+  const source = readFileSync(script, "utf8");
+  const limit = (name) => Number(source.match(new RegExp(`const ${name} = (\\d+);`))[1]);
+  const grouped = (n) => n.toLocaleString("en-US");
+  const contributing = readFileSync(join(repo, "CONTRIBUTING.md"), "utf8").replace(/\s+/g, " ");
+  const agents = readFileSync(join(repo, "AGENTS.md"), "utf8").replace(/\s+/g, " ");
+  assert.ok(contributing.includes(`${limit("DESCRIPTION_WARN_CHARS")} characters or fewer`));
+  assert.ok(contributing.includes(`fails above ${grouped(limit("DESCRIPTION_MAX_CHARS"))}`));
+  assert.ok(contributing.includes(`${limit("SKILL_WARN_LINES")} lines or fewer`));
+  assert.ok(contributing.includes(`under ${grouped(limit("SKILL_MAX_BYTES"))} bytes`));
+  assert.ok(agents.includes(`${limit("DESCRIPTION_WARN_CHARS")} characters or fewer`));
 });
