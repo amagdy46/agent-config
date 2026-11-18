@@ -8,7 +8,7 @@ import { existsSync } from "node:fs";
 import { readdir, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { frontmatterOf, parseFailures } from "./lib/skills.mjs";
+import { frontmatterOf, parseFailures, startupBytes } from "./lib/skills.mjs";
 
 // Limits. CONTRIBUTING.md and AGENTS.md quote these numbers; a test fails if they differ.
 const DESCRIPTION_WARN_CHARS = 300; // house style
@@ -17,6 +17,9 @@ const SKILL_WARN_LINES = 100; // house style
 const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation
 const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills after compaction
 const NAME_MAX_CHARS = 64; // Agent Skills specification
+// Bytes of every name and description, which agents load at session start.
+// Set a little above the measured total; raise it only in a commit that says why.
+const STARTUP_MAX_BYTES = 5600;
 
 // The repository root is the first argument, or this script's parent folder.
 const root = resolve(process.argv[2] ?? join(dirname(fileURLToPath(import.meta.url)), ".."));
@@ -25,6 +28,7 @@ const allowedKeys = ["name", "description", "license", "compatibility", "metadat
 const errors = [];
 const warnings = [];
 const folders = [];
+let startupTotal = 0;
 
 function inside(dir, path) {
   const rel = relative(dir, path);
@@ -87,6 +91,7 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
   } else if (description.length > DESCRIPTION_WARN_CHARS) {
     warnings.push(`${at}: description is ${description.length} characters (aim for ${DESCRIPTION_WARN_CHARS} or fewer). Cut it to what the skill does and the phrases that should trigger it`);
   }
+  if (typeof description === "string") startupTotal += startupBytes(name, description);
 
   const bytes = Buffer.byteLength(text);
   const lines = text.split("\n").length - (text.endsWith("\n") ? 1 : 0);
@@ -123,6 +128,10 @@ if (!existsSync(failuresFile)) {
 } else {
   const { errors: problems } = parseFailures(await readFile(failuresFile, "utf8"), folders);
   for (const problem of problems) errors.push(`FAILURES.md: ${problem}`);
+}
+
+if (startupTotal > STARTUP_MAX_BYTES) {
+  errors.push(`skills/: names and descriptions total ${startupTotal} bytes, loaded by every agent at session start (budget ${STARTUP_MAX_BYTES}). Trim a description, or raise STARTUP_MAX_BYTES in scripts/validate-repo.mjs in a commit that says why`);
 }
 
 for (const warning of warnings) console.warn(`warn: ${warning}.`);
