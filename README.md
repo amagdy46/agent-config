@@ -111,7 +111,7 @@ reflect   (at the end of a session full of corrections)
 brainstorm ──► writing-plans ──► to-issues ──► implement
    │  ▲             (plan.md)    (GitHub, Linear,   │
    │  └─ research, prototype      or Markdown)      ▼
-   └─ grilling (converge)                code-review, verification
+   └─ grilling (converge)               impact-review, verification
 ```
 
 1. **brainstorm** finds out what you want, researches in the background,
@@ -162,7 +162,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 |  | [frontend-design](skills/frontend-design/SKILL.md) | design and check UI that doesn't look like a template | 281 |
 | Check | [verification-before-completion](skills/verification-before-completion/SKILL.md) | prove a claim before saying "done" | 210 |
 |  | [create-verification-skill](skills/create-verification-skill/SKILL.md) | write a project's verify skill so agents can prove changes in the real app | 319 |
-|  | [code-review](skills/code-review/SKILL.md) | review a change and trace what it could break beyond its own diff | 226 |
+|  | [impact-review](skills/impact-review/SKILL.md) | review a change and trace what it could break beyond its own diff | 243 |
 |  | [ci-pr-lifecycle](skills/ci-pr-lifecycle/SKILL.md) | drive a PR through CI to a finished state; it never merges unasked | 236 |
 | Explain | [explain-codebase](skills/explain-codebase/SKILL.md) | explain how code works, and why it is shaped that way | 210 |
 |  | [wait-what](skills/wait-what/SKILL.md) | get the last answer again in plain words | 212 |
@@ -172,7 +172,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 |  | [unslop](skills/unslop/SKILL.md) | strip AI tells from prose | 253 |
 <!-- skills-table:end -->
 
-At session start an agent loads only each skill's name and description: 23 skills, 5,666 bytes, about 1,417 tokens. <!-- startup-cost -->
+At session start an agent loads only each skill's name and description: 23 skills, 5,683 bytes, about 1,421 tokens. <!-- startup-cost -->
 
 ## Why these skills
 
@@ -185,7 +185,7 @@ Each skill exists because of a failure I kept seeing.
   wastes more time than an occasional wrong call. The working style and
   `implement` keep it moving and have it report what it decided.
 - **"Done" meant "I think it's done".** `verification-before-completion`
-  makes the agent show fresh evidence, and `code-review` checks what a
+  makes the agent show fresh evidence, and `impact-review` checks what a
   change could break beyond its own diff.
 - **Fixes treated the symptom.** `systematic-debugging` reproduces the bug
   and finds its cause before anything changes.
