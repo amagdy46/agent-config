@@ -87,6 +87,10 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
   const dir = join(skillsRoot, name);
   const file = join(dir, "SKILL.md");
   const at = relative(root, file);
+  const validName = /^[a-z0-9]+(-[a-z0-9]+)*$/.test(name) && name.length <= NAME_MAX_CHARS;
+  if (!validName) {
+    errors.push(`${at}: folder name "${name}" is invalid. Rename the folder and the name field to lowercase letters, digits and single hyphens, at most ${NAME_MAX_CHARS} characters`);
+  }
   if (!existsSync(file)) {
     errors.push(`${at}: missing. Add SKILL.md to skills/${name}/, or delete the folder`);
     continue;
@@ -108,9 +112,7 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
     if (!allowedKeys.includes(key)) errors.push(`${at}: unknown frontmatter key "${key}". Use only ${allowedKeys.join(", ")}; put anything else under metadata:`);
   }
   const { name: declared, description } = fields;
-  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(name) || name.length > NAME_MAX_CHARS) {
-    errors.push(`${at}: folder name "${name}" is invalid. Rename the folder and the name field to lowercase letters, digits and single hyphens, at most ${NAME_MAX_CHARS} characters`);
-  } else if (declared !== name) {
+  if (validName && declared !== name) {
     errors.push(`${at}: name is "${declared ?? ""}" but the folder is "${name}". Set "name: ${name}"`);
   }
   if (typeof description !== "string" || !description) {
