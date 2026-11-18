@@ -31,19 +31,8 @@ surface, so the bar for adding text is higher than the bar for removing it.
 
 ## Add or change a skill
 
-1. Check the change against the bar above.
-2. Edit `skills/<name>/SKILL.md` as described under "Writing a skill". A new
-   skill also gets a row in the `README.md` skill table, and a credit in
-   `THIRD_PARTY_NOTICES.md` if it adapts an upstream skill.
-3. Validate with Node.js 24 or newer, and fix each message until it prints
-   `ok`:
-
-   ```sh
-   node scripts/validate-repo.mjs
-   node --test   # only if you changed scripts/
-   ```
-
-4. Open a pull request. CI runs the same two commands.
+Follow the numbered steps in [AGENTS.md](AGENTS.md#add-or-change-a-skill).
+They are the same for people and agents, and CI runs the same two commands.
 
 ## Merging the same skill from several upstreams
 
