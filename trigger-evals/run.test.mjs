@@ -41,7 +41,7 @@ test('every trigger case has its grader and scaffold', () => {
   assert.ok(cases.length > 0);
   for (const name of cases) {
     const { skill, shouldFire } = parseCaseName(name);
-    assert.ok(fs.existsSync(path.join(here, '..', '..', 'skills', skill, 'SKILL.md')), `${name}: no skill ${skill}`);
+    assert.ok(fs.existsSync(path.join(here, '..', 'skills', skill, 'SKILL.md')), `${name}: no skill ${skill}`);
     const grader = fs.readFileSync(path.join(here, name, 'graders', shouldFire ? 'fires.md' : 'stays-quiet.md'), 'utf8');
     assert.match(grader, /type: tool_used/);
     assert.ok(fs.existsSync(path.join(here, name, 'scaffold.sh')), `${name}: no scaffold.sh`);
