@@ -109,8 +109,18 @@ function run(opts) {
   if (failed) process.exitCode = 1;
 }
 
-// A run passes when it has no error and every scored grader passed.
-const passed = (r) => !r.error && r.graders.every((g) => g.passed || g.scored === false);
+// Graders that count. `skill-fired` is an indicator only; `claude plugin eval`
+// leaves it out under with-without but scores it under --ablation none, so
+// it is dropped here by name to keep the two arms comparable.
+const counted = (r) => r.graders.filter((g) => g.scored !== false && g.name !== "skill-fired");
+// A run passes when it has no error and every counted grader passed; its
+// score is the weighted share of counted graders that passed.
+const passed = (r) => !r.error && counted(r).every((g) => g.passed);
+const scoreOf = (r) => {
+  const gs = counted(r);
+  const total = gs.reduce((a, g) => a + (g.weight ?? 1), 0);
+  return r.error || !total ? 0 : gs.reduce((a, g) => a + (g.passed ? g.weight ?? 1 : 0), 0) / total;
+};
 const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const round = (x) => Math.round(x * 100) / 100;
 
@@ -129,7 +139,7 @@ function load(dirs) {
       for (const side of ["with", "without"]) {
         const runs = c.arms?.[side] ?? [];
         if (!runs.length) continue;
-        row[side] = { score: mean(runs.map((r) => r.score ?? 0)), passes: runs.filter(passed).length, runs: runs.length };
+        row[side] = { score: mean(runs.map(scoreOf)), passes: runs.filter(passed).length, runs: runs.length };
         row.cost += runs.reduce((a, r) => a + (r.costUsd ?? 0) + (r.judgeCostUsd ?? 0), 0);
       }
       const fired = (c.arms?.with ?? []).filter((r) => r.graders.some((g) => g.name === "skill-fired" && g.passed)).length;
