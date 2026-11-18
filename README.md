@@ -12,10 +12,11 @@
 <a href="#skills"><img alt="Startup cost: about 1,417 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C417%20tokens-0F5E63"></a> <!-- startup-badge -->
 </p>
 
-A skill is a short instruction file that a coding agent, such as Claude Code
-or Codex, loads when a task needs it. These skills cover a project from first
-idea to reviewed pull request. The agent asks you only what it cannot find
-out itself, then does the work and tells you what it decided.
+A skill is a short instruction file that a coding agent (an AI that writes
+and runs code for you, such as Claude Code or Codex) loads when a task needs
+it. These skills cover a project from first idea to reviewed change. They
+tell the agent to ask you only what it cannot find out itself, then do the
+work and say what it decided.
 
 ## One task, with and without
 
@@ -230,11 +231,12 @@ node agent-config/scripts/link.mjs
 It links every skill into `~/.agents/skills` and into each installed agent's
 skills folder, so `git pull` or a local edit reaches every agent at once. It
 also links `global/` over `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` and
-`~/AGENTS.md`; those hold my personal rules, so edit `global/` first. It
-deletes nothing it did not create: anything in the way is moved to
+`~/AGENTS.md`; those hold the author's personal rules, so edit `global/`
+first. It deletes nothing it did not create: anything in the way is moved to
 `~/.agents/agent-config/backups/`, and every link it makes is recorded in
-`~/.agents/agent-config/links.json`. Rerun it after you add, remove or rename
-a skill, or move the clone.
+`~/.agents/agent-config/links.json`. A later run removes only recorded links
+that are no longer needed, such as a deleted skill's. Rerun it after you add,
+remove or rename a skill, or move the clone.
 
 ## For agents and contributors
 
