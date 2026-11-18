@@ -77,7 +77,7 @@ const errors = [
   ["unterminated double quote", { "demo/SKILL.md": skill('name: demo\ndescription: "Do') }, /"description" opens a double quote it never closes\. End the value with "/],
   ["unterminated single quote", { "demo/SKILL.md": skill("name: demo\ndescription: 'Do") }, /"description" opens a single quote it never closes\. End the value with '/],
   ["plain value with YAML syntax", { "demo/SKILL.md": skill("name: demo\ndescription: Do: this") }, /"description" is unquoted but contains YAML syntax.*\. Write "description: >-"/],
-  ["unknown key", { "demo/SKILL.md": good("demo", "\nversion: 1") }, /unknown frontmatter key "version"\. Use only name, description.*put anything else under metadata:/],
+  ["unknown key", { "demo/SKILL.md": good("demo", "\nversion: 1") }, /unknown frontmatter key "version"\. Use only name, description.*nest anything else under metadata/],
   ["invalid folder name", { "Demo_Skill/SKILL.md": good("Demo_Skill") }, /folder name "Demo_Skill" is invalid\. Rename the folder and the name field/],
   ["name longer than 64", { [`${"a".repeat(65)}/SKILL.md`]: good("a".repeat(65)) }, /is invalid\..*at most 64 characters/],
   ["name differs from folder", { "demo/SKILL.md": good("other") }, /name is "other" but the folder is "demo"\. Set "name: demo"/],
