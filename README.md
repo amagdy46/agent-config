@@ -154,7 +154,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 | Plan | [writing-plans](skills/writing-plans/SKILL.md) | turn a design into small tasks with exact files, interfaces and tests | 234 | - |
 |  | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown, each naming what blocks it | 274 | - |
 |  | [architecture-design](skills/architecture-design/SKILL.md) | design module boundaries, and refactor without changing behaviour | 310 | - |
-| Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets to the end, yourself or with subagents | 200 | 83% / 100% |
+| Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets to the end, yourself or with subagents | 200 | 100% / 100% |
 |  | [working-style](skills/working-style/SKILL.md) | let the agent decide and do reversible work, and ask you only before steps it cannot undo | 220 | 81% / 86% |
 |  | [orchestrate](skills/orchestrate/SKILL.md) | coordinate many implementer and reviewer agents under your standing orders | 288 | - |
 |  | [test-driven-development](skills/test-driven-development/SKILL.md) | build each behaviour test-first: watch the test fail, then make it pass | 208 | - |

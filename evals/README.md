@@ -62,7 +62,8 @@ node scripts/build-index.mjs                                      # README Evals
 
 Cost, measured 2026-11-18, whole suite (16 cases), skill arm with its
 baseline, 3 runs: $8 on Sonnet and $18 on Opus. The full set on Opus, with
-arm only: $10. Haiku, one run: under $0.20. These are list-price estimates,
+arm only: $10. Haiku, 3 runs: $0.58 for the skill arms and $0.32 for
+the full set. These are list-price estimates,
 which is what an API key pays.
 
 To run the cases against the repo as it is, without the per-skill split:

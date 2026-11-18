@@ -12,9 +12,9 @@
     "implement": {
       "cases": 2,
       "runs": 6,
-      "with": 0.83,
+      "with": 1,
       "without": 1,
-      "delta": -0.17
+      "delta": 0
     },
     "systematic-debugging": {
       "cases": 3,
