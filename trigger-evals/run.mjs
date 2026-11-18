@@ -62,7 +62,11 @@ export function summarize(result, firedFor = () => null) {
       if (parsed.shouldFire) {
         row.fireRuns++;
         if (run.passed) { row.fired++; return; }
-        const others = (firedFor(c.name, i) ?? []).map(bare).filter((s) => s !== parsed.skill);
+        // Drop only this plugin's own skill. A bare name is a built-in skill
+        // (Claude Code ships its own code-review), which is a real miss.
+        const others = (firedFor(c.name, i) ?? [])
+          .filter((s) => !(s.includes(':') && bare(s) === parsed.skill))
+          .map((s) => (s.includes(':') ? bare(s) : `${s} (built-in)`));
         const key = others.length ? others.join('+') : 'none';
         row.instead[key] = (row.instead[key] ?? 0) + 1;
       } else {

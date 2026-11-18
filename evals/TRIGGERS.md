@@ -56,8 +56,6 @@ answered without any skill.
 - `test-driven-development`: 0/10. "add discount codes, test-first" and
   "write a test that catches it, then make it pass" were done directly,
   without the skill.
-- `verification-before-completion`: 0/10. "show me evidence it works" and
-  "don't tell me it's fixed until you've proved it" never loaded it.
 - `handoff`: "write up where we are" fires every time; "pick up where the
   last session left off" never does, on either model.
 - `reflect`: "reflect on this session" fires; "turn that mistake into a
@@ -78,6 +76,11 @@ scheduler" loaded `explain-codebase`, not `wait-what`.
 
 ## Limits
 
+- `verification-before-completion` scored 0/10, and that says nothing
+  about the skill. It is meant to load when the agent itself is about to
+  say "done", after real work; a single message with no shell never
+  reaches that point. Whether it fires there is measured by the behaviour
+  suite, not here.
 - One turn, no conversation before it. `wait-what`, `reflect` and
   `handoff` normally follow a session; their prompts quote or describe it
   instead.
