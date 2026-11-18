@@ -15,10 +15,15 @@ const temp = mkdtempSync(join(tmpdir(), "validate-repo-"));
 after(() => rmSync(temp, { recursive: true, force: true }));
 
 let count = 0;
-// files maps paths under skills/ to contents; null makes a folder.
-function run(files) {
+const section = (name, stage = "Build") => `## ${name}\n\nStage: ${stage}\nFor you: do it.\nFixes: It went wrong.\nOrigin: seen here\n\n`;
+// files maps paths under skills/ to contents; null makes a folder. failures
+// is FAILURES.md; by default it has one good section per skill folder.
+function run(files, failures) {
   const root = join(temp, String(count++));
   mkdirSync(join(root, "skills"), { recursive: true });
+  const folders = new Set(Object.keys(files).filter((path) => path.includes("/")).map((path) => path.split("/")[0]));
+  if (failures === undefined) failures = "# Failure log\n\n" + [...folders].map((name) => section(name)).join("");
+  if (failures !== null) writeFileSync(join(root, "FAILURES.md"), failures);
   for (const [path, content] of Object.entries(files)) {
     const full = join(root, "skills", path);
     if (content === null) mkdirSync(full, { recursive: true });
@@ -133,6 +138,22 @@ test("frontmatter with no newline after the closing --- still parses", () => {
 test("error: an indented key is reported as such", () => {
   expectOne(run({ "demo/SKILL.md": skill("name: demo\n  description: Do the thing.") }), "error", /the line after "name" is indented\. If it starts a new key, move it to column 0/);
 });
+
+const failureErrors = [
+  ["FAILURES.md missing", null, /^error: FAILURES\.md: not found\. Add it with one "## <name>" section per skill/],
+  ["no section for a skill", "# Failure log\n", /FAILURES\.md: no "## demo" section for skills\/demo\/\. Add one with Stage:, For you:, Fixes: and Origin: lines/],
+  ["section for a missing skill", section("demo") + section("gone"), /FAILURES\.md: "## gone" has no skills\/gone\/ folder\. Delete the section, or rename it/],
+  ["section twice", section("demo") + section("demo"), /FAILURES\.md: "## demo" appears twice\. Merge the two sections/],
+  ["missing line", section("demo").replace("Fixes: It went wrong.\n", ""), /FAILURES\.md: "## demo" has no "Fixes:" line\. Add "Fixes: \.\.\." on its own line/],
+  ["line twice", section("demo").replace("Origin:", "Origin: upstream\nOrigin:"), /FAILURES\.md: "## demo" has 2 "Origin:" lines\. Keep one/],
+  ["empty line", section("demo").replace("For you: do it.", "For you:"), /FAILURES\.md: "## demo" has an empty "For you:" line\. Fill it in/],
+  ["unknown stage", section("demo", "Ship"), /FAILURES\.md: "## demo" has Stage "Ship"\. Use one of Think, Plan, Build, Check, Explain, Improve, Write/],
+  ["unknown origin", section("demo").replace("seen here", "folklore"), /FAILURES\.md: "## demo" has Origin "folklore"\. Use one of seen here, upstream, inherited/],
+];
+
+for (const [name, failures, pattern] of failureErrors) {
+  test(`error: ${name}`, () => expectOne(run({ "demo/SKILL.md": good() }, failures), "error", pattern));
+}
 
 test("the limits quoted in CONTRIBUTING.md and AGENTS.md match the script", () => {
   const repo = join(dirname(script), "..");
