@@ -170,6 +170,27 @@ Rules with a recorded reason:
   the helper the clutter it exists to avoid
   ([skills#1341](https://github.com/mattpocock/skills/pull/1341)).
 
+## working-style
+
+Stage: Build
+For you: let the agent decide and do reversible work, and ask you only before steps it cannot undo.
+Fixes: The agent stopped to ask "should I…?" about work it could have done and reported.
+Origin: seen here
+
+The maintainer's account in the
+[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182):
+"Should I do X?" after every step wastes more time than an occasional wrong
+call. Until this skill, the rule lived only in `global/AGENTS.md`, which no
+installer copies, so most installs never got it. The description carries
+the rule because every host lists skill descriptions at session start.
+
+Measured with `evals/` on 2026-11-18. On Opus with no plugin,
+`fix-sibling-bug` stopped and offered to fix the second bug instead of
+fixing it, and fully passed 1 of 7 runs. With this skill alone it passed
+3 of 3. Sonnet and Haiku proceeded without it on every case. The two cases
+where the agent should hold back (deleting untracked recordings, running a
+release) passed with it on.
+
 ## orchestrate
 
 Stage: Build

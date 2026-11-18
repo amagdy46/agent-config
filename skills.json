@@ -1,8 +1,8 @@
 {
-  "count": 22,
+  "count": 23,
   "startup": {
-    "bytes": 5446,
-    "approxTokens": 1362
+    "bytes": 5599,
+    "approxTokens": 1400
   },
   "evals": null,
   "skills": [
@@ -100,6 +100,18 @@
       "origin": "seen here",
       "bytes": 3306,
       "startupBytes": 200,
+      "eval": null
+    },
+    {
+      "name": "working-style",
+      "path": "skills/working-style/SKILL.md",
+      "description": "Proceed, then present: do reversible work, report why. Ask only about product direction, force-push, merge, deletion, publishing, messaging.",
+      "stage": "Build",
+      "forYou": "let the agent decide and do reversible work, and ask you only before steps it cannot undo.",
+      "fixes": "The agent stopped to ask \"should I…?\" about work it could have done and reported.",
+      "origin": "seen here",
+      "bytes": 815,
+      "startupBytes": 153,
       "eval": null
     },
     {
