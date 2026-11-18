@@ -109,7 +109,7 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
     continue;
   }
   for (const key of Object.keys(fields)) {
-    if (!allowedKeys.includes(key)) errors.push(`${at}: unknown frontmatter key "${key}". Use only ${allowedKeys.join(", ")}; put anything else under metadata:`);
+    if (!allowedKeys.includes(key)) errors.push(`${at}: unknown frontmatter key "${key}". Use only ${allowedKeys.join(", ")}; nest anything else under metadata`);
   }
   const { name: declared, description } = fields;
   if (validName && declared !== name) {
