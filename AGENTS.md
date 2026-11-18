@@ -24,11 +24,14 @@ scripts only check and install them.
    letters, digits and hyphens. Frontmatter: `name: <name>` and
    `description:` (what it does, then trigger phrases, 300 characters or
    fewer). Write the body for the agent that runs it: terse, behaviour first.
-3. New skill: add a row to the skill table in `README.md`. Adapted from
+3. New skill: add its `## <name>` section to `FAILURES.md`, with the
+   `Stage:`, `For you:`, `Fixes:` and `Origin:` lines. Adapted from
    upstream: credit it in `THIRD_PARTY_NOTICES.md`.
-4. Run `node scripts/validate-repo.mjs` and fix each message until it
-   prints `ok`. If you changed `scripts/`, also run `node --test`.
-5. Commit: imperative sentence, no prefix. CI runs both commands.
+4. Run `node scripts/build-index.mjs`; it writes `skills.json` and the
+   README skills table, which are never edited by hand. Run
+   `node scripts/validate-repo.mjs` and fix each message until it prints
+   `ok`. If you changed `scripts/`, also run `node --test`.
+5. Commit: imperative sentence, no prefix. CI runs all three commands.
 
 ## Hard rules
 
