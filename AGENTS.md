@@ -17,6 +17,9 @@ scripts check, index and install them.
 - `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`: plugin manifests.
   A release bumps `version` in all three; the validator checks they agree.
 - `INSTALL.md`: install steps written for an agent to follow.
+- `evals/`: behaviour cases for `claude plugin eval`. `trigger-evals/`:
+  per skill, prompts that should and should not load it. Changed a
+  description? Rerun its cases: `evals/README.md` says how.
 - `scripts/link.mjs`: links skills into this machine's agent homes. Never
   run it unless the user asks.
 - `CONTRIBUTING.md`: the bar for new text and the upstream-merge rules.

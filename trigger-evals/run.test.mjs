@@ -36,6 +36,13 @@ test('summarize counts fires, false fires, misses and errors', () => {
   assert.match(formatTable([row]), /\| implement \| 1\/3 \| 1\/2 \| writing-plans \(1\), none \(1\) \(1 errored\) \|/);
 });
 
+test('a built-in skill of the same name counts as a miss, not as none', () => {
+  const result = { cases: [{ name: 'code-review--fire-1', arms: { with: [{ passed: false }, { passed: false }] } }] };
+  const fired = { 'code-review--fire-1.0': ['code-review'], 'code-review--fire-1.1': ['mashi:code-review'] };
+  const [row] = summarize(result, (name, i) => fired[`${name}.${i}`]);
+  assert.deepEqual({ ...row.instead }, { 'code-review (built-in)': 1, none: 1 });
+});
+
 test('every trigger case has its grader and scaffold', () => {
   const cases = fs.readdirSync(here).filter((d) => parseCaseName(d));
   assert.ok(cases.length > 0);
@@ -44,6 +51,7 @@ test('every trigger case has its grader and scaffold', () => {
     assert.ok(fs.existsSync(path.join(here, '..', 'skills', skill, 'SKILL.md')), `${name}: no skill ${skill}`);
     const grader = fs.readFileSync(path.join(here, name, 'graders', shouldFire ? 'fires.md' : 'stays-quiet.md'), 'utf8');
     assert.match(grader, /type: tool_used/);
+    assert.ok(grader.replace(/\\/g, '').includes(`:${skill}"`), `${name}: grader does not name ${skill}`);
     assert.ok(fs.existsSync(path.join(here, name, 'scaffold.sh')), `${name}: no scaffold.sh`);
   }
 });
