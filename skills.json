@@ -110,7 +110,7 @@
       "forYou": "let the agent decide and do reversible work, and ask you only before steps it cannot undo.",
       "fixes": "The agent stopped to ask \"should I…?\" about work it could have done and reported.",
       "origin": "seen here",
-      "bytes": 815,
+      "bytes": 828,
       "startupBytes": 153,
       "eval": null
     },

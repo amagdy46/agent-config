@@ -9,8 +9,6 @@
 // Links go into ~/.agents/skills and every agent-specific skills directory
 // that already exists. The global instruction files in global/ are linked
 // over ~/.claude/CLAUDE.md, ~/.codex/AGENTS.md and ~/AGENTS.md.
-// They hold personal tool rules only; the working style reaches every agent
-// through the linked working-style skill, so it is not repeated there.
 //
 // Nothing is deleted except links this script made. Every link it makes is
 // recorded in a manifest; a later run removes recorded links that are no
