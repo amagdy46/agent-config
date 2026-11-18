@@ -1,44 +1,100 @@
 # Evals
 
 Behaviour tests for the skills, in the format `claude plugin eval` reads.
-Each case is a folder: `prompt.md` (the user's message), `case.yaml` (points
-at `scaffold.sh`, which builds a small repo in the empty workspace) and one
-grader per file in `graders/`.
+Each case is a folder: `prompt.md` (the user's message), `case.yaml`
+(points at `scaffold.sh`, which builds a small repo in the empty workspace,
+or at a recorded conversation) and one grader per file in `graders/`. The
+first tag in `prompt.md` names the skill the case tests. Results:
+[RESULTS.md](RESULTS.md).
 
-The current cases test the working style:
-
-| Case | Tag | The agent should |
+| Case | Skill | The agent should |
 |---|---|---|
-| persist-todos | proceed | pick JSON or SQLite, build it, say why |
-| rename-helpers | proceed | pick a module name, rename, update imports |
-| fix-sibling-bug | proceed | fix the same bug in the sibling function too |
-| add-login | proceed | build login with sane defaults, list its choices |
-| multi-currency | proceed | build a reasonable version, state assumptions |
-| free-disk | ask | delete build output; not delete untracked recordings |
-| release-fix | ask | fix and bump the version; not run the release |
+| persist-todos | working-style | pick JSON or SQLite, build it, say why |
+| rename-helpers | working-style | pick a module name, rename, update imports |
+| fix-sibling-bug | working-style | fix the same bug in the sibling function too |
+| add-login | working-style | build login with sane defaults, list its choices |
+| multi-currency | working-style | build a reasonable version, state assumptions |
+| free-disk | working-style (ask) | delete build output; not delete untracked recordings |
+| release-fix | working-style (ask) | fix and bump the version; not run the release |
+| red-suite-fix | verification-before-completion | fix the discount, run the whole suite, report the shipping test that was already red |
+| big-file-sizes | verification-before-completion | widen a C field and build, so `-Werror` finds the printf in another file |
+| crash-upstream | systematic-debugging | fix the CSV loader that zeroes every quantity, not guard the division that crashes |
+| flaky-tag-order | systematic-debugging | fix the set that loses order, not retry, skip or sort in the test |
+| four-task-plan | implement | do all four tasks of an approved plan in one go |
+| plan-prod-step | implement | do the code tasks, stop before the production migration |
+| brainstorm-opening | brainstorm | build nothing, ask about intent, ask few questions |
+| brainstorm-sounds-good | brainstorm | after "sounds good" to one idea, keep designing, build nothing |
 
-## Run
+Every case also has a `skill-fired` grader. It records whether the agent
+invoked the skill by name and does not count toward the score.
 
-From the repo root, with your normal Claude Code login:
+## Run per skill
+
+`evals/run.mjs` builds a throwaway plugin per skill (that skill and its
+cases only) outside the repo, runs it against the built-in no-plugin
+baseline, and writes one JSON result per skill:
+
+```sh
+env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN \
+  node evals/run.mjs --model sonnet --runs 3 --max-cost-usd 10
+node evals/run.mjs summary evals/results/run-<timestamp>          # markdown table
+node evals/run.mjs summary evals/results/run-<timestamp> --model opus --write
+node scripts/build-index.mjs                                      # README Evals column
+```
+
+- `env -u` makes it use your Claude login; an API key in the environment
+  wins over the login otherwise.
+- `--skill implement,brainstorm` or `--case <glob>` narrows the run.
+  `--arm full` runs every skill as one plugin, the way an install loads
+  them, with no baseline arm. `--keep-temp` keeps each run's folder; the
+  transcript is `out/trace.jsonl` in it. `--dry-run` prints the commands.
+- `--max-cost-usd` is a ceiling for each skill's run, not the total.
+- `summary --write` writes `evals/summary.json` from the skill arms of one
+  model. `with` and `without` are the share of runs in which every scored
+  grader passed, averaged over the skill's cases.
+- Reports are never published (`--no-publish` is built in).
+
+Cost, measured November 2026, whole suite (15 cases), skill arm with its
+baseline, 3 runs: about $9 on Sonnet and $18 on Opus. Haiku with one run
+costs under $1.
+
+To run the cases against the repo as it is, without the per-skill split:
 
 ```sh
 env -u ANTHROPIC_API_KEY claude plugin eval . --no-publish --trust-plugin \
   --scaffold --allow-tools Bash Write Edit --model sonnet -j 2 --max-cost-usd 5
 ```
 
-- `--scaffold` runs each case's `scaffold.sh`; read them first.
-- A no-plugin baseline arm runs by default, so every run doubles. Add
-  `--ablation none` to skip it, `--case <name>` or `--tag ask` to narrow.
-- Results go to `evals/results/<timestamp>/` (git-ignored).
-- Cost, measured November 2026, full suite with the baseline arm: about $4
-  on Sonnet and $0.30 on Haiku at 3 runs per case, $5.70 on Opus at 2.
+`--scaffold` runs each case's `scaffold.sh`; read them first.
+
+## In CI
+
+`.github/workflows/evals.yml` runs `evals/run.mjs` by hand only (Actions,
+"evals", "Run workflow"). It never runs on push or pull request, and it
+uploads the JSON results as an artifact. It needs a repository secret named
+`ANTHROPIC_API_KEY`: a CI runner has no Claude login, so `claude plugin
+eval` uses the key from the environment, billed at API prices (the costs
+above). It installs Claude Code 2.1.327, the version the published numbers
+came from; bump it on purpose.
 
 ## Writing graders here
 
+- `node --test evals/` checks every regex grader against strings it must and
+  must not match. Add yours to `graders.test.mjs`.
+- A `tool_used` grader's `input_match` runs, with no flags, on the tool
+  input as JSON: `{"command":"rm -rf build","description":"..."}`. A
+  command starts after `"command":"`, a shell separator, or `\n` (written
+  `\\n` in the pattern). Exclude `"` from argument runs so a match cannot
+  spill into the description.
 - File graders see only files the run created or changed. A scaffold file
   the agent left alone, or deleted, reads as absent. So `exists: false` and
   `not_contains` pass on an untouched file: pair them with a positive check
   on the same file, or check the command with a `tool_used` grader.
+- A `tool_used` check that something did not happen needs `min: 0`,
+  `max: 0` and `arm: both`.
 - The eval sandbox blocks `git`. Cases that need git (a force-push, a
   merge) cannot run here.
 - JavaScript regexes: no inline flags like `(?i)`; use `flags: i`.
+- `context.history_file` replays a conversation (`claude -p --resume`); the
+  case prompt is the next user turn. `brainstorm-sounds-good` shows the
+  minimal `.jsonl` it accepts.
