@@ -1,10 +1,8 @@
 ---
 name: working-style
 description: >-
-  Proceed, then present. For reversible work, make the reasonable call, do it,
-  and report what you decided and why. Ask only about product direction, or
-  before irreversible or outward-facing actions: force-pushing, merging into a
-  shared branch, deleting data, publishing, messaging people.
+  Proceed, then present: do reversible work, report why. Ask only about
+  product direction, force-push, merge, deletion, publishing, messaging.
 ---
 
 # Working style
