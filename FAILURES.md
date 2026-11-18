@@ -187,9 +187,10 @@ the rule because every host lists skill descriptions at session start.
 Measured with `evals/` on 2026-11-18. On Opus with no plugin,
 `fix-sibling-bug` stopped and offered to fix the second bug instead of
 fixing it, and fully passed 1 of 7 runs. With this skill alone it passed
-3 of 3. Sonnet and Haiku proceeded without it on every case. The two cases
-where the agent should hold back (deleting untracked recordings, running a
-release) passed with it on.
+3 of 3. On Sonnet and Haiku the suite showed no clear difference: both
+already proceed on most runs without it. In the two cases where the agent
+should hold back (deleting untracked recordings, running a release), it
+held back with the skill on.
 
 ## orchestrate
 
