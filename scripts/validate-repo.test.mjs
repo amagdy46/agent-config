@@ -155,6 +155,16 @@ for (const [name, failures, pattern] of failureErrors) {
   test(`error: ${name}`, () => expectOne(run({ "demo/SKILL.md": good() }, failures), "error", pattern));
 }
 
+test("error: names and descriptions over the startup budget", () => {
+  const limit = Number(readFileSync(script, "utf8").match(/const STARTUP_MAX_BYTES = (\d+);/)[1]);
+  const files = {};
+  // 300-character descriptions stay clear of the description warning.
+  const skills = Math.ceil(limit / 300) + 1;
+  for (let i = 0; i < skills; i++) files[`s${i}/SKILL.md`] = skill(`name: s${i}\ndescription: ${"x".repeat(300)}`);
+  const total = Array.from({ length: skills }, (_, i) => `s${i}`.length + 300).reduce((a, b) => a + b);
+  expectOne(run(files), "error", new RegExp(`^error: skills/: names and descriptions total ${total} bytes.*\\(budget ${limit}\\)\\. Trim a description, or raise STARTUP_MAX_BYTES`));
+});
+
 test("the limits quoted in CONTRIBUTING.md and AGENTS.md match the script", () => {
   const repo = join(dirname(script), "..");
   const source = readFileSync(script, "utf8");
