@@ -1,150 +1,95 @@
-# Agent Config
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
+    <img alt="mashi (ماشي)" src="assets/wordmark-light.svg" width="360">
+  </picture>
+</p>
 
+<p align="center"><b>Agent skills that ask once, then get out of your way.</b></p>
+
+<p align="center">
+<a href="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml/badge.svg"></a>
 <a href="#skills"><img alt="Startup cost: about 1,417 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C417%20tokens-0F5E63"></a> <!-- startup-badge -->
+</p>
 
-These are the skills I use every day with Claude Code and Codex. They also
-work in Cursor, OpenCode, Pi and any other agent that reads the open
-[Agent Skills](https://agentskills.io) format.
+A skill is a short instruction file that a coding agent, such as Claude Code
+or Codex, loads when a task needs it. These skills cover a project from first
+idea to reviewed pull request. The agent asks you only what it cannot find
+out itself, then does the work and tells you what it decided.
 
-The skills started from three collections I like:
-[Superpowers](https://github.com/obra/superpowers),
-[Matt Pocock's skills](https://github.com/mattpocock/skills) and
-[pstack](https://github.com/cursor/plugins/tree/main/pstack). I kept the parts
-that fixed problems I actually hit, merged overlapping skills into one, and
-cut the rest. The result is 22 short skills.
+## One task, with and without
 
-Two ideas shape everything here:
+Asked to brainstorm a small app, Claude Opus with no skills wrote a design.
+With the `brainstorm` skill it asked one question.
 
-- **Proceed, then present.** For anything reversible, the agent makes the
-  call, does the work and tells you what it decided and why. It asks you only
-  about product direction, or before something it can't undo: force-pushing,
-  merging, deleting data, publishing, or messaging people.
-- **Interview first when the project is new.** Starting something from
-  scratch is the one time the agent should slow down. `brainstorm` asks you
-  questions until it knows what you want, and researches while you talk.
+<table>
+<tr><td colspan="2"><b>You:</b> let's brainstorm a little app for keeping track of when to water my houseplants</td></tr>
+<tr><th width="50%">Without the skill</th><th width="50%">With <code>brainstorm</code></th></tr>
+<tr valign="top">
+<td>
+
+Fun one. Here's a first pass to react to.
+
+**The core loop** […]<br>
+**Ideas worth considering** […]<br>
+**The big decision: what form should it take?** […]
+
+**My recommendation:** if this is a personal tool, a **PWA with local storage** is the best balance. […]
+
+**Questions for you**
+1. Roughly how many plants? 5 and 50 lead to different designs.
+2. Just you, or shared with others?
+3. Is this mainly about getting the tool, or also a project you want to enjoy building (e.g. trying out a framework)?
+4. Where do you want reminders to show up: phone notifications, calendar, chat, or email?
+
+[…]
+
+</td>
+<td>
+
+Fun one. If you'd rather skip the questions, just say so and I'll take a concrete guess and run with it.
+
+To start: think of the last time a plant suffered because you got the watering wrong. What happened?
+
+</td>
+</tr>
+</table>
+
+One run of three from the eval case
+[`brainstorm-opening`](evals/brainstorm-opening/), Claude Code 2.1.327,
+2026-11-18. Cuts are marked […]; nothing is reworded. Full replies:
+[without](evals/transcripts/brainstorm-opening-without.md),
+[with](evals/transcripts/brainstorm-opening-with.md).
 
 ## Install
 
-### Use the skills
+Paste this to your agent:
 
-With the [skills CLI](https://github.com/vercel-labs/skills):
+```text
+Install https://github.com/amagdy46/agent-config by following its INSTALL.md
+```
+
+Or run it yourself:
 
 ```sh
-npx skills add amagdy46/agent-config -g                    # pick from the list
-npx skills add amagdy46/agent-config -g --skill brainstorm  # just one
-npx skills update                                           # later
+# Claude Code
+claude plugin install mashi --marketplace amagdy46/agent-config
+
+# Codex
+codex plugin marketplace add amagdy46/agent-config
+codex plugin add mashi@mashi
+
+# Cursor, OpenCode, Pi and others
+npx -y skills add amagdy46/agent-config -g -y --agent <agent>
 ```
 
-The skills refer to each other by name. For example, `brainstorm` hands off
-to `writing-plans`, and `implement` calls `test-driven-development`. Install
-the whole set if you want the full flow.
+For `<agent>`, put `cursor`, `opencode`, `pi` or your agent's name. Install
+the whole set, because the skills hand off to each other by name. Do not
+install it next to Superpowers, Matt Pocock's skills or pstack, or twice by
+two paths; two copies of the same job give the agent conflicting
+instructions. Updates, removal and checks are in [INSTALL.md](INSTALL.md).
 
-The working style comes with the set, as the `working-style` skill. If you
-install only some skills, add that one too: the others assume it.
-
-### Fork it and make it yours
-
-If you fork the repo, run `scripts/link.mjs` from your clone:
-
-```sh
-git clone git@github.com:<you>/agent-config.git
-node agent-config/scripts/link.mjs --dry-run   # see what it will do
-node agent-config/scripts/link.mjs
-```
-
-The script links every skill into `~/.agents/skills` and into the skills
-folder of each agent you have installed. After that, `git pull` or a local
-edit updates every agent at once.
-
-The script also links the files in `global/` over `~/.claude/CLAUDE.md`,
-`~/.codex/AGENTS.md` and `~/AGENTS.md`. Those files hold my personal rules,
-so edit `global/` before you run it.
-
-The script never deletes anything it didn't create. A file, folder or
-someone else's link that is in the way is moved into a timestamped folder
-under `~/.agents/agent-config/backups/` first. It records every link it makes
-in `~/.agents/agent-config/links.json`, and a later run removes only recorded
-links that are no longer needed, such as the links for a deleted skill.
-
-Rerun the script after you add, remove or rename a skill, or move the clone.
-
-## Quick start
-
-You don't call most skills by name. Describe the task, and the agent picks
-the skill that fits.
-
-```text
-let's brainstorm a CLI that syncs my Kindle highlights into Obsidian
-```
-
-The agent asks you open questions one at a time, and starts background
-research on the ideas that come up. Every few answers it plays back what it
-has understood. When most questions are settled, it asks pointed questions
-with a recommended answer for each, and you can just say "yes". Once you
-approve, it writes `design.md`.
-
-```text
-plan it and put the work in GitHub issues
-```
-
-The agent writes `plan.md`, splits the work into small end-to-end tickets
-and opens them with their dependencies linked.
-
-```text
-work the issues
-```
-
-The agent picks up the tickets that are ready, builds each one test-first,
-verifies it and reviews it. It stops only when something is truly blocked.
-
-Other examples:
-
-```text
-debug this: the export hangs on files over 2 GB
-grill me on this migration plan
-review this branch: what could it break?
-is this PR ready? push it and watch CI
-reflect   (at the end of a session full of corrections)
-```
-
-## The flow for a new project
-
-```text
-brainstorm ──► writing-plans ──► to-issues ──► implement
-   │  ▲             (plan.md)    (GitHub, Linear,   │
-   │  └─ research, prototype      or Markdown)      ▼
-   └─ grilling (converge)                code-review, verification
-```
-
-1. **brainstorm** finds out what you want, researches in the background,
-   plays its understanding back in short chunks, then works through the
-   remaining decisions with `grilling`. When you approve, it writes
-   `design.md`.
-2. **writing-plans** turns the design into `plan.md`: small tasks, each with
-   its exact files, interfaces and checks.
-3. **to-issues** splits the work into thin tickets that each cut through the
-   whole stack and can be tested on their own. It links which ticket blocks
-   which, and publishes them to GitHub, Linear or Markdown files.
-4. **implement** works through the tickets that are ready, test-first. It
-   verifies and reviews the result, and pushes only when you ask.
-
-You can start at any step. If you already know what you want, skip
-straight to "write a plan" or "break this into issues".
-
-### Where the files go
-
-Everything for one piece of work lives in one planning folder: `design.md`,
-`plan.md` and `issues/`. The default is `docs/plans/YYYY-MM-DD-<slug>/` in
-the repo. The files use frontmatter and `[[wikilinks]]`, so an Obsidian
-vault shows them as linked notes. To put them in your vault and choose a
-tracker, add these lines to the project's `AGENTS.md`:
-
-```markdown
-Planning folder: ~/notes/projects/<project>
-Issue tracker: github            # or: linear (team: X), markdown
-```
-
-## Skills
+## What the evals show
 
 <!-- evals-table:start (generated by scripts/build-index.mjs from evals/summary.json; do not edit) -->
 | Skill | With the skill | Without | Gap |
@@ -157,6 +102,56 @@ Issue tracker: github            # or: linear (team: X), markdown
 
 Share of runs in which every check passed (on opus, run 2026-11-18, 3 runs per case and arm). With so few runs, read a gap under 20 points as noise.
 <!-- evals-table:end -->
+
+Five skills were tested on 16 short cases, each run with the skill and with
+no skills at all. `brainstorm` showed a clear effect, the one above. The
+other four showed no clear difference: current Sonnet and Opus pass most
+cases with no skill, and half the cases turned out too easy to show an
+effect. All rows, including the ones with no difference, are in
+[evals/RESULTS.md](evals/RESULTS.md).
+
+## The flow for a new project
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/flow-dark.svg">
+    <img alt="brainstorm (writes design.md), then writing-plans (writes plan.md), then to-issues (GitHub, Linear or Markdown), then implement. brainstorm draws on research and prototype, and converges with grilling. implement ends in code-review and verification-before-completion." src="assets/flow-light.svg" width="700">
+  </picture>
+</p>
+
+1. **brainstorm** asks what you want, one question at a time, researches in
+   the background, and writes `design.md` once you approve.
+2. **writing-plans** turns the design into `plan.md`: small tasks with exact
+   files, interfaces and checks.
+3. **to-issues** splits the work into tickets that can each be tested alone,
+   links which blocks which, and publishes them to GitHub, Linear or Markdown.
+4. **implement** works the ready tickets test-first, verifies and reviews
+   each, and pushes only when you ask.
+
+You can start at any step. If you already know what you want, say "write a
+plan" or "break this into issues".
+
+## Quick start
+
+You rarely name a skill. Describe the task and the agent picks the one that
+fits.
+
+```text
+let's brainstorm a CLI that syncs my Kindle highlights into Obsidian
+plan it and put the work in GitHub issues
+work the issues
+```
+
+Other things to say:
+
+```text
+debug this: the export hangs on files over 2 GB
+grill me on this migration plan
+review this branch: what could it break?
+is this PR ready? push it and watch CI
+```
+
+## Skills
 
 <!-- skills-table:start (generated by scripts/build-index.mjs from FAILURES.md; do not edit) -->
 | Stage | Skill | For you | Startup bytes | Evals: with / without |
@@ -192,44 +187,69 @@ At session start an agent loads only each skill's name and description: 23 skill
 
 ## Why these skills
 
-Each skill exists because of a failure I kept seeing.
+Each skill names the failure it targets and where that failure is recorded,
+in [FAILURES.md](FAILURES.md). About half have a record; the rest say
+"inherited" and claim nothing more. Three with a record:
 
-- **The agent built the wrong thing.** It guessed at what I meant instead
-  of asking. `brainstorm` and `grilling` close that gap before any code
-  exists.
-- **The agent kept asking permission.** "Should I do X?" after every step
-  wastes more time than an occasional wrong call. The working style and
-  `implement` keep it moving and have it report what it decided.
-- **"Done" meant "I think it's done".** `verification-before-completion`
-  makes the agent show fresh evidence, and `code-review` checks what a
-  change could break beyond its own diff.
-- **Fixes treated the symptom.** `systematic-debugging` reproduces the bug
-  and finds its cause before anything changes.
-- **The same mistake, every session.** `reflect` reads the session's
-  transcript and turns its lessons into edits to the skills, so the next
-  session starts smarter.
+- [implement](FAILURES.md#implement): upstream, Claude Code cut a long skill
+  file when it compacted the session, the limit on fix rounds was lost, and
+  one task ran 18 rounds. Here the loop stops at three rounds, and the
+  validator fails any `SKILL.md` of 20,000 bytes or more.
+- [writing-plans](FAILURES.md#writing-plans): upstream, a 1,894-line spec
+  became a 19,393-line plan after more than five hours, and no program was
+  written.
+  This skill's plans record only decisions.
+- [test-driven-development](FAILURES.md#test-driven-development): upstream,
+  an agent counted a compile error as its failing test. Here a setup or
+  syntax error does not count as a failing test.
 
-## Repository layout
+## Where the files go
 
-```text
-skills/<name>/SKILL.md   one skill; longer reference material sits next to it
-global/                  my global instructions for Claude Code and Codex
-scripts/link.mjs         link skills and global files into each agent
-scripts/validate-repo.mjs  check names, descriptions, sizes and links
-CONTRIBUTING.md          the bar for new skills and how to merge upstream ones
-THIRD_PARTY_NOTICES.md   credits and the pinned upstream versions
+One piece of work keeps `design.md`, `plan.md` and `issues/` in one planning
+folder, by default `docs/plans/YYYY-MM-DD-<slug>/`. The files use
+frontmatter and `[[wikilinks]]`, so an Obsidian vault shows them as linked
+notes. To change the folder or the tracker, add these lines to the
+project's `AGENTS.md`:
+
+```markdown
+Planning folder: ~/notes/projects/<project>
+Issue tracker: github            # or: linear (team: X), markdown
 ```
 
-## Contributing
+## Fork it and make it yours
 
-Issues and PRs are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) sets the bar.
-A new line of text must fix a failure someone actually saw. When more than
-one source has the same skill, we keep the strongest version rather than
-combining all of them. Run `node scripts/validate-repo.mjs` before you
-commit.
+To edit the skills and have every agent on your machine use your copy, fork
+the repo and run `scripts/link.mjs` from your clone:
+
+```sh
+git clone git@github.com:<you>/agent-config.git
+node agent-config/scripts/link.mjs --dry-run   # see what it will do
+node agent-config/scripts/link.mjs
+```
+
+It links every skill into `~/.agents/skills` and into each installed agent's
+skills folder, so `git pull` or a local edit reaches every agent at once. It
+also links `global/` over `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` and
+`~/AGENTS.md`; those hold my personal rules, so edit `global/` first. It
+deletes nothing it did not create: anything in the way is moved to
+`~/.agents/agent-config/backups/`, and every link it makes is recorded in
+`~/.agents/agent-config/links.json`. Rerun it after you add, remove or rename
+a skill, or move the clone.
+
+## For agents and contributors
+
+- Installing: [INSTALL.md](INSTALL.md). Every skill with its description and
+  startup cost: [skills.json](skills.json) and [llms.txt](llms.txt).
+- Changing a skill in this repo: [AGENTS.md](AGENTS.md).
+- The bar for new text, for people and agents: [CONTRIBUTING.md](CONTRIBUTING.md).
+  A new line must fix a failure someone saw.
 
 ## Credits and license
 
-MIT. Many ideas here come from Jesse Vincent's Superpowers, Matt Pocock's
-skills and poteto's pstack. Credits and pinned upstream versions are in
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+MIT. The skills started from Jesse Vincent's
+[Superpowers](https://github.com/obra/superpowers),
+[Matt Pocock's skills](https://github.com/mattpocock/skills) and poteto's
+[pstack](https://github.com/cursor/plugins/tree/main/pstack); the parts that
+fixed real problems were kept, overlaps merged, the rest cut. Credits and
+pinned upstream versions are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The name, mashi (ماشي), is Egyptian Arabic for "okay, on it".
