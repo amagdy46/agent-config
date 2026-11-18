@@ -4,7 +4,10 @@
     "bytes": 5666,
     "approxTokens": 1417
   },
-  "evals": null,
+  "evals": {
+    "generated": "2026-11-18",
+    "model": "opus"
+  },
   "skills": [
     {
       "name": "brainstorm",
@@ -16,7 +19,12 @@
       "origin": "seen here",
       "bytes": 4222,
       "startupBytes": 272,
-      "eval": null
+      "eval": {
+        "cases": 2,
+        "with": 1,
+        "without": 0.5,
+        "delta": 0.5
+      }
     },
     {
       "name": "grilling",
@@ -100,7 +108,12 @@
       "origin": "seen here",
       "bytes": 3306,
       "startupBytes": 200,
-      "eval": null
+      "eval": {
+        "cases": 2,
+        "with": 0.83,
+        "without": 1,
+        "delta": -0.17
+      }
     },
     {
       "name": "working-style",
@@ -112,7 +125,12 @@
       "origin": "seen here",
       "bytes": 897,
       "startupBytes": 220,
-      "eval": null
+      "eval": {
+        "cases": 7,
+        "with": 0.81,
+        "without": 0.86,
+        "delta": -0.05
+      }
     },
     {
       "name": "orchestrate",
@@ -148,7 +166,12 @@
       "origin": "seen here",
       "bytes": 3547,
       "startupBytes": 233,
-      "eval": null
+      "eval": {
+        "cases": 3,
+        "with": 1,
+        "without": 1,
+        "delta": 0
+      }
     },
     {
       "name": "frontend-design",
@@ -172,7 +195,12 @@
       "origin": "seen here",
       "bytes": 1964,
       "startupBytes": 210,
-      "eval": null
+      "eval": {
+        "cases": 2,
+        "with": 1,
+        "without": 1,
+        "delta": 0
+      }
     },
     {
       "name": "create-verification-skill",

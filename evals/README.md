@@ -55,9 +55,10 @@ node scripts/build-index.mjs                                      # README Evals
   grader passed, averaged over the skill's cases.
 - Reports are never published (`--no-publish` is built in).
 
-Cost, measured November 2026, whole suite (15 cases), skill arm with its
-baseline, 3 runs: about $9 on Sonnet and $18 on Opus. Haiku with one run
-costs under $1.
+Cost, measured 2026-11-18, whole suite (16 cases), skill arm with its
+baseline, 3 runs: $8 on Sonnet and $18 on Opus. The full set on Opus, with
+arm only: $10. Haiku, one run: under $0.20. These are list-price estimates,
+which is what an API key pays.
 
 To run the cases against the repo as it is, without the per-skill split:
 
@@ -74,9 +75,11 @@ env -u ANTHROPIC_API_KEY claude plugin eval . --no-publish --trust-plugin \
 "evals", "Run workflow"). It never runs on push or pull request, and it
 uploads the JSON results as an artifact. It needs a repository secret named
 `ANTHROPIC_API_KEY`: a CI runner has no Claude login, so `claude plugin
-eval` uses the key from the environment, billed at API prices (the costs
-above). It installs Claude Code 2.1.327, the version the published numbers
-came from; bump it on purpose.
+eval` uses the key from the environment, billed at API prices: about $8
+for a Sonnet run of the whole suite and $18 for Opus (the costs above).
+Narrow it with the `skill` input. It installs Claude Code 2.1.327, the
+version the published numbers came from; bump it on purpose. The workflow
+has not been run: the secret does not exist yet.
 
 ## Writing graders here
 

@@ -1,0 +1,36 @@
+{
+  "generated": "2026-11-18",
+  "model": "opus",
+  "skills": {
+    "brainstorm": {
+      "cases": 2,
+      "with": 1,
+      "without": 0.5,
+      "delta": 0.5
+    },
+    "implement": {
+      "cases": 2,
+      "with": 0.83,
+      "without": 1,
+      "delta": -0.17
+    },
+    "systematic-debugging": {
+      "cases": 3,
+      "with": 1,
+      "without": 1,
+      "delta": 0
+    },
+    "verification-before-completion": {
+      "cases": 2,
+      "with": 1,
+      "without": 1,
+      "delta": 0
+    },
+    "working-style": {
+      "cases": 7,
+      "with": 0.81,
+      "without": 0.86,
+      "delta": -0.05
+    }
+  }
+}
