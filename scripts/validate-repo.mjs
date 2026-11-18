@@ -9,10 +9,10 @@ import { readdir, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
-// Limits.
-const DESCRIPTION_WARN_CHARS = 400;
+// Limits. CONTRIBUTING.md quotes the house-style numbers; change them here first.
+const DESCRIPTION_WARN_CHARS = 300; // house style; the longest description today is 294
 const DESCRIPTION_MAX_CHARS = 1024; // Agent Skills specification
-const SKILL_WARN_LINES = 100;
+const SKILL_WARN_LINES = 100; // house style; the longest SKILL.md today is 88
 const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation
 const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills after compaction
 const NAME_MAX_CHARS = 64; // Agent Skills specification
