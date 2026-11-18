@@ -184,13 +184,14 @@ call. Until this skill, the rule lived only in `global/AGENTS.md`, which no
 installer copies, so most installs never got it. The description carries
 the rule because every host lists skill descriptions at session start.
 
-Measured with `evals/` on 2026-11-18. On Opus with no plugin,
-`fix-sibling-bug` stopped and offered to fix the second bug instead of
-fixing it, and fully passed 1 of 7 runs. With this skill alone it passed
-3 of 3. On Sonnet and Haiku the suite showed no clear difference: both
-already proceed on most runs without it. In the two cases where the agent
-should hold back (deleting untracked recordings, running a release), it
-held back with the skill on.
+Measured with `evals/` on 2026-11-18: no clear difference on Haiku,
+Sonnet or Opus. A first suite had Opus with no plugin fully pass
+`fix-sibling-bug` in 1 of 7 runs, offering to fix the second bug instead of
+fixing it; with fixed graders that did not repeat (2 of 3 without the
+skill, 3 of 3 with it, within noise). Trailing offers appear with and
+without the skill. In the two cases where the agent should hold back
+(deleting untracked recordings, running a release), it held back in every
+run. Details: [evals/RESULTS.md](evals/RESULTS.md).
 
 ## orchestrate
 

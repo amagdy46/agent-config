@@ -1,0 +1,70 @@
+name: evals
+
+# Manual only: every run spends money on the Anthropic API. See evals/README.md.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Model under test (haiku, sonnet, opus)
+        default: sonnet
+      arm:
+        description: "skill: each skill alone against no plugin. full: all skills, with-arm only"
+        default: skill
+      skill:
+        description: Comma-separated skills to run (empty for all)
+        default: ""
+      runs:
+        description: Runs per case and arm
+        default: "3"
+      max_cost_usd:
+        description: "Cost ceiling for each skill's run, not the total (all five skills: up to 5x this)"
+        default: "10"
+
+permissions:
+  contents: read
+
+jobs:
+  evals:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install Claude Code and the shell sandbox it needs
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.327
+          sudo apt-get update && sudo apt-get install -y bubblewrap socat
+          # Ubuntu 24.04 blocks the unprivileged user namespaces bubblewrap uses.
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Run the suite
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODEL: ${{ inputs.model }}
+          ARM: ${{ inputs.arm }}
+          SKILL: ${{ inputs.skill }}
+          RUNS: ${{ inputs.runs }}
+          MAX_COST: ${{ inputs.max_cost_usd }}
+        run: |
+          args=(--model "$MODEL" --arm "$ARM" --runs "$RUNS" --max-cost-usd "$MAX_COST" --out evals/results/ci)
+          [ -n "$SKILL" ] && args+=(--skill "$SKILL")
+          node evals/run.mjs "${args[@]}"
+      - name: Summarise
+        if: always()
+        run: |
+          if [ -d evals/results/ci ]; then
+            node evals/run.mjs summary evals/results/ci >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No results: the run stopped before the suite started." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: eval-results-${{ inputs.model }}-${{ inputs.arm }}
+          path: evals/results/ci
