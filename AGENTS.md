@@ -12,8 +12,14 @@ scripts check, index and install them.
 - `scripts/validate-repo.mjs`: checks every skill; limits are constants at
   its top. `scripts/validate-repo.test.mjs`: its tests.
 - `FAILURES.md`: per skill, the failure it fixes and its one-line pitch.
-- `scripts/build-index.mjs`: generates `skills.json` and the README skills
-  table from the skills and `FAILURES.md`.
+- `scripts/build-index.mjs`: generates `skills.json`, the README skills
+  table and the skills list in `llms.txt` from the skills and `FAILURES.md`.
+- `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`: plugin manifests.
+  A release bumps `version` in all three; the validator checks they agree.
+- `INSTALL.md`: install steps written for an agent to follow.
+- `evals/`: behaviour cases for `claude plugin eval`. `trigger-evals/`:
+  per skill, prompts that should and should not load it. Changed a
+  description? Rerun its cases: `evals/README.md` says how.
 - `scripts/link.mjs`: links skills into this machine's agent homes. Never
   run it unless the user asks.
 - `CONTRIBUTING.md`: the bar for new text and the upstream-merge rules.
@@ -30,8 +36,9 @@ scripts check, index and install them.
 3. New skill: add its `## <name>` section to `FAILURES.md`, with the
    `Stage:`, `For you:`, `Fixes:` and `Origin:` lines. Adapted from
    upstream: credit it in `THIRD_PARTY_NOTICES.md`.
-4. Run `node scripts/build-index.mjs`; it writes `skills.json` and the
-   README skills table, which are never edited by hand. Run
+4. Run `node scripts/build-index.mjs`; it writes `skills.json`, the
+   README skills table and the `llms.txt` skills list, which are never
+   edited by hand. Run
    `node scripts/validate-repo.mjs` and fix each message until it prints
    `ok`. If you changed `scripts/`, also run `node --test`.
 5. Commit: imperative sentence, no prefix. CI runs all three commands.

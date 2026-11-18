@@ -178,3 +178,16 @@ test("the limits quoted in CONTRIBUTING.md and AGENTS.md match the script", () =
   assert.ok(contributing.includes(`under ${grouped(limit("SKILL_MAX_BYTES"))} bytes`));
   assert.ok(agents.includes(`${limit("DESCRIPTION_WARN_CHARS")} characters or fewer`));
 });
+
+test("error: plugin manifests that disagree on version", () => {
+  const { root } = run({ "demo/SKILL.md": good() });
+  const manifest = (dir, json) => {
+    mkdirSync(join(root, dir), { recursive: true });
+    writeFileSync(join(root, dir, "plugin.json"), JSON.stringify(json));
+  };
+  manifest(".claude-plugin", { name: "demo", version: "1.0.0" });
+  manifest(".cursor-plugin", { name: "demo", version: "1.0.0" });
+  assert.equal(validate(root).stdout, "ok\n");
+  manifest(".codex-plugin", { name: "demo", version: "1.1.0" });
+  expectOne(validate(root), "error", /^error: \.codex-plugin\/plugin\.json: version is "1\.1\.0" but \.claude-plugin\/plugin\.json has "1\.0\.0"/);
+});

@@ -102,3 +102,35 @@ has not been run: the secret does not exist yet.
 - `context.history_file` replays a conversation (`claude -p --resume`); the
   case prompt is the next user turn. `brainstorm-sounds-good` shows the
   minimal `.jsonl` it accepts.
+
+## Trigger suite
+
+`trigger-evals/`, at the repo root, checks that each skill loads from its
+description alone, and stays quiet on a near miss. Per skill: two prompts
+that should load it (one close to its description, one in other words) and
+one that belongs to a neighbouring skill or to none. Each case passes or
+fails on one `tool_used: Skill` grader. `working-style` has no cases: its
+description is the rule itself, not meant to be invoked. The suite sits
+outside `evals/` because `claude plugin eval` searches its eval dir
+recursively, so the command above would run these cases too. Every case
+builds the same small repo (`fixture.sh`), so "review this PR" has
+something to point at. The baseline is in [TRIGGERS.md](TRIGGERS.md).
+
+After changing a description, rerun that skill, then the whole suite:
+
+```sh
+node trigger-evals/run.mjs --model haiku --case 'code-review--*'
+node trigger-evals/run.mjs --model sonnet --runs 2 --max-cost-usd 8
+```
+
+The runner calls `claude plugin eval` with `--eval-dir trigger-evals
+--scaffold --ablation none --no-publish` (no baseline arm: without the
+plugin there is nothing to load), unsets `ANTHROPIC_API_KEY`, and prints
+one table: per skill, fired / should-fire runs, false fires / should-not
+runs, and what loaded instead on a miss. `--from <results dir>...`
+reprints one or more old runs as one table. Results and traces go to
+`trigger-evals/results/` (git-ignored).
+
+Cost, November 2026: the whole suite at 3 runs per case is $0.77 on
+Haiku. Sonnet costs about $0.06 a run: about $11 at 3 runs, $7.50 at 2.
+One skill's 3 cases cost cents on Haiku and under $0.60 on Sonnet.
