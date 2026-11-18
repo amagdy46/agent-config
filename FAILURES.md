@@ -1,10 +1,16 @@
 # Failure log
 
 Each rule in these skills is meant to exist because an agent did something
-wrong. This file lists, skill by skill, the failure it targets and where you
-can check that the failure happened: a commit here, the README, or the
-upstream project the skill came from. Where nobody recorded one, the entry
-says `inherited` and claims nothing more.
+wrong. This file lists, skill by skill, the failure it targets and where that
+failure is recorded. `Origin` says how strong the record is:
+
+- `seen here`: the maintainer hit it in his own sessions. Unless the entry
+  cites a commit, the only record is his own account in the README's "Why
+  these skills" list; nothing was logged at the time.
+- `upstream`: the project the skill was adapted from documents an incident,
+  and the entry links it.
+- `inherited`: the skill came from upstream and nobody recorded a failure.
+  The entry claims nothing more.
 
 ## brainstorm
 
@@ -13,11 +19,11 @@ For you: find out what you actually want, with research, before any code exists.
 Fixes: The agent guessed what I meant and built the wrong thing.
 Origin: seen here
 
-Asked for an app, the agent picks a shape on its own and starts building it.
-brainstorm asks one question at a time, plays back what it heard, and builds
-nothing until you approve the written design. The failure is the first entry
-in the README's
-[Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L177-L179).
+The maintainer's account, first in the README's
+[Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L177-L179):
+the agent "guessed at what I meant instead of asking". brainstorm asks one
+question at a time, plays back what it heard, and builds nothing until you
+approve the written design.
 
 Rules with a recorded reason:
 
@@ -28,11 +34,11 @@ Rules with a recorded reason:
   the design document and started building in 24 of 24 test runs before that
   rule, and 3 of 24 after it
   ([superpowers#2571](https://github.com/obra/superpowers/pull/2571),
-  [release notes](https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/RELEASE-NOTES.md#L70)).
+  [release notes](https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/RELEASE-NOTES.md?plain=1#L70)).
 - It runs only for a new project or when you say "brainstorm"; other work
   proceeds without an interview
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L180-L182)).
+  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## grilling
 
@@ -41,22 +47,22 @@ For you: stress-test a plan in rounds of questions, each with a recommended answ
 Fixes: The agent acted on assumptions it never checked with me.
 Origin: seen here
 
-Given a plan, the agent starts on it while questions such as rollback or
-ordering were never asked. grilling maps the open decisions as a tree and asks
-every question that is ready, each with its recommended answer, round after
-round until none are left. The README records the failure together with
-brainstorm
-([Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L177-L179)).
+The README gives this together with brainstorm, as the maintainer's account:
+the agent guessed instead of asking
+([Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L177-L179)).
+grilling maps the open decisions as a tree and asks every question that is
+ready, each with its recommended answer, round after round until none are
+left.
 
 Rules with a recorded reason:
 
-- Each question is worded so "yes" accepts the recommendation. Upstream,
-  users had to answer "No, but I agree with the recommendation"
+- Each question is worded so "yes" accepts the recommendation. Upstream, a
+  user who agreed with the recommendation still had to answer "no"
   ([skills#706](https://github.com/mattpocock/skills/issues/706)).
 - Facts are the agent's to look up; decisions are yours. Upstream, a grilling
   agent run inside another skill read "explore instead of asking" as licence
   to answer the decisions itself
-  ([changelog](https://github.com/mattpocock/skills/blob/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d/CHANGELOG.md#L275)).
+  ([changelog](https://github.com/mattpocock/skills/blob/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d/CHANGELOG.md?plain=1#L275)).
 
 ## research
 
@@ -65,16 +71,15 @@ For you: answer a question from primary sources, cited and dated.
 Fixes: The agent answered from memory or a blog post and gave no source I could check.
 Origin: inherited
 
-Adapted from Matt Pocock's `research` and pstack's `how` and `why`. Neither
-this repo nor those sources record a case of this going wrong; the skill
-carries their method (go to the owner of each fact, cite beside the claim,
-report searches that found nothing) without a logged failure behind it.
+Adapted from Matt Pocock's `research` and pstack's `how` and `why`. No
+recorded failure was found; the skill carries their method: go to the owner
+of each fact, cite beside the claim, report searches that found nothing.
 
 ## prototype
 
 Stage: Think
 For you: build a throwaway to answer one design question.
-Fixes: A design question was argued in chat for an hour, or a quick spike ended up in production.
+Fixes: A design question was argued in chat for an hour, or throwaway code ended up in production.
 Origin: inherited
 
 Adapted from Matt Pocock's `prototype` and pstack's prototype playbook. No
@@ -87,7 +92,7 @@ For you: turn a design into small tasks with exact files, interfaces and tests.
 Fixes: The plan grew into thousands of lines of code and took hours, and nothing got built.
 Origin: upstream
 
-In two Superpowers field reports, a 1,894-line spec became a 19,393-line plan,
+In one of two Superpowers field reports, a 1,894-line spec became a 19,393-line plan,
 13,259 lines of it Go code, after more than five hours with no program written
 ([superpowers#2333](https://github.com/obra/superpowers/pull/2333)). This skill
 has the plan record only decisions: files, signatures, test names and
@@ -98,7 +103,7 @@ Rules with a recorded reason:
 - When you asked for the work itself, it continues into implement instead of
   stopping for a plan review
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L180-L182)).
+  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## to-issues
 
@@ -115,7 +120,7 @@ Rules with a recorded reason:
 - It publishes without waiting for approval of the list; asking for issues is
   the go-ahead
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L180-L182)).
+  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## architecture-design
 
@@ -132,7 +137,7 @@ Rules with a recorded reason:
 - It settles design choices itself and states each with its reason, instead
   of asking before every choice
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L180-L182)).
+  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## implement
 
@@ -141,8 +146,10 @@ For you: execute a plan or tickets to the end, yourself or with subagents.
 Fixes: The agent stopped after every step to ask whether it should go on.
 Origin: seen here
 
-"Should I do X?" after each task costs more than an occasional wrong call
-([README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L180-L182)).
+The maintainer's account in the
+[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182):
+"Should I do X?" after every step wastes more time than an occasional wrong
+call.
 implement keeps going between tasks and stops only for a plan that
 contradicts itself, an irreversible step, or three failures on one task. At
 the end it lists the calls it made.
@@ -150,17 +157,17 @@ the end it lists the calls it made.
 Rules with a recorded reason:
 
 - A task's review-and-fix loop stops after three rounds. Upstream, Claude Code
-  cut a long skill file after compaction, the round limit was lost, and one
-  task ran 18 fix rounds
+  cut a long skill file when it summarised the session to save space
+  (compaction), the round limit was lost, and one task ran 18 fix rounds
   ([superpowers#2481](https://github.com/obra/superpowers/issues/2481)).
   [c47e190](https://github.com/amagdy46/agent-config/commit/c47e190) makes the
   validator fail any `SKILL.md` of 20,000 bytes or more for the same reason.
 - When you name a ticket, it fetches it and states its title before starting.
   Upstream, `/implement #N` in a fresh session silently worked on the wrong item
   ([skills#700](https://github.com/mattpocock/skills/issues/700)).
-- Each subagent starts with a fresh context, never a fork of the session.
-  Upstream: some harnesses fork by default, which hands the subagent the
-  cluttered context it exists to avoid
+- Each helper agent starts with a fresh context, never a copy of the whole
+  conversation. Upstream: some agent tools copy it by default, which hands
+  the helper the clutter it exists to avoid
   ([skills#1341](https://github.com/mattpocock/skills/pull/1341)).
 
 ## orchestrate
@@ -173,7 +180,7 @@ Origin: seen here
 [1cd7279](https://github.com/amagdy46/agent-config/commit/1cd7279) records
 it: "A long orchestrator session kept needing the same reminders: keep agents
 busy, update the tracker, which model does what, continue after stalls."
-orchestrate keeps those orders in `preferences.md`, which it reads at the
+orchestrate keeps those orders in a standing-orders file it reads at the
 start of every session and after every compaction, so you say them once.
 
 Rules with a recorded reason:
@@ -188,13 +195,13 @@ For you: build each behaviour test-first: watch the test fail, then make it pass
 Fixes: The tests passed, but they would have passed even if the code were wrong.
 Origin: upstream
 
-Two upstream reports. An agent counted a compile error ("no method named
+Upstream, an agent counted a compile error ("no method named
 `drain_settled`") as its failing test, so the bug it was meant to reproduce
-never was ([skills#1210](https://github.com/mattpocock/skills/issues/1210)). A
+never was ([skills#1210](https://github.com/mattpocock/skills/issues/1210)), and a
 test whose setup never created the condition it claimed to test stayed green
 after the whole implementation was deleted
 ([superpowers#2092](https://github.com/obra/superpowers/issues/2092)). The
-skill says a syntax, fixture or setup error is not a failing test, and judges
+skill says a syntax or test-setup error is not a failing test, and judges
 each test by whether breaking the behaviour turns it red.
 
 Rules with a recorded reason:
@@ -218,10 +225,9 @@ For you: reproduce, isolate and fix the root cause.
 Fixes: The fix made the error go away but left the bug in place.
 Origin: seen here
 
-A symptom fix is a retry, a null check or a caught exception that hides
-where things first went wrong
-([README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L186-L187)).
-The skill first builds a command that reproduces the bug, then tests ranked
+The maintainer's account in the
+[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L186-L187):
+fixes treated the symptom. The skill first builds a command that reproduces the bug, then tests ranked
 hypotheses, and fixes the first place the system went wrong. It names
 guards, retries, swallowed errors and clamps as ways to hide a bug.
 
@@ -250,16 +256,16 @@ For you: prove a claim before saying "done".
 Fixes: The agent said "done" when it meant "I think it's done".
 Origin: seen here
 
-The agent edits code, writes "Fixed!", and has not run the tests or the
-feature
-([README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L183-L185)).
-The skill blocks any success claim without fresh output from this turn:
+The maintainer's account in the
+[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L183-L185):
+"done" meant "I think it's done". The skill blocks any success claim without fresh output from this turn:
 name the claim, run the command that proves it, read the result, and claim
 only what it shows.
 
 Rules with a recorded reason:
 
-- If the project has a `verify-*` skill, use it to drive the real app, so
+- If the project has a `verify-*` skill (its recipe for running the real
+  app), use it, so
   verification has a concrete source of proof
   ([9ec9452](https://github.com/amagdy46/agent-config/commit/9ec9452),
   [5087090](https://github.com/amagdy46/agent-config/commit/5087090)).
@@ -283,11 +289,12 @@ For you: review a change and trace what it could break beyond its own diff.
 Fixes: A change looked fine in its diff and broke something elsewhere.
 Origin: seen here
 
-The breaks grep misses: a renamed field another service reads, a changed
-default, a job that runs later
-([README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L183-L185)).
-The skill follows the change across those boundaries and has to prove the
-one or two facts it is safe because of, ideally by running code.
+The maintainer's account in the
+[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L183-L185)
+is one clause: a change can break things beyond its own diff. The skill
+follows the change to where a text search does not reach (a renamed field
+another service reads, a changed default, a job that runs later) and has to
+prove the one or two facts it is safe because of, ideally by running code.
 
 Rules with a recorded reason:
 
@@ -306,14 +313,15 @@ Origin: upstream
 
 Superpowers' `finishing-a-development-branch`, one of this skill's sources,
 already said uncommitted files exist nowhere else. In 24 of 24 test runs the
-agent deleted them anyway so it could remove the worktree
+agent deleted them anyway so it could remove the worktree, a second working
+copy of the repository
 ([superpowers#2706](https://github.com/obra/superpowers/issues/2706)), and
 another user had merges land on shared remote branches
 ([superpowers#2219](https://github.com/obra/superpowers/issues/2219)). This
 skill needs the branch, commits and worktree named and confirmed before
-anything is discarded, and never force-removes a worktree. The upstream case
-shows a written rule was not enough there; nobody has tested yet whether this
-wording does better.
+anything is discarded, and never force-removes a worktree; the upstream case
+shows a written rule was not enough there, and nobody has tested yet whether
+this wording does better.
 
 ## explain-codebase
 
@@ -332,8 +340,8 @@ For you: get the last answer again in plain words.
 Fixes: The agent's answer was so dense with jargon that I couldn't follow it.
 Origin: upstream
 
-Matt Pocock added it as a "verbosity fire extinguisher" after users reported
-models that stayed verbose even with a 400-line concision skill installed
+Matt Pocock added it as a "verbosity fire extinguisher" after a user reported
+a model that stayed verbose even with a 400-line concision skill installed
 ([skills#751](https://github.com/mattpocock/skills/pull/751)). This repo has
 no record of its own.
 
@@ -360,10 +368,11 @@ For you: turn a session's lessons into edits to skills, `AGENTS.md` or enforceme
 Fixes: The agent made the same mistake every session.
 Origin: seen here
 
-A correction you gave on Monday is gone by Tuesday
-([README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L188-L190)).
-reflect reads the session's transcript and turns each lasting lesson into
-one small commit to a skill, an `AGENTS.md` or a check that enforces it.
+The maintainer's account in the
+[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L188-L190):
+the same mistake, every session. reflect reads the session's transcript and
+turns each lasting lesson into one small edit to a skill, an `AGENTS.md` or a
+check that enforces it.
 
 Rules with a recorded reason:
 
@@ -376,7 +385,7 @@ Rules with a recorded reason:
 - It applies the edits, then shows them with an offer to revert, instead of
   waiting for you to pick rows
   ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md#L180-L182)).
+  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## technical-documentation
 
