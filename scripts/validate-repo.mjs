@@ -130,6 +130,30 @@ if (!existsSync(failuresFile)) {
   for (const problem of problems) errors.push(`FAILURES.md: ${problem}`);
 }
 
+// Plugin manifests: one per host, plus the marketplace. A release bumps the
+// version in each; one left behind keeps that host's users on a stale cache.
+const manifests = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".cursor-plugin/plugin.json"];
+const found = [];
+for (const path of [...manifests, ".claude-plugin/marketplace.json"]) {
+  if (!existsSync(join(root, path))) continue;
+  try {
+    const json = JSON.parse(await readFile(join(root, path), "utf8"));
+    if (path.endsWith("marketplace.json")) {
+      for (const entry of json.plugins ?? []) if (entry.source === "./") found.push({ path, name: entry.name, version: entry.version });
+    } else found.push({ path, name: json.name, version: json.version });
+  } catch (error) {
+    errors.push(`${path}: not valid JSON (${error.message}). Fix the syntax`);
+  }
+}
+for (const field of ["name", "version"]) {
+  const [first, ...rest] = found.filter((m) => m[field] !== undefined);
+  for (const m of rest) {
+    if (m[field] !== first[field]) {
+      errors.push(`${m.path}: ${field} is "${m[field]}" but ${first.path} has "${first[field]}". Set the same ${field} in every plugin manifest`);
+    }
+  }
+}
+
 if (startupTotal > STARTUP_MAX_BYTES) {
   errors.push(`skills/: names and descriptions total ${startupTotal} bytes, loaded by every agent at session start (budget ${STARTUP_MAX_BYTES}). Trim a description, or raise STARTUP_MAX_BYTES in scripts/validate-repo.mjs in a commit that says why`);
 }
