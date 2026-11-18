@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { frontmatterOf, parseFailures, startupBytes } from "./lib/skills.mjs";
 
 // Limits. CONTRIBUTING.md and AGENTS.md quote these numbers; a test fails if they differ.
-const DESCRIPTION_WARN_CHARS = 300; // house style
+const DESCRIPTION_WARN_CHARS = 220; // house style
 const DESCRIPTION_MAX_CHARS = 1024; // Agent Skills specification
 const SKILL_WARN_LINES = 100; // house style
 const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation

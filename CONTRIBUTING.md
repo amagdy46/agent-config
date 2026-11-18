@@ -17,7 +17,7 @@ surface, so the bar for adding text is higher than the bar for removing it.
 
 - `skills/<name>/SKILL.md`, `name` equal to the folder name.
 - The description front-loads the trigger: what the skill does, then the
-  phrases or situations that should fire it. Keep it to 300 characters or
+  phrases or situations that should fire it. Keep it to 220 characters or
   fewer; the validator warns above that and fails above 1,024.
 - Keep `SKILL.md` to 100 lines or fewer (the validator warns above that), and
   always under 20,000 bytes: Claude Code re-attaches a skill cut at that size
