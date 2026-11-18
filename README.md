@@ -9,7 +9,7 @@
 
 <p align="center">
 <a href="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 1,417 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C417%20tokens-0F5E63"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 1,079 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C079%20tokens-0F5E63"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
