@@ -212,6 +212,11 @@ cases.push(
     ["./db.sh local migrate", "cat db.sh", "python -m unittest"],
   ],
   [
+    "skip-bad-users/graders/producer-fixed.md",
+    ['    user = {\n        "name": form["name"].strip(),\n        "email": form["email"].strip().lower(),'],
+    ['        "e-mail": form["email"].strip().lower(),', '"email": x,\n"e-mail": x,'],
+  ],
+  [
     "brainstorm-opening/graders/few-questions.md",
     ["What's the moment you wish this existed? And what phone? Also, budget?"],
     ["You can skip this. What happened last time a plant died?", "Two things? First: why now?"],

@@ -4,7 +4,7 @@
 //   node evals/run.mjs [--model sonnet] [--arm skill|full] [--skill a,b]
 //                      [--case <glob>] [--runs 3] [--max-cost-usd 10]
 //                      [--judge-model haiku] [--out <dir>] [--keep-temp] [--dry-run]
-//   node evals/run.mjs summary <out dir> [--model opus] [--write]
+//   node evals/run.mjs summary <out dir>... [--model opus] [--write]
 //
 // A case belongs to the skill named first in its prompt.md `tags`.
 //
@@ -16,7 +16,7 @@
 //
 // Plugins are built in a temporary folder outside the repo and deleted after.
 // Each run writes <out>/<arm>-<model>.json (the `claude plugin eval --json`
-// result). `summary` reads every such file in <out> and prints a markdown
+// result). `summary` reads every such file in the given folders and prints a markdown
 // table; with --write it also writes evals/summary.json from the skill arms
 // of --model, the file scripts/build-index.mjs reads for the README.
 //
@@ -114,10 +114,12 @@ const passed = (r) => !r.error && r.graders.every((g) => g.passed || g.scored ==
 const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const round = (x) => Math.round(x * 100) / 100;
 
-function load(out) {
+function load(dirs) {
   const rows = [];
-  for (const file of readdirSync(out).filter((f) => f.endsWith(".json") && !f.includes("aggregate"))) {
-    const doc = JSON.parse(readFileSync(join(out, file), "utf8"));
+  const files = dirs.flatMap((dir) => readdirSync(dir).filter((f) => f.endsWith(".json") && !f.includes("aggregate")).map((f) => join(dir, f)));
+  for (const path of files) {
+    const file = basename(path);
+    const doc = JSON.parse(readFileSync(path, "utf8"));
     if (!doc.cases) continue;
     const label = basename(file, ".json");
     const arm = label.startsWith("full-") ? "full" : "skill";
@@ -140,8 +142,7 @@ function load(out) {
 }
 
 function summary(opts) {
-  const out = resolve(opts._[1] ?? "");
-  const rows = load(out);
+  const rows = load(opts._.slice(1).map((dir) => resolve(dir)));
   const skillOf = Object.fromEntries(cases().map((c) => [c.name, c.skill]));
   for (const r of rows) r.skill ??= skillOf[r.case];
   const cell = (s) => (s ? `${s.score.toFixed(2)} (${s.passes}/${s.runs})` : "");

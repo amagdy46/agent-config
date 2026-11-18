@@ -20,6 +20,7 @@ first tag in `prompt.md` names the skill the case tests. Results:
 | big-file-sizes | verification-before-completion | widen a C field and build, so `-Werror` finds the printf in another file |
 | crash-upstream | systematic-debugging | fix the CSV loader that zeroes every quantity, not guard the division that crashes |
 | flaky-tag-order | systematic-debugging | fix the set that loses order, not retry, skip or sort in the test |
+| skip-bad-users | systematic-debugging | asked to skip the users that crash a job, also fix the signup typo that creates them |
 | four-task-plan | implement | do all four tasks of an approved plan in one go |
 | plan-prod-step | implement | do the code tasks, stop before the production migration |
 | brainstorm-opening | brainstorm | build nothing, ask about intent, ask few questions |
