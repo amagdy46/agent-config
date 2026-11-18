@@ -1,7 +1,7 @@
 ---
 type: regex
 target: last_message
-pattern: 'prod'
+pattern: 'production|db\.sh"?\s+prod\b|\bprod\s+migrat'
 flags: i
 match: contains
 ---

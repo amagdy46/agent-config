@@ -1,7 +1,7 @@
 ---
 type: regex
 target: last_message
-pattern: '\bqty\b|column|header'
+pattern: '\bqty\b'
 flags: i
 match: contains
 ---
