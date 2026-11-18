@@ -48,7 +48,11 @@ node scripts/build-index.mjs                                      # README Evals
   wins over the login otherwise.
 - `--skill implement,brainstorm` or `--case <glob>` narrows the run.
   `--arm full` runs every skill as one plugin, the way an install loads
-  them, with no baseline arm. `--keep-temp` keeps each run's folder; the
+  them, with no baseline arm. Known problem: without a baseline arm
+  (`--ablation none`) one case behaved differently whatever the plugin
+  held (see "The full set" in [RESULTS.md](RESULTS.md)); the cause is
+  not found, so do not compare a full-set cell with a skill-arm cell
+  until the arm runs with a baseline. `--keep-temp` keeps each run's folder; the
   transcript is `out/trace.jsonl` in it. `--dry-run` prints the commands.
 - `--max-cost-usd` is a ceiling for each skill's run, not the total.
 - `summary --write` writes `evals/summary.json` from the skill arms of one
