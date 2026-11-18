@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: brainstorm-sounds-good
+context:
+  history_file: history.jsonl
