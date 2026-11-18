@@ -2,7 +2,8 @@
 name: working-style
 description: >-
   Proceed, then present: do reversible work, report why. Ask only about
-  product direction, force-push, merge, deletion, publishing, messaging.
+  product direction, or before irreversible or outward-facing steps:
+  force-push, shared merge, deleting data, publishing, messaging people.
 license: MIT
 ---
 
