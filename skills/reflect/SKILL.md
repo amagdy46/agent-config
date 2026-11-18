@@ -68,15 +68,18 @@ Route each kept finding to the cheapest home that makes it stick:
 | A standing preference of the user | the global instructions file |
 | None of the above, and it recurs | a new skill, rarely |
 
-Skill files are symlinks into the user's skills repository; resolve the real
-path and edit there. Apply the bar in that repository's `CONTRIBUTING.md`.
+Before editing a skill, run `git -C <its real folder> rev-parse --show-prefix`.
+`skills/<name>/` means a clone the user owns: edit there, under its
+`CONTRIBUTING.md`. Anything else is an installed copy an update overwrites:
+put the correction in the global instructions file as a rule naming the
+skill, and offer upstream issue or pull request text; never file it unasked.
 
 ## 4. Apply, then present
 
-Apply each kept finding as the smallest edit, run the skills repository's
-validator, and commit there with a message naming the lessons, one commit
-per lesson so any of them can be reverted alone. Push only when asked. Ask
-first only when a finding turns on a preference the user has not stated.
+Apply each kept finding as the smallest edit. In a git repository, run its
+validator if any and commit there, one commit per lesson so each can be
+reverted alone. Push only when asked. Ask first only when a finding turns on
+a preference the user has not stated.
 
 Then show one table, `Problem | Edit | Home | Commit`, plus the rejected
 findings with a one-word reason and the backlog, and offer to revert any row.
