@@ -1,7 +1,6 @@
 ---
 name: wait-what
-description: >-
-  Re-pitch your last message when it did not land. Use when the user is confused by your previous answer: "wait, what", "explain that normally", "I don't get it", "in plain English". One turn; no research.
+description: Re-pitch your last message when it did not land. Use for "wait, what", "I don't get it", "explain that normally", "in plain English". One turn; no research.
 license: MIT
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: technical-documentation
-description: "Write or revise source-grounded docs: READMEs, tutorials, how-to guides, references, explanations, design docs, and user guides or SOPs for non-technical operators. Use when documentation must be accurate, scannable, and verified against the current system."
+description: >-
+  Write or revise docs checked against the code: READMEs, how-to guides, references, step-by-step guides for non-technical users. Use for "write a README", "document this".
 license: MIT
 ---
 

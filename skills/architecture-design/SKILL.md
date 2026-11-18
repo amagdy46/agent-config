@@ -1,6 +1,6 @@
 ---
 name: architecture-design
-description: Design or reshape a module, interface, seam, or subsystem before coding, or restructure existing code without changing behavior. Use for "design this", "architect", "refactor", "restructure", extract/move/rename/dedupe, or unclear ownership; skip routine edits that fit an established shape.
+description: Settle module boundaries, interfaces and ownership before coding, or restructure code without changing behavior. Use for "design this", "refactor", "restructure", "how should we split X".
 license: MIT
 ---
 

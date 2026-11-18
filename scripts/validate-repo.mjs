@@ -19,7 +19,7 @@ const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills af
 const NAME_MAX_CHARS = 64; // Agent Skills specification
 // Bytes of every name and description, which agents load at session start.
 // Set a little above the measured total; raise it only in a commit that says why.
-const STARTUP_MAX_BYTES = 5700;
+const STARTUP_MAX_BYTES = 4400;
 
 // The repository root is the first argument, or this script's parent folder.
 const root = resolve(process.argv[2] ?? join(dirname(fileURLToPath(import.meta.url)), ".."));

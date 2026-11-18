@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Stress-test a plan, decision or idea through rounds of pointed questions, each with a recommended answer. Use for "grill me", "poke holes in this", "challenge my plan", or when a design must converge on decisions.
+description: Stress-test a plan or decision with pointed questions, one at a time, each with a recommended answer. Use for "grill me", "poke holes in this", "challenge my plan".
 license: MIT
 ---
 

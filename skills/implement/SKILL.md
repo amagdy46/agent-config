@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Execute an approved plan or set of issues to completion, task by task, with tests, verification and review. Use for "implement this", "build the plan", "work the issues", "start on ticket X".
+description: Carry an approved plan or issues to done, task by task, with tests and review. Use for "implement this", "build the plan", "work the issues", "start on ticket X".
 license: MIT
 ---
 

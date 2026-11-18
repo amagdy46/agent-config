@@ -1,6 +1,6 @@
 ---
 name: orchestrate
-description: Run a long session as the coordinator of implementer and reviewer agents working tickets in parallel worktrees, under the user's standing orders. Use for "orchestrate", "run the factory", "work the backlog", "keep agents busy", or any session that dispatches many implementers.
+description: Coordinate implementer and reviewer agents on tickets in parallel worktrees. Use for "orchestrate", "run the factory", "work the backlog", "keep agents busy".
 license: MIT
 ---
 
