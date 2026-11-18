@@ -182,18 +182,14 @@ const badge =
 
 // The short eval table near the top: one row per evaluated skill.
 const evaluated = entries.filter((entry) => entry.eval);
-const points = (delta) => {
-  const n = Math.round(delta * 100);
-  return n > 0 ? `+${n}` : String(n);
-};
 const evalsTable = evaluated.length
   ? [
-      line(["Skill", "With the skill", "Without", "Gap"]),
-      line(["---", "--:", "--:", "--:"]),
-      ...evaluated.map((entry) => line([`[${entry.name}](${entry.path})`, percent(entry.eval.with), percent(entry.eval.without), points(entry.eval.delta)])),
+      line(["Skill", "With the skill", "Without"]),
+      line(["---", "--:", "--:"]),
+      ...evaluated.map((entry) => line([`[${entry.name}](${entry.path})`, percent(entry.eval.with), percent(entry.eval.without)])),
       "",
       `Share of runs in which every check passed${from || runs ? ` (${[from, runs.slice(2)].filter(Boolean).join(", ")})` : ""}.` +
-        ` With so few runs, read a gap under 20 points as noise.`,
+        ` With so few runs, read a difference under 20 points as noise.`,
     ].join("\n")
   : "No eval results yet.";
 

@@ -188,10 +188,10 @@ test("an eval summary fills the short eval table, one row per evaluated skill", 
   assert.ok(
     readme.includes(
       `${EVALS_START}\n` +
-        "| Skill | With the skill | Without | Gap |\n| --- | --: | --: | --: |\n" +
-        "| [beta](skills/beta/SKILL.md) | 100% | 50% | +50 |\n" +
-        "| [alpha](skills/alpha/SKILL.md) | 81% | 86% | -5 |\n\n" +
-        "Share of runs in which every check passed (on m, run 2026-11-18, 3 runs per case and arm). With so few runs, read a gap under 20 points as noise.\n" +
+        "| Skill | With the skill | Without |\n| --- | --: | --: |\n" +
+        "| [beta](skills/beta/SKILL.md) | 100% | 50% |\n" +
+        "| [alpha](skills/alpha/SKILL.md) | 81% | 86% |\n\n" +
+        "Share of runs in which every check passed (on m, run 2026-11-18, 3 runs per case and arm). With so few runs, read a difference under 20 points as noise.\n" +
         "<!-- evals-table:end -->",
     ),
     readme,
