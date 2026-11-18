@@ -17,7 +17,8 @@ const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation
 const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills after compaction
 const NAME_MAX_CHARS = 64; // Agent Skills specification
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+// The repository root is the first argument, or this script's parent folder.
+const root = resolve(process.argv[2] ?? join(dirname(fileURLToPath(import.meta.url)), ".."));
 const skillsRoot = join(root, "skills");
 const allowedKeys = ["name", "description", "license", "compatibility", "metadata", "allowed-tools"];
 const errors = [];
@@ -73,6 +74,11 @@ async function markdownFiles(dir) {
     else if (entry.name.endsWith(".md")) out.push(path);
   }
   return out;
+}
+
+if (!existsSync(skillsRoot)) {
+  console.error(`error: ${skillsRoot}: not found. Pass the repository root as the first argument, or omit it to check this checkout.`);
+  process.exit(1);
 }
 
 for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
