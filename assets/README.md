@@ -17,7 +17,7 @@ All text in these files is converted to outlines, so they need no fonts and no l
 |---|---|
 | `wordmark-light.svg`, `wordmark-dark.svg` | top of the README (360 px wide) |
 | `mark.svg`, `mark-dark.svg` | the mark on light or dark pages, 24 px and up |
-| `mark-16.svg` | the pixel-drawn cut for 16 to 24 px |
+| `mark-16.svg`, `mark-16-dark.svg` | the pixel-drawn cut for 16 to 24 px, light or dark pages |
 | `mark-mono.svg` | one colour; takes `currentColor` when inlined |
 | `logo.png`, `logo-dark.png` | 512 px, transparent: plugin manifests (`logo`, `logoDark`) |
 | `social-preview.png` (source `.svg`) | 1280x640 social preview, uploaded in repository settings |
@@ -25,6 +25,12 @@ All text in these files is converted to outlines, so they need no fonts and no l
 
 Clear space: one nuqta's width around the mark, the height of the "m" around the wordmark.
 
-To swap the mark, replace the four `mark*.svg` files, paste the new paths into
-the first `<g>` of each wordmark and of `social-preview.svg`, then re-render the
-PNGs: `rsvg-convert -w 512 -h 512 mark.svg -o logo.png`. Keep the file names.
+To swap the mark, replace the six `mark*.svg` files, paste the new paths into
+the mark's `<g>` in each wordmark and in `social-preview.svg` (the group that
+holds the nuqta and the stroke), then re-render the PNGs. Keep the file names.
+
+```sh
+rsvg-convert -w 512 -h 512 mark.svg -o logo.png
+rsvg-convert -w 512 -h 512 mark-dark.svg -o logo-dark.png
+rsvg-convert -w 1280 -h 640 social-preview.svg -o social-preview.png
+```
