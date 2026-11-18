@@ -30,8 +30,8 @@ env -u ANTHROPIC_API_KEY claude plugin eval . --no-publish --trust-plugin \
 - A no-plugin baseline arm runs by default, so every run doubles. Add
   `--ablation none` to skip it, `--case <name>` or `--tag ask` to narrow.
 - Results go to `evals/results/<timestamp>/` (git-ignored).
-- Cost: the full suite, 3 runs per case, with the baseline arm, cost about
-  $4 on Sonnet and about $1 on Haiku in November 2026.
+- Cost, measured November 2026, full suite with the baseline arm: about $4
+  on Sonnet and $0.30 on Haiku at 3 runs per case, $5.70 on Opus at 2.
 
 ## Writing graders here
 
