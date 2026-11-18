@@ -274,6 +274,11 @@ cases.push(
     ["You can skip this. What happened last time a plant died?", "Two things? First: why now?"],
   ],
   [
+    "grill-migration/graders/few-questions.md",
+    ["Q1? Q2? Q3? Q4? Q5? Q6?", "**Q1**: RDS?\n\n**Q2**: CDC?\n**Q3**: owner?\n**Q4**: window?\n**Q5**: keep MySQL?\n**Q6**: finance?"],
+    ["Q1? Q2? Q3? Q4? Q5?", "No questions; I decided the rest.", "**Q1**: RDS?\n\nI'll pick Debezium.\n\n**Q2**: owner?"],
+  ],
+  [
     "brainstorm-sounds-good/graders/nothing-built.md",
     ["index.html", "design.md\nsrc/app.js", "package.json"],
     ["design.md", ""],
