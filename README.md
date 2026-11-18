@@ -156,6 +156,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 |  | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown, each naming what blocks it | 274 |
 |  | [architecture-design](skills/architecture-design/SKILL.md) | design module boundaries, and refactor without changing behaviour | 310 |
 | Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets to the end, yourself or with subagents | 200 |
+|  | [working-style](skills/working-style/SKILL.md) | let the agent decide and do reversible work, and ask you only before steps it cannot undo | 153 |
 |  | [orchestrate](skills/orchestrate/SKILL.md) | coordinate many implementer and reviewer agents under your standing orders | 288 |
 |  | [test-driven-development](skills/test-driven-development/SKILL.md) | build each behaviour test-first: watch the test fail, then make it pass | 208 |
 |  | [systematic-debugging](skills/systematic-debugging/SKILL.md) | reproduce, isolate and fix the root cause | 233 |
@@ -172,7 +173,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 |  | [unslop](skills/unslop/SKILL.md) | strip AI tells from prose | 253 |
 <!-- skills-table:end -->
 
-At session start an agent loads only each skill's name and description: 22 skills, 5,446 bytes, about 1,362 tokens. <!-- startup-cost -->
+At session start an agent loads only each skill's name and description: 23 skills, 5,599 bytes, about 1,400 tokens. <!-- startup-cost -->
 
 ## Why these skills
 
