@@ -52,7 +52,12 @@ node scripts/build-index.mjs                                      # README Evals
 - `--max-cost-usd` is a ceiling for each skill's run, not the total.
 - `summary --write` writes `evals/summary.json` from the skill arms of one
   model. `with` and `without` are the share of runs in which every scored
-  grader passed, averaged over the skill's cases.
+  grader passed, averaged over the skill's cases; `runs` is the number of
+  runs per arm, summed over those cases. A case found in more than one
+  folder counts once, from the last folder named, so a rerun of some cases
+  goes after the full run: `summary <full run> <rerun>`.
+- The README column shows `with / without` as percentages, from
+  `summary.json`, with one sentence under the table saying what they are.
 - Reports are never published (`--no-publish` is built in).
 
 Cost, measured 2026-11-18, whole suite (16 cases), skill arm with its

@@ -15,10 +15,11 @@
 //
 // evals/summary.json, written by the eval runner. A missing file, or a skill
 // missing from "skills", means that skill was not evaluated. "with" and
-// "without" are pass rates from 0 to 1 with and without the skill loaded:
+// "without" are pass rates from 0 to 1 with and without the skill loaded;
+// "runs", optional, is the number of runs per arm, summed over the cases:
 //
 //   { "generated": "2026-11-18", "model": "<model the numbers are from>",
-//     "skills": { "brainstorm": { "cases": 3, "with": 0.89, "without": 0.44, "delta": 0.45 } } }
+//     "skills": { "brainstorm": { "cases": 3, "runs": 9, "with": 0.89, "without": 0.44, "delta": 0.45 } } }
 
 import { existsSync } from "node:fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
@@ -103,6 +104,7 @@ if (existsSync(summaryFile)) {
   for (const [name, result] of Object.entries(summary?.skills ?? {})) {
     const numbers = ["cases", "with", "without", "delta"].every((key) => typeof result?.[key] === "number");
     if (!numbers) problems.push(`evals/summary.json: "${name}" needs numeric cases, with, without and delta. See the format at the top of scripts/build-index.mjs`);
+    else if (result.runs !== undefined && !(Number.isInteger(result.runs) && result.runs > 0)) problems.push(`evals/summary.json: "${name}" has runs ${JSON.stringify(result.runs)}; it must be a whole number above 0, or left out`);
     else if (!folders.includes(name)) problems.push(`evals/summary.json: "${name}" is not a skill in skills/. Remove it or rerun the evals`);
   }
 }
@@ -128,7 +130,9 @@ const entries = names.map((name) => {
     origin,
     bytes,
     startupBytes: startupBytes(name, description),
-    eval: result ? { cases: result.cases, with: result.with, without: result.without, delta: result.delta } : null,
+    eval: result
+      ? { cases: result.cases, ...(result.runs === undefined ? {} : { runs: result.runs }), with: result.with, without: result.without, delta: result.delta }
+      : null,
   };
 });
 const total = entries.reduce((sum, entry) => sum + entry.startupBytes, 0);
@@ -142,18 +146,30 @@ const index = {
 const json = JSON.stringify(index, null, 2) + "\n";
 
 // README: the skills table and the startup-cost line.
-const header = ["Stage", "Skill", "For you", "Startup bytes", ...(summary ? ["Eval gain"] : [])];
+const header = ["Stage", "Skill", "For you", "Startup bytes", ...(summary ? ["Evals: with / without"] : [])];
+const percent = (rate) => `${Math.round(rate * 100)}%`;
 const rows = entries.map((entry, i) => {
   const stage = i === 0 || entries[i - 1].stage !== entry.stage ? entry.stage : "";
   const row = [stage, `[${entry.name}](${entry.path})`, cell(entry.forYou.replace(/\.$/, "")), String(entry.startupBytes)];
   if (summary) {
     const e = entry.eval;
-    row.push(e ? `${e.delta >= 0 ? "+" : ""}${e.delta.toFixed(2)} (${e.cases} cases)` : "not run");
+    row.push(e ? `${percent(e.with)} / ${percent(e.without)}` : "-");
   }
   return row;
 });
 const line = (cells) => `| ${cells.join(" | ")} |`;
-const table = [line(header), line(header.map((_, i) => (i >= 3 ? "--:" : "---"))), ...rows.map(line)].join("\n");
+let table = [line(header), line(header.map((_, i) => (i >= 3 ? "--:" : "---"))), ...rows.map(line)].join("\n");
+if (summary) {
+  // Runs per case, when every evaluated skill says it and they agree.
+  const perCase = new Set(entries.filter((entry) => entry.eval).map((entry) => (entry.eval.runs ?? NaN) / entry.eval.cases));
+  const [only] = perCase;
+  const runs = perCase.size === 1 && Number.isInteger(only) ? `, ${only} runs per case and arm` : "";
+  const from = [summary.model && `on ${summary.model}`, summary.generated && `run ${summary.generated}`].filter(Boolean).join(", ");
+  table +=
+    `\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded` +
+    `${from ? ` (${from}${runs})` : runs ? ` (${runs.slice(2)})` : ""}; \`-\` means the skill has no cases.` +
+    ` The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).`;
+}
 const sentence = `At session start an agent loads only each skill's name and description: ${entries.length} skills, ${thousands(total)} bytes, about ${thousands(tokens)} tokens.`;
 
 const readmeFile = join(root, "README.md");

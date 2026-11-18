@@ -21,6 +21,7 @@
       "startupBytes": 272,
       "eval": {
         "cases": 2,
+        "runs": 6,
         "with": 1,
         "without": 0.5,
         "delta": 0.5
@@ -110,6 +111,7 @@
       "startupBytes": 200,
       "eval": {
         "cases": 2,
+        "runs": 6,
         "with": 0.83,
         "without": 1,
         "delta": -0.17
@@ -127,6 +129,7 @@
       "startupBytes": 220,
       "eval": {
         "cases": 7,
+        "runs": 21,
         "with": 0.81,
         "without": 0.86,
         "delta": -0.05
@@ -168,6 +171,7 @@
       "startupBytes": 233,
       "eval": {
         "cases": 3,
+        "runs": 9,
         "with": 1,
         "without": 1,
         "delta": 0
@@ -197,6 +201,7 @@
       "startupBytes": 210,
       "eval": {
         "cases": 2,
+        "runs": 6,
         "with": 1,
         "without": 1,
         "delta": 0

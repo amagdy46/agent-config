@@ -115,8 +115,8 @@ test("a skill with no FAILURES.md section fails with a fix, and writes nothing",
   assert.equal(read(root, "README.md"), README);
 });
 
-test("an eval summary adds a column; a skill missing from it shows not run", () => {
-  const summary = { generated: "2026-11-18", model: "m", skills: { alpha: { cases: 3, with: 0.89, without: 0.44, delta: 0.45 } } };
+test("an eval summary adds a with / without column and a sentence under the table", () => {
+  const summary = { generated: "2026-11-18", model: "m", skills: { alpha: { cases: 3, runs: 9, with: 0.89, without: 0.44, delta: 0.45 } } };
   const root = repo({ summary });
   assert.equal(build(root).status, 0);
   const index = JSON.parse(read(root, "skills.json"));
@@ -124,9 +124,31 @@ test("an eval summary adds a column; a skill missing from it shows not run", () 
   assert.deepEqual(index.skills[1].eval, summary.skills.alpha);
   assert.equal(index.skills[0].eval, null);
   const readme = read(root, "README.md");
-  assert.match(readme, /\| Stage \| Skill \| For you \| Startup bytes \| Eval gain \|\n\| --- \| --- \| --- \| --: \| --: \|/);
-  assert.match(readme, /\| \[alpha\]\(skills\/alpha\/SKILL\.md\) \| use alpha \| 14 \| \+0\.45 \(3 cases\) \|/);
-  assert.match(readme, /\| \[beta\]\(skills\/beta\/SKILL\.md\) \| split a \\\| b \| 20 \| not run \|/);
+  assert.match(readme, /\| Stage \| Skill \| For you \| Startup bytes \| Evals: with \/ without \|\n\| --- \| --- \| --- \| --: \| --: \|/);
+  assert.match(readme, /\| \[alpha\]\(skills\/alpha\/SKILL\.md\) \| use alpha \| 14 \| 89% \/ 44% \|/);
+  assert.match(readme, /\| \[beta\]\(skills\/beta\/SKILL\.md\) \| split a \\\| b \| 20 \| - \|/);
+  assert.doesNotMatch(readme, /\+0\.45|not run/);
+  assert.match(
+    readme,
+    /\| 89% \/ 44% \|\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded \/ with no skills loaded \(on m, run 2026-11-18, 3 runs per case and arm\); `-` means the skill has no cases\. The cases, and the ones too easy to show a difference, are in \[evals\/RESULTS\.md\]\(evals\/RESULTS\.md\)\.\n<!-- skills-table:end -->/,
+  );
+});
+
+test("a summary without runs leaves the run count out of the sentence", () => {
+  const summary = { generated: "2026-11-18", model: "m", skills: { alpha: { cases: 2, with: 1, without: 0.5, delta: 0.5 } } };
+  const root = repo({ summary });
+  assert.equal(build(root).status, 0);
+  const readme = read(root, "README.md");
+  assert.match(readme, /\| 100% \/ 50% \|/);
+  assert.match(readme, /with no skills loaded \(on m, run 2026-11-18\); `-`/);
+  assert.equal(JSON.parse(read(root, "skills.json")).skills[1].eval.runs, undefined);
+});
+
+test("a summary with a bad run count fails with a fix", () => {
+  const summary = { model: "m", skills: { alpha: { cases: 2, runs: 2.5, with: 1, without: 0.5, delta: 0.5 } } };
+  const result = build(repo({ summary }));
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /evals\/summary\.json: "alpha" has runs 2\.5; it must be a whole number above 0, or left out/);
 });
 
 test("missing llms.txt markers fail with where to put them", () => {

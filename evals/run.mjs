@@ -5,6 +5,7 @@
 //                      [--case <glob>] [--runs 3] [--max-cost-usd 10]
 //                      [--judge-model haiku] [--out <dir>] [--keep-temp] [--dry-run]
 //   node evals/run.mjs summary <out dir>... [--model opus] [--write]
+//     (a case found in several folders counts once, from the last folder)
 //
 // A case belongs to the skill named first in its prompt.md `tags`.
 //
@@ -152,7 +153,11 @@ function load(dirs) {
 }
 
 function summary(opts) {
-  const rows = load(opts._.slice(1).map((dir) => resolve(dir)));
+  // A case run again in a later folder replaces the earlier result.
+  const loaded = load(opts._.slice(1).map((dir) => resolve(dir)));
+  const latest = new Map(loaded.map((r) => [`${r.case}|${r.model}|${r.arm}`, r]));
+  const rows = [...latest.values()];
+  rows.costTotal = loaded.costTotal;
   const skillOf = Object.fromEntries(cases().map((c) => [c.name, c.skill]));
   for (const r of rows) r.skill ??= skillOf[r.case];
   const cell = (s) => (s ? `${s.score.toFixed(2)} (${s.passes}/${s.runs})` : "");
@@ -171,7 +176,8 @@ function summary(opts) {
   for (const [skill, list] of Object.entries(skills).sort()) {
     const w = round(mean(list.map((r) => r.with.passes / r.with.runs)));
     const wo = round(mean(list.map((r) => r.without.passes / r.without.runs)));
-    doc.skills[skill] = { cases: list.length, with: w, without: wo, delta: round(w - wo) };
+    const runs = list.reduce((a, r) => a + r.with.runs, 0);
+    doc.skills[skill] = { cases: list.length, runs, with: w, without: wo, delta: round(w - wo) };
   }
   writeFileSync(join(evalsDir, "summary.json"), JSON.stringify(doc, null, 2) + "\n");
   console.log(`wrote evals/summary.json (${model}, ${Object.keys(doc.skills).length} skills)`);
