@@ -35,6 +35,7 @@ claude plugin list 2>/dev/null; codex plugin list 2>/dev/null
 - `working-style` or plugin `mashi`: this set is already installed. Plugin
   `mashi`: run its update (step 5). A `working-style` folder: run the skills
   CLI update; if it is a symlink into a git clone, run `git pull` there.
+  Then follow "Renamed skills" below.
 
 Any other hit, or this set installed by a second path: stop. Tell the
 person what you found and where; two copies of the same job give you
@@ -97,3 +98,21 @@ npx -y skills remove -g -y -s $(npx -y skills list -g --json | node -e 'let s=""
 ```
 
 Restart the agent after an install, update or removal.
+
+## Renamed skills
+
+`code-review` is now `impact-review`: Claude Code's built-in `/code-review`
+shadowed it. `npx skills update` neither installs the new name nor removes
+the old one, and `implement` and `orchestrate` now hand off to
+`impact-review`. If `npx -y skills list -g --json` shows `code-review` with
+source `amagdy46/agent-config` (another collection's `code-review` is not
+ours), run once:
+
+```sh
+npx -y skills remove -g -y -s code-review
+npx -y skills add amagdy46/agent-config -g -y --agent <agent> --skill impact-review
+```
+
+Drop `-g` for a project install. The plugin switches with its next version.
+A clone linked with `scripts/link.mjs`: `git pull`, then run the script
+again; it removes the dead `code-review` link.
