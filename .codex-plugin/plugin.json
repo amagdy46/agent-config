@@ -1,0 +1,32 @@
+{
+  "name": "mashi",
+  "version": "0.1.0",
+  "description": "Agent skills that ask once, then get out of your way: brainstorm, plan, build test-first, debug, verify and review.",
+  "author": {
+    "name": "Abdulrahman Magdy",
+    "url": "https://github.com/amagdy46"
+  },
+  "homepage": "https://github.com/amagdy46/agent-config",
+  "repository": "https://github.com/amagdy46/agent-config",
+  "license": "MIT",
+  "keywords": ["skills", "workflow", "planning", "tdd", "debugging", "code-review", "verification"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "mashi",
+    "shortDescription": "Skills that ask once, then get out of your way.",
+    "longDescription": "Skills for the whole loop: brainstorm until the goal is clear, plan in small tasks, build test-first, debug to the root cause, verify before claiming done, and review. Every rule is there because of a failure someone saw.",
+    "developerName": "Abdulrahman Magdy",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/amagdy46/agent-config",
+    "defaultPrompt": [
+      "Let's brainstorm a new project.",
+      "Debug this failing test and find the root cause.",
+      "Review this branch before I open a PR."
+    ],
+    "brandColor": "#0F5E63",
+    "composerIcon": "./assets/mark-16.svg",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png"
+  }
+}
