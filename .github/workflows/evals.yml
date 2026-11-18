@@ -17,7 +17,7 @@ on:
         description: Runs per case and arm
         default: "3"
       max_cost_usd:
-        description: Cost ceiling for each skill's run
+        description: "Cost ceiling for each skill's run, not the total (all five skills: up to 5x this)"
         default: "10"
 
 permissions:
@@ -34,6 +34,9 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
       - name: Install Claude Code and the shell sandbox it needs
         run: |
           npm install -g @anthropic-ai/claude-code@2.1.327
@@ -54,7 +57,12 @@ jobs:
           node evals/run.mjs "${args[@]}"
       - name: Summarise
         if: always()
-        run: node evals/run.mjs summary evals/results/ci >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          if [ -d evals/results/ci ]; then
+            node evals/run.mjs summary evals/results/ci >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No results: the run stopped before the suite started." >> "$GITHUB_STEP_SUMMARY"
+          fi
       - uses: actions/upload-artifact@v7
         if: always()
         with:
