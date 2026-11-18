@@ -2,9 +2,9 @@
 // Runs the trigger suite with `claude plugin eval` and prints one table:
 // per skill, how often it fired when it should and when it should not.
 //
-//   node evals/triggers/run.mjs [--model haiku] [--runs 3] [--case <glob>]
+//   node trigger-evals/run.mjs [--model haiku] [--runs 3] [--case <glob>]
 //                               [--max-cost-usd 2] [-j 2]
-//   node evals/triggers/run.mjs --from <results dir>   (reprint, no runs)
+//   node trigger-evals/run.mjs --from <results dir>...   (reprint, no runs)
 //
 // Each run's trace is copied into the results dir so the table can name the
 // skill that fired instead; the eval's kept temp dirs are then removed.
@@ -15,7 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const root = path.resolve(here, '../..');
+const root = path.resolve(here, '..');
 
 // Case folders are named <skill>--fire-1, <skill>--fire-2 and <skill>--not.
 export function parseCaseName(name) {
@@ -87,16 +87,33 @@ export function formatTable(rows) {
   return lines.join('\n');
 }
 
-function report(dir) {
-  const result = JSON.parse(fs.readFileSync(path.join(dir, 'result.json'), 'utf8'));
+// One table from one or more result dirs (a suite run in parts, or a
+// partial run finished later): runs of the same case are pooled.
+function report(dirs) {
+  const cases = new Map();
+  const traces = new Map();
+  let cost = 0;
+  for (const dir of dirs) {
+    const result = JSON.parse(fs.readFileSync(path.join(dir, 'result.json'), 'utf8'));
+    cost += result.costUsd;
+    console.log(`${result.startedAt}  model ${result.suite.modelOverride ?? 'per case'}  ` +
+      `Claude Code ${result.claudeVersion}  cost $${result.costUsd.toFixed(2)}` +
+      (result.partial ? '  PARTIAL (cost ceiling hit)' : ''));
+    for (const c of result.cases) {
+      const pooled = cases.get(c.name) ?? { name: c.name, arms: { with: [] } };
+      cases.set(c.name, pooled);
+      (c.arms?.with ?? []).forEach((run, i) => {
+        traces.set(`${c.name}.${pooled.arms.with.length}`, path.join(dir, 'traces', `${c.name}.${i}.jsonl`));
+        pooled.arms.with.push(run);
+      });
+    }
+  }
   const firedFor = (name, i) => {
-    const file = path.join(dir, 'traces', `${name}.${i}.jsonl`);
-    return fs.existsSync(file) ? skillsInTrace(fs.readFileSync(file, 'utf8')) : null;
+    const file = traces.get(`${name}.${i}`);
+    return file && fs.existsSync(file) ? skillsInTrace(fs.readFileSync(file, 'utf8')) : null;
   };
-  console.log(`${result.startedAt}  model ${result.suite.modelOverride ?? 'per case'}  ` +
-    `Claude Code ${result.claudeVersion}  cost $${result.costUsd.toFixed(2)}` +
-    (result.partial ? '  PARTIAL (cost ceiling hit)' : ''));
-  console.log(formatTable(summarize(result, firedFor)));
+  if (dirs.length > 1) console.log(`total cost $${cost.toFixed(2)}`);
+  console.log(formatTable(summarize({ cases: [...cases.values()] }, firedFor)));
 }
 
 function main(argv) {
@@ -108,7 +125,7 @@ function main(argv) {
     else if (flag === '--case') opts.case = value;
     else if (flag === '--max-cost-usd') opts.cost = value;
     else if (flag === '-j') opts.j = value;
-    else if (flag === '--from') opts.from = value;
+    else if (flag === '--from') { opts.from = argv.slice(i + 1); break; }
     else { console.error(`unknown flag ${flag}`); process.exit(2); }
     i++;
   }
@@ -117,7 +134,7 @@ function main(argv) {
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
   const out = path.join(here, 'results', `${stamp}-${opts.model}`);
   fs.mkdirSync(path.join(out, 'traces'), { recursive: true });
-  const args = ['plugin', 'eval', root, '--eval-dir', 'evals/triggers', '--no-publish',
+  const args = ['plugin', 'eval', root, '--eval-dir', 'trigger-evals', '--no-publish',
     '--trust-plugin', '--scaffold', '--ablation', 'none', '--keep-temp', '--model', opts.model,
     '--runs', opts.runs, '-j', opts.j, '--max-cost-usd', opts.cost,
     '--output-dir', out, '--json', path.join(out, 'result.json')];
@@ -142,7 +159,7 @@ function main(argv) {
       }
     });
   }
-  report(out);
+  report([out]);
   console.log(`\nresults: ${path.relative(root, out)}`);
 }
 

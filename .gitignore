@@ -9,4 +9,4 @@ dist/
 *.local.yaml
 *.local.json
 evals/results/
-evals/triggers/results/
+trigger-evals/results/
