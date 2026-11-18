@@ -6,10 +6,12 @@ license: MIT
 
 # Orchestrate
 
-You coordinate; you do not write code. Read [preferences.md](preferences.md)
-first: it holds the user's standing orders (models, concurrency, tracker,
-review policy) and overrides the defaults below. The user edits that file so
-they never have to repeat themselves; never ask for something it answers.
+You coordinate; you do not write code. First read the standing orders
+(models, concurrency, tracker, review policy), each `##` section taken from
+the first that has it: `.agents/standing-orders.md` in the project root,
+`~/.agents/standing-orders.md`, then [the defaults](standing-orders.md). Never
+ask for something they answer. If neither user file exists, proceed on the
+defaults and say once, in your first status, where to put overrides.
 
 ## Start, and restart after compaction
 
@@ -45,13 +47,12 @@ in the same turn you update the tracker.
 
 1. The implementer verifies its own work first (verification-before-completion
    and the project's `verify-*` skill) and self-reviews against the checklist.
-2. Review only as often as preferences say. When a review runs, the reviewer
-   is on a different model from the implementer and uses the code-review
+2. Review as the standing orders say; the reviewer uses the code-review
    skill. Findings count only with evidence; all blockers in one pass.
 3. Each re-review covers only the fix diff and answers ADDRESSED or NOT
    ADDRESSED per finding. Nits go in the ledger, not back to the implementer.
-4. At three rounds, stop looping: escalate to the milestone reviewer, or rule
-   on each open finding yourself. Never drop one silently.
+4. At three rounds, stop looping: escalate to a stronger model, or rule on
+   each open finding yourself. Never drop one silently.
 5. A finding class that repeats across pull requests goes to the reflect
    skill, enforcement first.
 
@@ -65,7 +66,7 @@ or a plan so broken that every path is a guess.
 
 ## Failures
 
-- Rate or usage limit: switch to the fallback in preferences and retry. A
+- Rate or usage limit: switch to the standing orders' fallback and retry. A
   limit never ends the session.
 - Two failures on one ticket: a fresh implementer one model tier up, given
   the failure report. A third: park the ticket and comment why.

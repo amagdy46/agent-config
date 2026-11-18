@@ -1,0 +1,23 @@
+name: validate
+
+on:
+  push:
+    branches: [main, next]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: node scripts/validate-repo.mjs
+      - run: node --test
+      - run: node scripts/build-index.mjs --check
