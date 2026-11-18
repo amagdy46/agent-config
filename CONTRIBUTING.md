@@ -32,7 +32,7 @@ surface, so the bar for adding text is higher than the bar for removing it.
 ## Add or change a skill
 
 Follow the numbered steps in [AGENTS.md](AGENTS.md#add-or-change-a-skill).
-They are the same for people and agents, and CI runs the same two commands.
+They are the same for people and agents, and CI runs the same commands.
 
 ## Merging the same skill from several upstreams
 
