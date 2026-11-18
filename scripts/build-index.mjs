@@ -168,6 +168,7 @@ if (summary) {
   table +=
     `\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded` +
     `${from ? ` (${from}${runs})` : runs ? ` (${runs.slice(2)})` : ""}; \`-\` means the skill has no cases.` +
+    ` With so few runs, read a gap under 20 points as noise.` +
     ` The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).`;
 }
 const sentence = `At session start an agent loads only each skill's name and description: ${entries.length} skills, ${thousands(total)} bytes, about ${thousands(tokens)} tokens.`;

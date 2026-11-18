@@ -130,7 +130,7 @@ test("an eval summary adds a with / without column and a sentence under the tabl
   assert.doesNotMatch(readme, /\+0\.45|not run/);
   assert.match(
     readme,
-    /\| 89% \/ 44% \|\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded \/ with no skills loaded \(on m, run 2026-11-18, 3 runs per case and arm\); `-` means the skill has no cases\. The cases, and the ones too easy to show a difference, are in \[evals\/RESULTS\.md\]\(evals\/RESULTS\.md\)\.\n<!-- skills-table:end -->/,
+    /\| 89% \/ 44% \|\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded \/ with no skills loaded \(on m, run 2026-11-18, 3 runs per case and arm\); `-` means the skill has no cases\. With so few runs, read a gap under 20 points as noise\. The cases, and the ones too easy to show a difference, are in \[evals\/RESULTS\.md\]\(evals\/RESULTS\.md\)\.\n<!-- skills-table:end -->/,
   );
 });
 

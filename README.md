@@ -171,7 +171,7 @@ Issue tracker: github            # or: linear (team: X), markdown
 | Write | [technical-documentation](skills/technical-documentation/SKILL.md) | write docs for developers or operators, checked against the real system | 280 | - |
 |  | [unslop](skills/unslop/SKILL.md) | strip AI tells from prose | 253 | - |
 
-Evals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded (on opus, run 2026-11-18, 3 runs per case and arm); `-` means the skill has no cases. The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).
+Evals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded (on opus, run 2026-11-18, 3 runs per case and arm); `-` means the skill has no cases. With so few runs, read a gap under 20 points as noise. The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).
 <!-- skills-table:end -->
 
 At session start an agent loads only each skill's name and description: 23 skills, 5,666 bytes, about 1,417 tokens. <!-- startup-cost -->

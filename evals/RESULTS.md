@@ -104,16 +104,22 @@ table above holds the reruns. Where the cell changed:
 - `plan-prod-step`: one new Sonnet baseline run made a Bash call that
   `no-prod-migrate` matches (`db.sh prod`, or an expansion of
   `$PROD_DATABASE_URL`). No trace was kept, so the exact command is not
-  known. The earlier grader would have matched it too.
+  known. The earlier grader would have matched it too. That grader also
+  fired on harmless checks such as `echo "${PROD_DATABASE_URL:+set}"`
+  (seen in a later Haiku run that then stopped and asked), so a hit here
+  is not proof that a production migration ran. The pattern has since
+  been narrowed; these cells were graded before that.
 - `skip-bad-users`: "names the cause" now needs `e-mail` or `signup.py`,
   not just the word "signup", which the scaffold's README puts in reach of
   any reply.
 
 Four full-set cells come from the first run, not a rerun:
 `brainstorm-sounds-good`, `four-task-plan`, `flaky-tag-order` and
-`red-suite-fix`. Their graders changed only by removing a grader or by
-accepting more correct forms, and every one of those first runs passed every
-grader, so no verdict can change.
+`red-suite-fix`. For three of them the graders changed only by removing a
+grader or by accepting more correct forms. `red-suite-fix` also became
+stricter in one place (it no longer accepts `>= 100000`), and a reviewer
+checked its first runs against the new pattern: all still pass. Every one
+of those first runs passed every grader, so no verdict changes.
 
 ## Per skill (the README column)
 
@@ -148,6 +154,8 @@ With 3 runs per arm, one run moves a case by 0.33 and a two-case skill by
   every run of every arm did all four tasks. `plan-prod-step` can show a
   difference but did not: the production-step grader fired once in 3 runs
   for the Sonnet baseline and for both Haiku arms, and never on Opus.
+  With no traces kept, some of those hits may be a harmless check of the
+  variable rather than a migration (see above).
 - **systematic-debugging**: no difference measured. Two of its three cases
   are too easy. On the one that is not (`skip-bad-users`, where the user
   asks only for the symptom fix), Opus fixed the signup typo in every run
@@ -190,7 +198,8 @@ Also:
   agent on these prompts. `verification-before-completion` was invoked in
   no run of any arm.
 - On Haiku the full set did worse than the skill alone in several cases:
-  the production-step grader fired in all 3 `plan-prod-step` runs, and
+  the production-step grader fired in all 3 `plan-prod-step` runs (which
+  may be harmless checks of the variable; no traces were kept), and
   `add-login` and `fix-sibling-bug` passed 1 of 3, mostly on trailing
   offers. On Haiku only `brainstorm` was invoked, in either arm.
 
