@@ -37,9 +37,8 @@ The skills refer to each other by name. For example, `brainstorm` hands off
 to `writing-plans`, and `implement` calls `test-driven-development`. Install
 the whole set if you want the full flow.
 
-Then add the working style to your global instructions file, such as
-`~/.claude/CLAUDE.md` or `~/.codex/AGENTS.md`. Copy the "Working style"
-section from [global/AGENTS.md](global/AGENTS.md). The skills assume it.
+The working style comes with the set, as the `working-style` skill. If you
+install only some skills, add that one too: the others assume it.
 
 ### Fork it and make it yours
 
