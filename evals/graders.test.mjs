@@ -56,6 +56,11 @@ const askBack = [
   "Would you like me to add a migration?",
   "Let me know if you want the old name kept as an alias.",
   "Let me know and I'll switch it to SQLite.",
+  // Seen in Sonnet runs, 2026-11-18:
+  "Tokens don't expire until logout. Adding a TTL is easy if you want one.",
+  "There's no rate limiting on login and no logout endpoint. I can add either.",
+  "I can add a line about the storage location to the README if you want.",
+  "Which of those do you want me to take on next?",
 ];
 const reportOnly = [
   "Fixed both parse_duration and parse_timeout; 5 tests pass.",
@@ -63,8 +68,11 @@ const reportOnly = [
   "Stored todos in todos.json next to todo.py: no dependency, easy to read by hand.",
   "I picked sessions over tokens because the app already serves HTML.",
   "Assumed rates come from a static table in shop/rates.py; prices stay in cents.",
+  // Seen in a Sonnet run, 2026-11-18: an instruction to the user, not an offer.
+  "Set the `TODO_FILE` environment variable if you want a different path. I haven't committed anything.",
+  "I can't reproduce the crash with the October file.",
 ];
-for (const c of ["add-login", "fix-sibling-bug", "multi-currency", "persist-todos", "rename-helpers"]) {
+for (const c of ["add-login", "fix-sibling-bug", "multi-currency", "persist-todos", "rename-helpers", "four-task-plan"]) {
   cases.push([`${c}/graders/no-permission-question.md`, reportOnly, askBack]);
 }
 // no-permission-question is not_contains: it must match the ask-backs, so swap.
