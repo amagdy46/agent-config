@@ -7,8 +7,8 @@ license: MIT
 # Orchestrate
 
 You coordinate; you do not write code. First read the standing orders
-(models, concurrency, tracker, review policy), each line taken from the first
-that sets it: `.agents/standing-orders.md` in the project root,
+(models, concurrency, tracker, review policy), each `##` section taken from
+the first that has it: `.agents/standing-orders.md` in the project root,
 `~/.agents/standing-orders.md`, then [the defaults](standing-orders.md). Never
 ask for something they answer. If neither user file exists, proceed on the
 defaults and say once, in your first status, where to put overrides.
