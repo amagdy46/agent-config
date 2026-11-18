@@ -2,7 +2,7 @@
 
 A curated library of short Agent Skills (https://agentskills.io), installed
 into Claude Code, Codex and other agents. The skills are the product; the
-scripts only check and install them.
+scripts check, index and install them.
 
 ## Layout
 
@@ -11,6 +11,9 @@ scripts only check and install them.
 - `global/`: the owner's global agent instructions.
 - `scripts/validate-repo.mjs`: checks every skill; limits are constants at
   its top. `scripts/validate-repo.test.mjs`: its tests.
+- `FAILURES.md`: per skill, the failure it fixes and its one-line pitch.
+- `scripts/build-index.mjs`: generates `skills.json` and the README skills
+  table from the skills and `FAILURES.md`.
 - `scripts/link.mjs`: links skills into this machine's agent homes. Never
   run it unless the user asks.
 - `CONTRIBUTING.md`: the bar for new text and the upstream-merge rules.

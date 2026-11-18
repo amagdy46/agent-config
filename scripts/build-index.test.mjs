@@ -92,7 +92,7 @@ test("--check passes when current and fails in one line when a description chang
   const before = [read(root, "skills.json"), read(root, "README.md")];
   const result = build(root, "--check");
   assert.equal(result.status, 1);
-  assert.equal(result.stderr, "error: skills.json and README.md are out of date with skills/ and FAILURES.md. Run node scripts/build-index.mjs and commit the result.\n");
+  assert.equal(result.stderr, "error: skills.json and README.md are not what the generator would write (a source changed, or a generated file was edited by hand). Run node scripts/build-index.mjs and commit the result.\n");
   assert.deepEqual([read(root, "skills.json"), read(root, "README.md")], before, "--check wrote a file");
 });
 

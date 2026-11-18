@@ -60,7 +60,11 @@ for (const name of folders) {
     problems.push(`${at}: ${error.message}`);
     continue;
   }
-  if (typeof fields?.description !== "string" || !fields.description) {
+  if (!fields) {
+    problems.push(`${at}: no frontmatter. Start the file with a "---" line, the name and description fields, and a closing "---" line`);
+    continue;
+  }
+  if (typeof fields.description !== "string" || !fields.description) {
     problems.push(`${at}: no description. Add "description:" to the frontmatter`);
     continue;
   }
@@ -177,7 +181,7 @@ for (const [label, file, content] of outputs) {
 if (check) {
   if (stale.length) {
     const labels = stale.map(([label]) => label).join(" and ");
-    console.error(`error: ${labels} ${stale.length > 1 ? "are" : "is"} out of date with skills/ and FAILURES.md. Run node scripts/build-index.mjs and commit the result.`);
+    console.error(`error: ${labels} ${stale.length > 1 ? "are" : "is"} not what the generator would write (a source changed, or a generated file was edited by hand). Run node scripts/build-index.mjs and commit the result.`);
     process.exit(1);
   }
   console.log("ok");
