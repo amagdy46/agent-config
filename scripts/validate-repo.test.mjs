@@ -94,6 +94,13 @@ for (const [name, files, pattern] of errors) {
   test(`error: ${name}`, () => expectOne(run(files), "error", pattern));
 }
 
+test("a bad folder name is reported even when the frontmatter is broken", () => {
+  const result = run({ "Demo/SKILL.md": "# Demo\n" });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /folder name "Demo" is invalid/);
+  assert.match(result.stderr, /no frontmatter/);
+});
+
 test("error: link through a symlink that leaves the folder", () => {
   const result = run({ "demo/SKILL.md": good() + "[x](out.md)\n", "outside.md": "secret\n" });
   symlinkSync(join(result.root, "skills", "outside.md"), join(result.root, "skills", "demo", "out.md"));
