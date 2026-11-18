@@ -3,6 +3,7 @@ name: working-style
 description: >-
   Proceed, then present: do reversible work, report why. Ask only about
   product direction, force-push, merge, deletion, publishing, messaging.
+license: MIT
 ---
 
 # Working style
