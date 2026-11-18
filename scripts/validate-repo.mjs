@@ -8,6 +8,7 @@ import { existsSync } from "node:fs";
 import { readdir, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { frontmatterOf, parseFailures } from "./lib/skills.mjs";
 
 // Limits. CONTRIBUTING.md and AGENTS.md quote these numbers; a test fails if they differ.
 const DESCRIPTION_WARN_CHARS = 300; // house style
@@ -23,43 +24,7 @@ const skillsRoot = join(root, "skills");
 const allowedKeys = ["name", "description", "license", "compatibility", "metadata", "allowed-tools"];
 const errors = [];
 const warnings = [];
-
-// Parse the frontmatter subset skills use: top-level `key: value` pairs whose
-// values are plain, quoted, or folded/literal block scalars, plus an indented
-// `metadata:` mapping. Anything a strict YAML loader would reject or read
-// differently, such as an unquoted ": " inside a plain value, is an error.
-function parseFrontmatter(text) {
-  const fields = {};
-  const lines = text.split("\n");
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    if (line.trim() === "" || line.trimStart().startsWith("#")) continue;
-    const match = line.match(/^([A-Za-z][\w-]*):(?:\s+(.*))?$/);
-    if (!match) throw new Error(`frontmatter line ${i + 1} is not a top-level "key: value" pair. Start it at column 0 as "key: value", or indent it under the key it continues`);
-    const [, key, raw = ""] = match;
-    if (key in fields) throw new Error(`frontmatter key "${key}" appears twice. Keep one`);
-    const block = [];
-    while (i + 1 < lines.length && /^(\s+\S|\s*$)/.test(lines[i + 1])) block.push(lines[++i].trim());
-    let value = raw.trim();
-    if (/^[>|][+-]?$/.test(value)) {
-      value = raw.trim().startsWith(">") ? block.filter(Boolean).join(" ") : block.join("\n").trim();
-    } else if (value === "" && block.length) {
-      value = Object.fromEntries(block.filter(Boolean).map((entry) => entry.split(/:\s*/, 2)));
-    } else if (block.some(Boolean)) {
-      throw new Error(`the line after "${key}" is indented. If it starts a new key, move it to column 0; if it continues "${key}", write "${key}: >-" and put the whole value on the indented lines below it`);
-    } else if (/^"/.test(value)) {
-      if (!/^"(?:[^"\\]|\\.)*"$/.test(value)) throw new Error(`"${key}" opens a double quote it never closes. End the value with " and escape inner quotes as \\"`);
-      value = JSON.parse(value);
-    } else if (/^'/.test(value)) {
-      if (!/^'(?:[^']|'')*'$/.test(value)) throw new Error(`"${key}" opens a single quote it never closes. End the value with ' and double inner quotes as ''`);
-      value = value.slice(1, -1).replace(/''/g, "'");
-    } else if (/: |\s#|^[-?:,[\]{}#&*!|>%@`]/.test(value)) {
-      throw new Error(`"${key}" is unquoted but contains YAML syntax (": ", " #" or a leading symbol). Write "${key}: >-" and put the value on the next indented line`);
-    }
-    fields[key] = value;
-  }
-  return fields;
-}
+const folders = [];
 
 function inside(dir, path) {
   const rel = relative(dir, path);
@@ -84,6 +49,7 @@ if (!existsSync(skillsRoot)) {
 for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;
   const name = entry.name;
+  folders.push(name);
   const dir = join(skillsRoot, name);
   const file = join(dir, "SKILL.md");
   const at = relative(root, file);
@@ -96,16 +62,15 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
     continue;
   }
   const text = await readFile(file, "utf8");
-  const front = text.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
-  if (!front) {
-    errors.push(`${at}: no frontmatter. Start the file with a "---" line, the name and description fields, and a closing "---" line (LF line endings)`);
-    continue;
-  }
   let fields;
   try {
-    fields = parseFrontmatter(front[1]);
+    fields = frontmatterOf(text);
   } catch (error) {
     errors.push(`${at}: ${error.message}`);
+    continue;
+  }
+  if (!fields) {
+    errors.push(`${at}: no frontmatter. Start the file with a "---" line, the name and description fields, and a closing "---" line (LF line endings)`);
     continue;
   }
   for (const key of Object.keys(fields)) {
@@ -150,6 +115,14 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
       }
     }
   }
+}
+
+const failuresFile = join(root, "FAILURES.md");
+if (!existsSync(failuresFile)) {
+  errors.push(`FAILURES.md: not found. Add it with one "## <name>" section per skill, each with Stage:, For you:, Fixes: and Origin: lines`);
+} else {
+  const { errors: problems } = parseFailures(await readFile(failuresFile, "utf8"), folders);
+  for (const problem of problems) errors.push(`FAILURES.md: ${problem}`);
 }
 
 for (const warning of warnings) console.warn(`warn: ${warning}.`);
