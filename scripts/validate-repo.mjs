@@ -147,6 +147,12 @@ for (const path of [...manifests, ".claude-plugin/marketplace.json"]) {
 }
 for (const field of ["name", "version"]) {
   const [first, ...rest] = found.filter((m) => m[field] !== undefined);
+  // The marketplace entry may leave version out; a plugin manifest may not.
+  for (const m of found) {
+    if (m[field] === undefined && first && (field === "name" || !m.path.endsWith("marketplace.json"))) {
+      errors.push(`${m.path}: no ${field}, but ${first.path} has "${first[field]}". Set the same ${field} in every plugin manifest`);
+    }
+  }
   for (const m of rest) {
     if (m[field] !== first[field]) {
       errors.push(`${m.path}: ${field} is "${m[field]}" but ${first.path} has "${first[field]}". Set the same ${field} in every plugin manifest`);

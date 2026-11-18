@@ -59,14 +59,13 @@ Only some skills asked for: use the skills CLI on any agent, and always add
 - Codex: `codex debug prompt-input hi | grep -c 'Proceed, then present'` prints 1 or more.
 - Skills CLI: `npx -y skills list -g` lists `working-style`.
 
-Skills load at session start. Tell the person to start a new session and
-ask "Quote the first sentence of any working-style instruction in your
-context"; the answer must contain "Proceed, then present". If it does not,
-or `working-style` is not installed, append this to the global instructions
-file from step 1:
+Skills load at session start, so this session cannot see them; the checks
+above are the proof you can run. If one fails, or the person chose a subset
+without `working-style`, append this to the global instructions file from
+step 1:
 
 ```markdown
-<!-- mashi:working-style -->
+<!-- working-style:start -->
 ## Working style
 
 Proceed, then present. For reversible work, make the reasonable call, do it,
@@ -75,13 +74,15 @@ instead of asking; if running something would settle a question, run it. Ask
 only about product direction no experiment can settle, and before
 irreversible or outward-facing actions: force-pushing, merging into a shared
 branch, deleting data, publishing, messaging people.
-<!-- /mashi:working-style -->
+<!-- working-style:end -->
 ```
 
 ## 5. Report to the person
 
-Say which skills you installed, for which agent, by which path, and give
-these lines. Plugins do not update themselves.
+Say which skills you installed, for which agent, by which path. Give them
+one check for their next session: ask "Quote the first sentence of any
+working-style instruction in your context"; the answer contains "Proceed,
+then present". Then give these lines. Plugins do not update themselves.
 
 | Path | Update | Remove |
 |---|---|---|

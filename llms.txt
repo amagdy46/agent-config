@@ -1,6 +1,6 @@
 # agent-config
 
-> Short Agent Skills for coding agents (Claude Code, Codex, Cursor, OpenCode, Pi): the agent asks once, then does reversible work and reports what it decided. Every rule traces to a failure someone saw, logged in FAILURES.md.
+> Short Agent Skills for coding agents (Claude Code, Codex, Cursor, OpenCode, Pi): the agent asks once, then does reversible work and reports what it decided. FAILURES.md logs the failure each skill targets and how strong the record is.
 
 Install all skills, not a subset: they hand off to each other by name, and `working-style` carries the always-on rule.
 
@@ -8,7 +8,7 @@ Install all skills, not a subset: they hand off to each other by name, and `work
 
 - [INSTALL.md](INSTALL.md): steps for an agent to install, verify, update and remove the skills
 - [skills.json](skills.json): index of every skill with its description, stage, failure fixed and startup cost
-- [FAILURES.md](FAILURES.md): per skill, the failure it fixes and where that failure was seen
+- [FAILURES.md](FAILURES.md): per skill, the failure it targets and where that failure is recorded
 - [evals/README.md](evals/README.md): behaviour tests in the `claude plugin eval` format, and how to run them
 
 ## Skills

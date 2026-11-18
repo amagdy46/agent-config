@@ -14,7 +14,7 @@
   "interface": {
     "displayName": "mashi",
     "shortDescription": "Skills that ask once, then get out of your way.",
-    "longDescription": "Skills for the whole loop: brainstorm until the goal is clear, plan in small tasks, build test-first, debug to the root cause, verify before claiming done, and review. Every rule is there because of a failure someone saw.",
+    "longDescription": "Skills for the whole loop: brainstorm until the goal is clear, plan in small tasks, build test-first, debug to the root cause, verify before claiming done, and review. The failure each skill targets is logged, with its source.",
     "developerName": "Abdulrahman Magdy",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Read", "Write"],
