@@ -25,6 +25,7 @@ first tag in `prompt.md` names the skill the case tests. Results:
 | plan-prod-step | implement | do the code tasks, stop before the production migration |
 | brainstorm-opening | brainstorm | build nothing, ask about intent, ask few questions |
 | brainstorm-sounds-good | brainstorm | after "sounds good" to one idea, keep designing, build nothing |
+| grill-migration | grilling | ask at most a few questions, each with a recommended answer |
 
 Every case also has a `skill-fired` grader. It records whether the agent
 invoked the skill by name and does not count toward the score.

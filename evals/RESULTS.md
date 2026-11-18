@@ -16,6 +16,7 @@ only; its baseline is the same as the skill's).
 |---|---|---|---|---|---|---|---|---|---|
 | brainstorm | brainstorm-opening | 0.50 (0/3) | 0.83 (2/3) | 1.00 (3/3) | 0.50 (0/3) | 1.00 (3/3) | 0.50 (0/3) | 1.00 (3/3) | 1.00 (3/3) |
 | brainstorm | brainstorm-sounds-good | 1.00 (3/3) | 1.00 (3/3) | 0.89 (2/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) |
+| grilling | grill-migration | not run | not run | not run | 0.33 (0/3) | 0.67 (1/3) | not run | not run | not run |
 | implement | four-task-plan | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) |
 | implement | plan-prod-step | 0.92 (2/3) | 0.92 (2/3) | 0.75 (0/3) | 0.92 (2/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) |
 | systematic-debugging | crash-upstream | 1.00 (3/3) | 1.00 (3/3) | 0.92 (2/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) |
@@ -32,7 +33,9 @@ only; its baseline is the same as the skill's).
 | working-style | release-fix | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) | 1.00 (3/3) |
 
 Read a difference of one run in three as noise: 3 runs per arm cannot
-separate 2/3 from 3/3.
+separate 2/3 from 3/3. The `grill-migration` row is the skill after the
+question cap; before it, and the brainstorm reruns, are in
+[Question cap](#question-cap-grilling-sonnet).
 
 ### Which cases can show a difference
 
@@ -67,6 +70,7 @@ Runs in which the agent invoked the skill by name. Not scored.
 |---|---|---|---|---|---|
 | brainstorm-opening | 2/3 | 3/3 | 3/3 | 3/3 | 3/3 |
 | brainstorm-sounds-good | 0/3 | 0/3 | 3/3 | 3/3 | 1/3 |
+| grill-migration | not run | not run | 3/3 | not run | not run |
 | four-task-plan | 0/3 | 0/3 | 3/3 | 3/3 | 3/3 |
 | plan-prod-step | 0/3 | 0/3 | 3/3 | 3/3 | 3/3 |
 | crash-upstream | 0/3 | 0/3 | 3/3 | 3/3 | 0/3 |
@@ -121,6 +125,59 @@ stricter in one place (it no longer accepts `>= 100000`), and a reviewer
 checked its first runs against the new pattern: all still pass. Every one
 of those first runs passed every grader, so no verdict changes.
 
+## Question cap (grilling, Sonnet)
+
+Run on 2026-11-18, Sonnet only, 3 runs per arm, judge Haiku. "Before" is
+`grilling` as it was, asking every ready question each round; "after" asks
+at most three and states its own choice for the rest, and `brainstorm`
+hands its convergence step to `grilling` instead of restating it.
+
+`grill-migration` asks to be grilled on a MySQL-to-Postgres plan with a
+dozen or more open decisions. Graders: `asks` (the reply asks something),
+`few-questions` (at most five question marks), `recommends` (every
+question carries a recommended answer; `llm`).
+
+| Case | Without, before | With, before | Without, after | With, after |
+|---|---|---|---|---|
+| grill-migration | 0.33 (0/3) | 0.44 (0/3) | 0.33 (0/3) | 0.67 (1/3) |
+
+Questions in the reply, per run, counted from the transcripts. "Numbered"
+is the questions the agent headed as questions (`❓ **Q1**` with the skill,
+`**1.**` without), not its list of defaults:
+
+| Arm | Numbered questions | Question marks | Characters |
+|---|---|---|---|
+| Without, before | 9, 11, 7 | 33, 41, 27 | 5,401, 4,740, 3,820 |
+| With, before | 5, 6, 4 | 11, 17, 10 | 4,066, 4,593, 2,876 |
+| Without, after | 12, 10, 11 | 36, 25, 33 | 6,231, 4,895, 5,981 |
+| With, after | 3, 3, 3 | 5, 6, 7 | 3,848, 4,780, 3,901 |
+
+- Without the skill Sonnet asks 7 to 12 numbered questions, most with
+  three or four sub-questions, and recommends an answer in none of the
+  six runs.
+- The skill before the cap already asked fewer, 4 to 6 root decisions,
+  but packed each with sub-questions ("Do you know how many reports there
+  are, who maintains them ... and whether they use MySQL-specific SQL?").
+- After the cap every run asked exactly 3 and listed 8 or 9 other
+  decisions as defaults to overturn. The remaining question marks come
+  from titles written as questions ("Why not MySQL 8.0?") and one
+  follow-up question left under a recommendation, which is also the
+  `recommends` failure in the after run that failed it.
+
+Rerun of the two brainstorm cases after the change, same model:
+
+| Case | Sonnet without | Sonnet with | Before the change (above) |
+|---|---|---|---|
+| brainstorm-opening | 0.50 (0/3) | 1.00 (3/3) | 0.50 (0/3) / 1.00 (3/3) |
+| brainstorm-sounds-good | 0.78 (1/3) | 1.00 (3/3) | 1.00 (3/3) / 1.00 (3/3) |
+
+With the skill, every opening was one question (208 to 317 characters).
+The baseline missed `keeps-designing` in 2 of 3 `brainstorm-sounds-good`
+runs this time; it passed 3 of 3 before. The skill arm is unchanged.
+
+`evals/summary.json` is not changed: it holds the Opus skill arms, and
+none of these runs is Opus.
+
 ## Per skill (the README column)
 
 Share of runs with every scored grader passing, averaged over the skill's
@@ -130,6 +187,7 @@ cases, skill alone against no plugin. The Opus column is
 | Skill | Cases | Can any case show a difference? | Opus with / without | Sonnet with / without | Haiku with / without |
 |---|---|---|---|---|---|
 | brainstorm | 2 | yes: brainstorm-opening | 1.00 / 0.50 | 1.00 / 0.50 | 0.83 / 0.50 |
+| grilling | 1 | yes: grill-migration | not run | 0.33 / 0.00 (after the cap) | not run |
 | implement | 2 | yes, barely: plan-prod-step (one Sonnet miss) | 1.00 / 1.00 | 1.00 / 0.83 | 0.83 / 0.83 |
 | systematic-debugging | 3 | yes: skip-bad-users | 1.00 / 1.00 | 0.67 / 0.67 | 0.67 / 0.67 |
 | verification-before-completion | 2 | no on Sonnet or Opus; red-suite-fix on Haiku | 1.00 / 1.00 | 1.00 / 1.00 | 0.83 / 0.67 |
@@ -242,7 +300,9 @@ column.
 | After the grader fixes: Opus, 8 cases rerun, skill arm and baseline | $9.37 |
 | After the grader fixes: Opus full set, 4 cases rerun | $2.40 |
 | Haiku, 16 cases, skill arm and baseline, and full set | $0.90 |
-| **Total** | **$57.13** |
+| Question cap, before: Sonnet, `grill-migration`, skill arm and baseline | $0.43 |
+| Question cap, after: Sonnet, `grill-migration` and the two brainstorm cases, skill arm and baseline | $1.10 |
+| **Total** | **$58.66** |
 
 Costs are the list-price estimates `claude plugin eval` reports, judge
 calls included. Runs replaced by a rerun stay in the raw results.

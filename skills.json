@@ -17,7 +17,7 @@
       "forYou": "find out what you actually want, with research, before any code exists.",
       "fixes": "The agent guessed what I meant and built the wrong thing.",
       "origin": "seen here",
-      "bytes": 4222,
+      "bytes": 4008,
       "startupBytes": 272,
       "eval": {
         "cases": 2,
@@ -35,7 +35,7 @@
       "forYou": "stress-test a plan in rounds of questions, each with a recommended answer.",
       "fixes": "The agent acted on assumptions it never checked with me.",
       "origin": "seen here",
-      "bytes": 1777,
+      "bytes": 1751,
       "startupBytes": 221,
       "eval": null
     },
