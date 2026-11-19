@@ -33,6 +33,16 @@ import { basename, join, resolve } from "node:path";
 const evalsDir = import.meta.dirname;
 const root = resolve(evalsDir, "..");
 
+const USAGE = `node evals/run.mjs [--model sonnet] [--arm skill|full] [--skill a,b] [--case <glob>]
+                   [--runs 3] [--max-cost-usd 10] [--judge-model haiku] [--out <dir>]
+                   [--keep-temp] [--dry-run]
+node evals/run.mjs summary <out dir>... [--model opus] [--write]
+With no arguments it runs every case of every skill, which costs money: use --dry-run to see the commands.`;
+if (process.argv.slice(2).some((arg) => arg === "--help" || arg === "-h")) {
+  console.log(USAGE);
+  process.exit(0);
+}
+
 function parseArgs(argv) {
   const opts = { _: [] };
   for (let i = 0; i < argv.length; i++) {

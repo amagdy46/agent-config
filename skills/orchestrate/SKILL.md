@@ -45,8 +45,9 @@ in the same turn you update the tracker.
 
 ## Review loop
 
-1. The implementer verifies its own work first (verification-before-completion
-   and the project's `verify-*` skill) and self-reviews against the checklist.
+1. The implementer verifies its own work first (fresh output from the full
+   suite and the project's `verify-*` skill) and self-reviews against the
+   checklist.
 2. Review as the standing orders say; the reviewer uses the impact-review
    skill. Findings count only with evidence; all blockers in one pass.
 3. Each re-review covers only the fix diff and answers ADDRESSED or NOT

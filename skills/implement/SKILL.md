@@ -31,9 +31,9 @@ independent reviewer was available.
 The tasks are a graph, not a list. The **frontier** is every task whose
 blockers are done. For each task on it:
 
-1. Build it test-first with the test-driven-development skill at the seams
-   the plan names, unless the project's `AGENTS.md` sets a different testing
-   rule; then follow that rule.
+1. Build it test-first at the seams the plan names: write the test, watch
+   it fail for the right reason, then write the code that passes it. If the
+   project's `AGENTS.md` sets a different testing rule, follow that.
 2. Run the project's fast checks during each cycle and its gate once at the
    end of the task, proving the change in the running app with the project's
    `verify-*` skill when it has one.
@@ -68,7 +68,7 @@ Record any call you made where the plan was silent, and report it at the end.
 
 ## Finish
 
-Run the full suite and the verification-before-completion skill. Then review
-the whole change with the impact-review skill and fix what it finds. Report
+Run the full suite on the final state and read its output; claim only what
+it shows. Then review the whole change with the impact-review skill and fix what it finds. Report
 what was built, the evidence, the calls you made, and anything left. Push or
 open a pull request only when asked; the ci-pr-lifecycle skill covers that.

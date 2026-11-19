@@ -13,13 +13,15 @@ import { frontmatterOf, parseFailures, startupBytes } from "./lib/skills.mjs";
 // Limits. CONTRIBUTING.md and AGENTS.md quote these numbers; a test fails if they differ.
 const DESCRIPTION_WARN_CHARS = 220; // house style
 const DESCRIPTION_MAX_CHARS = 1024; // Agent Skills specification
+// Skills whose description is the rule itself, read at every session start; the house length does not apply.
+const RULE_SKILLS = ["working-style"];
 const SKILL_WARN_LINES = 100; // house style
 const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation
 const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills after compaction
 const NAME_MAX_CHARS = 64; // Agent Skills specification
 // Bytes of every name and description, which agents load at session start.
 // Set a little above the measured total; raise it only in a commit that says why.
-const STARTUP_MAX_BYTES = 4400;
+const STARTUP_MAX_BYTES = 2800;
 
 // The repository root is the first argument, or this script's parent folder.
 const root = resolve(process.argv[2] ?? join(dirname(fileURLToPath(import.meta.url)), ".."));
@@ -88,7 +90,7 @@ for (const entry of await readdir(skillsRoot, { withFileTypes: true })) {
     errors.push(`${at}: no description. Add "description:" saying what the skill does, then the phrases that should trigger it`);
   } else if (description.length > DESCRIPTION_MAX_CHARS) {
     errors.push(`${at}: description is ${description.length} characters (limit ${DESCRIPTION_MAX_CHARS}). Cut it to what the skill does and the phrases that should trigger it`);
-  } else if (description.length > DESCRIPTION_WARN_CHARS) {
+  } else if (description.length > DESCRIPTION_WARN_CHARS && !RULE_SKILLS.includes(name)) {
     warnings.push(`${at}: description is ${description.length} characters (aim for ${DESCRIPTION_WARN_CHARS} or fewer). Cut it to what the skill does and the phrases that should trigger it`);
   }
   if (typeof description === "string") startupTotal += startupBytes(name, description);

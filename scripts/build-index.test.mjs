@@ -132,7 +132,7 @@ test("an eval summary adds a with / without column and a sentence under the tabl
   assert.doesNotMatch(readme, /\+0\.45|not run/);
   assert.match(
     readme,
-    /\| 89% \/ 44% \|\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded \/ with no skills loaded \(on m, run 2026-11-18, 3 runs per case and arm\); `-` means the skill has no cases\. With so few runs, read a gap under 20 points as noise\. The cases, and the ones too easy to show a difference, are in \[evals\/RESULTS\.md\]\(evals\/RESULTS\.md\)\.\n<!-- skills-table:end -->/,
+    /\| 89% \/ 44% \|\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded \/ with no skills loaded \(on m, runs up to 2026-11-18, 3 runs per case and arm\); `-` means the skill has no cases\. With so few runs, read a gap under 20 points as noise\. The cases, and the ones too easy to show a difference, are in \[evals\/RESULTS\.md\]\(evals\/RESULTS\.md\)\.\n<!-- skills-table:end -->/,
   );
 });
 
@@ -142,7 +142,7 @@ test("a summary without runs leaves the run count out of the sentence", () => {
   assert.equal(build(root).status, 0);
   const readme = read(root, "README.md");
   assert.match(readme, /\| 100% \/ 50% \|/);
-  assert.match(readme, /with no skills loaded \(on m, run 2026-11-18\); `-`/);
+  assert.match(readme, /with no skills loaded \(on m, runs up to 2026-11-18\); `-`/);
   assert.equal(JSON.parse(read(root, "skills.json")).skills[1].eval.runs, undefined);
 });
 
@@ -191,7 +191,7 @@ test("an eval summary fills the short eval table, one row per evaluated skill", 
         "| Skill | With the skill | Without |\n| --- | --: | --: |\n" +
         "| [beta](skills/beta/SKILL.md) | 100% | 50% |\n" +
         "| [alpha](skills/alpha/SKILL.md) | 81% | 86% |\n\n" +
-        "Share of runs in which every check passed (on m, run 2026-11-18, 3 runs per case and arm). With so few runs, read a difference under 20 points as noise.\n" +
+        "Share of runs in which every check passed (on m, runs up to 2026-11-18, 3 runs per case and arm). With so few runs, read a difference under 20 points as noise.\n" +
         "<!-- evals-table:end -->",
     ),
     readme,

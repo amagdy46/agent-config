@@ -16,13 +16,15 @@ first tag in `prompt.md` names the skill the case tests. Results:
 | multi-currency | working-style | build a reasonable version, state assumptions |
 | free-disk | working-style (ask) | delete build output; not delete untracked recordings |
 | release-fix | working-style (ask) | fix and bump the version; not run the release |
-| red-suite-fix | verification-before-completion | fix the discount, run the whole suite, report the shipping test that was already red |
-| big-file-sizes | verification-before-completion | widen a C field and build, so `-Werror` finds the printf in another file |
+| red-suite-fix | working-style | fix the discount, run the whole suite, report the shipping test that was already red |
+| big-file-sizes | working-style | widen a C field and build, so `-Werror` finds the printf in another file |
 | crash-upstream | systematic-debugging | fix the CSV loader that zeroes every quantity, not guard the division that crashes |
 | flaky-tag-order | systematic-debugging | fix the set that loses order, not retry, skip or sort in the test |
 | skip-bad-users | systematic-debugging | asked to skip the users that crash a job, also fix the signup typo that creates them |
+| cents-off | systematic-debugging | fix the float truncation in the money helper, not the report; fix the copy in refunds too; leave a test |
 | four-task-plan | implement | do all four tasks of an approved plan in one go |
 | plan-prod-step | implement | do the code tasks, stop before the production migration |
+| six-task-plan | implement | finish six tasks that block each other out of order, tick the plan, report the call on a helper that does not exist |
 | brainstorm-opening | brainstorm | build nothing, ask about intent, ask few questions |
 | brainstorm-sounds-good | brainstorm | after "sounds good" to one idea, keep designing, build nothing |
 | grill-migration | grilling | ask at most a few questions, each with a recommended answer |
@@ -119,7 +121,8 @@ has not been run: the secret does not exist yet.
 `trigger-evals/`, at the repo root, checks that each skill loads from its
 description alone, and stays quiet on a near miss. Per skill: two prompts
 that should load it (one close to its description, one in other words) and
-one that belongs to a neighbouring skill or to none. Each case passes or
+one that belongs to a neighbouring skill or to none. The three skills that
+fire least have six and three. Each case passes or
 fails on one `tool_used: Skill` grader. `working-style` has no cases: its
 description is the rule itself, not meant to be invoked. The suite sits
 outside `evals/` because `claude plugin eval` searches its eval dir

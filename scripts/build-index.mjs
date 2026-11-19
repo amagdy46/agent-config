@@ -167,7 +167,7 @@ let table = [line(header), line(header.map((_, i) => (i >= 3 ? "--:" : "---"))),
 const perCase = new Set(entries.filter((entry) => entry.eval).map((entry) => (entry.eval.runs ?? NaN) / entry.eval.cases));
 const [only] = perCase;
 const runs = perCase.size === 1 && Number.isInteger(only) ? `, ${only} runs per case and arm` : "";
-const from = [summary?.model && `on ${summary.model}`, summary?.generated && `run ${summary.generated}`].filter(Boolean).join(", ");
+const from = [summary?.model && `on ${summary.model}`, summary?.generated && `runs up to ${summary.generated}`].filter(Boolean).join(", ");
 if (summary) {
   table +=
     `\n\nEvals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded` +

@@ -131,6 +131,12 @@ test("limits are inclusive: the house description limit and 100 lines pass clean
   assert.equal(result.status, 0);
 });
 
+test("a skill whose description is the rule may exceed the house limit", () => {
+  const result = run({ "working-style/SKILL.md": skill(`name: working-style\ndescription: ${"x".repeat(warnChars + 1)}`) });
+  assert.equal(result.stderr, "");
+  assert.equal(result.status, 0);
+});
+
 test("frontmatter with no newline after the closing --- still parses", () => {
   const result = run({ "demo/SKILL.md": "---\nname: demo\ndescription: Do the thing.\n---" });
   assert.equal(result.stderr, "");

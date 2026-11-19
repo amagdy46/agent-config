@@ -6,25 +6,20 @@ see `CONTRIBUTING.md` for how updates are merged.
 
 | Skill | Main sources |
 |---|---|
-| brainstorm | Superpowers `brainstorming`; Pocock `grilling`, `wayfinder` |
+| brainstorm | Superpowers `brainstorming`; Pocock `grilling`, `wayfinder`, `prototype`; pstack prototype playbook |
 | grilling | Pocock `grilling` |
 | writing-plans | Superpowers `writing-plans` |
 | to-issues | Pocock `to-tickets` |
-| implement | Pocock `implement`, `implement-spec`; Superpowers `executing-plans`, `subagent-driven-development` |
+| implement | Pocock `implement`, `implement-spec`; Superpowers `executing-plans`, `subagent-driven-development`, `test-driven-development` |
 | orchestrate | Superpowers `subagent-driven-development`; pstack `orchestrate`; tstack `sol-loop` |
 | create-verification-skill | pstack `create-verification-skill` |
 | impact-review | Pocock `code-review`; Superpowers `receiving-code-review`; pstack `blast-radius`, `interrogate`; tstack `sol-loop` |
-| verification-before-completion | Superpowers; pstack `principle-prove-it-works` |
-| test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
+| working-style | Superpowers `verification-before-completion`; pstack `principle-prove-it-works` |
 | systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
-| architecture-design | Pocock `codebase-design`, `domain-modeling`; pstack `architect`, `arena` |
-| research, explain-codebase | Pocock `research`; pstack `how`, `why` |
-| prototype | Pocock `prototype`; pstack prototype playbook |
-| handoff, wait-what | Pocock `handoff`, `wait-what`; pstack `bro` |
+| research | Pocock `research` |
 | ci-pr-lifecycle | Pocock `pr`; Superpowers `finishing-a-development-branch` |
-| frontend-design | Taste Skill; Anthropic `frontend-design`; Vibe Design Skills |
 | reflect | pstack `reflect`, `principle-encode-lessons-in-structure`; Pocock `chief-of-staff`; compound-engineering `ce-compound` |
-| technical-documentation, unslop | pstack `technical-writing`, `unslop`; Technical Writer; Awesome Copilot |
+| unslop | pstack `unslop`; Technical Writer; Awesome Copilot |
 
 ## Superpowers
 
@@ -71,15 +66,6 @@ Pinned revision: `18468a95b427e70e258b51389796367c6f684e7d`
 Copyright (c) 2026 Pawel Huryn
 License: MIT
 
-## Vibe Design Skills
-
-Source: https://github.com/nick3/vibe-design-skills
-
-Pinned revision: `79000e161fdfeb3a35674045a7bcb8d33bf555e1`
-
-Copyright (c) 2026 nick3
-License: MIT
-
 ## Awesome Copilot
 
 Source: https://github.com/github/awesome-copilot
@@ -96,25 +82,6 @@ Source: https://github.com/riekelt/technical-writer
 Pinned revision: `69a7f3518ee004a1689a7a480f4fbba89206b934`
 
 Copyright (c) 2026 riekelt
-License: MIT
-
-## Anthropic Skills
-
-Source: https://github.com/anthropics/skills
-
-Pinned revision: `3b3fad96af16a10759d930941b4520ba0c40edae`
-
-The frontend-design source was consulted for conceptual inspiration; no source
-text or code was copied. License: Apache-2.0. Full terms:
-https://github.com/anthropics/skills/blob/3b3fad96af16a10759d930941b4520ba0c40edae/skills/frontend-design/LICENSE.txt
-
-## Taste Skill
-
-Source: https://github.com/Leonxlnx/taste-skill
-
-Pinned revision: `ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
-
-Copyright (c) 2026 Leonxlnx
 License: MIT
 
 ## MIT License

@@ -1,12 +1,12 @@
 {
-  "count": 23,
+  "count": 14,
   "startup": {
-    "bytes": 4330,
-    "approxTokens": 1083
+    "bytes": 2675,
+    "approxTokens": 669
   },
   "evals": {
-    "generated": "2026-11-18",
-    "model": "opus"
+    "generated": "2026-11-19",
+    "model": "sonnet"
   },
   "skills": [
     {
@@ -17,14 +17,14 @@
       "forYou": "find out what you actually want, with research, before any code exists.",
       "fixes": "The agent guessed what I meant and built the wrong thing.",
       "origin": "seen here",
-      "bytes": 3920,
+      "bytes": 4299,
       "startupBytes": 179,
       "eval": {
         "cases": 2,
         "runs": 6,
         "with": 1,
-        "without": 0.5,
-        "delta": 0.5
+        "without": 0.33,
+        "delta": 0.67
       }
     },
     {
@@ -35,9 +35,15 @@
       "forYou": "stress-test a plan in rounds of questions, each with a recommended answer.",
       "fixes": "The agent acted on assumptions it never checked with me.",
       "origin": "seen here",
-      "bytes": 1701,
+      "bytes": 2045,
       "startupBytes": 171,
-      "eval": null
+      "eval": {
+        "cases": 1,
+        "runs": 3,
+        "with": 0.33,
+        "without": 0,
+        "delta": 0.33
+      }
     },
     {
       "name": "research",
@@ -52,18 +58,6 @@
       "eval": null
     },
     {
-      "name": "prototype",
-      "path": "skills/prototype/SKILL.md",
-      "description": "Build a throwaway artifact to settle one uncertain design question. Use for \"prototype\", \"spike\", \"mockup\", \"try a few versions\", \"what should this look like\". Skip when behavior is settled.",
-      "stage": "Think",
-      "forYou": "build a throwaway to answer one design question.",
-      "fixes": "A design question was argued in chat for an hour, or throwaway code ended up in production.",
-      "origin": "inherited",
-      "bytes": 2342,
-      "startupBytes": 199,
-      "eval": null
-    },
-    {
       "name": "writing-plans",
       "path": "skills/writing-plans/SKILL.md",
       "description": "Turn an approved design into a plan of small, testable tasks with exact files and checks. Use for \"write a plan\", \"plan this out\", or before multi-step work.",
@@ -71,7 +65,7 @@
       "forYou": "turn a design into small tasks with exact files, interfaces and tests.",
       "fixes": "The plan grew into thousands of lines of code and took hours, and nothing got built.",
       "origin": "upstream",
-      "bytes": 3052,
+      "bytes": 3232,
       "startupBytes": 170,
       "eval": null
     },
@@ -88,18 +82,6 @@
       "eval": null
     },
     {
-      "name": "architecture-design",
-      "path": "skills/architecture-design/SKILL.md",
-      "description": "Settle module boundaries, interfaces and ownership before coding, or restructure code without changing behavior. Use for \"design this\", \"refactor\", \"restructure\", \"how should we split X\".",
-      "stage": "Plan",
-      "forYou": "design module boundaries, and refactor without changing behaviour.",
-      "fixes": "A refactor quietly changed behaviour, or a new design added layers that only passed arguments along.",
-      "origin": "inherited",
-      "bytes": 3443,
-      "startupBytes": 206,
-      "eval": null
-    },
-    {
       "name": "implement",
       "path": "skills/implement/SKILL.md",
       "description": "Carry an approved plan or issues to done, task by task, with tests and review. Use for \"implement this\", \"build the plan\", \"work the issues\", \"start on ticket X\".",
@@ -107,32 +89,32 @@
       "forYou": "execute a plan or tickets to the end, yourself or with subagents.",
       "fixes": "The agent stopped after every step to ask whether it should go on.",
       "origin": "seen here",
-      "bytes": 3279,
+      "bytes": 3334,
       "startupBytes": 171,
       "eval": {
-        "cases": 2,
-        "runs": 6,
+        "cases": 3,
+        "runs": 9,
         "with": 1,
-        "without": 1,
-        "delta": 0
+        "without": 0.56,
+        "delta": 0.44
       }
     },
     {
       "name": "working-style",
       "path": "skills/working-style/SKILL.md",
-      "description": "Proceed, then present: do reversible work, report why. Ask only about product direction, or before irreversible or outward-facing steps: force-push, shared merge, deleting data, publishing, messaging people.",
+      "description": "Proceed, then present: do reversible work, report why. Ask only about product direction, or before irreversible or outward-facing steps: force-push, shared merge, deleting data, publishing, messaging people. Say \"done\" only on fresh evidence: run the check and read its output.",
       "stage": "Build",
       "forYou": "let the agent decide and do reversible work, and ask you only before steps it cannot undo.",
       "fixes": "The agent stopped to ask \"should I…?\" about work it could have done and reported.",
       "origin": "seen here",
-      "bytes": 897,
-      "startupBytes": 220,
+      "bytes": 1459,
+      "startupBytes": 290,
       "eval": {
-        "cases": 7,
-        "runs": 21,
-        "with": 0.81,
-        "without": 0.86,
-        "delta": -0.05
+        "cases": 9,
+        "runs": 27,
+        "with": 0.96,
+        "without": 0.89,
+        "delta": 0.07
       }
     },
     {
@@ -143,20 +125,8 @@
       "forYou": "coordinate many implementer and reviewer agents under your standing orders.",
       "fixes": "In long sessions I kept repeating the same reminders: keep agents busy, update the tracker, use this model.",
       "origin": "seen here",
-      "bytes": 3821,
+      "bytes": 3826,
       "startupBytes": 169,
-      "eval": null
-    },
-    {
-      "name": "test-driven-development",
-      "path": "skills/test-driven-development/SKILL.md",
-      "description": "Build features and fix bugs test-first: a failing test, then the code that passes it. Use for TDD, \"test-first\", \"write a failing test\", \"then make it pass\", or regression tests.",
-      "stage": "Build",
-      "forYou": "build each behaviour test-first: watch the test fail, then make it pass.",
-      "fixes": "The tests passed, but they would have passed even if the code were wrong.",
-      "origin": "upstream",
-      "bytes": 3015,
-      "startupBytes": 201,
       "eval": null
     },
     {
@@ -167,44 +137,14 @@
       "forYou": "reproduce, isolate and fix the root cause.",
       "fixes": "The fix made the error go away but left the bug in place.",
       "origin": "seen here",
-      "bytes": 3519,
+      "bytes": 3448,
       "startupBytes": 205,
       "eval": {
-        "cases": 3,
-        "runs": 9,
-        "with": 1,
-        "without": 1,
-        "delta": 0
-      }
-    },
-    {
-      "name": "frontend-design",
-      "path": "skills/frontend-design/SKILL.md",
-      "description": "Design and build web UI that does not look like a template or AI output. Use for building or restyling pages, components or dashboards, \"make it look good\", or deciding UX flows.",
-      "stage": "Build",
-      "forYou": "design and check UI that doesn't look like a template.",
-      "fixes": "The interface the agent built looked like a generic template.",
-      "origin": "inherited",
-      "bytes": 4045,
-      "startupBytes": 193,
-      "eval": null
-    },
-    {
-      "name": "verification-before-completion",
-      "path": "skills/verification-before-completion/SKILL.md",
-      "description": "Gate any claim that work is done, fixed, passing or ready on fresh evidence. Use right before saying \"done\", \"fixed\" or \"passing\", handing work back, committing or opening a PR.",
-      "stage": "Check",
-      "forYou": "prove a claim before saying \"done\".",
-      "fixes": "The agent said \"done\" when it meant \"I think it's done\".",
-      "origin": "seen here",
-      "bytes": 1961,
-      "startupBytes": 207,
-      "eval": {
-        "cases": 2,
-        "runs": 6,
-        "with": 1,
-        "without": 1,
-        "delta": 0
+        "cases": 4,
+        "runs": 12,
+        "with": 0.67,
+        "without": 0.5,
+        "delta": 0.17
       }
     },
     {
@@ -244,42 +184,6 @@
       "eval": null
     },
     {
-      "name": "explain-codebase",
-      "path": "skills/explain-codebase/SKILL.md",
-      "description": "Explain how existing code works and why it is shaped that way. Use for \"how does X work\", walkthroughs, \"where should this live\", \"why is this here\". Read-only.",
-      "stage": "Explain",
-      "forYou": "explain how code works, and why it is shaped that way.",
-      "fixes": "The agent explained code from its names and folders, and gave guesses about intent as fact.",
-      "origin": "inherited",
-      "bytes": 2023,
-      "startupBytes": 176,
-      "eval": null
-    },
-    {
-      "name": "wait-what",
-      "path": "skills/wait-what/SKILL.md",
-      "description": "Re-pitch your last message when it did not land. Use for \"wait, what\", \"I don't get it\", \"explain that normally\", \"in plain English\". One turn; no research.",
-      "stage": "Explain",
-      "forYou": "get the last answer again in plain words.",
-      "fixes": "The agent's answer was so dense with jargon that I couldn't follow it.",
-      "origin": "upstream",
-      "bytes": 712,
-      "startupBytes": 165,
-      "eval": null
-    },
-    {
-      "name": "handoff",
-      "path": "skills/handoff/SKILL.md",
-      "description": "Write a handoff brief so another agent can carry on, or resume work from one. Use for \"hand off\", \"write up where we are\", \"pick up where we left off\", \"resume the last session\".",
-      "stage": "Explain",
-      "forYou": "write a handoff between sessions, or resume from one.",
-      "fixes": "A new session started cold and redid finished work, or trusted a stale summary.",
-      "origin": "inherited",
-      "bytes": 2595,
-      "startupBytes": 185,
-      "eval": null
-    },
-    {
       "name": "reflect",
       "path": "skills/reflect/SKILL.md",
       "description": "Mine the current session for durable lessons and turn each into an edit to a skill or AGENTS.md. Use for \"reflect\", \"what did we learn\", \"update the skills from this session\", or a repeated mistake.",
@@ -289,18 +193,6 @@
       "origin": "seen here",
       "bytes": 4142,
       "startupBytes": 205,
-      "eval": null
-    },
-    {
-      "name": "technical-documentation",
-      "path": "skills/technical-documentation/SKILL.md",
-      "description": "Write or revise docs checked against the code: READMEs, how-to guides, references, step-by-step guides for non-technical users. Use for \"write a README\", \"document this\".",
-      "stage": "Write",
-      "forYou": "write docs for developers or operators, checked against the real system.",
-      "fixes": "The docs described what the code used to do, or guessed at names and flags.",
-      "origin": "inherited",
-      "bytes": 5051,
-      "startupBytes": 193,
       "eval": null
     },
     {

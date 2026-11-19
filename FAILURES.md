@@ -92,16 +92,6 @@ Adapted from Matt Pocock's `research` and pstack's `how` and `why`. No
 recorded failure was found; the skill carries their method: go to the owner
 of each fact, cite beside the claim, report searches that found nothing.
 
-## prototype
-
-Stage: Think
-For you: build a throwaway to answer one design question.
-Fixes: A design question was argued in chat for an hour, or throwaway code ended up in production.
-Origin: inherited
-
-Adapted from Matt Pocock's `prototype` and pstack's prototype playbook. No
-recorded failure was found here or upstream.
-
 ## writing-plans
 
 Stage: Plan
@@ -139,23 +129,6 @@ Rules with a recorded reason:
   ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
   reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
-## architecture-design
-
-Stage: Plan
-For you: design module boundaries, and refactor without changing behaviour.
-Fixes: A refactor quietly changed behaviour, or a new design added layers that only passed arguments along.
-Origin: inherited
-
-Adapted from Matt Pocock's `codebase-design` and `domain-modeling` and
-pstack's `architect` and `arena`. No recorded failure was found.
-
-Rules with a recorded reason:
-
-- It settles design choices itself and states each with its reason, instead
-  of asking before every choice
-  ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-
 ## implement
 
 Stage: Build
@@ -187,6 +160,12 @@ Rules with a recorded reason:
   the helper the clutter it exists to avoid
   ([skills#1341](https://github.com/mattpocock/skills/pull/1341)).
 
+Measured on 2026-11-19 (`six-task-plan`, Sonnet, 3 runs per arm): with and
+without the skill every run finished all six tasks with their tests. Only
+with it was the plan ticked as the work went, 3 of 3 against 0 of 3. On the
+two shorter cases there is no difference
+([RESULTS.md](evals/RESULTS.md#2026-11-19-fewer-skills-two-harder-cases)).
+
 ## working-style
 
 Stage: Build
@@ -210,6 +189,21 @@ without the skill. In the two cases where the agent should hold back
 (deleting untracked recordings, running a release), it held back in every
 run. Details: [evals/RESULTS.md](evals/RESULTS.md).
 
+It also carries the rule that was the `verification-before-completion`
+skill until 2026-11-19: no success claim without fresh output from this
+turn. The maintainer's account in the
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L183-L185):
+"done" meant "I think it's done". As its own skill the body loaded in 0 of
+33 eval runs, so only its description did any work; the rule now sits in
+this description, which every host lists at session start.
+
+Rules with a recorded reason:
+
+- If the project has a `verify-*` skill (its recipe for running the real
+  app), use it, so verification has a concrete source of proof
+  ([9ec9452](https://github.com/amagdy46/skills/commit/9ec9452),
+  [5087090](https://github.com/amagdy46/skills/commit/5087090)).
+
 ## orchestrate
 
 Stage: Build
@@ -227,36 +221,6 @@ Rules with a recorded reason:
 
 - Review loops stop at three rounds, for the reason under implement
   ([superpowers#2481](https://github.com/obra/superpowers/issues/2481)).
-
-## test-driven-development
-
-Stage: Build
-For you: build each behaviour test-first: watch the test fail, then make it pass.
-Fixes: The tests passed, but they would have passed even if the code were wrong.
-Origin: upstream
-
-Upstream, an agent counted a compile error ("no method named
-`drain_settled`") as its failing test, so the bug it was meant to reproduce
-never was ([skills#1210](https://github.com/mattpocock/skills/issues/1210)), and a
-test whose setup never created the condition it claimed to test stayed green
-after the whole implementation was deleted
-([superpowers#2092](https://github.com/obra/superpowers/issues/2092)). The
-skill says a syntax or test-setup error is not a failing test, and judges
-each test by whether breaking the behaviour turns it red.
-
-Rules with a recorded reason:
-
-- Each proposed seam (the boundary a test drives) gets one line on what it
-  catches and misses, and the agent states its choice instead of asking.
-  Upstream, agents asked users to pick a seam with no reasons given
-  ([skills#607](https://github.com/mattpocock/skills/issues/607));
-  [f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7) removed
-  the confirmation step here.
-- A characterization test, which pins existing behaviour before a refactor,
-  may pass first time if it is shown to fail when the behaviour breaks. The
-  earlier text told agents to "fix the test" whenever one passed first time,
-  which forbade these
-  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
 ## systematic-debugging
 
@@ -278,37 +242,12 @@ Rules with a recorded reason:
   not theorise without a loop", which halted work that the existing evidence
   could carry ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
-## frontend-design
-
-Stage: Build
-For you: design and check UI that doesn't look like a template.
-Fixes: The interface the agent built looked like a generic template.
-Origin: inherited
-
-Merged from Taste Skill, Anthropic's `frontend-design` and Vibe Design
-Skills. Those sources describe the look they steer away from, but none
-records a case, and this repo has none either.
-
-## verification-before-completion
-
-Stage: Check
-For you: prove a claim before saying "done".
-Fixes: The agent said "done" when it meant "I think it's done".
-Origin: seen here
-
-The maintainer's account in the
-[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L183-L185):
-"done" meant "I think it's done". The skill blocks any success claim without fresh output from this turn:
-name the claim, run the command that proves it, read the result, and claim
-only what it shows.
-
-Rules with a recorded reason:
-
-- If the project has a `verify-*` skill (its recipe for running the real
-  app), use it, so
-  verification has a concrete source of proof
-  ([9ec9452](https://github.com/amagdy46/skills/commit/9ec9452),
-  [5087090](https://github.com/amagdy46/skills/commit/5087090)).
+Measured on 2026-11-19 (`cents-off`, Sonnet, 3 runs per arm): every run
+fixed the bug it was shown. Only with the skill did the agent also fix the
+copy of the same mistake in another file (3 of 3 against 0 of 3) and leave
+a regression test (2 of 3 against 0 of 3). Haiku did not load the skill and
+shows no difference; the three shorter cases show none on any model
+([RESULTS.md](evals/RESULTS.md#2026-11-19-fewer-skills-two-harder-cases)).
 
 ## create-verification-skill
 
@@ -319,7 +258,7 @@ Origin: inherited
 
 Adapted from pstack's `create-verification-skill`.
 [9ec9452](https://github.com/amagdy46/skills/commit/9ec9452) states its
-purpose, a concrete source of proof for verification-before-completion, but
+purpose, a concrete source of proof for the rule in working-style that "done" needs fresh evidence, but
 neither it nor pstack records a specific failure.
 
 ## impact-review
@@ -363,44 +302,6 @@ anything is discarded, and never force-removes a worktree; the upstream case
 shows a written rule was not enough there, and nobody has tested yet whether
 this wording does better.
 
-## explain-codebase
-
-Stage: Explain
-For you: explain how code works, and why it is shaped that way.
-Fixes: The agent explained code from its names and folders, and gave guesses about intent as fact.
-Origin: inherited
-
-Adapted from Matt Pocock's `research` and pstack's `how` and `why`. No
-recorded failure was found.
-
-## wait-what
-
-Stage: Explain
-For you: get the last answer again in plain words.
-Fixes: The agent's answer was so dense with jargon that I couldn't follow it.
-Origin: upstream
-
-Matt Pocock added it as a "verbosity fire extinguisher" after a user reported
-a model that stayed verbose even with a 400-line concision skill installed
-([skills#751](https://github.com/mattpocock/skills/pull/751)). This repo has
-no record of its own.
-
-Rules with a recorded reason:
-
-- It no longer fires on "bro" alone. The description listed "bro" as a
-  trigger, a word that also turns up in ordinary requests
-  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
-
-## handoff
-
-Stage: Explain
-For you: write a handoff between sessions, or resume from one.
-Fixes: A new session started cold and redid finished work, or trusted a stale summary.
-Origin: inherited
-
-Adapted from Matt Pocock's `handoff`. No recorded failure
-was found.
-
 ## reflect
 
 Stage: Improve
@@ -426,16 +327,6 @@ Rules with a recorded reason:
   waiting for you to pick rows
   ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47), for the
   reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-
-## technical-documentation
-
-Stage: Write
-For you: write docs for developers or operators, checked against the real system.
-Fixes: The docs described what the code used to do, or guessed at names and flags.
-Origin: inherited
-
-Adapted from pstack's `technical-writing`, Technical Writer and Awesome
-Copilot. No recorded failure was found.
 
 ## unslop
 

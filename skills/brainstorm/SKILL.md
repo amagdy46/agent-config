@@ -27,6 +27,8 @@ existed?", "Walk me through the last time this hurt."
   something concrete.
 - A guess they can correct ("I'm guessing X keeps biting you?") often beats a
   question.
+- Ask only what would change what gets built. Never ask about process: how
+  to proceed, which skill to use, whether to continue.
 - Territory to cover, never read out as a script: what this is and what makes
   it special, why now, what success looks like, goals, non-goals,
   **anti-goals** (what would make it a failure even if it works), prior art
@@ -46,7 +48,11 @@ conversation and offer the rest. Without subagents, look it up inline between
 questions.
 
 When a quick throwaway build would answer a question faster than talking,
-offer a spike with the prototype skill. Bring what it taught you back here.
+offer a spike: the smallest runnable thing that answers that one question
+(two to four structurally different variants for a look, a small interactive
+model for logic, a probe for a feasibility fact). Keep it in a scratch
+folder, on fixtures, without tests. Run it, show what you saw, and bring what
+it taught you back here.
 
 ## 3. Play it back
 
