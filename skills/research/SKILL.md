@@ -1,6 +1,6 @@
 ---
 name: research
-description: Investigate a defined question against primary sources and return a cited, dated answer. Use for "research X", "find out", docs or API facts, comparing options, or as a background lane for another skill; not for plain codebase explanation (explain-codebase).
+description: Answer a defined question from primary sources, with dated citations. Use for "research X", "find out", docs or API facts, comparing options. Not for explaining this codebase.
 license: MIT
 ---
 
