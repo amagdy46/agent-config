@@ -10,15 +10,13 @@ see `CONTRIBUTING.md` for how updates are merged.
 | grilling | Pocock `grilling` |
 | writing-plans | Superpowers `writing-plans` |
 | to-issues | Pocock `to-tickets` |
-| implement | Pocock `implement`, `implement-spec`; Superpowers `executing-plans`, `subagent-driven-development` |
+| implement | Pocock `implement`, `implement-spec`; Superpowers `executing-plans`, `subagent-driven-development`, `test-driven-development` |
 | orchestrate | Superpowers `subagent-driven-development`; pstack `orchestrate`; tstack `sol-loop` |
 | create-verification-skill | pstack `create-verification-skill` |
 | impact-review | Pocock `code-review`; Superpowers `receiving-code-review`; pstack `blast-radius`, `interrogate`; tstack `sol-loop` |
 | working-style | Superpowers `verification-before-completion`; pstack `principle-prove-it-works` |
-| test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
 | systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
 | research | Pocock `research` |
-| wait-what | Pocock `wait-what`; pstack `bro` |
 | ci-pr-lifecycle | Pocock `pr`; Superpowers `finishing-a-development-branch` |
 | reflect | pstack `reflect`, `principle-encode-lessons-in-structure`; Pocock `chief-of-staff`; compound-engineering `ce-compound` |
 | unslop | pstack `unslop`; Technical Writer; Awesome Copilot |

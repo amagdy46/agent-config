@@ -1,8 +1,8 @@
 {
-  "count": 16,
+  "count": 14,
   "startup": {
-    "bytes": 3113,
-    "approxTokens": 778
+    "bytes": 2741,
+    "approxTokens": 685
   },
   "evals": {
     "generated": "2026-11-18",
@@ -83,7 +83,7 @@
       "forYou": "execute a plan or tickets to the end, yourself or with subagents.",
       "fixes": "The agent stopped after every step to ask whether it should go on.",
       "origin": "seen here",
-      "bytes": 3299,
+      "bytes": 3334,
       "startupBytes": 171,
       "eval": {
         "cases": 2,
@@ -121,18 +121,6 @@
       "origin": "seen here",
       "bytes": 3826,
       "startupBytes": 169,
-      "eval": null
-    },
-    {
-      "name": "test-driven-development",
-      "path": "skills/test-driven-development/SKILL.md",
-      "description": "Change behavior test-first: write the test, watch it fail, then write the code that passes it. Use for any feature or bug fix with a testable seam, TDD, \"test-first\", regression tests.",
-      "stage": "Build",
-      "forYou": "build each behaviour test-first: watch the test fail, then make it pass.",
-      "fixes": "The tests passed, but they would have passed even if the code were wrong.",
-      "origin": "upstream",
-      "bytes": 3021,
-      "startupBytes": 207,
       "eval": null
     },
     {
@@ -187,18 +175,6 @@
       "origin": "upstream",
       "bytes": 2465,
       "startupBytes": 170,
-      "eval": null
-    },
-    {
-      "name": "wait-what",
-      "path": "skills/wait-what/SKILL.md",
-      "description": "Re-pitch your last message when it did not land. Use for \"wait, what\", \"I don't get it\", \"explain that normally\", \"in plain English\". One turn; no research.",
-      "stage": "Explain",
-      "forYou": "get the last answer again in plain words.",
-      "fixes": "The agent's answer was so dense with jargon that I couldn't follow it.",
-      "origin": "upstream",
-      "bytes": 712,
-      "startupBytes": 165,
       "eval": null
     },
     {
