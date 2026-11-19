@@ -1,4 +1,4 @@
-# Trigger baseline
+# Trigger rates
 
 Does each skill load when a request needs it, from its name and
 description alone? Measured 2026-11-18 with Claude Code 2.1.327, all 23
@@ -10,7 +10,7 @@ counts runs where the skill loaded; "false" counts near-miss runs where it
 loaded anyway. A miss lists what loaded instead; "none" means the agent
 answered without any skill.
 
-## Results
+## Baseline
 
 | skill | Haiku fired | Haiku false | Sonnet fired | Sonnet false | Sonnet miss: loaded instead |
 |---|---|---|---|---|---|
@@ -45,7 +45,61 @@ answered without any skill.
 - `working-style` has no cases: its description is the rule, and it is not
   meant to be invoked.
 
-## What it shows
+## After the description trim
+
+Measured 2026-11-18, same suite and settings, after every description
+except `working-style` was cut to about 180 bytes (5,666 to 4,314 bytes
+for the set). Haiku: 3 runs per case. Sonnet: 2 runs per case, all
+skills.
+
+| skill | Haiku fired | before | Sonnet fired | before |
+|---|---|---|---|---|
+| architecture-design | 1/6 | 0/6 | 4/4 | 3/6 |
+| brainstorm | 3/6 | 3/6 | 4/4 | 5/6 |
+| ci-pr-lifecycle | 5/6 | 4/6 | 4/4 | 6/6 |
+| code-review | 3/6 | 1/6 | 4/4 | 5/6 |
+| create-verification-skill | 4/6 | 4/6 | 4/4 | 6/6 |
+| explain-codebase | 2/6 | 2/6 | 4/4 | 6/6 |
+| frontend-design | 4/6 | 5/6 | 4/4 | 6/6 |
+| grilling | 5/6 | 5/6 | 4/4 | 6/6 |
+| handoff | 3/6 | 3/6 | 4/4 | 3/6 |
+| implement | 5/6 | 3/6 | 4/4 | 6/6 |
+| orchestrate | 6/6 | 6/6 | 4/4 | 6/6 |
+| prototype | 1/6 | 3/6 | 4/4 | 6/6 |
+| reflect | 2/6 | 3/6 | 2/4 | 2/4 |
+| research | 4/6 | 1/6 | 4/4 | 4/4 |
+| systematic-debugging | 1/6 | 3/6 | 4/4 | 4/4 |
+| technical-documentation | 2/6 | 0/6 | 4/4 | 3/4 |
+| test-driven-development | 1/6 | 0/6 | 4/4 | 0/4 |
+| to-issues | 1/6 | 1/6 | 3/4 | 3/4 |
+| unslop | 3/6 | 2/6 | 4/4 | 4/4 |
+| verification-before-completion | 0/6 | 0/6 | 0/4 | 0/4 |
+| wait-what | 3/6 | 2/6 | 3/4 | 4/4 |
+| writing-plans | 3/6 | 2/6 | 4/4 | 4/4 |
+| **all** | **62/132 (47%)** | 53/132 (40%) | **80/88 (91%)** | 92/112 (82%) |
+
+False fires: 0/66 on Haiku, 0/44 on Sonnet. Changes beyond a one-run
+difference:
+
+- `test-driven-development`: Sonnet 0/4 to 4/4. "test-first" and "make
+  it pass" are now quoted; both prompts fire.
+- `architecture-design`: "how should we split X" is quoted; the
+  "restructure billing.py" prompt now fires on Sonnet (0/3 to 2/2) and
+  on Haiku (0/3 to 4/6 over two passes).
+- `handoff`: "pick up where the last session left off" fires on Sonnet
+  (0/5 to 2/2). Haiku still misses it.
+- `implement`, `research`, `code-review`, `technical-documentation`:
+  Haiku up 2 or 3 runs; Sonnet level.
+- `prototype`, `systematic-debugging`: Haiku down 2 runs. Noise: rerun
+  side by side, the old and new text scored the same (3/6 and 3/6; 2/6
+  and 2/6).
+- Still missing on both models: `reflect` on "turn that mistake into a
+  rule".
+- `grilling` was reworded after this run: "one at a time" became "in
+  short rounds", because the skill asks in rounds. Its cases were not
+  rerun, and one of its prompts says "one at a time".
+
+## What the baseline shows
 
 **Fire reliably** (Sonnet every run, Haiku 4/6 or more): `orchestrate`,
 `frontend-design`, `grilling`, `ci-pr-lifecycle`,

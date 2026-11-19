@@ -1,6 +1,7 @@
 ---
 name: test-driven-development
-description: Build features and fix bugs test-first with red-green-refactor at agreed seams. Use for TDD, "write a failing test first", regression tests, or any behavior change with a testable seam.
+description: >-
+  Build features and fix bugs test-first: a failing test, then the code that passes it. Use for TDD, "test-first", "write a failing test", "then make it pass", or regression tests.
 license: MIT
 ---
 

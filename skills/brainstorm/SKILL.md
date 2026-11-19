@@ -1,6 +1,7 @@
 ---
 name: brainstorm
-description: Think a new project through with the user before anything is built. Interview them for intent, research in the background, converge on a direction, and write the design. Use for "brainstorm", "let's brainstorm", "new project", or starting a product from scratch.
+description: >-
+  Think a new project through with the user before anything is built: interview, research, write the design. Use for "brainstorm", "new project", or starting from scratch.
 license: MIT
 ---
 

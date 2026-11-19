@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: Remove AI tells from prose while keeping facts and voice. Use as the final pass on reports, docs, READMEs, proposals, PR descriptions, and posts, or when asked to humanize, tighten, or de-slop text. Skip code, logs, quotes, and short chat replies.
+description: Remove AI tells from prose, keeping facts and voice. Use on reports, docs, READMEs and PR text, or for "humanize", "tighten", "de-slop". Skip code, logs and quotes.
 license: MIT
 ---
 

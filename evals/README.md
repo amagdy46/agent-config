@@ -125,7 +125,8 @@ description is the rule itself, not meant to be invoked. The suite sits
 outside `evals/` because `claude plugin eval` searches its eval dir
 recursively, so the command above would run these cases too. Every case
 builds the same small repo (`fixture.sh`), so "review this PR" has
-something to point at. The baseline is in [TRIGGERS.md](TRIGGERS.md).
+something to point at. The baseline and the rates after the description
+trim are in [TRIGGERS.md](TRIGGERS.md).
 
 After changing a description, rerun that skill, then the whole suite:
 

@@ -1,6 +1,6 @@
 ---
 name: create-verification-skill
-description: Write a project's own verify-<app> skill that tells any agent how to launch the app from scratch, drive a feature like a user, capture evidence and clean up. Use for "make a verification skill", "how do agents prove changes work here", or when agents keep claiming done without running the app.
+description: Write a verify-<app> skill so any agent can launch the app, drive a feature and capture proof. Use for "make a verification skill", or when agents claim done without running the app.
 license: MIT
 ---
 

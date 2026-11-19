@@ -31,7 +31,7 @@ scripts check, index and install them.
    saw; removing text beats adding it.
 2. Edit or create `skills/<name>/SKILL.md`. The folder name is lowercase
    letters, digits and hyphens. Frontmatter: `name: <name>` and
-   `description:` (what it does, then trigger phrases, 300 characters or
+   `description:` (what it does, then trigger phrases, 220 characters or
    fewer). Write the body for the agent that runs it: terse, behaviour first.
 3. New skill: add its `## <name>` section to `FAILURES.md`, with the
    `Stage:`, `For you:`, `Fixes:` and `Origin:` lines. Adapted from

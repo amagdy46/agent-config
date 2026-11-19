@@ -113,8 +113,10 @@ test("error: link through a symlink that leaves the folder", () => {
   expectOne(validate(result.root), "error", /link "out\.md" is a symlink to a file outside skills\/demo\/\. Replace the symlink/);
 });
 
-test("warn: description over 300 characters", () => {
-  expectOne(run({ "demo/SKILL.md": skill(`name: demo\ndescription: ${"x".repeat(301)}`) }), "warn", /description is 301 characters \(aim for 300 or fewer\)\. Cut it/);
+const warnChars = Number(readFileSync(script, "utf8").match(/const DESCRIPTION_WARN_CHARS = (\d+);/)[1]);
+
+test("warn: description over the house limit", () => {
+  expectOne(run({ "demo/SKILL.md": skill(`name: demo\ndescription: ${"x".repeat(warnChars + 1)}`) }), "warn", new RegExp(`description is ${warnChars + 1} characters \\(aim for ${warnChars} or fewer\\)\\. Cut it`));
 });
 
 test("warn: SKILL.md over 100 lines", () => {
@@ -122,8 +124,8 @@ test("warn: SKILL.md over 100 lines", () => {
   expectOne(run({ "demo/SKILL.md": text + "x\n".repeat(101 - countLines(text)) }), "warn", /SKILL\.md: 101 lines \(aim for 100 or fewer\)\. Cut lines/);
 });
 
-test("limits are inclusive: 300 characters and 100 lines pass clean", () => {
-  const text = skill(`name: demo\ndescription: ${"x".repeat(300)}`);
+test("limits are inclusive: the house description limit and 100 lines pass clean", () => {
+  const text = skill(`name: demo\ndescription: ${"x".repeat(warnChars)}`);
   const result = run({ "demo/SKILL.md": text + "x\n".repeat(100 - countLines(text)) });
   assert.equal(result.stderr, "");
   assert.equal(result.status, 0);
@@ -158,10 +160,10 @@ for (const [name, failures, pattern] of failureErrors) {
 test("error: names and descriptions over the startup budget", () => {
   const limit = Number(readFileSync(script, "utf8").match(/const STARTUP_MAX_BYTES = (\d+);/)[1]);
   const files = {};
-  // 300-character descriptions stay clear of the description warning.
-  const skills = Math.ceil(limit / 300) + 1;
-  for (let i = 0; i < skills; i++) files[`s${i}/SKILL.md`] = skill(`name: s${i}\ndescription: ${"x".repeat(300)}`);
-  const total = Array.from({ length: skills }, (_, i) => `s${i}`.length + 300).reduce((a, b) => a + b);
+  // Descriptions at the house limit stay clear of the description warning.
+  const skills = Math.ceil(limit / warnChars) + 1;
+  for (let i = 0; i < skills; i++) files[`s${i}/SKILL.md`] = skill(`name: s${i}\ndescription: ${"x".repeat(warnChars)}`);
+  const total = Array.from({ length: skills }, (_, i) => `s${i}`.length + warnChars).reduce((a, b) => a + b);
   expectOne(run(files), "error", new RegExp(`^error: skills/: names and descriptions total ${total} bytes.*\\(budget ${limit}\\)\\. Trim a description, or raise STARTUP_MAX_BYTES`));
 });
 

@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { frontmatterOf, parseFailures, startupBytes } from "./lib/skills.mjs";
 
 // Limits. CONTRIBUTING.md and AGENTS.md quote these numbers; a test fails if they differ.
-const DESCRIPTION_WARN_CHARS = 300; // house style
+const DESCRIPTION_WARN_CHARS = 220; // house style
 const DESCRIPTION_MAX_CHARS = 1024; // Agent Skills specification
 const SKILL_WARN_LINES = 100; // house style
 const SKILL_MAX_LINES = 500; // Agent Skills specification recommendation
@@ -19,7 +19,7 @@ const SKILL_MAX_BYTES = 20000; // Claude Code drops the tail of larger skills af
 const NAME_MAX_CHARS = 64; // Agent Skills specification
 // Bytes of every name and description, which agents load at session start.
 // Set a little above the measured total; raise it only in a commit that says why.
-const STARTUP_MAX_BYTES = 5700;
+const STARTUP_MAX_BYTES = 4400;
 
 // The repository root is the first argument, or this script's parent folder.
 const root = resolve(process.argv[2] ?? join(dirname(fileURLToPath(import.meta.url)), ".."));

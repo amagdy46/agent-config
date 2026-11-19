@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: Mine the current session for durable lessons and turn each into a concrete edit to a skill, an AGENTS.md, or an enforcement backlog item. Use for "reflect", "what did we learn", "update the skills from this session", or after a session full of corrections.
+description: Mine the current session for durable lessons and turn each into an edit to a skill or AGENTS.md. Use for "reflect", "what did we learn", "update the skills from this session", or a repeated mistake.
 license: MIT
 ---
 
