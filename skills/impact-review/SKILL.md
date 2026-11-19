@@ -1,10 +1,10 @@
 ---
-name: code-review
-description: Review a diff or PR for spec and standards fit, and trace what it could break beyond the diff. Use for "review this", "what could this break", "blast radius", or review feedback.
+name: impact-review
+description: Review a diff or PR for spec and standards fit, and trace what it could break beyond the diff. Use for "review this", "code review", "what could this break", "blast radius", or review feedback.
 license: MIT
 ---
 
-# Code Review
+# Impact Review
 
 Review is read-only: report findings; edit only when asked.
 

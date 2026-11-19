@@ -322,7 +322,7 @@ Adapted from pstack's `create-verification-skill`.
 purpose, a concrete source of proof for verification-before-completion, but
 neither it nor pstack records a specific failure.
 
-## code-review
+## impact-review
 
 Stage: Check
 For you: review a change and trace what it could break beyond its own diff.

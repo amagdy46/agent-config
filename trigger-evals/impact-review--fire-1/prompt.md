@@ -1,6 +1,6 @@
 ---
-name: code-review--fire-1
-description: "code-review should fire: close to the description."
+name: impact-review--fire-1
+description: "impact-review should fire: close to the description."
 tags: [trigger, should-fire]
 runs: 3
 max_turns: 4

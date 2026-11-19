@@ -1,6 +1,6 @@
 ---
 name: ci-pr-lifecycle--not
-description: "ci-pr-lifecycle should not fire: near miss (code-review)."
+description: "ci-pr-lifecycle should not fire: near miss (impact-review)."
 tags: [trigger, should-not-fire]
 runs: 3
 max_turns: 4

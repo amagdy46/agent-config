@@ -1,8 +1,8 @@
 {
   "count": 23,
   "startup": {
-    "bytes": 4313,
-    "approxTokens": 1078
+    "bytes": 4330,
+    "approxTokens": 1083
   },
   "evals": {
     "generated": "2026-11-18",
@@ -107,7 +107,7 @@
       "forYou": "execute a plan or tickets to the end, yourself or with subagents.",
       "fixes": "The agent stopped after every step to ask whether it should go on.",
       "origin": "seen here",
-      "bytes": 3277,
+      "bytes": 3279,
       "startupBytes": 171,
       "eval": {
         "cases": 2,
@@ -143,7 +143,7 @@
       "forYou": "coordinate many implementer and reviewer agents under your standing orders.",
       "fixes": "In long sessions I kept repeating the same reminders: keep agents busy, update the tracker, use this model.",
       "origin": "seen here",
-      "bytes": 3819,
+      "bytes": 3821,
       "startupBytes": 169,
       "eval": null
     },
@@ -220,15 +220,15 @@
       "eval": null
     },
     {
-      "name": "code-review",
-      "path": "skills/code-review/SKILL.md",
-      "description": "Review a diff or PR for spec and standards fit, and trace what it could break beyond the diff. Use for \"review this\", \"what could this break\", \"blast radius\", or review feedback.",
+      "name": "impact-review",
+      "path": "skills/impact-review/SKILL.md",
+      "description": "Review a diff or PR for spec and standards fit, and trace what it could break beyond the diff. Use for \"review this\", \"code review\", \"what could this break\", \"blast radius\", or review feedback.",
       "stage": "Check",
       "forYou": "review a change and trace what it could break beyond its own diff.",
       "fixes": "A change looked fine in its diff and broke something elsewhere.",
       "origin": "seen here",
-      "bytes": 4343,
-      "startupBytes": 189,
+      "bytes": 4362,
+      "startupBytes": 206,
       "eval": null
     },
     {

@@ -131,7 +131,7 @@ trim are in [TRIGGERS.md](TRIGGERS.md).
 After changing a description, rerun that skill, then the whole suite:
 
 ```sh
-node trigger-evals/run.mjs --model haiku --case 'code-review--*'
+node trigger-evals/run.mjs --model haiku --case 'impact-review--*'
 node trigger-evals/run.mjs --model sonnet --runs 2 --max-cost-usd 8
 ```
 

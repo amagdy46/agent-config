@@ -1,6 +1,6 @@
 ---
-name: code-review--not
-description: "code-review should not fire: near miss (systematic-debugging)."
+name: impact-review--not
+description: "impact-review should not fire: near miss (systematic-debugging)."
 tags: [trigger, should-not-fire]
 runs: 3
 max_turns: 4

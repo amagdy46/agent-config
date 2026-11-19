@@ -1,6 +1,6 @@
 ---
-name: code-review--fire-2
-description: "code-review should fire: in other words."
+name: impact-review--fire-2
+description: "impact-review should fire: in other words."
 tags: [trigger, should-fire]
 runs: 3
 max_turns: 4

@@ -17,7 +17,7 @@ answered without any skill.
 | architecture-design | 0/6 | 0/3 | 3/6 | 0/3 | none (3) |
 | brainstorm | 3/6 | 0/3 | 5/6 | 0/3 | none (1) |
 | ci-pr-lifecycle | 4/6 | 0/3 | 6/6 | 0/3 | |
-| code-review | 1/6 | 0/3 | 5/6 | 0/3 | none (1) |
+| impact-review (measured as `code-review`, its name then) | 1/6 | 0/3 | 5/6 | 0/3 | none (1) |
 | create-verification-skill | 4/6 | 0/3 | 6/6 | 0/3 | |
 | explain-codebase | 2/6 | 0/3 | 6/6 | 0/3 | |
 | frontend-design | 5/6 | 0/3 | 6/6 | 0/3 | |
@@ -57,7 +57,7 @@ skills.
 | architecture-design | 1/6 | 0/6 | 4/4 | 3/6 |
 | brainstorm | 3/6 | 3/6 | 4/4 | 5/6 |
 | ci-pr-lifecycle | 5/6 | 4/6 | 4/4 | 6/6 |
-| code-review | 3/6 | 1/6 | 4/4 | 5/6 |
+| impact-review (measured as `code-review`) | 3/6 | 1/6 | 4/4 | 5/6 |
 | create-verification-skill | 4/6 | 4/6 | 4/4 | 6/6 |
 | explain-codebase | 2/6 | 2/6 | 4/4 | 6/6 |
 | frontend-design | 4/6 | 5/6 | 4/4 | 6/6 |
@@ -88,7 +88,7 @@ difference:
   on Haiku (0/3 to 4/6 over two passes).
 - `handoff`: "pick up where the last session left off" fires on Sonnet
   (0/5 to 2/2). Haiku still misses it.
-- `implement`, `research`, `code-review`, `technical-documentation`:
+- `implement`, `research`, `impact-review`, `technical-documentation`:
   Haiku up 2 or 3 runs; Sonnet level.
 - `prototype`, `systematic-debugging`: Haiku down 2 runs. Noise: rerun
   side by side, the old and new text scored the same (3/6 and 3/6; 2/6
@@ -98,6 +98,10 @@ difference:
 - `grilling` was reworded after this run: "one at a time" became "in
   short rounds", because the skill asks in rounds. Its cases were not
   rerun, and one of its prompts says "one at a time".
+- `code-review` was then renamed `impact-review`, with "code review"
+  added as a trigger phrase. Its three cases, rerun 2026-11-19 (Claude
+  Code 2.1.328): Haiku 3/6, Sonnet 4/4, no false fires. The same as
+  before the rename.
 
 ## What the baseline shows
 
