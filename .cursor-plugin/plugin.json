@@ -1,6 +1,6 @@
 {
-  "name": "mashi",
-  "displayName": "mashi",
+  "name": "amagdy-skills",
+  "displayName": "amagdy-skills",
   "version": "0.1.0",
   "description": "Agent skills that ask once, then get out of your way: brainstorm, plan, build test-first, debug, verify and review.",
   "author": {
@@ -9,7 +9,6 @@
   "homepage": "https://github.com/amagdy46/agent-config",
   "repository": "https://github.com/amagdy46/agent-config",
   "license": "MIT",
-  "logo": "assets/logo.png",
   "category": "developer-tools",
   "keywords": ["skills", "workflow", "planning", "tdd", "debugging", "code-review", "verification"],
   "skills": "./skills/"

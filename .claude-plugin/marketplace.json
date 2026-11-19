@@ -1,5 +1,5 @@
 {
-  "name": "mashi",
+  "name": "amagdy-skills",
   "owner": {
     "name": "Abdulrahman Magdy",
     "url": "https://github.com/amagdy46"
@@ -7,7 +7,7 @@
   "description": "Agent skills that ask once, then get out of your way.",
   "plugins": [
     {
-      "name": "mashi",
+      "name": "amagdy-skills",
       "source": "./",
       "category": "development",
       "description": "Agent skills that ask once, then get out of your way: brainstorm, plan, build test-first, debug, verify and review."

@@ -32,8 +32,8 @@ claude plugin list 2>/dev/null; codex plugin list 2>/dev/null
 - `using-superpowers`, `brainstorming`, plugin `superpowers`: Superpowers.
 - `grill-me`, `to-tickets`, plugin `mattpocock-skills`: Matt Pocock's skills.
 - `setup-pstack`, `poteto-mode`, plugin `pstack`: pstack.
-- `working-style` or plugin `mashi`: this set is already installed. Plugin
-  `mashi`: run its update (step 5). A `working-style` folder: run the skills
+- `working-style` or plugin `amagdy-skills`: this set is already installed. Plugin
+  `amagdy-skills`: run its update (step 5). A `working-style` folder: run the skills
   CLI update; if it is a symlink into a git clone, run `git pull` there.
   Then follow "Renamed skills" below.
 
@@ -45,9 +45,9 @@ conflicting instructions. Ask whether to remove the other one or stop.
 
 Whole set by default: the skills hand off to each other by name.
 
-- Claude Code: `claude plugin install mashi --marketplace amagdy46/agent-config`
+- Claude Code: `claude plugin install amagdy-skills --marketplace amagdy46/agent-config`
 - Codex: `codex plugin marketplace add amagdy46/agent-config`, then
-  `codex plugin add mashi@mashi`
+  `codex plugin add amagdy-skills@amagdy-skills`
 - Others: `npx -y skills add amagdy46/agent-config -g -y --agent <agent>`
 
 Only some skills asked for: use the skills CLI on any agent, and always add
@@ -56,7 +56,7 @@ Only some skills asked for: use the skills CLI on any agent, and always add
 
 ## 4. Check that it loaded
 
-- Claude Code plugin: `claude plugin details mashi@mashi` lists `working-style`.
+- Claude Code plugin: `claude plugin details amagdy-skills@amagdy-skills` lists `working-style`.
 - Codex: `codex debug prompt-input hi | grep -c 'Proceed, then present'` prints 1 or more.
 - Skills CLI: `npx -y skills list -g` lists `working-style`.
 
@@ -87,8 +87,8 @@ then present". Then give these lines. Plugins do not update themselves.
 
 | Path | Update | Remove |
 |---|---|---|
-| Claude Code plugin | `claude plugin marketplace update mashi && claude plugin update mashi@mashi` | `claude plugin uninstall mashi@mashi && claude plugin marketplace remove mashi` |
-| Codex plugin | `codex plugin marketplace upgrade mashi` | `codex plugin remove mashi@mashi && codex plugin marketplace remove mashi` |
+| Claude Code plugin | `claude plugin marketplace update amagdy-skills && claude plugin update amagdy-skills@amagdy-skills` | `claude plugin uninstall amagdy-skills@amagdy-skills && claude plugin marketplace remove amagdy-skills` |
+| Codex plugin | `codex plugin marketplace upgrade amagdy-skills` | `codex plugin remove amagdy-skills@amagdy-skills && codex plugin marketplace remove amagdy-skills` |
 | Skills CLI | `npx -y skills update -g -y` | see below |
 
 Skills CLI removal of this set only:

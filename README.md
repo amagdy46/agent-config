@@ -1,15 +1,10 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
-    <img alt="mashi (ماشي)" src="assets/wordmark-light.svg" width="360">
-  </picture>
-</p>
+# agent-config
 
-<p align="center"><b>Agent skills that ask once, then get out of your way.</b></p>
+**Agent skills that ask once, then get out of your way.**
 
-<p align="center">
+<p>
 <a href="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 1,083 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C083%20tokens-0F5E63"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 1,083 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C083%20tokens-555"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
@@ -74,11 +69,11 @@ Or run it yourself:
 
 ```sh
 # Claude Code
-claude plugin install mashi --marketplace amagdy46/agent-config
+claude plugin install amagdy-skills --marketplace amagdy46/agent-config
 
 # Codex
 codex plugin marketplace add amagdy46/agent-config
-codex plugin add mashi@mashi
+codex plugin add amagdy-skills@amagdy-skills
 
 # Cursor, OpenCode, Pi and others
 npx -y skills add amagdy46/agent-config -g -y --agent <agent>
@@ -254,4 +249,3 @@ MIT. The skills started from Jesse Vincent's
 [pstack](https://github.com/cursor/plugins/tree/main/pstack); the parts that
 fixed real problems were kept, overlaps merged, the rest cut. Credits and
 pinned upstream versions are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-The name, mashi (ماشي), is Egyptian Arabic for "okay, on it".
