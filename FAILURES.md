@@ -139,23 +139,6 @@ Rules with a recorded reason:
   ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
   reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
-## architecture-design
-
-Stage: Plan
-For you: design module boundaries, and refactor without changing behaviour.
-Fixes: A refactor quietly changed behaviour, or a new design added layers that only passed arguments along.
-Origin: inherited
-
-Adapted from Matt Pocock's `codebase-design` and `domain-modeling` and
-pstack's `architect` and `arena`. No recorded failure was found.
-
-Rules with a recorded reason:
-
-- It settles design choices itself and states each with its reason, instead
-  of asking before every choice
-  ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-
 ## implement
 
 Stage: Build

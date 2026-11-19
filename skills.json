@@ -1,8 +1,8 @@
 {
-  "count": 19,
+  "count": 18,
   "startup": {
-    "bytes": 3583,
-    "approxTokens": 896
+    "bytes": 3377,
+    "approxTokens": 844
   },
   "evals": {
     "generated": "2026-11-18",
@@ -85,18 +85,6 @@
       "origin": "inherited",
       "bytes": 2629,
       "startupBytes": 179,
-      "eval": null
-    },
-    {
-      "name": "architecture-design",
-      "path": "skills/architecture-design/SKILL.md",
-      "description": "Settle module boundaries, interfaces and ownership before coding, or restructure code without changing behavior. Use for \"design this\", \"refactor\", \"restructure\", \"how should we split X\".",
-      "stage": "Plan",
-      "forYou": "design module boundaries, and refactor without changing behaviour.",
-      "fixes": "A refactor quietly changed behaviour, or a new design added layers that only passed arguments along.",
-      "origin": "inherited",
-      "bytes": 3443,
-      "startupBytes": 206,
       "eval": null
     },
     {

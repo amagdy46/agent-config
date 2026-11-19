@@ -9,7 +9,7 @@
 
 <p align="center">
 <a href="https://github.com/amagdy46/skills/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/skills/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 896 tokens" src="https://img.shields.io/badge/startup%20cost-about%20896%20tokens-0d0f12"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 844 tokens" src="https://img.shields.io/badge/startup%20cost-about%20844%20tokens-0d0f12"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
@@ -163,7 +163,6 @@ is this PR ready? push it and watch CI
 |  | [prototype](skills/prototype/SKILL.md) | build a throwaway to answer one design question | 199 | - |
 | Plan | [writing-plans](skills/writing-plans/SKILL.md) | turn a design into small tasks with exact files, interfaces and tests | 170 | - |
 |  | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown, each naming what blocks it | 179 | - |
-|  | [architecture-design](skills/architecture-design/SKILL.md) | design module boundaries, and refactor without changing behaviour | 206 | - |
 | Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets to the end, yourself or with subagents | 171 | 100% / 100% |
 |  | [working-style](skills/working-style/SKILL.md) | let the agent decide and do reversible work, and ask you only before steps it cannot undo | 220 | 81% / 86% |
 |  | [orchestrate](skills/orchestrate/SKILL.md) | coordinate many implementer and reviewer agents under your standing orders | 169 | - |
@@ -180,7 +179,7 @@ is this PR ready? push it and watch CI
 Evals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded (on opus, run 2026-11-18, 3 runs per case and arm); `-` means the skill has no cases. With so few runs, read a gap under 20 points as noise. The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).
 <!-- skills-table:end -->
 
-At session start an agent loads only each skill's name and description: 19 skills, 3,583 bytes, about 896 tokens. <!-- startup-cost -->
+At session start an agent loads only each skill's name and description: 18 skills, 3,377 bytes, about 844 tokens. <!-- startup-cost -->
 
 ## Why these skills
 

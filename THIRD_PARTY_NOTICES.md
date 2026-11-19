@@ -17,7 +17,6 @@ see `CONTRIBUTING.md` for how updates are merged.
 | verification-before-completion | Superpowers; pstack `principle-prove-it-works` |
 | test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
 | systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
-| architecture-design | Pocock `codebase-design`, `domain-modeling`; pstack `architect`, `arena` |
 | research, explain-codebase | Pocock `research`; pstack `how`, `why` |
 | prototype | Pocock `prototype`; pstack prototype playbook |
 | handoff, wait-what | Pocock `handoff`, `wait-what`; pstack `bro` |
