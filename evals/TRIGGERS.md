@@ -103,6 +103,35 @@ difference:
   Code 2.1.328): Haiku 3/6, Sonnet 4/4, no false fires. The same as
   before the rename.
 
+## Held-out prompts and reworded descriptions (2026-11-19)
+
+The set shrank to 14 skills on this day; rows above that name a removed
+skill describe the suite as it was.
+
+`reflect`, `to-issues` and `systematic-debugging` fired least, so each got
+four more prompts that should load it and two more near misses, written
+without looking at the descriptions. Then the three descriptions were
+reworded to describe the situation, not only quote phrases, as the spec's
+guide advises. Claude Code 2.1.328, all skills as one plugin.
+
+| Skill | Haiku, old wording | Haiku, new | Sonnet, old | Sonnet, new |
+|---|---|---|---|---|
+| reflect | 3/18 | 3/18 | 4/12 | 6/12 |
+| to-issues | 2/18 | 2/18 | 7/12 | 7/12 |
+| systematic-debugging | 3/18 | 3/18 | 8/12 | 8/12 |
+| **all** | **8/54** | **8/54** | **19/36** | **21/36** |
+
+Haiku: 3 runs of all six should-fire prompts. Sonnet: 2 runs. No near miss
+fired on Haiku (0 of 27 with either wording); Sonnet ran the should-fire
+prompts only.
+
+- The rewording changed nothing on Haiku and nothing clear on Sonnet, so it
+  was reverted: the descriptions are the shorter ones measured above.
+- On prompts written in other words, Sonnet loads these skills in about
+  half the runs and Haiku in about one in seven. The first suite's two
+  prompts per skill overstated both.
+- Every miss was "none": the agent did the task without a skill.
+
 ## What the baseline shows
 
 **Fire reliably** (Sonnet every run, Haiku 4/6 or more): `orchestrate`,

@@ -160,6 +160,12 @@ Rules with a recorded reason:
   the helper the clutter it exists to avoid
   ([skills#1341](https://github.com/mattpocock/skills/pull/1341)).
 
+Measured on 2026-11-19 (`six-task-plan`, Sonnet, 3 runs per arm): with and
+without the skill every run finished all six tasks with their tests. Only
+with it was the plan ticked as the work went, 3 of 3 against 0 of 3. On the
+two shorter cases there is no difference
+([RESULTS.md](evals/RESULTS.md#2026-11-19-fewer-skills-two-harder-cases)).
+
 ## working-style
 
 Stage: Build
@@ -235,6 +241,13 @@ Rules with a recorded reason:
   asks only for the one missing piece. The earlier text said "stop" and "do
   not theorise without a loop", which halted work that the existing evidence
   could carry ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
+
+Measured on 2026-11-19 (`cents-off`, Sonnet, 3 runs per arm): every run
+fixed the bug it was shown. Only with the skill did the agent also fix the
+copy of the same mistake in another file (3 of 3 against 0 of 3) and leave
+a regression test (2 of 3 against 0 of 3). Haiku did not load the skill and
+shows no difference; the three shorter cases show none on any model
+([RESULTS.md](evals/RESULTS.md#2026-11-19-fewer-skills-two-harder-cases)).
 
 ## create-verification-skill
 
