@@ -107,7 +107,7 @@ Restart the agent after an install, update or removal.
 (another collection's skill of the same name is not ours), run once:
 
 ```sh
-npx -y skills remove -g -y -s code-review verification-before-completion prototype frontend-design explain-codebase handoff technical-documentation architecture-design
+npx -y skills remove -g -y -s code-review verification-before-completion prototype frontend-design explain-codebase handoff technical-documentation architecture-design test-driven-development wait-what
 npx -y skills add amagdy46/skills -g -y --agent <agent>
 ```
 
@@ -116,7 +116,9 @@ npx -y skills add amagdy46/skills -g -y --agent <agent>
 - `verification-before-completion` is now a rule in `working-style`, and
   `prototype` a paragraph in `brainstorm`.
 - `frontend-design`, `explain-codebase`, `handoff`,
-  `technical-documentation` and `architecture-design` are removed.
+  `technical-documentation`, `architecture-design`,
+  `test-driven-development` and `wait-what` are removed. `implement` still
+  builds test-first.
 
 Drop `-g` for a project install. The plugin switches with its next version.
 A clone linked with `scripts/link.mjs`: `git pull`, then run the script

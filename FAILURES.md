@@ -216,36 +216,6 @@ Rules with a recorded reason:
 - Review loops stop at three rounds, for the reason under implement
   ([superpowers#2481](https://github.com/obra/superpowers/issues/2481)).
 
-## test-driven-development
-
-Stage: Build
-For you: build each behaviour test-first: watch the test fail, then make it pass.
-Fixes: The tests passed, but they would have passed even if the code were wrong.
-Origin: upstream
-
-Upstream, an agent counted a compile error ("no method named
-`drain_settled`") as its failing test, so the bug it was meant to reproduce
-never was ([skills#1210](https://github.com/mattpocock/skills/issues/1210)), and a
-test whose setup never created the condition it claimed to test stayed green
-after the whole implementation was deleted
-([superpowers#2092](https://github.com/obra/superpowers/issues/2092)). The
-skill says a syntax or test-setup error is not a failing test, and judges
-each test by whether breaking the behaviour turns it red.
-
-Rules with a recorded reason:
-
-- Each proposed seam (the boundary a test drives) gets one line on what it
-  catches and misses, and the agent states its choice instead of asking.
-  Upstream, agents asked users to pick a seam with no reasons given
-  ([skills#607](https://github.com/mattpocock/skills/issues/607));
-  [f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7) removed
-  the confirmation step here.
-- A characterization test, which pins existing behaviour before a refactor,
-  may pass first time if it is shown to fail when the behaviour breaks. The
-  earlier text told agents to "fix the test" whenever one passed first time,
-  which forbade these
-  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
-
 ## systematic-debugging
 
 Stage: Build
@@ -318,24 +288,6 @@ skill needs the branch, commits and worktree named and confirmed before
 anything is discarded, and never force-removes a worktree; the upstream case
 shows a written rule was not enough there, and nobody has tested yet whether
 this wording does better.
-
-## wait-what
-
-Stage: Explain
-For you: get the last answer again in plain words.
-Fixes: The agent's answer was so dense with jargon that I couldn't follow it.
-Origin: upstream
-
-Matt Pocock added it as a "verbosity fire extinguisher" after a user reported
-a model that stayed verbose even with a 400-line concision skill installed
-([skills#751](https://github.com/mattpocock/skills/pull/751)). This repo has
-no record of its own.
-
-Rules with a recorded reason:
-
-- It no longer fires on "bro" alone. The description listed "bro" as a
-  trigger, a word that also turns up in ordinary requests
-  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
 ## reflect
 

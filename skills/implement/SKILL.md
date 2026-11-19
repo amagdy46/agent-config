@@ -31,9 +31,9 @@ independent reviewer was available.
 The tasks are a graph, not a list. The **frontier** is every task whose
 blockers are done. For each task on it:
 
-1. Build it test-first with the test-driven-development skill at the seams
-   the plan names, unless the project's `AGENTS.md` sets a different testing
-   rule; then follow that rule.
+1. Build it test-first at the seams the plan names: write the test, watch
+   it fail for the right reason, then write the code that passes it. If the
+   project's `AGENTS.md` sets a different testing rule, follow that.
 2. Run the project's fast checks during each cycle and its gate once at the
    end of the task, proving the change in the running app with the project's
    `verify-*` skill when it has one.
