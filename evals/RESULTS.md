@@ -11,6 +11,14 @@ is all 23 skills as one plugin, the way an install loads them (with-arm
 only, run without a baseline arm: read "The full set" below before
 comparing it with the other columns).
 
+Three changes landed on 2026-11-19, after these runs: every description
+was trimmed, `brainstorm` now hands its last step to `grilling`, and
+`code-review` became `impact-review`. Only `brainstorm` was rerun on the
+result (Sonnet, Claude Code 2.1.328, 3 runs per arm): `brainstorm-opening`
+1.00 (3/3) with the skill and 0.50 (0/3) without, `brainstorm-sounds-good`
+1.00 (3/3) and 1.00 (3/3). The other rows describe the skills as they
+were on 2026-11-18.
+
 ## Per case
 
 | Skill | Case | Haiku without | Haiku with | Haiku full set | Sonnet without | Sonnet with | Opus without | Opus with | Opus full set |
