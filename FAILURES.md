@@ -39,6 +39,10 @@ Rules with a recorded reason:
   proceeds without an interview
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
   reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
+- It converges by running `grilling`, not a copy of its rounds, so the two
+  cannot drift apart ([CONTRIBUTING.md](CONTRIBUTING.md): one job, one
+  skill). Rerun on Sonnet after that change: `brainstorm-opening` still
+  passes 3/3 with the skill and 0/3 without.
 
 ## grilling
 
@@ -50,9 +54,10 @@ Origin: seen here
 The README gives this together with brainstorm, as the maintainer's account:
 the agent guessed instead of asking
 ([Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L177-L179)).
-grilling maps the open decisions as a tree and asks every question that is
-ready, each with its recommended answer, round after round until none are
-left.
+grilling maps the open decisions as a tree and asks, each round, the three
+that matter most among those that are ready, each with its recommended
+answer. It lists the rest as defaults you can overturn, and goes on round
+after round until none are left.
 
 Rules with a recorded reason:
 
@@ -63,6 +68,18 @@ Rules with a recorded reason:
   agent run inside another skill read "explore instead of asking" as licence
   to answer the decisions itself
   ([changelog](https://github.com/mattpocock/skills/blob/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d/CHANGELOG.md?plain=1#L275)).
+- A round asks at most three questions, one decision each, and states the
+  agent's own choice for the rest. Upstream, users complained of question
+  floods: "Codex just asked me 200 questions"
+  ([skills#44](https://github.com/mattpocock/skills/issues/44)) and "getting
+  10+ questions at once is unbearable"
+  ([skills#831](https://github.com/mattpocock/skills/issues/831)). Measured
+  here (`grill-migration`, Sonnet, 3 runs per arm) before the cap: without
+  the skill, 7 to 11 numbered questions and 27 to 41 question marks in one
+  reply; with the skill, 4 to 6 questions, but each carried sub-questions,
+  for 10 to 17 question marks. After the cap: 3 questions in every run and
+  5 to 7 question marks, the rest stated as defaults
+  ([RESULTS.md](evals/RESULTS.md#question-cap-grilling-sonnet)).
 
 ## research
 
