@@ -396,16 +396,6 @@ Rules with a recorded reason:
   ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47), for the
   reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
-## technical-documentation
-
-Stage: Write
-For you: write docs for developers or operators, checked against the real system.
-Fixes: The docs described what the code used to do, or guessed at names and flags.
-Origin: inherited
-
-Adapted from pstack's `technical-writing`, Technical Writer and Awesome
-Copilot. No recorded failure was found.
-
 ## unslop
 
 Stage: Write
