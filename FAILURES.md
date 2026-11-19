@@ -352,16 +352,6 @@ anything is discarded, and never force-removes a worktree; the upstream case
 shows a written rule was not enough there, and nobody has tested yet whether
 this wording does better.
 
-## explain-codebase
-
-Stage: Explain
-For you: explain how code works, and why it is shaped that way.
-Fixes: The agent explained code from its names and folders, and gave guesses about intent as fact.
-Origin: inherited
-
-Adapted from Matt Pocock's `research` and pstack's `how` and `why`. No
-recorded failure was found.
-
 ## wait-what
 
 Stage: Explain

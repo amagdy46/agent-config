@@ -1,8 +1,8 @@
 {
-  "count": 22,
+  "count": 21,
   "startup": {
-    "bytes": 4137,
-    "approxTokens": 1034
+    "bytes": 3961,
+    "approxTokens": 990
   },
   "evals": {
     "generated": "2026-11-18",
@@ -229,18 +229,6 @@
       "origin": "upstream",
       "bytes": 2465,
       "startupBytes": 170,
-      "eval": null
-    },
-    {
-      "name": "explain-codebase",
-      "path": "skills/explain-codebase/SKILL.md",
-      "description": "Explain how existing code works and why it is shaped that way. Use for \"how does X work\", walkthroughs, \"where should this live\", \"why is this here\". Read-only.",
-      "stage": "Explain",
-      "forYou": "explain how code works, and why it is shaped that way.",
-      "fixes": "The agent explained code from its names and folders, and gave guesses about intent as fact.",
-      "origin": "inherited",
-      "bytes": 2023,
-      "startupBytes": 176,
       "eval": null
     },
     {
