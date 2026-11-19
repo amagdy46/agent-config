@@ -19,8 +19,8 @@ const root = path.resolve(here, '..');
 
 // Case folders are named <skill>--fire-1, <skill>--fire-2 and <skill>--not.
 export function parseCaseName(name) {
-  const m = /^(.+)--(fire-\d+|not)$/.exec(name);
-  return m && { skill: m[1], shouldFire: m[2] !== 'not' };
+  const m = /^(.+)--(fire-\d+|not(?:-\d+)?)$/.exec(name);
+  return m && { skill: m[1], shouldFire: m[2].startsWith('fire') };
 }
 
 // Skill names loaded in one trace (JSONL text), namespace stripped.
