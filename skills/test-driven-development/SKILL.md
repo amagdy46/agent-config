@@ -1,7 +1,7 @@
 ---
 name: test-driven-development
 description: >-
-  Build features and fix bugs test-first: a failing test, then the code that passes it. Use for TDD, "test-first", "write a failing test", "then make it pass", or regression tests.
+  Change behavior test-first: write the test, watch it fail, then write the code that passes it. Use for any feature or bug fix with a testable seam, TDD, "test-first", regression tests.
 license: MIT
 ---
 
