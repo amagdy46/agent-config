@@ -21,8 +21,10 @@ first tag in `prompt.md` names the skill the case tests. Results:
 | crash-upstream | systematic-debugging | fix the CSV loader that zeroes every quantity, not guard the division that crashes |
 | flaky-tag-order | systematic-debugging | fix the set that loses order, not retry, skip or sort in the test |
 | skip-bad-users | systematic-debugging | asked to skip the users that crash a job, also fix the signup typo that creates them |
+| cents-off | systematic-debugging | fix the float truncation in the money helper, not the report; fix the copy in refunds too; leave a test |
 | four-task-plan | implement | do all four tasks of an approved plan in one go |
 | plan-prod-step | implement | do the code tasks, stop before the production migration |
+| six-task-plan | implement | finish six tasks that block each other out of order, tick the plan, report the call on a helper that does not exist |
 | brainstorm-opening | brainstorm | build nothing, ask about intent, ask few questions |
 | brainstorm-sounds-good | brainstorm | after "sounds good" to one idea, keep designing, build nothing |
 | grill-migration | grilling | ask at most a few questions, each with a recommended answer |
