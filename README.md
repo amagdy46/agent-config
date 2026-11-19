@@ -9,7 +9,7 @@
 
 <p align="center">
 <a href="https://github.com/amagdy46/skills/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/skills/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 1,034 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C034%20tokens-0d0f12"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 990 tokens" src="https://img.shields.io/badge/startup%20cost-about%20990%20tokens-0d0f12"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
@@ -173,8 +173,7 @@ is this PR ready? push it and watch CI
 |  | [create-verification-skill](skills/create-verification-skill/SKILL.md) | write a project's verify skill so agents can prove changes in the real app | 207 | - |
 |  | [impact-review](skills/impact-review/SKILL.md) | review a change and trace what it could break beyond its own diff | 206 | - |
 |  | [ci-pr-lifecycle](skills/ci-pr-lifecycle/SKILL.md) | drive a PR through CI to a finished state; it never merges unasked | 170 | - |
-| Explain | [explain-codebase](skills/explain-codebase/SKILL.md) | explain how code works, and why it is shaped that way | 176 | - |
-|  | [wait-what](skills/wait-what/SKILL.md) | get the last answer again in plain words | 165 | - |
+| Explain | [wait-what](skills/wait-what/SKILL.md) | get the last answer again in plain words | 165 | - |
 |  | [handoff](skills/handoff/SKILL.md) | write a handoff between sessions, or resume from one | 185 | - |
 | Improve | [reflect](skills/reflect/SKILL.md) | turn a session's lessons into edits to skills, `AGENTS.md` or enforcement | 205 | - |
 | Write | [technical-documentation](skills/technical-documentation/SKILL.md) | write docs for developers or operators, checked against the real system | 193 | - |
@@ -183,7 +182,7 @@ is this PR ready? push it and watch CI
 Evals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded (on opus, run 2026-11-18, 3 runs per case and arm); `-` means the skill has no cases. With so few runs, read a gap under 20 points as noise. The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).
 <!-- skills-table:end -->
 
-At session start an agent loads only each skill's name and description: 22 skills, 4,137 bytes, about 1,034 tokens. <!-- startup-cost -->
+At session start an agent loads only each skill's name and description: 21 skills, 3,961 bytes, about 990 tokens. <!-- startup-cost -->
 
 ## Why these skills
 
