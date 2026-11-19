@@ -1,5 +1,5 @@
 {
-  "name": "mashi",
+  "name": "amagdy-skills",
   "version": "0.1.0",
   "description": "Agent skills that ask once, then get out of your way: brainstorm, plan, build test-first, debug, verify and review.",
   "author": {
@@ -12,7 +12,7 @@
   "keywords": ["skills", "workflow", "planning", "tdd", "debugging", "code-review", "verification"],
   "skills": "./skills/",
   "interface": {
-    "displayName": "mashi",
+    "displayName": "amagdy-skills",
     "shortDescription": "Skills that ask once, then get out of your way.",
     "longDescription": "Skills for the whole loop: brainstorm until the goal is clear, plan in small tasks, build test-first, debug to the root cause, verify before claiming done, and review. The failure each skill targets is logged, with its source.",
     "developerName": "Abdulrahman Magdy",
@@ -24,8 +24,8 @@
       "Debug this failing test and find the root cause.",
       "Review this branch before I open a PR."
     ],
-    "brandColor": "#0F5E63",
-    "composerIcon": "./assets/mark-16.svg",
+    "brandColor": "#ff5a1f",
+    "composerIcon": "./assets/mark.svg",
     "logo": "./assets/logo.png",
     "logoDark": "./assets/logo-dark.png"
   }

@@ -68,7 +68,7 @@ test("writes skills.json and the README regions, and nothing else", () => {
   const readme = read(root, "README.md");
   assert.equal(
     readme,
-    `# Demo\n\n<a href="#skills"><img alt="Startup cost: about 9 tokens" src="https://img.shields.io/badge/startup%20cost-about%209%20tokens-0F5E63"></a> <!-- startup-badge -->\n\n` +
+    `# Demo\n\n<a href="#skills"><img alt="Startup cost: about 9 tokens" src="https://img.shields.io/badge/startup%20cost-about%209%20tokens-0d0f12"></a> <!-- startup-badge -->\n\n` +
       `${EVALS_START}\nNo eval results yet.\n<!-- evals-table:end -->\n\nIntro stays.\n\n${START}\n` +
       "| Stage | Skill | For you | Startup bytes |\n| --- | --- | --- | --: |\n" +
       "| Think | [beta](skills/beta/SKILL.md) | split a \\| b | 20 |\n" +

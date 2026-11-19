@@ -178,7 +178,7 @@ if (summary) {
 const sentence = `At session start an agent loads only each skill's name and description: ${entries.length} skills, ${thousands(total)} bytes, about ${thousands(tokens)} tokens.`;
 const badge =
   `<a href="#skills"><img alt="Startup cost: about ${thousands(tokens)} tokens" ` +
-  `src="https://img.shields.io/badge/startup%20cost-about%20${thousands(tokens).replace(/,/g, "%2C")}%20tokens-0F5E63"></a>`;
+  `src="https://img.shields.io/badge/startup%20cost-about%20${thousands(tokens).replace(/,/g, "%2C")}%20tokens-0d0f12"></a>`;
 
 // The short eval table near the top: one row per evaluated skill.
 const evaluated = entries.filter((entry) => entry.eval);
