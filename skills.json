@@ -1,8 +1,8 @@
 {
-  "count": 18,
+  "count": 17,
   "startup": {
-    "bytes": 3377,
-    "approxTokens": 844
+    "bytes": 3178,
+    "approxTokens": 795
   },
   "evals": {
     "generated": "2026-11-18",
@@ -17,7 +17,7 @@
       "forYou": "find out what you actually want, with research, before any code exists.",
       "fixes": "The agent guessed what I meant and built the wrong thing.",
       "origin": "seen here",
-      "bytes": 3920,
+      "bytes": 4169,
       "startupBytes": 179,
       "eval": {
         "cases": 2,
@@ -49,18 +49,6 @@
       "origin": "inherited",
       "bytes": 2190,
       "startupBytes": 183,
-      "eval": null
-    },
-    {
-      "name": "prototype",
-      "path": "skills/prototype/SKILL.md",
-      "description": "Build a throwaway artifact to settle one uncertain design question. Use for \"prototype\", \"spike\", \"mockup\", \"try a few versions\", \"what should this look like\". Skip when behavior is settled.",
-      "stage": "Think",
-      "forYou": "build a throwaway to answer one design question.",
-      "fixes": "A design question was argued in chat for an hour, or throwaway code ended up in production.",
-      "origin": "inherited",
-      "bytes": 2342,
-      "startupBytes": 199,
       "eval": null
     },
     {

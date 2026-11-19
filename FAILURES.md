@@ -92,16 +92,6 @@ Adapted from Matt Pocock's `research` and pstack's `how` and `why`. No
 recorded failure was found; the skill carries their method: go to the owner
 of each fact, cite beside the claim, report searches that found nothing.
 
-## prototype
-
-Stage: Think
-For you: build a throwaway to answer one design question.
-Fixes: A design question was argued in chat for an hour, or throwaway code ended up in production.
-Origin: inherited
-
-Adapted from Matt Pocock's `prototype` and pstack's prototype playbook. No
-recorded failure was found here or upstream.
-
 ## writing-plans
 
 Stage: Plan

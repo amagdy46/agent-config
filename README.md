@@ -9,7 +9,7 @@
 
 <p align="center">
 <a href="https://github.com/amagdy46/skills/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/skills/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 844 tokens" src="https://img.shields.io/badge/startup%20cost-about%20844%20tokens-0d0f12"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 795 tokens" src="https://img.shields.io/badge/startup%20cost-about%20795%20tokens-0d0f12"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
@@ -160,7 +160,6 @@ is this PR ready? push it and watch CI
 | Think | [brainstorm](skills/brainstorm/SKILL.md) | find out what you actually want, with research, before any code exists | 179 | 100% / 50% |
 |  | [grilling](skills/grilling/SKILL.md) | stress-test a plan in rounds of questions, each with a recommended answer | 171 | - |
 |  | [research](skills/research/SKILL.md) | answer a question from primary sources, cited and dated | 183 | - |
-|  | [prototype](skills/prototype/SKILL.md) | build a throwaway to answer one design question | 199 | - |
 | Plan | [writing-plans](skills/writing-plans/SKILL.md) | turn a design into small tasks with exact files, interfaces and tests | 170 | - |
 |  | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown, each naming what blocks it | 179 | - |
 | Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets to the end, yourself or with subagents | 171 | 100% / 100% |
@@ -179,7 +178,7 @@ is this PR ready? push it and watch CI
 Evals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded (on opus, run 2026-11-18, 3 runs per case and arm); `-` means the skill has no cases. With so few runs, read a gap under 20 points as noise. The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).
 <!-- skills-table:end -->
 
-At session start an agent loads only each skill's name and description: 18 skills, 3,377 bytes, about 844 tokens. <!-- startup-cost -->
+At session start an agent loads only each skill's name and description: 17 skills, 3,178 bytes, about 795 tokens. <!-- startup-cost -->
 
 ## Why these skills
 

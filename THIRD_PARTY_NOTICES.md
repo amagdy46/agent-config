@@ -6,7 +6,7 @@ see `CONTRIBUTING.md` for how updates are merged.
 
 | Skill | Main sources |
 |---|---|
-| brainstorm | Superpowers `brainstorming`; Pocock `grilling`, `wayfinder` |
+| brainstorm | Superpowers `brainstorming`; Pocock `grilling`, `wayfinder`, `prototype`; pstack prototype playbook |
 | grilling | Pocock `grilling` |
 | writing-plans | Superpowers `writing-plans` |
 | to-issues | Pocock `to-tickets` |
@@ -18,7 +18,6 @@ see `CONTRIBUTING.md` for how updates are merged.
 | test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
 | systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
 | research | Pocock `research` |
-| prototype | Pocock `prototype`; pstack prototype playbook |
 | wait-what | Pocock `wait-what`; pstack `bro` |
 | ci-pr-lifecycle | Pocock `pr`; Superpowers `finishing-a-development-branch` |
 | reflect | pstack `reflect`, `principle-encode-lessons-in-structure`; Pocock `chief-of-staff`; compound-engineering `ce-compound` |

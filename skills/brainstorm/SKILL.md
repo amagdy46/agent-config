@@ -46,7 +46,11 @@ conversation and offer the rest. Without subagents, look it up inline between
 questions.
 
 When a quick throwaway build would answer a question faster than talking,
-offer a spike with the prototype skill. Bring what it taught you back here.
+offer a spike: the smallest runnable thing that answers that one question
+(two to four structurally different variants for a look, a small interactive
+model for logic, a probe for a feasibility fact). Keep it in a scratch
+folder, on fixtures, without tests. Run it, show what you saw, and bring what
+it taught you back here.
 
 ## 3. Play it back
 
