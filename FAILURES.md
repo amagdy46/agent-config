@@ -370,16 +370,6 @@ Rules with a recorded reason:
   trigger, a word that also turns up in ordinary requests
   ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
-## handoff
-
-Stage: Explain
-For you: write a handoff between sessions, or resume from one.
-Fixes: A new session started cold and redid finished work, or trusted a stale summary.
-Origin: inherited
-
-Adapted from Matt Pocock's `handoff`. No recorded failure
-was found.
-
 ## reflect
 
 Stage: Improve

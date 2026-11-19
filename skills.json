@@ -1,8 +1,8 @@
 {
-  "count": 21,
+  "count": 20,
   "startup": {
-    "bytes": 3961,
-    "approxTokens": 990
+    "bytes": 3776,
+    "approxTokens": 944
   },
   "evals": {
     "generated": "2026-11-18",
@@ -241,18 +241,6 @@
       "origin": "upstream",
       "bytes": 712,
       "startupBytes": 165,
-      "eval": null
-    },
-    {
-      "name": "handoff",
-      "path": "skills/handoff/SKILL.md",
-      "description": "Write a handoff brief so another agent can carry on, or resume work from one. Use for \"hand off\", \"write up where we are\", \"pick up where we left off\", \"resume the last session\".",
-      "stage": "Explain",
-      "forYou": "write a handoff between sessions, or resume from one.",
-      "fixes": "A new session started cold and redid finished work, or trusted a stale summary.",
-      "origin": "inherited",
-      "bytes": 2595,
-      "startupBytes": 185,
       "eval": null
     },
     {
