@@ -17,7 +17,6 @@ Install all skills, not a subset: they hand off to each other by name, and `work
 - [brainstorm](skills/brainstorm/SKILL.md): Think a new project through with the user before anything is built: interview, research, write the design. Use for "brainstorm", "new project", or starting from scratch.
 - [grilling](skills/grilling/SKILL.md): Stress-test a plan or decision in short rounds of pointed questions, each with a recommended answer. Use for "grill me", "poke holes in this", "challenge my plan".
 - [research](skills/research/SKILL.md): Answer a defined question from primary sources, with dated citations. Use for "research X", "find out", docs or API facts, comparing options. Not for explaining this codebase.
-- [prototype](skills/prototype/SKILL.md): Build a throwaway artifact to settle one uncertain design question. Use for "prototype", "spike", "mockup", "try a few versions", "what should this look like". Skip when behavior is settled.
 - [writing-plans](skills/writing-plans/SKILL.md): Turn an approved design into a plan of small, testable tasks with exact files and checks. Use for "write a plan", "plan this out", or before multi-step work.
 - [to-issues](skills/to-issues/SKILL.md): Break a design or plan into issues with dependencies and publish them to GitHub, Linear or Markdown. Use for "break this into issues", "create tickets", "make a backlog".
 - [implement](skills/implement/SKILL.md): Carry an approved plan or issues to done, task by task, with tests and review. Use for "implement this", "build the plan", "work the issues", "start on ticket X".
