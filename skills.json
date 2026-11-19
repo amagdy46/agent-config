@@ -1,8 +1,8 @@
 {
   "count": 23,
   "startup": {
-    "bytes": 4314,
-    "approxTokens": 1079
+    "bytes": 4313,
+    "approxTokens": 1078
   },
   "evals": {
     "generated": "2026-11-18",
@@ -30,13 +30,13 @@
     {
       "name": "grilling",
       "path": "skills/grilling/SKILL.md",
-      "description": "Stress-test a plan or decision with pointed questions, one at a time, each with a recommended answer. Use for \"grill me\", \"poke holes in this\", \"challenge my plan\".",
+      "description": "Stress-test a plan or decision in short rounds of pointed questions, each with a recommended answer. Use for \"grill me\", \"poke holes in this\", \"challenge my plan\".",
       "stage": "Think",
       "forYou": "stress-test a plan in rounds of questions, each with a recommended answer.",
       "fixes": "The agent acted on assumptions it never checked with me.",
       "origin": "seen here",
-      "bytes": 1728,
-      "startupBytes": 172,
+      "bytes": 1727,
+      "startupBytes": 171,
       "eval": null
     },
     {

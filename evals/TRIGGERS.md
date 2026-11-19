@@ -95,6 +95,9 @@ difference:
   and 2/6).
 - Still missing on both models: `reflect` on "turn that mistake into a
   rule".
+- `grilling` was reworded after this run: "one at a time" became "in
+  short rounds", because the skill asks in rounds. Its cases were not
+  rerun, and one of its prompts says "one at a time".
 
 ## What the baseline shows
 
