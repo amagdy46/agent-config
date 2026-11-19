@@ -14,7 +14,7 @@ see `CONTRIBUTING.md` for how updates are merged.
 | orchestrate | Superpowers `subagent-driven-development`; pstack `orchestrate`; tstack `sol-loop` |
 | create-verification-skill | pstack `create-verification-skill` |
 | impact-review | Pocock `code-review`; Superpowers `receiving-code-review`; pstack `blast-radius`, `interrogate`; tstack `sol-loop` |
-| verification-before-completion | Superpowers; pstack `principle-prove-it-works` |
+| working-style | Superpowers `verification-before-completion`; pstack `principle-prove-it-works` |
 | test-driven-development | Superpowers; Pocock `tdd`; pstack `tdd` |
 | systematic-debugging | Superpowers; Pocock `diagnosing-bugs`; pstack `principle-fix-root-causes` |
 | research | Pocock `research` |

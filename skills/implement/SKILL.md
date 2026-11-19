@@ -68,7 +68,7 @@ Record any call you made where the plan was silent, and report it at the end.
 
 ## Finish
 
-Run the full suite and the verification-before-completion skill. Then review
-the whole change with the impact-review skill and fix what it finds. Report
+Run the full suite on the final state and read its output; claim only what
+it shows. Then review the whole change with the impact-review skill and fix what it finds. Report
 what was built, the evidence, the calls you made, and anything left. Push or
 open a pull request only when asked; the ci-pr-lifecycle skill covers that.

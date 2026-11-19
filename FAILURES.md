@@ -183,6 +183,21 @@ without the skill. In the two cases where the agent should hold back
 (deleting untracked recordings, running a release), it held back in every
 run. Details: [evals/RESULTS.md](evals/RESULTS.md).
 
+It also carries the rule that was the `verification-before-completion`
+skill until 2026-11-19: no success claim without fresh output from this
+turn. The maintainer's account in the
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L183-L185):
+"done" meant "I think it's done". As its own skill the body loaded in 0 of
+33 eval runs, so only its description did any work; the rule now sits in
+this description, which every host lists at session start.
+
+Rules with a recorded reason:
+
+- If the project has a `verify-*` skill (its recipe for running the real
+  app), use it, so verification has a concrete source of proof
+  ([9ec9452](https://github.com/amagdy46/skills/commit/9ec9452),
+  [5087090](https://github.com/amagdy46/skills/commit/5087090)).
+
 ## orchestrate
 
 Stage: Build
@@ -251,27 +266,6 @@ Rules with a recorded reason:
   not theorise without a loop", which halted work that the existing evidence
   could carry ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
-## verification-before-completion
-
-Stage: Check
-For you: prove a claim before saying "done".
-Fixes: The agent said "done" when it meant "I think it's done".
-Origin: seen here
-
-The maintainer's account in the
-[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L183-L185):
-"done" meant "I think it's done". The skill blocks any success claim without fresh output from this turn:
-name the claim, run the command that proves it, read the result, and claim
-only what it shows.
-
-Rules with a recorded reason:
-
-- If the project has a `verify-*` skill (its recipe for running the real
-  app), use it, so
-  verification has a concrete source of proof
-  ([9ec9452](https://github.com/amagdy46/skills/commit/9ec9452),
-  [5087090](https://github.com/amagdy46/skills/commit/5087090)).
-
 ## create-verification-skill
 
 Stage: Check
@@ -281,7 +275,7 @@ Origin: inherited
 
 Adapted from pstack's `create-verification-skill`.
 [9ec9452](https://github.com/amagdy46/skills/commit/9ec9452) states its
-purpose, a concrete source of proof for verification-before-completion, but
+purpose, a concrete source of proof for the rule in working-style that "done" needs fresh evidence, but
 neither it nor pstack records a specific failure.
 
 ## impact-review

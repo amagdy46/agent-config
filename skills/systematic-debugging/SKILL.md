@@ -43,4 +43,4 @@ Three failed fixes mean a wrong model or architecture: stop stacking changes, re
 
 ## 6. Clean up
 
-Remove tagged instrumentation (grep the prefix) and throwaway harnesses. State the confirmed hypothesis in the commit or report so the next debugger learns. Use the verification-before-completion skill before claiming it fixed.
+Remove tagged instrumentation (grep the prefix) and throwaway harnesses. State the confirmed hypothesis in the commit or report so the next debugger learns.
