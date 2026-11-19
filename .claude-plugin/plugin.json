@@ -1,6 +1,6 @@
 {
-  "name": "mashi",
-  "displayName": "mashi",
+  "name": "amagdy-skills",
+  "displayName": "amagdy-skills",
   "version": "0.1.0",
   "description": "Agent skills that ask once, then get out of your way: brainstorm, plan, build test-first, debug, verify and review.",
   "author": {
