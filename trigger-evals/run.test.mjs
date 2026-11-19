@@ -10,6 +10,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 test('parseCaseName reads skill and direction', () => {
   assert.deepEqual(parseCaseName('code-review--fire-2'), { skill: 'code-review', shouldFire: true });
   assert.deepEqual(parseCaseName('code-review--not'), { skill: 'code-review', shouldFire: false });
+  assert.deepEqual(parseCaseName('reflect--not-2'), { skill: 'reflect', shouldFire: false });
   assert.equal(parseCaseName('persist-todos'), null);
 });
 
