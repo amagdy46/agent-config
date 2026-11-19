@@ -35,7 +35,7 @@ claude plugin list 2>/dev/null; codex plugin list 2>/dev/null
 - `working-style` or plugin `amagdy-skills`: this set is already installed. Plugin
   `amagdy-skills`: run its update (step 5). A `working-style` folder: run the skills
   CLI update; if it is a symlink into a git clone, run `git pull` there.
-  Then follow "Renamed skills" below.
+  Then follow "Renamed and removed skills" below.
 
 Any other hit, or this set installed by a second path: stop. Tell the
 person what you found and where; two copies of the same job give you
@@ -99,20 +99,25 @@ npx -y skills remove -g -y -s $(npx -y skills list -g --json | node -e 'let s=""
 
 Restart the agent after an install, update or removal.
 
-## Renamed skills
+## Renamed and removed skills
 
-`code-review` is now `impact-review`: Claude Code's built-in `/code-review`
-shadowed it. `npx skills update` neither installs the new name nor removes
-the old one, and `implement` and `orchestrate` now hand off to
-`impact-review`. If `npx -y skills list -g --json` shows `code-review` with
-source `amagdy46/skills` or `amagdy46/agent-config`, the repository's old
-name (another collection's `code-review` is not ours), run once:
+`npx skills update` neither installs a new name nor removes an old one. If
+`npx -y skills list -g --json` shows any of the names below with source
+`amagdy46/skills` or `amagdy46/agent-config`, the repository's old name
+(another collection's skill of the same name is not ours), run once:
 
 ```sh
-npx -y skills remove -g -y -s code-review
-npx -y skills add amagdy46/skills -g -y --agent <agent> --skill impact-review
+npx -y skills remove -g -y -s code-review verification-before-completion prototype frontend-design explain-codebase handoff technical-documentation architecture-design
+npx -y skills add amagdy46/skills -g -y --agent <agent>
 ```
+
+- `code-review` is now `impact-review`: Claude Code's built-in
+  `/code-review` shadowed it.
+- `verification-before-completion` is now a rule in `working-style`, and
+  `prototype` a paragraph in `brainstorm`.
+- `frontend-design`, `explain-codebase`, `handoff`,
+  `technical-documentation` and `architecture-design` are removed.
 
 Drop `-g` for a project install. The plugin switches with its next version.
 A clone linked with `scripts/link.mjs`: `git pull`, then run the script
-again; it removes the dead `code-review` link.
+again; it removes the dead links.
