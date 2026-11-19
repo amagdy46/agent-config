@@ -9,6 +9,7 @@
   "homepage": "https://github.com/amagdy46/agent-config",
   "repository": "https://github.com/amagdy46/agent-config",
   "license": "MIT",
+  "logo": "assets/logo.png",
   "category": "developer-tools",
   "keywords": ["skills", "workflow", "planning", "tdd", "debugging", "code-review", "verification"],
   "skills": "./skills/"

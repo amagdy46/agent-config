@@ -1,10 +1,15 @@
-# agent-config
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
+    <img alt="amagdy-skills" src="assets/wordmark-light.svg" width="320">
+  </picture>
+</p>
 
-**Agent skills that ask once, then get out of your way.**
+<p align="center"><b>Agent skills that ask once, then get out of your way.</b></p>
 
-<p>
+<p align="center">
 <a href="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 1,083 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C083%20tokens-555"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 1,083 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C083%20tokens-0d0f12"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
