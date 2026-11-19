@@ -1,8 +1,8 @@
 {
-  "count": 23,
+  "count": 22,
   "startup": {
-    "bytes": 4330,
-    "approxTokens": 1083
+    "bytes": 4137,
+    "approxTokens": 1034
   },
   "evals": {
     "generated": "2026-11-18",
@@ -176,18 +176,6 @@
         "without": 1,
         "delta": 0
       }
-    },
-    {
-      "name": "frontend-design",
-      "path": "skills/frontend-design/SKILL.md",
-      "description": "Design and build web UI that does not look like a template or AI output. Use for building or restyling pages, components or dashboards, \"make it look good\", or deciding UX flows.",
-      "stage": "Build",
-      "forYou": "design and check UI that doesn't look like a template.",
-      "fixes": "The interface the agent built looked like a generic template.",
-      "origin": "inherited",
-      "bytes": 4045,
-      "startupBytes": 193,
-      "eval": null
     },
     {
       "name": "verification-before-completion",

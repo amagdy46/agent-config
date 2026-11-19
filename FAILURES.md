@@ -278,17 +278,6 @@ Rules with a recorded reason:
   not theorise without a loop", which halted work that the existing evidence
   could carry ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
-## frontend-design
-
-Stage: Build
-For you: design and check UI that doesn't look like a template.
-Fixes: The interface the agent built looked like a generic template.
-Origin: inherited
-
-Merged from Taste Skill, Anthropic's `frontend-design` and Vibe Design
-Skills. Those sources describe the look they steer away from, but none
-records a case, and this repo has none either.
-
 ## verification-before-completion
 
 Stage: Check
