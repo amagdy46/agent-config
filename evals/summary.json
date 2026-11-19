@@ -1,34 +1,41 @@
 {
-  "generated": "2026-11-18",
-  "model": "opus",
+  "generated": "2026-11-19",
+  "model": "sonnet",
   "skills": {
     "brainstorm": {
       "cases": 2,
       "runs": 6,
       "with": 1,
-      "without": 0.5,
-      "delta": 0.5
+      "without": 0.33,
+      "delta": 0.67
+    },
+    "grilling": {
+      "cases": 1,
+      "runs": 3,
+      "with": 0.33,
+      "without": 0,
+      "delta": 0.33
     },
     "implement": {
-      "cases": 2,
-      "runs": 6,
-      "with": 1,
-      "without": 1,
-      "delta": 0
-    },
-    "systematic-debugging": {
       "cases": 3,
       "runs": 9,
       "with": 1,
-      "without": 1,
-      "delta": 0
+      "without": 0.56,
+      "delta": 0.44
+    },
+    "systematic-debugging": {
+      "cases": 4,
+      "runs": 12,
+      "with": 0.67,
+      "without": 0.5,
+      "delta": 0.17
     },
     "working-style": {
-      "cases": 7,
-      "runs": 21,
-      "with": 0.81,
-      "without": 0.86,
-      "delta": -0.05
+      "cases": 9,
+      "runs": 27,
+      "with": 0.96,
+      "without": 0.89,
+      "delta": 0.07
     }
   }
 }

@@ -7,7 +7,7 @@ case and arm. Judge model for `llm` graders: Haiku. Reproduce with
 Each cell is the mean grader score, then the runs in which every scored
 grader passed. "Without" is the built-in baseline: no plugin at all.
 "With" is a throwaway plugin holding only the skill under test. "Full set"
-is all 23 skills as one plugin, the way an install loads them (with-arm
+is all 23 skills of that day as one plugin, the way an install loads them (with-arm
 only, run without a baseline arm: read "The full set" below before
 comparing it with the other columns).
 
@@ -18,6 +18,62 @@ result (Sonnet, Claude Code 2.1.328, 3 runs per arm): `brainstorm-opening`
 1.00 (3/3) with the skill and 0.50 (0/3) without, `brainstorm-sounds-good`
 1.00 (3/3) and 1.00 (3/3). The other rows describe the skills as they
 were on 2026-11-18.
+
+## 2026-11-19: fewer skills, two harder cases
+
+The set went from 23 skills to 14. Removed: `frontend-design`,
+`explain-codebase`, `handoff`, `technical-documentation`,
+`architecture-design`, `test-driven-development` and `wait-what`.
+`prototype` became a paragraph in `brainstorm`, and
+`verification-before-completion` a rule in `working-style`, so its two
+cases now count under `working-style`. Rows below that name a removed skill
+describe it as it was.
+
+Two cases were added because the short ones could not show a difference
+for `implement` or `systematic-debugging`. Run with Claude Code 2.1.328, 3
+runs per arm, skill alone against no plugin:
+
+| Case | Sonnet without | Sonnet with | Haiku without | Haiku with |
+|---|---|---|---|---|
+| cents-off (systematic-debugging) | 0.33 (0/3) | 0.89 (2/3) | 0.33 (0/3) | 0.44 (0/3) |
+| six-task-plan (implement) | 0.83 (0/3) | 1.00 (3/3) | 0.83 (0/3) | 0.83 (0/3) |
+
+Per grader, runs passed:
+
+| Case | Grader | Sonnet without | Sonnet with | Haiku without | Haiku with |
+|---|---|---|---|---|---|
+| cents-off | root-fixed | 3/3 | 3/3 | 3/3 | 3/3 |
+| cents-off | copy-fixed | 0/3 | 3/3 | 0/3 | 1/3 |
+| cents-off | test-added | 0/3 | 2/3 | 0/3 | 0/3 |
+| six-task-plan | all six tasks, with their tests | 3/3 | 3/3 | 3/3 | 3/3 |
+| six-task-plan | reports-call | 3/3 | 3/3 | 3/3 | 3/3 |
+| six-task-plan | plan-ticked | 0/3 | 3/3 | 0/3 | 0/3 |
+
+- Every run fixed the truncation in the money helper. Only Sonnet with
+  `systematic-debugging` also fixed the copy of it in `refunds.py` and left
+  a test. That is the skill's "search for the same fault elsewhere" and its
+  regression test.
+- Every run finished the six tasks and reported the missing helper. Only
+  Sonnet with `implement` ticked the plan as it went.
+- Haiku loaded `systematic-debugging` in 0 of 3 runs and `implement` in 1
+  of 3, so it shows no effect: the skill has to load to matter.
+
+Reruns after the day's edits, Sonnet, same settings:
+
+| Case | Without | With |
+|---|---|---|
+| brainstorm-opening | 0.50 (0/3) | 1.00 (3/3) |
+| brainstorm-sounds-good | 0.89 (2/3) | 1.00 (3/3) |
+| grill-migration | 0.33 (0/3) | 0.78 (1/3) |
+| red-suite-fix (now working-style) | 1.00 (3/3) | 1.00 (3/3) |
+| big-file-sizes (now working-style) | 1.00 (3/3) | 1.00 (3/3) |
+
+The verification rule still shows no difference on these two cases, in
+`working-style` as before in its own skill.
+
+`evals/summary.json`, which the README shows, is now the Sonnet skill arms:
+the 2026-11-18 Sonnet runs with the runs above replacing the cases they
+repeat. Opus was not rerun, so its columns below stop at 2026-11-18.
 
 ## Per case
 
@@ -190,17 +246,18 @@ none of these runs is Opus.
 ## Per skill (the README column)
 
 Share of runs with every scored grader passing, averaged over the skill's
-cases, skill alone against no plugin. The Opus column is
-`evals/summary.json`, which the README shows.
+cases, skill alone against no plugin. The Sonnet column is
+`evals/summary.json`, which the README shows; it includes the 2026-11-19
+cases and reruns. The Opus and Haiku columns are from 2026-11-18.
 
 | Skill | Cases | Can any case show a difference? | Opus with / without | Sonnet with / without | Haiku with / without |
 |---|---|---|---|---|---|
-| brainstorm | 2 | yes: brainstorm-opening | 1.00 / 0.50 | 1.00 / 0.50 | 0.83 / 0.50 |
+| brainstorm | 2 | yes: brainstorm-opening | 1.00 / 0.50 | 1.00 / 0.33 | 0.83 / 0.50 |
 | grilling | 1 | yes: grill-migration | not run | 0.33 / 0.00 (after the cap) | not run |
-| implement | 2 | yes, barely: plan-prod-step (one Sonnet miss) | 1.00 / 1.00 | 1.00 / 0.83 | 0.83 / 0.83 |
-| systematic-debugging | 3 | yes: skip-bad-users | 1.00 / 1.00 | 0.67 / 0.67 | 0.67 / 0.67 |
-| verification-before-completion | 2 | no on Sonnet or Opus; red-suite-fix on Haiku | 1.00 / 1.00 | 1.00 / 1.00 | 0.83 / 0.67 |
-| working-style | 7 | yes: fix-sibling-bug, add-login, multi-currency | 0.81 / 0.86 | 0.95 / 0.86 | 0.86 / 0.86 |
+| implement | 3 on Sonnet, 2 elsewhere | yes: six-task-plan | 1.00 / 1.00 | 1.00 / 0.56 | 0.83 / 0.83 |
+| systematic-debugging | 4 on Sonnet, 3 elsewhere | yes: cents-off, skip-bad-users | 1.00 / 1.00 | 0.67 / 0.50 | 0.67 / 0.67 |
+| verification-before-completion (merged into working-style on 2026-11-19) | 2 | no on Sonnet or Opus; red-suite-fix on Haiku | 1.00 / 1.00 | counted under working-style | 0.83 / 0.67 |
+| working-style | 9 on Sonnet, 7 elsewhere | yes: fix-sibling-bug, add-login, multi-currency | 0.81 / 0.86 | 0.96 / 0.89 | 0.86 / 0.86 |
 
 With 3 runs per arm, one run moves a case by 0.33 and a two-case skill by
 0.17. Read any difference under 0.2 as noise.

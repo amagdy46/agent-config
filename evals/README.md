@@ -121,7 +121,8 @@ has not been run: the secret does not exist yet.
 `trigger-evals/`, at the repo root, checks that each skill loads from its
 description alone, and stays quiet on a near miss. Per skill: two prompts
 that should load it (one close to its description, one in other words) and
-one that belongs to a neighbouring skill or to none. Each case passes or
+one that belongs to a neighbouring skill or to none. The three skills that
+fire least have six and three. Each case passes or
 fails on one `tool_used: Skill` grader. `working-style` has no cases: its
 description is the rule itself, not meant to be invoked. The suite sits
 outside `evals/` because `claude plugin eval` searches its eval dir
