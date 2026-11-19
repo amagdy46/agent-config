@@ -17,16 +17,22 @@ surface, so the bar for adding text is higher than the bar for removing it.
 
 - `skills/<name>/SKILL.md`, `name` equal to the folder name.
 - The description front-loads the trigger: what the skill does, then the
-  phrases or situations that should fire it. Keep it under about 300
-  characters.
-- Keep `SKILL.md` under about 80 lines, and always under 20,000 bytes: Claude
-  Code re-attaches a skill cut at that size after compaction, silently dropping
-  its last rules. Push detail that only some runs need into a sibling file and
-  point at it.
+  phrases or situations that should fire it. Keep it to 220 characters or
+  fewer; the validator warns above that and fails above 1,024.
+- Keep `SKILL.md` to 100 lines or fewer (the validator warns above that), and
+  always under 20,000 bytes: Claude Code re-attaches a skill cut at that size
+  after compaction, silently dropping its last rules. Push detail that only
+  some runs need into a sibling file and point at it. The limits live at the
+  top of `scripts/validate-repo.mjs`; change them there first.
 - Prompt the behaviour you want. Use a prohibition only for a hard guardrail,
   and pair it with the positive target.
 - Reference only files inside the skill's own folder, so each skill installs
   alone.
+
+## Add or change a skill
+
+Follow the numbered steps in [AGENTS.md](AGENTS.md#add-or-change-a-skill).
+They are the same for people and agents, and CI runs the same commands.
 
 ## Merging the same skill from several upstreams
 
@@ -66,8 +72,3 @@ git diff <pinned>..HEAD -- <skill paths>
 Apply the rules above to each change, then bump the pinned commit in
 `THIRD_PARTY_NOTICES.md`.
 
-## Validate
-
-```sh
-node scripts/validate-repo.mjs
-```

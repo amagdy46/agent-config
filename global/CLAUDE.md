@@ -13,8 +13,6 @@ When I correct the same mistake twice, suggest the reflect skill.
 
 ## Tools
 
-- Never publish Artifacts. Make a self-contained local HTML file instead,
-  untracked unless I ask.
 - Scrape the web with the Scrapling MCP, not curl or scripts. No logins
   unless I ask.
 - Commit with plain `git commit`; never set or override the author or
@@ -22,3 +20,5 @@ When I correct the same mistake twice, suggest the reflect skill.
 - Worktrees: Worktrunk (`wt switch --create`, `wt merge`, `wt remove`). Clean
   up what you create; never force-remove a dirty worktree; no `sudo` inside
   one.
+- Never publish Artifacts. Make a self-contained local HTML file instead,
+  untracked unless I ask.

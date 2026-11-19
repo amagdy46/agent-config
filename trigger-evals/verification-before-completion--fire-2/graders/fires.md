@@ -1,0 +1,7 @@
+---
+type: tool_used
+tool: Skill
+input_match: "\"skill\"\\s*:\\s*\"[\\w-]+:verification\\-before\\-completion\""
+min: 1
+---
+The agent loads verification-before-completion.

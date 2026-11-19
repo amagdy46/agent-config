@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
+<title>mashi</title>
+<!-- Nuqta nod. Grid: 56 units, every point on a half unit. One reed nib, 7.07 wide, held at 45 degrees,
+     draws both shapes; the three cuts (dot, entry, exit) are parallel. Optical centre, not box centre, sits mid-square. -->
+<!-- nuqta: the one question. The nib pushed its own width: a square on its corner, every edge a nib cut. -->
+<path fill="currentColor" d="M11.5 14.5L16.5 19.5L11.5 24.5L6.5 19.5Z"/>
+<!-- nod: one stroke, half a nib after the dot on the same axis. It enters at full nib width with a square cut,
+     dips once (8 units) and runs out long and low (18.5 units at 14 degrees), cut by the same nib at the end. -->
+<path fill="currentColor" d="M21.5 24.5L24 27C27.5 30.5 30.5 33.5 34.5 32.5L52.5 28L47.5 33L29.5 37.5C25.5 38.5 22.5 35.5 19 32L16.5 29.5Z"/>
+</svg>

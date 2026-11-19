@@ -1,0 +1,319 @@
+{
+  "count": 23,
+  "startup": {
+    "bytes": 4330,
+    "approxTokens": 1083
+  },
+  "evals": {
+    "generated": "2026-11-18",
+    "model": "opus"
+  },
+  "skills": [
+    {
+      "name": "brainstorm",
+      "path": "skills/brainstorm/SKILL.md",
+      "description": "Think a new project through with the user before anything is built: interview, research, write the design. Use for \"brainstorm\", \"new project\", or starting from scratch.",
+      "stage": "Think",
+      "forYou": "find out what you actually want, with research, before any code exists.",
+      "fixes": "The agent guessed what I meant and built the wrong thing.",
+      "origin": "seen here",
+      "bytes": 3920,
+      "startupBytes": 179,
+      "eval": {
+        "cases": 2,
+        "runs": 6,
+        "with": 1,
+        "without": 0.5,
+        "delta": 0.5
+      }
+    },
+    {
+      "name": "grilling",
+      "path": "skills/grilling/SKILL.md",
+      "description": "Stress-test a plan or decision in short rounds of pointed questions, each with a recommended answer. Use for \"grill me\", \"poke holes in this\", \"challenge my plan\".",
+      "stage": "Think",
+      "forYou": "stress-test a plan in rounds of questions, each with a recommended answer.",
+      "fixes": "The agent acted on assumptions it never checked with me.",
+      "origin": "seen here",
+      "bytes": 1701,
+      "startupBytes": 171,
+      "eval": null
+    },
+    {
+      "name": "research",
+      "path": "skills/research/SKILL.md",
+      "description": "Answer a defined question from primary sources, with dated citations. Use for \"research X\", \"find out\", docs or API facts, comparing options. Not for explaining this codebase.",
+      "stage": "Think",
+      "forYou": "answer a question from primary sources, cited and dated.",
+      "fixes": "The agent answered from memory or a blog post and gave no source I could check.",
+      "origin": "inherited",
+      "bytes": 2190,
+      "startupBytes": 183,
+      "eval": null
+    },
+    {
+      "name": "prototype",
+      "path": "skills/prototype/SKILL.md",
+      "description": "Build a throwaway artifact to settle one uncertain design question. Use for \"prototype\", \"spike\", \"mockup\", \"try a few versions\", \"what should this look like\". Skip when behavior is settled.",
+      "stage": "Think",
+      "forYou": "build a throwaway to answer one design question.",
+      "fixes": "A design question was argued in chat for an hour, or throwaway code ended up in production.",
+      "origin": "inherited",
+      "bytes": 2342,
+      "startupBytes": 199,
+      "eval": null
+    },
+    {
+      "name": "writing-plans",
+      "path": "skills/writing-plans/SKILL.md",
+      "description": "Turn an approved design into a plan of small, testable tasks with exact files and checks. Use for \"write a plan\", \"plan this out\", or before multi-step work.",
+      "stage": "Plan",
+      "forYou": "turn a design into small tasks with exact files, interfaces and tests.",
+      "fixes": "The plan grew into thousands of lines of code and took hours, and nothing got built.",
+      "origin": "upstream",
+      "bytes": 3052,
+      "startupBytes": 170,
+      "eval": null
+    },
+    {
+      "name": "to-issues",
+      "path": "skills/to-issues/SKILL.md",
+      "description": "Break a design or plan into issues with dependencies and publish them to GitHub, Linear or Markdown. Use for \"break this into issues\", \"create tickets\", \"make a backlog\".",
+      "stage": "Plan",
+      "forYou": "break work into tickets in GitHub, Linear or Markdown, each naming what blocks it.",
+      "fixes": "Work landed as one huge ticket, or as layers (all database, then all UI) that could not be tested alone.",
+      "origin": "inherited",
+      "bytes": 2629,
+      "startupBytes": 179,
+      "eval": null
+    },
+    {
+      "name": "architecture-design",
+      "path": "skills/architecture-design/SKILL.md",
+      "description": "Settle module boundaries, interfaces and ownership before coding, or restructure code without changing behavior. Use for \"design this\", \"refactor\", \"restructure\", \"how should we split X\".",
+      "stage": "Plan",
+      "forYou": "design module boundaries, and refactor without changing behaviour.",
+      "fixes": "A refactor quietly changed behaviour, or a new design added layers that only passed arguments along.",
+      "origin": "inherited",
+      "bytes": 3443,
+      "startupBytes": 206,
+      "eval": null
+    },
+    {
+      "name": "implement",
+      "path": "skills/implement/SKILL.md",
+      "description": "Carry an approved plan or issues to done, task by task, with tests and review. Use for \"implement this\", \"build the plan\", \"work the issues\", \"start on ticket X\".",
+      "stage": "Build",
+      "forYou": "execute a plan or tickets to the end, yourself or with subagents.",
+      "fixes": "The agent stopped after every step to ask whether it should go on.",
+      "origin": "seen here",
+      "bytes": 3279,
+      "startupBytes": 171,
+      "eval": {
+        "cases": 2,
+        "runs": 6,
+        "with": 1,
+        "without": 1,
+        "delta": 0
+      }
+    },
+    {
+      "name": "working-style",
+      "path": "skills/working-style/SKILL.md",
+      "description": "Proceed, then present: do reversible work, report why. Ask only about product direction, or before irreversible or outward-facing steps: force-push, shared merge, deleting data, publishing, messaging people.",
+      "stage": "Build",
+      "forYou": "let the agent decide and do reversible work, and ask you only before steps it cannot undo.",
+      "fixes": "The agent stopped to ask \"should I…?\" about work it could have done and reported.",
+      "origin": "seen here",
+      "bytes": 897,
+      "startupBytes": 220,
+      "eval": {
+        "cases": 7,
+        "runs": 21,
+        "with": 0.81,
+        "without": 0.86,
+        "delta": -0.05
+      }
+    },
+    {
+      "name": "orchestrate",
+      "path": "skills/orchestrate/SKILL.md",
+      "description": "Coordinate implementer and reviewer agents on tickets in parallel worktrees. Use for \"orchestrate\", \"run the factory\", \"work the backlog\", \"keep agents busy\".",
+      "stage": "Build",
+      "forYou": "coordinate many implementer and reviewer agents under your standing orders.",
+      "fixes": "In long sessions I kept repeating the same reminders: keep agents busy, update the tracker, use this model.",
+      "origin": "seen here",
+      "bytes": 3821,
+      "startupBytes": 169,
+      "eval": null
+    },
+    {
+      "name": "test-driven-development",
+      "path": "skills/test-driven-development/SKILL.md",
+      "description": "Build features and fix bugs test-first: a failing test, then the code that passes it. Use for TDD, \"test-first\", \"write a failing test\", \"then make it pass\", or regression tests.",
+      "stage": "Build",
+      "forYou": "build each behaviour test-first: watch the test fail, then make it pass.",
+      "fixes": "The tests passed, but they would have passed even if the code were wrong.",
+      "origin": "upstream",
+      "bytes": 3015,
+      "startupBytes": 201,
+      "eval": null
+    },
+    {
+      "name": "systematic-debugging",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "description": "Find the root cause of bugs, test failures, regressions, flaky or slow behavior before fixing. Use for \"debug this\", \"diagnose\", \"why does X fail\", or anything broken, throwing or slow.",
+      "stage": "Build",
+      "forYou": "reproduce, isolate and fix the root cause.",
+      "fixes": "The fix made the error go away but left the bug in place.",
+      "origin": "seen here",
+      "bytes": 3519,
+      "startupBytes": 205,
+      "eval": {
+        "cases": 3,
+        "runs": 9,
+        "with": 1,
+        "without": 1,
+        "delta": 0
+      }
+    },
+    {
+      "name": "frontend-design",
+      "path": "skills/frontend-design/SKILL.md",
+      "description": "Design and build web UI that does not look like a template or AI output. Use for building or restyling pages, components or dashboards, \"make it look good\", or deciding UX flows.",
+      "stage": "Build",
+      "forYou": "design and check UI that doesn't look like a template.",
+      "fixes": "The interface the agent built looked like a generic template.",
+      "origin": "inherited",
+      "bytes": 4045,
+      "startupBytes": 193,
+      "eval": null
+    },
+    {
+      "name": "verification-before-completion",
+      "path": "skills/verification-before-completion/SKILL.md",
+      "description": "Gate any claim that work is done, fixed, passing or ready on fresh evidence. Use right before saying \"done\", \"fixed\" or \"passing\", handing work back, committing or opening a PR.",
+      "stage": "Check",
+      "forYou": "prove a claim before saying \"done\".",
+      "fixes": "The agent said \"done\" when it meant \"I think it's done\".",
+      "origin": "seen here",
+      "bytes": 1961,
+      "startupBytes": 207,
+      "eval": {
+        "cases": 2,
+        "runs": 6,
+        "with": 1,
+        "without": 1,
+        "delta": 0
+      }
+    },
+    {
+      "name": "create-verification-skill",
+      "path": "skills/create-verification-skill/SKILL.md",
+      "description": "Write a verify-<app> skill so any agent can launch the app, drive a feature and capture proof. Use for \"make a verification skill\", or when agents claim done without running the app.",
+      "stage": "Check",
+      "forYou": "write a project's verify skill so agents can prove changes in the real app.",
+      "fixes": "Agents had no scripted way to run the app, so \"it works\" was a guess.",
+      "origin": "inherited",
+      "bytes": 2135,
+      "startupBytes": 207,
+      "eval": null
+    },
+    {
+      "name": "impact-review",
+      "path": "skills/impact-review/SKILL.md",
+      "description": "Review a diff or PR for spec and standards fit, and trace what it could break beyond the diff. Use for \"review this\", \"code review\", \"what could this break\", \"blast radius\", or review feedback.",
+      "stage": "Check",
+      "forYou": "review a change and trace what it could break beyond its own diff.",
+      "fixes": "A change looked fine in its diff and broke something elsewhere.",
+      "origin": "seen here",
+      "bytes": 4362,
+      "startupBytes": 206,
+      "eval": null
+    },
+    {
+      "name": "ci-pr-lifecycle",
+      "path": "skills/ci-pr-lifecycle/SKILL.md",
+      "description": "Get a branch, PR and CI to done. Use for \"is this ready\", \"CI status\", \"open a PR\", \"push and watch CI\", \"retry the failed job\". Never merges unless asked.",
+      "stage": "Check",
+      "forYou": "drive a PR through CI to a finished state; it never merges unasked.",
+      "fixes": "Cleaning up after a merge, the agent deleted work that had never been committed.",
+      "origin": "upstream",
+      "bytes": 2465,
+      "startupBytes": 170,
+      "eval": null
+    },
+    {
+      "name": "explain-codebase",
+      "path": "skills/explain-codebase/SKILL.md",
+      "description": "Explain how existing code works and why it is shaped that way. Use for \"how does X work\", walkthroughs, \"where should this live\", \"why is this here\". Read-only.",
+      "stage": "Explain",
+      "forYou": "explain how code works, and why it is shaped that way.",
+      "fixes": "The agent explained code from its names and folders, and gave guesses about intent as fact.",
+      "origin": "inherited",
+      "bytes": 2023,
+      "startupBytes": 176,
+      "eval": null
+    },
+    {
+      "name": "wait-what",
+      "path": "skills/wait-what/SKILL.md",
+      "description": "Re-pitch your last message when it did not land. Use for \"wait, what\", \"I don't get it\", \"explain that normally\", \"in plain English\". One turn; no research.",
+      "stage": "Explain",
+      "forYou": "get the last answer again in plain words.",
+      "fixes": "The agent's answer was so dense with jargon that I couldn't follow it.",
+      "origin": "upstream",
+      "bytes": 712,
+      "startupBytes": 165,
+      "eval": null
+    },
+    {
+      "name": "handoff",
+      "path": "skills/handoff/SKILL.md",
+      "description": "Write a handoff brief so another agent can carry on, or resume work from one. Use for \"hand off\", \"write up where we are\", \"pick up where we left off\", \"resume the last session\".",
+      "stage": "Explain",
+      "forYou": "write a handoff between sessions, or resume from one.",
+      "fixes": "A new session started cold and redid finished work, or trusted a stale summary.",
+      "origin": "inherited",
+      "bytes": 2595,
+      "startupBytes": 185,
+      "eval": null
+    },
+    {
+      "name": "reflect",
+      "path": "skills/reflect/SKILL.md",
+      "description": "Mine the current session for durable lessons and turn each into an edit to a skill or AGENTS.md. Use for \"reflect\", \"what did we learn\", \"update the skills from this session\", or a repeated mistake.",
+      "stage": "Improve",
+      "forYou": "turn a session's lessons into edits to skills, `AGENTS.md` or enforcement.",
+      "fixes": "The agent made the same mistake every session.",
+      "origin": "seen here",
+      "bytes": 4142,
+      "startupBytes": 205,
+      "eval": null
+    },
+    {
+      "name": "technical-documentation",
+      "path": "skills/technical-documentation/SKILL.md",
+      "description": "Write or revise docs checked against the code: READMEs, how-to guides, references, step-by-step guides for non-technical users. Use for \"write a README\", \"document this\".",
+      "stage": "Write",
+      "forYou": "write docs for developers or operators, checked against the real system.",
+      "fixes": "The docs described what the code used to do, or guessed at names and flags.",
+      "origin": "inherited",
+      "bytes": 5051,
+      "startupBytes": 193,
+      "eval": null
+    },
+    {
+      "name": "unslop",
+      "path": "skills/unslop/SKILL.md",
+      "description": "Remove AI tells from prose, keeping facts and voice. Use on reports, docs, READMEs and PR text, or for \"humanize\", \"tighten\", \"de-slop\". Skip code, logs and quotes.",
+      "stage": "Write",
+      "forYou": "strip AI tells from prose.",
+      "fixes": "The text read as if a model wrote it: filler openings, stock words, a triplet in every sentence.",
+      "origin": "inherited",
+      "bytes": 3544,
+      "startupBytes": 170,
+      "eval": null
+    }
+  ]
+}

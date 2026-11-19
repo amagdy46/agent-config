@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Turn an approved design or clear requirements into an implementation plan of small, independently testable tasks with exact files, interfaces and checks. Use for "write a plan", "plan this out", or before multi-step work.
+description: Turn an approved design into a plan of small, testable tasks with exact files and checks. Use for "write a plan", "plan this out", or before multi-step work.
 license: MIT
 ---
 

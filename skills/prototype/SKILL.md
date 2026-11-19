@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: Build a throwaway artifact to settle one uncertain design question. Use for "prototype", "spike", "mockup", "try a few versions", "does this state model feel right", or "what should this look like". Skip when the behavior is already settled.
+description: Build a throwaway artifact to settle one uncertain design question. Use for "prototype", "spike", "mockup", "try a few versions", "what should this look like". Skip when behavior is settled.
 license: MIT
 ---
 

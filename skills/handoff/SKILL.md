@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Write a handoff brief for another agent, session, or machine, or resume work from one. Use for "hand off", "write a handoff", "pick up where we left off", "take over from this brief or branch".
+description: Write a handoff brief so another agent can carry on, or resume work from one. Use for "hand off", "write up where we are", "pick up where we left off", "resume the last session".
 license: MIT
 ---
 

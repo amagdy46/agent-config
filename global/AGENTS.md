@@ -19,5 +19,6 @@ When I correct the same mistake twice, suggest the reflect skill.
   committer identity.
 - Worktrees: Worktrunk (`wt switch --create`, `wt merge`, `wt remove`). Clean
   up what you create; never force-remove a dirty worktree; no `sudo` inside
-  one. Leave Codex-managed worktrees under `$CODEX_HOME/worktrees` to the
-  Codex app.
+  one.
+- Leave Codex-managed worktrees under `$CODEX_HOME/worktrees` to the Codex
+  app.
