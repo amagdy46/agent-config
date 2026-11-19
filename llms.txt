@@ -1,4 +1,4 @@
-# agent-config
+# amagdy-skills
 
 > Short Agent Skills for coding agents (Claude Code, Codex, Cursor, OpenCode, Pi): the agent asks once, then does reversible work and reports what it decided. FAILURES.md logs the failure each skill targets and how strong the record is.
 

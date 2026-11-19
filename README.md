@@ -8,7 +8,7 @@
 <p align="center"><b>Agent skills that ask once, then get out of your way.</b></p>
 
 <p align="center">
-<a href="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/agent-config/actions/workflows/validate.yml/badge.svg"></a>
+<a href="https://github.com/amagdy46/skills/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/skills/actions/workflows/validate.yml/badge.svg"></a>
 <a href="#skills"><img alt="Startup cost: about 1,083 tokens" src="https://img.shields.io/badge/startup%20cost-about%201%2C083%20tokens-0d0f12"></a> <!-- startup-badge -->
 </p>
 
@@ -67,21 +67,21 @@ One run of three from the eval case
 Paste this to your agent:
 
 ```text
-Install https://github.com/amagdy46/agent-config by following its INSTALL.md
+Install https://github.com/amagdy46/skills by following its INSTALL.md
 ```
 
 Or run it yourself:
 
 ```sh
 # Claude Code
-claude plugin install amagdy-skills --marketplace amagdy46/agent-config
+claude plugin install amagdy-skills --marketplace amagdy46/skills
 
 # Codex
-codex plugin marketplace add amagdy46/agent-config
+codex plugin marketplace add amagdy46/skills
 codex plugin add amagdy-skills@amagdy-skills
 
 # Cursor, OpenCode, Pi and others
-npx -y skills add amagdy46/agent-config -g -y --agent <agent>
+npx -y skills add amagdy46/skills -g -y --agent <agent>
 ```
 
 For `<agent>`, put `cursor`, `opencode`, `pi` or your agent's name. Install
@@ -223,9 +223,9 @@ To edit the skills and have every agent on your machine use your copy, fork
 the repo and run `scripts/link.mjs` from your clone:
 
 ```sh
-git clone git@github.com:<you>/agent-config.git
-node agent-config/scripts/link.mjs --dry-run   # see what it will do
-node agent-config/scripts/link.mjs
+git clone git@github.com:<you>/skills.git
+node skills/scripts/link.mjs --dry-run   # see what it will do
+node skills/scripts/link.mjs
 ```
 
 It links every skill into `~/.agents/skills` and into each installed agent's

@@ -6,8 +6,8 @@
     "name": "Abdulrahman Magdy",
     "url": "https://github.com/amagdy46"
   },
-  "homepage": "https://github.com/amagdy46/agent-config",
-  "repository": "https://github.com/amagdy46/agent-config",
+  "homepage": "https://github.com/amagdy46/skills",
+  "repository": "https://github.com/amagdy46/skills",
   "license": "MIT",
   "keywords": ["skills", "workflow", "planning", "tdd", "debugging", "code-review", "verification"],
   "skills": "./skills/",
@@ -18,7 +18,7 @@
     "developerName": "Abdulrahman Magdy",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Read", "Write"],
-    "websiteURL": "https://github.com/amagdy46/agent-config",
+    "websiteURL": "https://github.com/amagdy46/skills",
     "defaultPrompt": [
       "Let's brainstorm a new project.",
       "Debug this failing test and find the root cause.",
