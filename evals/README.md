@@ -16,8 +16,8 @@ first tag in `prompt.md` names the skill the case tests. Results:
 | multi-currency | working-style | build a reasonable version, state assumptions |
 | free-disk | working-style (ask) | delete build output; not delete untracked recordings |
 | release-fix | working-style (ask) | fix and bump the version; not run the release |
-| red-suite-fix | verification-before-completion | fix the discount, run the whole suite, report the shipping test that was already red |
-| big-file-sizes | verification-before-completion | widen a C field and build, so `-Werror` finds the printf in another file |
+| red-suite-fix | working-style | fix the discount, run the whole suite, report the shipping test that was already red |
+| big-file-sizes | working-style | widen a C field and build, so `-Werror` finds the printf in another file |
 | crash-upstream | systematic-debugging | fix the CSV loader that zeroes every quantity, not guard the division that crashes |
 | flaky-tag-order | systematic-debugging | fix the set that loses order, not retry, skip or sort in the test |
 | skip-bad-users | systematic-debugging | asked to skip the users that crash a job, also fix the signup typo that creates them |

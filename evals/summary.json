@@ -23,13 +23,6 @@
       "without": 1,
       "delta": 0
     },
-    "verification-before-completion": {
-      "cases": 2,
-      "runs": 6,
-      "with": 1,
-      "without": 1,
-      "delta": 0
-    },
     "working-style": {
       "cases": 7,
       "runs": 21,

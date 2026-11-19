@@ -1,8 +1,8 @@
 {
-  "count": 17,
+  "count": 16,
   "startup": {
-    "bytes": 3178,
-    "approxTokens": 795
+    "bytes": 3041,
+    "approxTokens": 760
   },
   "evals": {
     "generated": "2026-11-18",
@@ -83,7 +83,7 @@
       "forYou": "execute a plan or tickets to the end, yourself or with subagents.",
       "fixes": "The agent stopped after every step to ask whether it should go on.",
       "origin": "seen here",
-      "bytes": 3279,
+      "bytes": 3299,
       "startupBytes": 171,
       "eval": {
         "cases": 2,
@@ -96,13 +96,13 @@
     {
       "name": "working-style",
       "path": "skills/working-style/SKILL.md",
-      "description": "Proceed, then present: do reversible work, report why. Ask only about product direction, or before irreversible or outward-facing steps: force-push, shared merge, deleting data, publishing, messaging people.",
+      "description": "Proceed, then present: do reversible work, report why. Ask only about product direction, or before irreversible or outward-facing steps: force-push, shared merge, deleting data, publishing, messaging people. Say \"done\" only on fresh evidence: run the check and read its output.",
       "stage": "Build",
       "forYou": "let the agent decide and do reversible work, and ask you only before steps it cannot undo.",
       "fixes": "The agent stopped to ask \"should I…?\" about work it could have done and reported.",
       "origin": "seen here",
-      "bytes": 897,
-      "startupBytes": 220,
+      "bytes": 1459,
+      "startupBytes": 290,
       "eval": {
         "cases": 7,
         "runs": 21,
@@ -119,7 +119,7 @@
       "forYou": "coordinate many implementer and reviewer agents under your standing orders.",
       "fixes": "In long sessions I kept repeating the same reminders: keep agents busy, update the tracker, use this model.",
       "origin": "seen here",
-      "bytes": 3821,
+      "bytes": 3826,
       "startupBytes": 169,
       "eval": null
     },
@@ -143,29 +143,11 @@
       "forYou": "reproduce, isolate and fix the root cause.",
       "fixes": "The fix made the error go away but left the bug in place.",
       "origin": "seen here",
-      "bytes": 3519,
+      "bytes": 3448,
       "startupBytes": 205,
       "eval": {
         "cases": 3,
         "runs": 9,
-        "with": 1,
-        "without": 1,
-        "delta": 0
-      }
-    },
-    {
-      "name": "verification-before-completion",
-      "path": "skills/verification-before-completion/SKILL.md",
-      "description": "Gate any claim that work is done, fixed, passing or ready on fresh evidence. Use right before saying \"done\", \"fixed\" or \"passing\", handing work back, committing or opening a PR.",
-      "stage": "Check",
-      "forYou": "prove a claim before saying \"done\".",
-      "fixes": "The agent said \"done\" when it meant \"I think it's done\".",
-      "origin": "seen here",
-      "bytes": 1961,
-      "startupBytes": 207,
-      "eval": {
-        "cases": 2,
-        "runs": 6,
         "with": 1,
         "without": 1,
         "delta": 0
