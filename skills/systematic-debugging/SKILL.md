@@ -1,6 +1,7 @@
 ---
 name: systematic-debugging
-description: Find the root cause of bugs, test failures, regressions, flaky or slow behavior before fixing. Use for "debug this", "diagnose", "why does X fail", or anything broken, throwing or slow.
+description: >-
+  Reproduce a bug and find its root cause before changing code. Use for anything broken, failing, flaky, slow or regressed, even when the fix looks obvious: "debug this", "why does X fail".
 license: MIT
 ---
 

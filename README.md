@@ -9,7 +9,7 @@
 
 <p align="center">
 <a href="https://github.com/amagdy46/skills/actions/workflows/validate.yml"><img alt="validate" src="https://github.com/amagdy46/skills/actions/workflows/validate.yml/badge.svg"></a>
-<a href="#skills"><img alt="Startup cost: about 760 tokens" src="https://img.shields.io/badge/startup%20cost-about%20760%20tokens-0d0f12"></a> <!-- startup-badge -->
+<a href="#skills"><img alt="Startup cost: about 778 tokens" src="https://img.shields.io/badge/startup%20cost-about%20778%20tokens-0d0f12"></a> <!-- startup-badge -->
 </p>
 
 A skill is a short instruction file that a coding agent (an AI that writes
@@ -160,23 +160,23 @@ is this PR ready? push it and watch CI
 |  | [grilling](skills/grilling/SKILL.md) | stress-test a plan in rounds of questions, each with a recommended answer | 171 | - |
 |  | [research](skills/research/SKILL.md) | answer a question from primary sources, cited and dated | 183 | - |
 | Plan | [writing-plans](skills/writing-plans/SKILL.md) | turn a design into small tasks with exact files, interfaces and tests | 170 | - |
-|  | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown, each naming what blocks it | 179 | - |
+|  | [to-issues](skills/to-issues/SKILL.md) | break work into tickets in GitHub, Linear or Markdown, each naming what blocks it | 221 | - |
 | Build | [implement](skills/implement/SKILL.md) | execute a plan or tickets to the end, yourself or with subagents | 171 | 100% / 100% |
 |  | [working-style](skills/working-style/SKILL.md) | let the agent decide and do reversible work, and ask you only before steps it cannot undo | 290 | 81% / 86% |
 |  | [orchestrate](skills/orchestrate/SKILL.md) | coordinate many implementer and reviewer agents under your standing orders | 169 | - |
-|  | [test-driven-development](skills/test-driven-development/SKILL.md) | build each behaviour test-first: watch the test fail, then make it pass | 201 | - |
-|  | [systematic-debugging](skills/systematic-debugging/SKILL.md) | reproduce, isolate and fix the root cause | 205 | 100% / 100% |
+|  | [test-driven-development](skills/test-driven-development/SKILL.md) | build each behaviour test-first: watch the test fail, then make it pass | 207 | - |
+|  | [systematic-debugging](skills/systematic-debugging/SKILL.md) | reproduce, isolate and fix the root cause | 207 | 100% / 100% |
 | Check | [create-verification-skill](skills/create-verification-skill/SKILL.md) | write a project's verify skill so agents can prove changes in the real app | 207 | - |
 |  | [impact-review](skills/impact-review/SKILL.md) | review a change and trace what it could break beyond its own diff | 206 | - |
 |  | [ci-pr-lifecycle](skills/ci-pr-lifecycle/SKILL.md) | drive a PR through CI to a finished state; it never merges unasked | 170 | - |
 | Explain | [wait-what](skills/wait-what/SKILL.md) | get the last answer again in plain words | 165 | - |
-| Improve | [reflect](skills/reflect/SKILL.md) | turn a session's lessons into edits to skills, `AGENTS.md` or enforcement | 205 | - |
+| Improve | [reflect](skills/reflect/SKILL.md) | turn a session's lessons into edits to skills, `AGENTS.md` or enforcement | 227 | - |
 | Write | [unslop](skills/unslop/SKILL.md) | strip AI tells from prose | 170 | - |
 
 Evals: the share of eval runs in which every check passed, with the skill alone loaded / with no skills loaded (on opus, run 2026-11-18, 3 runs per case and arm); `-` means the skill has no cases. With so few runs, read a gap under 20 points as noise. The cases, and the ones too easy to show a difference, are in [evals/RESULTS.md](evals/RESULTS.md).
 <!-- skills-table:end -->
 
-At session start an agent loads only each skill's name and description: 16 skills, 3,041 bytes, about 760 tokens. <!-- startup-cost -->
+At session start an agent loads only each skill's name and description: 16 skills, 3,113 bytes, about 778 tokens. <!-- startup-cost -->
 
 ## Why these skills
 

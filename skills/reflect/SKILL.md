@@ -1,6 +1,7 @@
 ---
 name: reflect
-description: Mine the current session for durable lessons and turn each into an edit to a skill or AGENTS.md. Use for "reflect", "what did we learn", "update the skills from this session", or a repeated mistake.
+description: >-
+  Turn this session's corrections and lessons into edits to a skill or AGENTS.md, so a mistake does not repeat. Use when a lesson should stick: "reflect", "what did we learn", "make that a rule", the same correction twice.
 license: MIT
 ---
 

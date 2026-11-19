@@ -1,6 +1,7 @@
 ---
 name: to-issues
-description: Break a design or plan into issues with dependencies and publish them to GitHub, Linear or Markdown. Use for "break this into issues", "create tickets", "make a backlog".
+description: >-
+  Split a design or plan into issues that can each be built alone, with what blocks what, and publish them to GitHub, Linear or Markdown. Use when work needs tickets, a backlog or a board: "break this into issues".
 license: MIT
 ---
 
