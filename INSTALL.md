@@ -1,7 +1,7 @@
 # Install, for agents
 
 You were asked to install the skills from
-https://github.com/amagdy46/agent-config. Do these steps in order. Ask the
+https://github.com/amagdy46/skills. Do these steps in order. Ask the
 person nothing unless step 2 finds a conflict.
 
 ## 1. Find which agent you are
@@ -45,14 +45,14 @@ conflicting instructions. Ask whether to remove the other one or stop.
 
 Whole set by default: the skills hand off to each other by name.
 
-- Claude Code: `claude plugin install amagdy-skills --marketplace amagdy46/agent-config`
-- Codex: `codex plugin marketplace add amagdy46/agent-config`, then
+- Claude Code: `claude plugin install amagdy-skills --marketplace amagdy46/skills`
+- Codex: `codex plugin marketplace add amagdy46/skills`, then
   `codex plugin add amagdy-skills@amagdy-skills`
-- Others: `npx -y skills add amagdy46/agent-config -g -y --agent <agent>`
+- Others: `npx -y skills add amagdy46/skills -g -y --agent <agent>`
 
 Only some skills asked for: use the skills CLI on any agent, and always add
 `working-style`:
-`npx -y skills add amagdy46/agent-config -g -y --agent <agent> --skill <name> working-style`
+`npx -y skills add amagdy46/skills -g -y --agent <agent> --skill <name> working-style`
 
 ## 4. Check that it loaded
 
@@ -94,7 +94,7 @@ then present". Then give these lines. Plugins do not update themselves.
 Skills CLI removal of this set only:
 
 ```sh
-npx -y skills remove -g -y -s $(npx -y skills list -g --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).filter(x=>x.source==="amagdy46/agent-config").map(x=>x.name).join(" ")))')
+npx -y skills remove -g -y -s $(npx -y skills list -g --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).filter(x=>x.source==="amagdy46/skills").map(x=>x.name).join(" ")))')
 ```
 
 Restart the agent after an install, update or removal.
@@ -105,12 +105,12 @@ Restart the agent after an install, update or removal.
 shadowed it. `npx skills update` neither installs the new name nor removes
 the old one, and `implement` and `orchestrate` now hand off to
 `impact-review`. If `npx -y skills list -g --json` shows `code-review` with
-source `amagdy46/agent-config` (another collection's `code-review` is not
-ours), run once:
+source `amagdy46/skills` or `amagdy46/agent-config`, the repository's old
+name (another collection's `code-review` is not ours), run once:
 
 ```sh
 npx -y skills remove -g -y -s code-review
-npx -y skills add amagdy46/agent-config -g -y --agent <agent> --skill impact-review
+npx -y skills add amagdy46/skills -g -y --agent <agent> --skill impact-review
 ```
 
 Drop `-g` for a project install. The plugin switches with its next version.

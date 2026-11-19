@@ -20,7 +20,7 @@ Fixes: The agent guessed what I meant and built the wrong thing.
 Origin: seen here
 
 The maintainer's account, first in the README's
-[Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L177-L179):
+[Why these skills](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L177-L179):
 the agent "guessed at what I meant instead of asking". brainstorm asks one
 question at a time, plays back what it heard, and builds nothing until you
 approve the written design.
@@ -37,8 +37,8 @@ Rules with a recorded reason:
   [release notes](https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/RELEASE-NOTES.md?plain=1#L70)).
 - It runs only for a new project or when you say "brainstorm"; other work
   proceeds without an interview
-  ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
+  ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
+  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 - It converges by running `grilling`, not a copy of its rounds, so the two
   cannot drift apart ([CONTRIBUTING.md](CONTRIBUTING.md): one job, one
   skill). Rerun on Sonnet after that change: `brainstorm-opening` still
@@ -53,7 +53,7 @@ Origin: seen here
 
 The README gives this together with brainstorm, as the maintainer's account:
 the agent guessed instead of asking
-([Why these skills](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L177-L179)).
+([Why these skills](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L177-L179)).
 grilling maps the open decisions as a tree and asks, each round, the three
 that matter most among those that are ready, each with its recommended
 answer. It lists the rest as defaults you can overturn, and goes on round
@@ -119,8 +119,8 @@ Rules with a recorded reason:
 
 - When you asked for the work itself, it continues into implement instead of
   stopping for a plan review
-  ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
+  ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
+  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## to-issues
 
@@ -136,8 +136,8 @@ Rules with a recorded reason:
 
 - It publishes without waiting for approval of the list; asking for issues is
   the go-ahead
-  ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
+  ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
+  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## architecture-design
 
@@ -153,8 +153,8 @@ Rules with a recorded reason:
 
 - It settles design choices itself and states each with its reason, instead
   of asking before every choice
-  ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
+  ([f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7), for the
+  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## implement
 
@@ -164,7 +164,7 @@ Fixes: The agent stopped after every step to ask whether it should go on.
 Origin: seen here
 
 The maintainer's account in the
-[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182):
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182):
 "Should I do X?" after every step wastes more time than an occasional wrong
 call.
 implement keeps going between tasks and stops only for a plan that
@@ -177,7 +177,7 @@ Rules with a recorded reason:
   cut a long skill file when it summarised the session to save space
   (compaction), the round limit was lost, and one task ran 18 fix rounds
   ([superpowers#2481](https://github.com/obra/superpowers/issues/2481)).
-  [c47e190](https://github.com/amagdy46/agent-config/commit/c47e190) makes the
+  [c47e190](https://github.com/amagdy46/skills/commit/c47e190) makes the
   validator fail any `SKILL.md` of 20,000 bytes or more for the same reason.
 - When you name a ticket, it fetches it and states its title before starting.
   Upstream, `/implement #N` in a fresh session silently worked on the wrong item
@@ -195,7 +195,7 @@ Fixes: The agent stopped to ask "should I…?" about work it could have done and
 Origin: seen here
 
 The maintainer's account in the
-[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182):
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182):
 "Should I do X?" after every step wastes more time than an occasional wrong
 call. Until this skill, the rule lived only in `global/AGENTS.md`, which no
 installer copies, so most installs never got it. The description carries
@@ -217,7 +217,7 @@ For you: coordinate many implementer and reviewer agents under your standing ord
 Fixes: In long sessions I kept repeating the same reminders: keep agents busy, update the tracker, use this model.
 Origin: seen here
 
-[1cd7279](https://github.com/amagdy46/agent-config/commit/1cd7279) records
+[1cd7279](https://github.com/amagdy46/skills/commit/1cd7279) records
 it: "A long orchestrator session kept needing the same reminders: keep agents
 busy, update the tracker, which model does what, continue after stalls."
 orchestrate keeps those orders in a standing-orders file it reads at the
@@ -250,13 +250,13 @@ Rules with a recorded reason:
   catches and misses, and the agent states its choice instead of asking.
   Upstream, agents asked users to pick a seam with no reasons given
   ([skills#607](https://github.com/mattpocock/skills/issues/607));
-  [f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7) removed
+  [f5ae5a7](https://github.com/amagdy46/skills/commit/f5ae5a7) removed
   the confirmation step here.
 - A characterization test, which pins existing behaviour before a refactor,
   may pass first time if it is shown to fail when the behaviour breaks. The
   earlier text told agents to "fix the test" whenever one passed first time,
   which forbade these
-  ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47)).
+  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
 ## systematic-debugging
 
@@ -266,7 +266,7 @@ Fixes: The fix made the error go away but left the bug in place.
 Origin: seen here
 
 The maintainer's account in the
-[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L186-L187):
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L186-L187):
 fixes treated the symptom. The skill first builds a command that reproduces the bug, then tests ranked
 hypotheses, and fixes the first place the system went wrong. It names
 guards, retries, swallowed errors and clamps as ways to hide a bug.
@@ -276,7 +276,7 @@ Rules with a recorded reason:
 - Without a reproduction, it keeps going from logs, traces and history and
   asks only for the one missing piece. The earlier text said "stop" and "do
   not theorise without a loop", which halted work that the existing evidence
-  could carry ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47)).
+  could carry ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
 ## frontend-design
 
@@ -297,7 +297,7 @@ Fixes: The agent said "done" when it meant "I think it's done".
 Origin: seen here
 
 The maintainer's account in the
-[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L183-L185):
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L183-L185):
 "done" meant "I think it's done". The skill blocks any success claim without fresh output from this turn:
 name the claim, run the command that proves it, read the result, and claim
 only what it shows.
@@ -307,8 +307,8 @@ Rules with a recorded reason:
 - If the project has a `verify-*` skill (its recipe for running the real
   app), use it, so
   verification has a concrete source of proof
-  ([9ec9452](https://github.com/amagdy46/agent-config/commit/9ec9452),
-  [5087090](https://github.com/amagdy46/agent-config/commit/5087090)).
+  ([9ec9452](https://github.com/amagdy46/skills/commit/9ec9452),
+  [5087090](https://github.com/amagdy46/skills/commit/5087090)).
 
 ## create-verification-skill
 
@@ -318,7 +318,7 @@ Fixes: Agents had no scripted way to run the app, so "it works" was a guess.
 Origin: inherited
 
 Adapted from pstack's `create-verification-skill`.
-[9ec9452](https://github.com/amagdy46/agent-config/commit/9ec9452) states its
+[9ec9452](https://github.com/amagdy46/skills/commit/9ec9452) states its
 purpose, a concrete source of proof for verification-before-completion, but
 neither it nor pstack records a specific failure.
 
@@ -330,7 +330,7 @@ Fixes: A change looked fine in its diff and broke something elsewhere.
 Origin: seen here
 
 The maintainer's account in the
-[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L183-L185)
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L183-L185)
 is one clause: a change can break things beyond its own diff. The skill
 follows the change to where a text search does not reach (a renamed field
 another service reads, a changed default, a job that runs later) and has to
@@ -341,7 +341,7 @@ Rules with a recorded reason:
 - Every blocker comes in one pass with evidence, a re-review checks only the
   fix and answers ADDRESSED or NOT ADDRESSED per finding, and it stops after
   three rounds
-  ([5087090](https://github.com/amagdy46/agent-config/commit/5087090),
+  ([5087090](https://github.com/amagdy46/skills/commit/5087090),
   "Bound review loops"; the cap's reason is under implement).
 
 ## ci-pr-lifecycle
@@ -389,7 +389,7 @@ Rules with a recorded reason:
 
 - It no longer fires on "bro" alone. The description listed "bro" as a
   trigger, a word that also turns up in ordinary requests
-  ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47)).
+  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
 
 ## handoff
 
@@ -409,7 +409,7 @@ Fixes: The agent made the same mistake every session.
 Origin: seen here
 
 The maintainer's account in the
-[README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L188-L190):
+[README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L188-L190):
 the same mistake, every session. reflect reads the session's transcript and
 turns each lasting lesson into one small edit to a skill, an `AGENTS.md` or a
 check that enforces it.
@@ -418,14 +418,14 @@ Rules with a recorded reason:
 
 - It finds its own transcript by session id, not by picking the newest file,
   because another session can be running in the same folder
-  ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47)).
+  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47)).
   pstack's version warns that searching every project's transcripts reads
   private chats from unrelated projects
   ([pstack reflect](https://github.com/cursor/plugins/blob/2776ddd2355d6d6c8747d3964600f28daf62f049/pstack/skills/reflect/SKILL.md)).
 - It applies the edits, then shows them with an offer to revert, instead of
   waiting for you to pick rows
-  ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47), for the
-  reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
+  ([d44ee47](https://github.com/amagdy46/skills/commit/d44ee47), for the
+  reason in [README](https://github.com/amagdy46/skills/blob/fc1a4fa/README.md?plain=1#L180-L182)).
 
 ## technical-documentation
 
