@@ -14,7 +14,8 @@ depend on it.
 
 The **frontier** is every decision whose prerequisites are settled. Ask its
 three most consequential, one question each, then wait. List the rest as
-your defaults, one line each, for the user to overturn.
+your defaults, one line each, for the user to overturn. A decision whose
+answer would not change what gets built is yours: decide it and list it.
 
 ```
 ❓ **Q1 - <title>**: <one question, with options when they help>
@@ -45,3 +46,8 @@ The session is done when the frontier is empty: every branch visited, nothing
 silently assumed. Summarise the settled decisions with reasons, the rejected
 alternatives, the remaining risks and who owns any open choice. Ask the user
 to confirm that this is the shared understanding before acting on it.
+
+Record what was settled where the project keeps decisions (`design.md`, an
+ADR, the ticket); with no such place, offer to write `decisions.md` in the
+planning folder. Read that record before the first round, and never ask
+again what it already answers.

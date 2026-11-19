@@ -27,6 +27,8 @@ existed?", "Walk me through the last time this hurt."
   something concrete.
 - A guess they can correct ("I'm guessing X keeps biting you?") often beats a
   question.
+- Ask only what would change what gets built. Never ask about process: how
+  to proceed, which skill to use, whether to continue.
 - Territory to cover, never read out as a script: what this is and what makes
   it special, why now, what success looks like, goals, non-goals,
   **anti-goals** (what would make it a failure even if it works), prior art

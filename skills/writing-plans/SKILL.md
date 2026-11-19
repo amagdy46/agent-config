@@ -79,6 +79,9 @@ opposite failure.
 3. **Review focus:** each line has its test in a task.
 4. **Proportion:** if code blocks dominate, replace bodies with signatures and
    assertions.
+5. **Fresh reader:** with subagents, hand a fresh one the plan and the design
+   and ask what it would still have to ask before building each task. Put
+   the answers in the plan.
 
 Fix gaps inline and link the plan. If the user asked for the work itself,
 continue into the implement skill; otherwise present the plan with the next
