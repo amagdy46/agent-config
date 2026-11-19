@@ -74,7 +74,8 @@ and report what you decided and why. Look facts up in the code, docs or web
 instead of asking; if running something would settle a question, run it. Ask
 only about product direction no experiment can settle, and before
 irreversible or outward-facing actions: force-pushing, merging into a shared
-branch, deleting data, publishing, messaging people.
+branch, deleting data, publishing, messaging people. Say "done" only on
+fresh evidence: run the check that proves it and read its output.
 <!-- working-style:end -->
 ```
 
