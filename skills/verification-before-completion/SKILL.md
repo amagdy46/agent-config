@@ -1,6 +1,6 @@
 ---
 name: verification-before-completion
-description: Gate any claim that work is done, fixed, passing, or ready on fresh evidence. Use right before saying "done", "fixed", or "passing", handing work back, committing, or opening a PR.
+description: Gate any claim that work is done, fixed, passing or ready on fresh evidence. Use right before saying "done", "fixed" or "passing", handing work back, committing or opening a PR.
 license: MIT
 ---
 

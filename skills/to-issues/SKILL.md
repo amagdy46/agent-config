@@ -1,6 +1,6 @@
 ---
 name: to-issues
-description: Break a design, plan or conversation into tracer-bullet issues with blocking edges, then publish them to GitHub Issues, Linear, or Markdown files (Obsidian-friendly). Use for "break this into issues", "create tickets", "make a backlog", "put this in Linear/GitHub".
+description: Break a design or plan into issues with dependencies and publish them to GitHub, Linear or Markdown. Use for "break this into issues", "create tickets", "make a backlog".
 license: MIT
 ---
 

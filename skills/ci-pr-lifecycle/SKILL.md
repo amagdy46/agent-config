@@ -1,6 +1,6 @@
 ---
 name: ci-pr-lifecycle
-description: Check or drive a branch, PR, and CI through to a finished state. Use for "is this ready", "CI status", "open a PR", "push and watch CI", "retry the failed job", or finishing a branch. Never merges without an explicit ask.
+description: Get a branch, PR and CI to done. Use for "is this ready", "CI status", "open a PR", "push and watch CI", "retry the failed job". Never merges unless asked.
 license: MIT
 ---
 

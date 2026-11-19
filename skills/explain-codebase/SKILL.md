@@ -1,6 +1,6 @@
 ---
 name: explain-codebase
-description: Explain how existing code works, and when asked why it is shaped that way. Use for "how does X work", walkthroughs, "where should this live", "why is this here", and design rationale. Read-only.
+description: Explain how existing code works and why it is shaped that way. Use for "how does X work", walkthroughs, "where should this live", "why is this here". Read-only.
 license: MIT
 ---
 

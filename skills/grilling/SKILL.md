@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Stress-test a plan, decision or idea through rounds of pointed questions, each with a recommended answer. Use for "grill me", "poke holes in this", "challenge my plan", or when a design must converge on decisions.
+description: Stress-test a plan or decision in short rounds of pointed questions, each with a recommended answer. Use for "grill me", "poke holes in this", "challenge my plan".
 license: MIT
 ---
 
@@ -12,11 +12,12 @@ depend on it.
 
 ## Rounds
 
-The **frontier** is every decision whose prerequisites are settled. Ask the
-whole frontier in one round, then wait.
+The **frontier** is every decision whose prerequisites are settled. Ask its
+three most consequential, one question each, then wait. List the rest as
+your defaults, one line each, for the user to overturn.
 
 ```
-❓ **Q1 - <title>**: <the question, with options when they help>
+❓ **Q1 - <title>**: <one question, with options when they help>
 
 ➡️ <your recommended answer and its main trade-off>
 
@@ -25,10 +26,8 @@ whole frontier in one round, then wait.
 ❓ **Q2 - <title>**: ...
 ```
 
-Word each question so "yes" accepts your recommendation. A question that
-depends on another open question in the same round belongs to a later round.
-After each round, fold in the answers, recompute the frontier and ask the
-next round.
+Word each question so "yes" accepts your recommendation. After each round,
+fold in the answers, recompute the frontier and ask the next round.
 
 Press on contradictions, vague words, hidden assumptions, irreversible
 choices, failure modes, operating cost, and what would prove the plan wrong.
@@ -36,9 +35,9 @@ choices, failure modes, operating cost, and what would prove the plan wrong.
 ## Facts versus decisions
 
 Facts are your job. When a question needs a fact from the code, the files or
-the web, dispatch a subagent to find it and keep going (without subagents, look it up
-yourself between rounds); only the questions downstream of that lookup wait. Decisions, trade-offs and risk tolerance are
-the user's: put each one to them.
+the web, dispatch a subagent to find it and keep going (without subagents,
+look it up yourself between rounds); only the questions downstream of that
+lookup wait. Decisions, trade-offs and risk tolerance are the user's.
 
 ## Done
 

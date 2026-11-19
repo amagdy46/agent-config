@@ -1,6 +1,6 @@
 ---
 name: impact-review
-description: Review a diff, branch, PR, or files for spec and standards fit, and trace what a change could break beyond the diff. Use for "review this", "code review", "what could this break", "blast radius", or when acting on review feedback.
+description: Review a diff or PR for spec and standards fit, and trace what it could break beyond the diff. Use for "review this", "code review", "what could this break", "blast radius", or review feedback.
 license: MIT
 ---
 

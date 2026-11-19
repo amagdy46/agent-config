@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Design and build web UI that avoids template and AI-generated looks. Use when building or restyling pages, components, dashboards, or landing pages, when asked to "make it look good", and when UX flows, information architecture, or screen states need deciding first.
+description: Design and build web UI that does not look like a template or AI output. Use for building or restyling pages, components or dashboards, "make it look good", or deciding UX flows.
 license: MIT
 compatibility: Best with a browser or screenshot tool for rendered verification.
 ---
