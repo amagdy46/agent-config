@@ -121,10 +121,6 @@ Rules with a recorded reason:
   stopping for a plan review
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
   reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-- It converges by running `grilling`, not a copy of its rounds, so the two
-  cannot drift apart ([CONTRIBUTING.md](CONTRIBUTING.md): one job, one
-  skill). Rerun on Sonnet after that change: `brainstorm-opening` still
-  passes 3/3 with the skill and 0/3 without.
 
 ## to-issues
 
@@ -142,10 +138,6 @@ Rules with a recorded reason:
   the go-ahead
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
   reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-- It converges by running `grilling`, not a copy of its rounds, so the two
-  cannot drift apart ([CONTRIBUTING.md](CONTRIBUTING.md): one job, one
-  skill). Rerun on Sonnet after that change: `brainstorm-opening` still
-  passes 3/3 with the skill and 0/3 without.
 
 ## architecture-design
 
@@ -163,10 +155,6 @@ Rules with a recorded reason:
   of asking before every choice
   ([f5ae5a7](https://github.com/amagdy46/agent-config/commit/f5ae5a7), for the
   reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-- It converges by running `grilling`, not a copy of its rounds, so the two
-  cannot drift apart ([CONTRIBUTING.md](CONTRIBUTING.md): one job, one
-  skill). Rerun on Sonnet after that change: `brainstorm-opening` still
-  passes 3/3 with the skill and 0/3 without.
 
 ## implement
 
@@ -438,10 +426,6 @@ Rules with a recorded reason:
   waiting for you to pick rows
   ([d44ee47](https://github.com/amagdy46/agent-config/commit/d44ee47), for the
   reason in [README](https://github.com/amagdy46/agent-config/blob/fc1a4fa/README.md?plain=1#L180-L182)).
-- It converges by running `grilling`, not a copy of its rounds, so the two
-  cannot drift apart ([CONTRIBUTING.md](CONTRIBUTING.md): one job, one
-  skill). Rerun on Sonnet after that change: `brainstorm-opening` still
-  passes 3/3 with the skill and 0/3 without.
 
 ## technical-documentation
 
