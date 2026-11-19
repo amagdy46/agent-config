@@ -23,6 +23,10 @@
       "Let's brainstorm a new project.",
       "Debug this failing test and find the root cause.",
       "Review this branch before I open a PR."
-    ]
+    ],
+    "brandColor": "#ff5a1f",
+    "composerIcon": "./assets/mark.svg",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png"
   }
 }
